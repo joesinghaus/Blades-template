@@ -1,0 +1,48 @@
+mixin makefactions(number, title)
+	.factions-header.flex.uppercase
+		+text-input(`factions${number}_header`)(value=title).faction-name.label
+		span.faction-tier(data-i18n='tier')
+		span.faction-hold(data-i18n='hold')
+		span.faction-status(data-i18n='status')
+	fieldset(class=`repeating_factions${number}`)
+		.faction
+			+checkbox('expand').expand
+			+text-input('name').faction-name
+			+text-input('tier').faction-tier
+			+text-input('hold').faction-hold
+			+number-input('status').faction-status
+			+textarea('notes')(data-i18n-placeholder='faction_notes')
+
+//- Faction Sheet
+.type-faction.flex-wrap
+	+hidden-input('setting_clocks_only')(value='0').input-clocks-only
+	.factiontitle.flex.col100
+		+text-input('factions_title')(value='Factions of Doskvol').label
+		+hidden-input('show_faction_generatebutton')(value='1').hider
+		label.generatebutton
+			+checkbox('generate_factions')(data-i18n='generate_factions')
+		+fortuneroll('Fortune_faction', '{{fortune=1}} {{title-fortune=1}} {{title=^{fortune}}} {{short=1}} {{character_name=}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+	.factions.flex
+		.col24b.white-repcontrol
+			+makefactions(1, 'Underworld')
+		.col24b.white-repcontrol
+			+makefactions(2, 'Institutions')
+		.col24b.white-repcontrol
+			+makefactions(3, 'Labor & Trade')
+			+makefactions(4, 'The Fringe')
+		.col24b.white-repcontrol
+			+makefactions(5, 'Citizenry')
+			.warblurb.def-margin
+				.label(data-i18n='war')
+				ul
+					li.nondot(data-i18n='warblurb1')
+					li(data-i18n='warblurb2')
+					li(data-i18n='warblurb3')
+					li(data-i18n='warblurb4')
+					li(data-i18n='warblurb5')
+	.clocks.col55.white-repcontrol
+		.specialheader.label(data-i18n='clocks')
+		fieldset.repeating_factionclock
+			+makeclock
+	.col45.right-column
+		+textarea('faction_notes')(data-i18n-placeholder='notes').notes

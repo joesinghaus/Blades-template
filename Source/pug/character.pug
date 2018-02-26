@@ -1,0 +1,411 @@
+//- Character Sheet
+.type-character.flex
+	//- Left column
+	.col55.flex-wrap
+		//- Logo, Header text fields
+		.col100.header.flex
+			.col55.bladeslogo
+			label.col45.header
+				+text-input('crew')
+				.label.text.title(data-i18n='crew')
+			label.col55
+				+text-input('name')
+				.label.text.title(data-i18n='name')
+			label.col45
+				+text-input('alias')
+				.label.text.title(data-i18n='alias')
+			label.col100
+				+text-input('look')
+				.label.text.title(data-i18n='look')
+			label.col55
+				+autoexpand('heritage')
+				+hidden-input('heritage')(value='')
+				.text
+					span.label.title(data-i18n='heritage')
+					span.uppercase.info(data-i18n='heritage_info')
+			label.col45
+				+autoexpand('background')
+				+hidden-input('background')(value='')
+				.text
+					span.label.title(data-i18n='background')
+					span.uppercase.info(data-i18n='background_info')
+			+hidden-input('setting_vice_type')(value='normal').vice-input
+			label.col100.vice.normal
+				+autoexpand('vice_purveyor')
+				+hidden-input('vice_purveyor')(value='')
+				.text
+					span.label.title(data-i18n='vice_purveyor')
+					span.uppercase.info(data-i18n='vice_info')
+				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} ^{stress}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
+				+hidden-input('vice')(value='0')
+			.col100.vice.ghost
+				span.italic(data-i18n='ghost_viceblurb')
+			.col100.vice.hull
+				label.flex-wrap
+					+text-input('hull_functions')(data-i18n-placeholder='choose_3_functions', placeholder='choose 3 functions')
+					+hidden-input('hull_functions')(value='')
+					.text
+						span.label.title(data-i18n='functions')
+						span.uppercase.info(data-i18n='functions_info')
+				span.italic(data-i18n='hull_viceblurb')
+			.col100.vice.vampire
+				span.italic(data-i18n='vampire_viceblurb')
+				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} ^{stress}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
+		//- Stress and Trauma
+		.col100.flex.stress.def-margin
+			//- Stress markers
+			.stress1.blackheader
+				.label(data-i18n='stress')
+			.stress2.blackborder.flex
+				+radio('stress')(value='0', checked).tooth.zero
+				each num in [...Array(15).keys()].slice(1)
+					if (num > 8 && num < 14)
+						+hidden-checkbox('setting_extra_stress')(value=num-9, checked=(num === 9)).extra-teeth
+					+radio('stress')(value=num).tooth.stresstooth
+			//- Trauma markers
+			.stress3
+				.blackheader
+					.label(data-i18n='trauma')
+				.traumaholder.flex
+					+radio('trauma')(value='0', checked).tooth.zero
+					each num in [1,2,3,4,5]
+						if (num === 4)
+							+hidden-checkbox('setting_extra_trauma')(value='0', checked).extra-teeth
+						+radio('trauma')(value=num).tooth.regulartooth
+			//- Individual traumata
+			.stress4.blackborder
+				+hidden-input('setting_traumata_set')(value='normal').input
+				each traumas, type in traumaData
+					div(class=type)
+						.flex
+							each trauma, i in traumas.slice(0, traumas.length / 2)
+								label.text-button
+									+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
+								if (i < traumas.length / 2 - 1)
+									span —
+						.flex
+							each trauma, i in traumas.slice(traumas.length / 2)
+								label.text-button
+									+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
+								if (i < traumas.length / 2 - 1)
+									span —
+		//- Harm, Healing, Armor, Coin
+		.col100.flex.def-margin
+			//- Harm
+			.harm.col63
+				.blackheader.col100
+					.label(data-i18n='harm')
+					button.broadcast-button(type='roll', name='roll_Harm', value='&{template:bitd-broadcast} {{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}}', data-i18n-title='send_details_to_chat') :
+				.harmbody
+					.flex-center.harmnumber 3
+					+textarea('harm3').twocols
+					.flex-center.harmeffect(data-i18n='need_help')
+					.flex-center.harmnumber 2
+					+textarea('harm2_1')
+					+textarea('harm2_2')
+					.flex-center.harmeffect(data-i18n='minus1d')
+					.flex-center.harmnumber 1
+					+textarea('harm1_1')
+					+textarea('harm1_2')
+					.flex-center.harmeffect(data-i18n='less_effect')
+			//- Armor, Healing and Coin
+			.col37.flex-wrap
+				//- Healing
+				.col45.healing
+					.blackheader.col100
+						+fortuneroll('Recovery', '{{resist=1}} {{short=1}} {{title-recovery=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for-l}}}')(data-i18n='healing').label.rollbutton.inherit
+					.col100.healing-progress(data-i18n='progress_clock', data-i18n-title='recoveryblurb')
+					+hidden-input('recovery_max')(value='4').size
+					.clock-container
+						.spoke-0.all
+						.spoke-90.all
+						+radio('recovery')(value='0', checked).zero.input-progress
+						each num in [1,2,3,4]
+							input.input-progress.all(type='radio', name='attr_recovery', value=num, data-i18n-title='recoveryblurb')
+						.clock
+				//- Armor
+				.armor.col55
+					.blackheader.col100
+						.label(data-i18n='armor_uses')
+					each val in ['Armor', '+Heavy', 'Special']
+						label
+							+checkbox(val.toLowerCase().replace('+', '')).checkbox.squarebox
+							span.label(data-i18n=val.toLowerCase())
+				//- Coin and Stash
+				.col100.coin-and-stash
+					//- Coin
+					.col100.coinrow.flex
+						.coin.flex
+							.label(data-i18n='coin')
+							+radio('coin')(value='0', checked).zero
+							each num in [1,2,3,4]
+								+radio('coin')(value=num).radiobox
+						.stashbutton-holder
+							+hidden-input('stash_dice')(value='0')
+							+roll('Stash', '{{resist=1}} {{short=1}} {{title-lifestyle=1}} {{title=^{stash}}} {{subtitle=^{rolls-l}}}', '@{stash_dice}')(data-i18n='stash').rollbutton.label
+					//- Stash
+					.col100.stash
+						+radio('stash')(value='0', checked).zero
+						each num in [...Array(41).keys()].slice(1)
+							+radio('stash')(value=num).radiobox
+							if (num % 10 === 0)
+								br
+		//- Special abilities
+		.col100.def-margin
+			.specialheader.col100.label(data-i18n='special_abilities')
+			.greyholder.col100
+				fieldset.repeating_ability
+					.specialability.flex
+						button.broadcast-button(type='roll', name='roll_Show', value='&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}', data-i18n-title='send_details_to_chat') :
+						+checkbox('check').checkbox.circlebox
+						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
+						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc
+		//- Advancement
+		.col100.def-margin
+			.advancement-header.flex.blackheader
+				.label.markxp(data-i18n='mark_xp:')
+				.label(data-i18n='playbook_advancement')
+				.xpholder.flex
+					+hidden-input('setting_vampirexp')(value='0').vampirexp
+					+radio('playbook_xp')(value='0', checked).tooth.zero
+					each num in [1,2,3,4,5,6,7,8,9,10]
+						if (num === 9)
+							+hidden-input('setting_vampirexp')(value='0').toothhider
+						+radio('playbook_xp')(value=num).tooth.xptooth
+			ul.advancement-desc
+				li(data-i18n='xp_desperate')
+				li.nondot(data-i18n='xp_top')
+				li
+					+autoexpand('xp_condition')(data-i18n-placeholder='xp_specific')
+				+hidden-input('setting_extra_xp')(value='0').hider
+				li
+					+autoexpand('xp_condition_extra')(data-i18n-placeholder='xp_specific_extra')
+				li
+					+autoexpand('xp_condition2')
+				li
+					+autoexpand('xp_condition3')
+		//- Teamwork
+		.col45.right-column.def-margin
+			.plainheader.label(data-i18n='teamwork')
+			.teamworkbox(data-i18n='assist_a_teammate')
+			.teamworkbox(data-i18n='lead_a_group_action')
+			.teamworkbox(data-i18n='protect_a_teammate')
+			.teamworkbox(data-i18n='set_up_a_teammate-N')
+		//- Gather Information
+		.col55.right-column.def-margin
+			.gatherinfo.col100
+				.plainheader.label(data-i18n='gather_information')
+				div
+					ul
+						li
+							+text-input('gatherinfo1')(data-i18n-placeholder='gatherinfo_what_do_they_intend').inherit
+						li
+							+text-input('gatherinfo2')(data-i18n-placeholder='gatherinfo_how_can_I_get_them').inherit
+						li
+							+text-input('gatherinfo3')(data-i18n-placeholder='gatherinfo_what_are_they_really').inherit
+						li
+							+text-input('gatherinfo4')(data-i18n-placeholder='gatherinfo_what_should_I_look').inherit
+						li
+							+text-input('gatherinfo5')(data-i18n-placeholder='gatherinfo_wheres_the_weakness').inherit
+						li
+							+text-input('gatherinfo6')(data-i18n-placeholder='gatherinfo_how_can_I_find').inherit
+						li(data-i18n='gatherinfo_whats_going_on')
+			+hidden-input('setting_show_strictures')(value='0').hider
+			.strictures.col100.def-margin
+				.plainheader.label(data-i18n='strictures')
+				div
+					span.italic(data-i18n='stricturesblurb')
+				each desc, name in stricturesData
+					div
+						label
+							+checkbox(`stricture_${name.toLowerCase()}`).checkbox.squarebox
+							span.label(data-i18n=name.toLowerCase())
+						span(data-i18n=`strictures_${name.toLowerCase()}`)
+	//- Right column
+	.col45.flex-wrap.right-column
+		//- Playbook
+		.playbook.flex
+			+text-input('playbook')(data-i18n-placeholder='playbook').label
+			+textarea('playbook_description')(data-i18n-placeholder='playbook_description').label
+			+hidden-input('show_playbook_reminder')(value='1').hider
+			.reminder
+				span(data-i18n='autofill_reminder_playbook')
+				br
+				span(data-i18n='list_playbooks')
+		//- Items and Planning
+		.col53.itemcolumn.small-margin
+			//- Load
+			.loadheader.flex.col100
+				.label(data-i18n='load')
+				each val in ['light', 'normal', 'heavy']
+					label
+						+checkbox('load')(value=val).checkbox
+						span.loadnumber(name=`attr_setting_load_${val[0]}`)
+						span(data-i18n=val)
+			.itemheader.small-margin.col100.flex
+				.label(data-i18n='items')
+				span.italic(data-i18n='italics_dont_count')
+				label.text-button
+					+checkbox('reset_items')(data-i18n='reset?')
+			//- Items
+			.itemholder.col100.items
+				//- Playbook items
+				.playbookitems.col100.small-repcontrol
+					fieldset.repeating_playbookitem
+						+hidden-input('boxes_chosen')(value='0').boxes-chosen
+						.item.numboxes-chooser
+							div(data-i18n='how_much_load')
+							+number-input('numboxes')(min='0', max='3', value='0')
+							label
+								+checkbox('bold')(data-i18n='bold')
+							label
+								+checkbox('boxes_chosen')(data-i18n='ok')
+						.item
+							+hidden-input('bold')(value='0').input-bold
+							+hidden-input('numboxes')(value='0').numboxes
+							+checkbox('check_1').checkbox.squarebox
+							span.floatingbar.boxesgeq2
+							+checkbox('check_2', 'boxesgeq2').checkbox.squarebox
+							span.floatingbar.boxesgeq3.boxesgeq2
+							+checkbox('check_3', 'boxesgeq2 boxesgeq3').checkbox.squarebox
+							+autoexpand('name')(data-i18n-placeholder='item_name').itemname
+						.item-description
+							+checkbox('expand').expand
+							+textarea('description')(data-i18n-placeholder='description')
+					+hidden-input('setting_show_frame')(value='0').hider
+					.frame.small-margin
+						+text-input('frame')(value='Frame').smallcaps
+						+textarea('frame_description')(data-i18n-placeholder='frame_description')
+						fieldset.repeating_framefeature
+							.item
+								+checkbox('check').checkbox.circlebox
+								+text-input('name')(data-i18n-placeholder='frame_feature').itemname
+				//- Regular items
+				.regularitems.white-repcontrol.col100
+					fieldset.repeating_item
+						+hidden-input('short')(value='0').input-short
+						+hidden-input('expand')(value='0').input-expand
+						.item-container
+							+hidden-input('boxes_chosen')(value='0').boxes-chosen
+							.item.numboxes-chooser
+								div(data-i18n='how_much_load')
+								+number-input('numboxes')(min='0', max='3', value='0')
+								label
+									+checkbox('short')(data-i18n='short')
+								label
+									+checkbox('boxes_chosen')(data-i18n='ok')
+							.item
+								+hidden-input('numboxes')(value='0').numboxes
+								+checkbox('check_1').checkbox.squarebox
+								span.floatingbar.boxesgeq2
+								+checkbox('check_2', 'boxesgeq2').checkbox.squarebox
+								span.floatingbar.boxesgeq3.boxesgeq2
+								+checkbox('check_3', 'boxesgeq2 boxesgeq3').checkbox.squarebox
+								+text-input('name')(data-i18n-placeholder='item_name').itemname
+							.item-description
+								+checkbox('expand').expand
+								+textarea('description')(data-i18n-placeholder='description')
+			//- Alchemicals
+			.col100.def-margin
+				input.title-checkbox(type='checkbox', name='attr_show_alchemicals', value='1')
+				span.label.plainheader(data-i18n='alchemicals')
+				.alchemicals.white-repcontrol
+					.bandolier.item
+						span.bandoliers-name(data-i18n='bandoliers')
+						each bannum in [1,2]
+							each checknum in [1,2,3]
+								+checkbox(`bandolier${bannum}_check_${checknum}`).checkbox.squarebox
+								if (checknum !== 3)
+									span.floatingbar
+					.bandolier-desc(data-i18n='when_you_use_bandolier')
+					fieldset.repeating_alchemical
+						+checkbox('expand').alchemicals-expand
+						+autoexpand('name')
+						+textarea('description').alchemicals-info
+			//- Planning and Load
+			.planning.col100.def-margin
+				input.title-checkbox(type='checkbox', name='attr_show_planning', value='1', checked)
+				span.label.plainheader(data-i18n='planning_load')
+				.planning-content
+					.planningdesc(data-i18n='planningdesc')
+					.teamworkbox
+						span.bold(data-i18n='assault')
+						span.italic(data-i18n='detail_assault')
+					.teamworkbox
+						span.bold(data-i18n='occult')
+						span.italic(data-i18n='detail_occult')
+					.teamworkbox
+						span.bold(data-i18n='deception')
+						span.italic(data-i18n='detail_deception')
+					.teamworkbox
+						span.bold(data-i18n='social')
+						span.italic(data-i18n='detail_social')
+					.teamworkbox
+						span.bold(data-i18n='stealth')
+						span.italic(data-i18n='detail_stealth')
+					.teamworkbox
+						span.bold(data-i18n='transport')
+						span.italic(data-i18n='detail_transport')
+		//- Action ratings
+		.col47.right-column.actioncolumn.small-margin
+			each actions, attribute in actionData
+				.attribute.col100
+					.attribute-title.flex.col100
+						+roll(attribute,
+							'{{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-' + attribute + '=1}} {{title=^{' + attribute + '}}}',
+							`@{${attribute}}+@{setting_resbonus_${attribute}}`
+							)(data-i18n=attribute, data-i18n-title=`${attribute}_description`).rollbutton.label
+						+hidden-input(`${attribute}`)(value='0')
+						+hidden-input(`${attribute}_xp_max`)(value='6')
+						.attribute-xp-box.flex
+							+hidden-input('setting_vampirexp')(value='0').vampirexp
+							+radio(`${attribute}_xp`)(value='0', checked).tooth.zero
+							each num in [1,2,3,4,5,6,7,8]
+								if (num === 7)
+									+hidden-input('setting_vampirexp')(value='0').toothhider
+								+radio(`${attribute}_xp`)(value=num).tooth.xptooth
+					.actions.col100
+						each action in actions
+							.action.flex.col100
+								+hidden-input(`setting_dark_talent_${attribute}`)(value='0').darktalent
+								+hidden-checkbox(action)(value='0', checked).fakeradio
+								+checkbox(action)(value='1').checkbox.circlebox.fakeradio
+								.divider
+								each num in [2,3,4,5]
+									+checkbox(action)(value=num).checkbox.circlebox.fakeradio
+								+roll(action, '{{action=1}} {{subtitle=^{rolls-l}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
+			//- Cohort
+			+hidden-input('setting_show_cohort')(value='0').hider
+			+makecohort('char_cohort_', true)
+			//- Bonus die box
+			.bonusdie.col100
+				.col100.label(data-i18n='bonus_die')
+				.col100.flex
+					.flex-center.bonusdieplus +
+					.bonusdietext
+						.label(data-i18n='push_yourself')
+						span(data-i18n='push_yourself_desc1')
+						span(data-i18n='stress')
+						span(data-i18n='push_yourself_desc2-N')
+						.label(data-i18n='devils_bargain')
+			//- Friends
+			.col100.def-margin
+				.specialheader.col100.label.flex
+					+text-input('friends_title')(value='Friends').inherit
+				.greyholder.col100
+					fieldset.repeating_friend
+						.friend-contact.friend.flex
+							+hidden-input('status')(value='0').friendstate
+							label.up
+								+checkbox('status')(value='up').checkbox
+							label.down
+								+checkbox('status')(value='down').checkbox
+							+autoexpand('name')(data-i18n-placeholder='friend_name')
+			//- Roll Fortune
+			+fortuneroll('Fortune', '{{fortune=1}} {{subtitle=^{rolls-l}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+		//- Clocks
+		.col100.clocks.white-repcontrol.def-margin
+			.specialheader.label(data-i18n='clocks')
+			fieldset.repeating_clock
+				+makeclock
+		+textarea('notes')(data-i18n-placeholder='notes').notes

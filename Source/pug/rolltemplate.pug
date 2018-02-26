@@ -1,0 +1,71 @@
+//- ROLL TEMPLATE
+rolltemplate.sheet-rolltemplate-bitd
+	div(class!='sheet-roll-holder{{#action}} sheet-roll-action{{/action}}{{#resist}} sheet-roll-resist{{/resist}}{{#vice}} sheet-roll-vice{{/vice}}{{#fortune}} sheet-roll-fortune{{/fortune}}{{#short}} sheet-roll-short{{/short}}{{#action}}{{^position}} sheet-roll-short{{/position}}{{/action}}')
+		.sheet-roll-header {{charname}} {{subtitle}}
+		.sheet-roll-title
+			span(class='{{#small-title}}roll-small-title{{/small-title}}') {{title}}
+		.sheet-roll-dice
+			each num in [1,2,3,4,5,6,7,8,9,10,11,12]
+				= `{{#rollGreater() roll${num} 0}}{{roll${num}}}`
+				span.sheet-comma ,
+				= ` {{/rollGreater() roll${num} 0}}`
+			| {{#rollGreater() zerodice 0}}
+			.sheet-zerodice1 {{zerodice}}
+			.sheet-zerodice2(data-i18n='zerodice-N')
+			| {{/rollGreater() zerodice 0}}
+		| {{#position}}
+		.sheet-roll-position {{position}}
+		| {{/position}}{{#effect}}
+		.sheet-roll-effect {{effect}}
+		| {{/effect}}{{#resist}}{{^short}}
+		.sheet-roll-instructions(data-i18n='resist_instructions')
+		| {{/short}}{{/resist}}{{#vice}}{{^short}}
+		.sheet-roll-instructions(data-i18n='vice_instructions')
+		| {{/short}}{{/vice}}{{#notes}}
+		.sheet-roll-notes {{notes}}
+		| {{/notes}}
+
+//- BROADCAST
+rolltemplate.sheet-rolltemplate-bitd-broadcast
+	div
+		.sheet-roll-header
+			div {{charname}}
+			div {{type}}
+		| {{#content}}
+		.sheet-roll-title {{title}}
+		.sheet-roll-content {{content}}
+		| {{/content}}{{#clock}}
+		.sheet-roll-flex
+			.sheet-roll-clock(class='sheet-roll-size-{{clocksize}} sheet-roll-progress-{{clockprogress}}')
+				.sheet-roll-spoke.sheet-roll-spoke-0
+				.sheet-roll-spoke.sheet-roll-spoke-30
+				.sheet-roll-spoke.sheet-roll-spoke-36
+				.sheet-roll-spoke.sheet-roll-spoke-45
+				.sheet-roll-spoke.sheet-roll-spoke-60
+				.sheet-roll-spoke.sheet-roll-spoke-72
+				.sheet-roll-spoke.sheet-roll-spoke-90
+				.sheet-roll-spoke.sheet-roll-spoke-108
+				.sheet-roll-spoke.sheet-roll-spoke-135
+				.sheet-roll-spoke.sheet-roll-spoke-144
+				.sheet-roll-spoke.sheet-roll-spoke-120
+				.sheet-roll-spoke.sheet-roll-spoke-150
+			.sheet-roll-title {{title}}
+		| {{/clock}}{{#harm}}
+		.sheet-roll-title(data-i18n='harm')
+		table.sheet-roll-harm
+			tr
+				td 3
+				td
+					| {{#harm3}} #[.sheet-roll-harm-inner {{harm3}}] {{/harm3}}
+				td(data-i18n='need_help')
+			tr
+				td 2
+				td
+					| {{#harm2_1}} #[.sheet-roll-harm-inner {{harm2_1}}] {{/harm2_1}}{{#harm2_2}} #[.sheet-roll-harm-inner {{harm2_2}}] {{/harm2_2}}
+				td(data-i18n='minus1d')
+			tr
+				td 1
+				td
+					| {{#harm1_1}} #[.sheet-roll-harm-inner {{harm1_1}}] {{/harm1_1}}{#harm1_2}} #[.sheet-roll-harm-inner {{harm1_2}}] {{/harm1_2}}
+				td(data-i18n='less_effect')
+		| {{/harm}}

@@ -1,0 +1,192 @@
+-
+	const actionData = {
+		insight: ['hunt', 'study', 'survey', 'tinker'],
+		prowess: ['finesse', 'prowl', 'skirmish', 'wreck'],
+		resolve: ['attune', 'command', 'consort', 'sway']
+	};
+	const traumaData = {
+		normal: ['cold', 'haunted', 'obsessed', 'paranoid', 'reckless', 'soft', 'unstable', 'vicious'],
+		ghost: ['chaotic', 'destructive', 'furious', 'obsessive', 'territorial', 'savage'],
+		hull: ['clanking', 'leaking', 'fixated', 'smoking', 'sparking', 'unstable']
+	};
+	const stricturesData = {
+		Slumber: 'In downtime, you must spend one activity resting in a dark, silent place (or else suffer 3 stress).',
+		Forbidden: 'You cannot enter a private residence without permission from the owner.',
+		Repelled: 'Spiritbane charms can hold you at bay. (Take 2 stress to resist the repulsion.)',
+		Bestial: 'When you suffer physical harm or overindulge your vice, your body twists into a horrific bestial form until you next feed without overindulging.',
+		Bound: 'Your spirit must remain in this body, or be destroyed.'
+	}
+
+
+//- Mixins for code reuse
+mixin checkbox(name, extraclass)
+	input(type='checkbox', class=[attributes.class, extraclass || ''], name=`attr_${name}`, value=attributes.value||'1', checked=attributes.checked)
+	span(class=extraclass, data-i18n!=attributes['data-i18n'])
+		block
+
+mixin radio(name)
+	input(type='radio', class!=attributes.class, name=`attr_${name}`, value!=attributes.value, checked=attributes.checked)
+	span(data-i18n!=attributes['data-i18n'])
+
+mixin text-input(name)
+	input(type='text', spellcheck='false', name=`attr_${name}`)&attributes(attributes)
+
+mixin number-input(name)
+	input(type='number', name=`attr_${name}`)&attributes(attributes)
+
+mixin textarea(name)
+	textarea(spellcheck='false', name=`attr_${name}`)&attributes(attributes)
+		block
+
+mixin hidden-input(name)
+	input(type='hidden', name=`attr_${name}`)&attributes(attributes)
+
+mixin hidden-checkbox(name)
+	- classes = attributes.class;
+	- delete attributes.class;
+	input(type='checkbox', name=`attr_${name}`, class=['hidden', classes])&attributes(attributes)
+
+mixin autoexpand(name)
+	div(class=['auto-expand', attributes.class])
+		span(name=`attr_${name}`)= content
+		+textarea(name)(data-i18n-placeholder!=attributes['data-i18n-placeholder'])
+			block
+
+mixin roll(name, templatedata, stat)
+	button(
+		type='roll',
+		name=`roll_${name}`,
+		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} {{roll1=[[[[{[[${stat}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[${stat}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[${stat}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[${stat}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[${stat}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[${stat}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[${stat}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[${stat}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[${stat}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[${stat}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[${stat}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[${stat}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(${stat})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(${stat})-(@{bonusdice})]],1}kl1]]d6]]}}`
+	)&attributes(attributes)
+
+mixin fortuneroll(name, templatedata, useNotes)
+	button(
+		type='roll',
+		name=`roll_${name}`,
+		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} {{roll1=[[[[{@{numberofdice},1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}]]-1,1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} ${useNotes ? '{{notes=@{notes_query}}} ' : ''}`
+	)&attributes(attributes)
+
+mixin makecohort(prefix, isCharacter)
+	.cohort
+		+hidden-input(`${prefix}dice`)(value=isCharacter ? '1' : '0')
+		+hidden-input(`${prefix}verb`)(value=isCharacter ? '^{rolls_their-l}' : '^{roll_their-l}')
+		.cohort-title.flex.col100.label
+			+text-input(`${prefix}name`)(value='Cohort').inherit
+			+roll(`${prefix}roll`, '{{resist=1}} {{short=1}} {{charname=@{'+prefix+'name} (^{@{'+prefix+'type}}, @{'+prefix+'subtype})}} {{title-cohort_quality=1}} {{title=^{cohort_quality}}} {{subtitle=@{'+prefix+'verb}}})', `@{${prefix}dice}`)(data-i18n='roll-inf').inherit.rollbutton
+		.cohort-info.flex.col100.uppercase
+			.cohort-dropdown
+				div
+					span(name=`attr_${prefix}type`, data-i18n-dynamic)
+				div
+					+radio(`${prefix}type`)(value='gang', checked=!isCharacter, data-i18n='gang')
+				div
+					+radio(`${prefix}type`)(value='elite', data-i18n='elite')
+				div
+					+radio(`${prefix}type`)(value='expert', checked=isCharacter, data-i18n='expert')
+			+text-input(`${prefix}subtype`)(data-i18n-placeholder=isCharacter ? 'hunter' : 'gang_type').sheet-inherit
+			if (isCharacter)
+				.label.cohort-quality-label(data-i18n='quality_abbreviated') Q:
+				+number-input(`${prefix}quality`)(min='0', max='5', value='1').label
+		.cohort-condition.flex.col100
+			each name in ['Weak', 'Impaired', 'Broken', 'Armor']
+				label
+					span(class='cohort-condition-name ' + (name ==='Armor' ? 'label' : 'uppercase'), data-i18n=name.toLowerCase())
+					+checkbox(prefix + name.toLowerCase()).tooth.stresstooth
+		each name in ['Edges', 'Flaws']
+			label.cohort-edgeflaw
+				span.uppercase(data-i18n=name.toLowerCase())
+				+autoexpand(`${prefix}${name.toLowerCase()}`)
+		+textarea(`${prefix}description`).cohort-description
+
+mixin makeclock(isFaction)
+	+hidden-input('size')(value='').size
+	+autoexpand('name')(data-i18n-placeholder='clock_name').smallcaps
+	button.broadcast-button(type='roll', name='roll_Show', value='&{template:bitd-broadcast}' + (!isFaction ? '{{charname=@{character_name}}} ' : '') + '{{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}', data-i18n-title='send_details_to_chat') :
+	.size-choice
+		each num in [4,6,8,10,12]
+			label.text-button
+				+radio('size')(value=num)=num
+	.clock-container
+		.spoke-0.all
+		.spoke-30.sheet-12clock
+		.spoke-45.sheet-8clock
+		.spoke-36.sheet-10clock
+		.spoke-60.sheet-6clock.sheet-12clock
+		.spoke-72.sheet-10clock
+		.spoke-90.sheet-4clock.sheet-8clock.sheet-12clock
+		.spoke-108.sheet-10clock
+		.spoke-120.sheet-6clock.sheet-12clock
+		.spoke-135.sheet-8clock
+		.spoke-144.sheet-10clock
+		.spoke-150.sheet-12clock
+		+radio('progress')(value='0', checked).zero.input-progress
+		input.input-progress.all(type='radio', name='attr_progress', value='1')
+		input.input-progress.all(type='radio', name='attr_progress', value='2')
+		input.input-progress.all(type='radio', name='attr_progress', value='3')
+		input.input-progress.all(type='radio', name='attr_progress', value='4')
+		input.input-progress.sheet-6clock.sheet-8clock.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='5')
+		input.input-progress.sheet-6clock.sheet-8clock.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='6')
+		input.input-progress.sheet-8clock.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='7')
+		input.input-progress.sheet-8clock.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='8')
+		input.input-progress.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='9')
+		input.input-progress.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='10')
+		input.input-progress.sheet-12clock(type='radio', name='attr_progress', value='11')
+		input.input-progress.sheet-12clock(type='radio', name='attr_progress', value='12')
+		.clock
+
+-	const teeth = ['xptooth-red', 'xptooth-white', 'stresstooth-red', 'stresstooth-black', 'stresstooth-halfgrey', 'stresstooth-white', 'shorttooth-red', 'shorttooth-grey'];
+
+//- Image preloading
+.preload
+	each tooth in teeth
+		img(src=`https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/${tooth}.png`)
+
+//- Global setttings
++hidden-input('setting_focus_shadow')(value='1').focus-shadow
++hidden-input('setting_show_broadcast')(value='1').show-broadcast
++hidden-input('setting_show_itemdesc')(value='1').show-itemdesc
++hidden-input('setting_usekirsty')(value='0').use-kirsty
++hidden-input('setting_flexwidth')(value='0').flexwidth
++hidden-input('changed_attributes')(value='')
++hidden-input('bonusdice')(value='?{Bonus dice|0|1|2|3|4|5|6|-1|-2|-3}')
++hidden-input('numberofdice')(value='?{Number of dice|0|1|2|3|4|5|6}')
++hidden-input('notes_query')(value='?{Notes}')
++hidden-input('position_query')(value='?{Position|Risky,position=Risky|Controlled,position=Controlled|Desperate,position=Desperate|Fortune roll,position=}')
++hidden-input('effect_query')(value='?{Effect|Standard|Limited|Great|Extreme|Zero}')
++hidden-input('consequence_query')(value='^{a_consequence}')
+
+
+//- Hidden maxima
++hidden-input('stress_max')(value='9')
++hidden-input('trauma_max')(value='4')
++hidden-input('coin_max')(value='4')
++hidden-input('stash_max')(value='40')
++hidden-input('playbook_xp_max')(value='8')
++hidden-input('rep_max')(value='12')
++hidden-input('turf_max')(value='6')
++hidden-input('crew_tier_max')(value='4')
++hidden-input('heat_max')(value='9')
++hidden-input('wanted_max')(value='4')
++hidden-input('crewcoin_max')(value='16')
++hidden-input('crew_xp_max')(value='8')
+
+//- Actual sheet
+.container
+	+hidden-input('sheet_type')(value='character').type
+	include pug/title.pug
+	include pug/character.pug
+	include pug/crew.pug
+	include pug/faction.pug
+
+//- Strange syntax is meant fo force a line break
+|
+|
+include pug/rolltemplate.pug
+|
+|
+script(type='text/worker')
+	|
+	|
+	include:babel(presets=['minify']) sheetworkers.js
+	|
+	|
