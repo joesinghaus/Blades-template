@@ -14,20 +14,20 @@ executed in the root directory of this code.
 
 If you want to change the **look** of the sheet or the roll template, you should already know how CSS works: in this case, just go ahead and change the `sheet.scss` and `rolltemplate.scss` to your heart's content. SCSS is an extension of CSS, so if you don't know SCSS, just adding CSS code will work just fine.
 
-For changing the **content** of the sheet, you will have to make changes to the pug files (for the HTML), the `translation.json` file (for changing the actual text on the sheet), or to the `sheetworkers.js` file for changing data.
+For changing the **content** of the sheet, you will have to make changes to the pug files (for the HTML), the `translation.json` file (for changing the actual text on the sheet), or to the `sheetworkers.js` file.
 
 **If you do not feel comfortable working with pug or SCSS**, the `Source/uncompressed` folder contains compiled, but human-readable versions of `blades.html` and `blades.css`. Editing them is more work, however (for example for changing action names).
 
 ## Common changes
 All of the text visible on the sheet and in roll templates is translated text. Most of the text on the sheet can simply be changed by changing the corresponding value in the `translation.json` file. In general, whenever you add new text to the sheet or change existing text, you will have to make changes to the `translation.json`.
 
-**Defaults.** Some of the sheet's default values are handled via the translatedDefaults and defaultValues objects in line 1174+ of `sheetworkers.js`. If you change the names of attributes (e.g. by changing the action names), you will have to make some changes heres. It should be more or less straightforward.
+**Defaults.** Some of the sheet's default values are handled via the translatedDefaults and defaultValues objects in line 1178+ of `sheetworkers.js`. If you change the names of attributes (e.g. by changing the action names), you will have to make some changes heres. It should be more or less straightforward.
 
-### Changing names of actions and attributes
+### Action/attribute names
 To effectively change action and/or attribute names, you need to make changes in three places
 
 1. At the top of the blades.pug file, in the actionData object (lines 2-4)
-2. In the sheetworkers.js file, in the actionData object (lines 1067-1085)
+2. In the sheetworkers.js file, in the actionData object (lines 1067-1085, same as the ome in the first step), and in the defaultValues object on line 1230+ (e.g. add a line `hack: "0",`)
 3. In the translation.json file, add keys for your changed actions, attributes, and their descriptions. E.g., if you want to add a "Hack" action, add the following lines:
 
 ```
@@ -39,15 +39,13 @@ To effectively change action and/or attribute names, you need to make changes in
 
 In order to change the non-playbook-specific gear that every character gets, you will need to edit the `itemData` array in the `sheetworkers.js` file. The names of items (such as "a_blade_or_two") and their descriptions (such as "a_blade_or_two_description") are translated, so make sure to also edit the `translation.json` file as well. The items are in the same order that they will appear on the sheet.
 
-### Adding special abilities
-In order to add or change special abilities, you need to change the translation.json file (note that adding special abilities will do nothing unless you also add or modify a playbook or crew so that it uses them). In order to do this, you need two new lines in the translation.json file for every new special ability, with keys `playbook_ability_NAME` and `playbook_ability_NAME_description` (for characters) or `crew_ability_NAME` and `crew_ability_NAME_description` (for crews). E.g:
+### Factions
+To change the factions, modify the factionData object in the `sheetworkers.js` (line 760+). The faction names (such as "The Circle of Flame") as well the headers (such as "Underworld") are translated, so be sure to change and/or add the corresponding keys in the `translation.json` file, e.g. `"faction_the_circle_of_flame": "The Circle of Flame",` and `"factions1": "Underworld",`.
 
-```
-"playbook_ability_hedonist": "Hedonist",
-"playbook_ability_hedonist_description": "When you indulge your vice, you may adjust the dice outcome by +/-2. An ally who joins you may do the same.",
-```
+### Logo
+The game logo is on line 635 of `sheet.scss`.
 
-### Changing playbooks/crews
+### Playbooks/crews
 You will have to edit both the `sheetworkers.js` and the `translation.json` in order to modify playbooks.
 
 1. Add your changed playbook to the `translation.json` file, e.g. `"hacker": "Hacker",`.
@@ -55,7 +53,7 @@ You will have to edit both the `sheetworkers.js` and the `translation.json` in o
 3. Change the translation.json to reflect any newly-added translation keys, such as for playbook contacts, items, et cetera.
 
 Some remarks on Step 2:
-* A playbook's **friends** (or a crew's **contacts**) are generated automatically from the translation.json file — hence, when you add your "Hacker" playbook, you also have to add their five hacker friends (as below). Changing the number of contacts or friends can be done on line 1310 and 1366 of the `sheetworkers.js`.
+* A playbook's **friends** (or a crew's **contacts**) are generated automatically from the translation.json file — hence, when you add your "Hacker" playbook, you also have to add their five hacker friends (as below). Changing the number of contacts or friends can be done on line 1309 and 1366 of the `sheetworkers.js`.
 ```
 "playbook_hacker_friend_0": "Jack",
 "playbook_hacker_friend_1": "Sue",
@@ -69,13 +67,18 @@ Some remarks on Step 2:
 
 * Everything about a character/crew that's *not* abilities, friends/contacts, or items/upgrades, is detailed in the "base" property. Here, you change default action dots, xp triggers, gather information questions, the names of claims, et cetera. Take a look at the existing playbooks and crews for details.
 
-### Changing factions
-To change the factions, modify the factionData object in the `sheetworkers.js` (line 760+). The faction names (such as "The Circle of Flame") as well the headers (such as "Underworld") are translated, so be sure to change and/or add the corresponding keys in the `translation.json` file, e.g. `"faction_the_circle_of_flame": "The Circle of Flame",` and `"factions1": "Underworld",`.
+### Special abilities
+In order to add or change special abilities, you need to change the translation.json file (note that adding special abilities will do nothing unless you also add or modify a playbook or crew so that it uses them). In order to do this, you need two new lines in the translation.json file for every new special ability, with keys `playbook_ability_NAME` and `playbook_ability_NAME_description` (for characters) or `crew_ability_NAME` and `crew_ability_NAME_description` (for crews). E.g:
 
-### Changing traumas
-To modify traumas, change the traumaData variable at the beginning of `blades.pug`, the traumaData variable in `sheetworkers.js` (line 1083+), and add translations for any newly-added traumas.
+```
+"playbook_ability_hedonist": "Hedonist",
+"playbook_ability_hedonist_description": "When you indulge your vice, you may adjust the dice outcome by +/-2. An ally who joins you may do the same.",
+```
 
-### Changing upgrades
+### Traumas
+To modify traumas, change the traumaData variable at the beginning of `blades.pug`, the traumaData variable in `sheetworkers.js` (line 1087+), and add translations for any newly-added traumas.
+
+### Upgrades
 The crew upgrades are on line 234+ of the crew.pug. However, their default names and descriptions are actually translated values, making changes here somewhat complicated. Let's assume you are changing the "Carriage" upgrade to a 1-box upgrade 'Racing car', then you have to do these things:
 
 1. Change line 249 in `crew.pug` to your desired default. The '6' is the number of the upgrade (make sure this is distinct for all different upgrades), the 2 is the number of boxes in front of the name. The other arguments are the default name and default description.
