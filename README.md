@@ -27,7 +27,7 @@ All of the text visible on the sheet and in roll templates is translated text. M
 To effectively change action and/or attribute names, you need to make changes in three places
 
 1. At the top of the blades.pug file, in the actionData object (lines 2-4)
-2. In the sheetworkers.js file, in the actionData object (lines 1067-1085, same as the ome in the first step), and in the defaultValues object on line 1230+ (e.g. add a line `hack: "0",`)
+2. In the sheetworkers.js file, in the actionData object (lines 1067-1085, same as the one in the first step), and in the defaultValues object on line 1230+ (e.g. add a line `hack: "0",`)
 3. In the translation.json file, add keys for your changed actions, attributes, and their descriptions. E.g., if you want to add a "Hack" action, add the following lines:
 
 ```
@@ -40,7 +40,7 @@ To effectively change action and/or attribute names, you need to make changes in
 In order to change the non-playbook-specific gear that every character gets, you will need to edit the `itemData` array in the `sheetworkers.js` file. The names of items (such as "a_blade_or_two") and their descriptions (such as "a_blade_or_two_description") are translated, so make sure to also edit the `translation.json` file as well. The items are in the same order that they will appear on the sheet.
 
 ### Factions
-To change the factions, modify the factionData object in the `sheetworkers.js` (line 760+). The faction names (such as "The Circle of Flame") as well the headers (such as "Underworld") are translated, so be sure to change and/or add the corresponding keys in the `translation.json` file, e.g. `"faction_the_circle_of_flame": "The Circle of Flame",` and `"factions1": "Underworld",`.
+To change the factions, modify the factionsData object in the `sheetworkers.js` (line 760+). The faction names (such as "The Circle of Flame") as well the headers (such as "Underworld") are translated, so be sure to change and/or add the corresponding keys in the `translation.json` file, e.g. `"faction_the_circle_of_flame": "The Circle of Flame",` and `"factions1": "Underworld",`. You should also change the header in the corresponding line of  `faction.pug` (line 27+). You can play around with the number of faction "categories" in the faction.pug and the factionsData object.
 
 ### Logo
 The game logo is on line 635 of `sheet.scss`.
@@ -63,7 +63,7 @@ Some remarks on Step 2:
 
 * The names of playbook items and their descriptions are pulled from the `translation.json`, so make sure to make the necessary changes there. Same for crew upgrades.
 
-* If you (which is very likely) have new special abilities for your playbook or crew, just enter the name into the corresponding array; to add the actual data of the ability, add them to the translation.json, as detailed under the previous heading.
+* If you (which is very likely) have new special abilities for your playbook or crew, just enter the name into the corresponding array; to add the actual data of the ability, add them to the translation.json, as detailed under "Special abilities".
 
 * Everything about a character/crew that's *not* abilities, friends/contacts, or items/upgrades, is detailed in the "base" property. Here, you change default action dots, xp triggers, gather information questions, the names of claims, et cetera. Take a look at the existing playbooks and crews for details.
 
