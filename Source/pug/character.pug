@@ -176,17 +176,9 @@
 				.label.markxp(data-i18n='mark_xp:')
 				.label(data-i18n='playbook_advancement')
 				.xpholder.flex
-					//- Generates 10 xp boxes, but only show the last two if the vampirexp setting is checked
-						A simplified version without the vampirexp stuff:
-
-						+radio('playbook_xp')(value='0', checked).tooth.zero
-						each num in [1,2,3,4,5,6,7,8]
-							+radio('playbook_xp')(value=num).tooth.xptooth
-					+hidden-input('setting_vampirexp')(value='0').vampirexp
+					//- generates 8 xp boxes
 					+radio('playbook_xp')(value='0', checked).tooth.zero
-					each num in [1,2,3,4,5,6,7,8,9,10]
-						if (num === 9)
-							+hidden-input('setting_vampirexp')(value='0').toothhider
+					each num in [1,2,3,4,5,6,7,8]
 						+radio('playbook_xp')(value=num).tooth.xptooth
 			ul.advancement-desc
 				li(data-i18n='xp_desperate')
@@ -369,7 +361,8 @@
 		// Action ratings
 		.col47.right-column.actioncolumn.small-margin
 			//- This generates the action ratings. You should only change this section if you want to change something about every
-				action at once. Modifying the names of attributes and actions should be done in the actionData object in blades.pug
+				action at once. Modifying the names of attributes and actions (or adding/deleting actions) should be done in the
+				actionData object in blades.pug
 			each actions, attribute in actionData
 				.attribute.col100
 					.attribute-title.flex.col100
@@ -380,34 +373,17 @@
 						+hidden-input(`${attribute}`)(value='0')
 						+hidden-input(`${attribute}_xp_max`)(value='6')
 						.attribute-xp-box.flex
-							//- Generates 8 xp boxes, but only show the last two if the vampirexp setting is checked
-								A simplified version without the vampirexp stuff:
-
-								+radio(`${attribute}_xp`)(value='0', checked).tooth.zero
-								each num in [1,2,3,4,5,6]
-									+radio(`${attribute}_xp`)(value=num).tooth.xptooth
-							+hidden-input('setting_vampirexp')(value='0').vampirexp
+							//- generate 6 xp boxes
 							+radio(`${attribute}_xp`)(value='0', checked).tooth.zero
-							each num in [1,2,3,4,5,6,7,8]
-								if (num === 7)
-									+hidden-input('setting_vampirexp')(value='0').toothhider
+							each num in [1,2,3,4,5,6]
 								+radio(`${attribute}_xp`)(value=num).tooth.xptooth
 					.actions.col100
 						each action in actions
 							.action.flex.col100
-								//- The dark talent toggle will show the fifth attribute box. A simplified version without dark talent:
-
-									+hidden-checkbox(action)(value='0', checked).fakeradio
-									+checkbox(action)(value='1').checkbox.circlebox.fakeradio
-									.divider
-									each num in [2,3,4]
-										+checkbox(action)(value=num).checkbox.circlebox.fakeradio
-									+roll(action, '{{action=1}} {{subtitle=^{rolls-l}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
-								+hidden-input(`setting_dark_talent_${attribute}`)(value='0').darktalent
 								+hidden-checkbox(action)(value='0', checked).fakeradio
 								+checkbox(action)(value='1').checkbox.circlebox.fakeradio
 								.divider
-								each num in [2,3,4,5]
+								each num in [2,3,4]
 									+checkbox(action)(value=num).checkbox.circlebox.fakeradio
 								+roll(action, '{{action=1}} {{subtitle=^{rolls-l}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
 			// Cohort

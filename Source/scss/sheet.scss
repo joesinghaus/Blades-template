@@ -1787,13 +1787,6 @@ input.sheet-zero {
 		display: none;
 	}
 }
-.sheet-vampirexp[value="1"] ~ .sheet-xptooth + span {
-	margin-right: 2px;
-}
-.sheet-xpholder .sheet-vampirexp[value="0"] ~ .sheet-tooth[value="8"] + span,
-.sheet-attribute-xp-box .sheet-vampirexp[value="0"] ~ .sheet-tooth[value="6"] + span {
-	margin-right: 0;
-}
 /* small fixes */
 .sheet-rep input.sheet-tooth {
 	width: 11px;
@@ -1958,17 +1951,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 .sheet-action .sheet-checkbox + span:first-of-type {
 	margin-right: 6px;
 }
-.sheet-action .sheet-darktalent[value="1"] ~ .sheet-checkbox + span {
-	&:first-of-type {
-		margin-right: 4px;
-	}
-	&:not(:first-of-type) {
-		margin-right: calc(3px + (100% - 171px)/10);
-	}
-	&:last-of-type {
-		margin-right: calc(4px + (100% - 171px)/10);
-	}
-}
 /* Fake radios */
 .sheet-checkbox.sheet-fakeradio + span {
 	background: red;
@@ -1978,11 +1960,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 }
 .sheet-tier .sheet-fakeradio:checked ~ .sheet-fakeradio + span {
 	background: white;
-}
-/* HIDER */
-.sheet-darktalent[value="0"] ~ input:last-of-type,
-.sheet-darktalent[value="0"] ~ input:last-of-type + span {
-	display: none;
 }
 /* Friend triangles */
 .sheet-friend-contact {
@@ -2069,9 +2046,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 	margin-right: calc(5px + (100% - 173px)/12);
 	border-right: 1px solid black;
 	height: inherit;
-}
-.sheet-darktalent[value="1"] ~ .sheet-divider {
-	margin-right: calc(3px + (100% - 173px)/15)
 }
 .sheet-action:first-child .sheet-divider {
 	position: relative;

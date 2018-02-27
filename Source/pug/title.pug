@@ -20,17 +20,11 @@
 	.setting-char.generaterow
 		select(name='attr_generate_source_character', title='Choose source')
 			optgroup
-				option(value='cutter', data-i18n='cutter', selected)
-				option(value='hound', data-i18n='hound')
-				option(value='leech', data-i18n='leech')
-				option(value='lurk', data-i18n='lurk')
-				option(value='slide', data-i18n='slide')
-				option(value='spider', data-i18n='spider')
-				option(value='whisper', data-i18n='whisper')
+				each playbook in playbooks
+					option(value=playbook, data-i18n=playbook)
 			optgroup(data-i18n-label='spirit_playbooks')
-				option(value='ghost', data-i18n='ghost')
-				option(value='hull', data-i18n='hull')
-				option(value='vampire', data-i18n='vampire')
+				each playbook in spiritPlaybooks
+					option(value=playbook, data-i18n=playbook)
 		label.generatebutton
 			+checkbox('generate_ability')(data-i18n='add_abilities')
 		label.generatebutton
@@ -39,13 +33,8 @@
 			+checkbox('generate_playbookitem')(data-i18n='add_items')
 	.setting-crew.generaterow
 		select(name='attr_generate_source_crew', title='Choose source')
-			option(value='assassins', data-i18n='assassins', selected)
-			option(value='bravos', data-i18n='bravos')
-			option(value='cult', data-i18n='cult')
-			option(value='hawkers', data-i18n='hawkers')
-			option(value='shadows', data-i18n='shadows')
-			option(value='smugglers', data-i18n='smugglers')
-			option(value='vigilantes', data-i18n='vigilantes')
+			each crew in crews
+				option(value=crew, data-i18n=crew)
 		label.generatebutton
 			+checkbox('generate_crewability')(data-i18n='add_abilities')
 		label.generatebutton
@@ -71,11 +60,6 @@
 		label
 			+checkbox('setting_extra_xp').checkbox.squarebox
 			span(data-i18n='show_extra_xp_condition')
-	//- Vampire XP. Can be deleted safely
-	.setting-char
-		label
-			+checkbox('setting_vampirexp').checkbox.squarebox
-			span(data-i18n='extra_xp_boxes')
 	if (showStrictures)
 		.setting-char
 			label
@@ -112,19 +96,6 @@
 			label
 				+checkbox('setting_show_origin').checkbox.squarebox
 				span(data-i18n='show_origin')
-	//- Dark talent (for vampires). Can be deleted safely
-	.setting-char
-		span(data-i18n='dark_talent')
-		span
-		label
-			+checkbox('setting_dark_talent_insight').checkbox.squarebox
-			span(data-i18n='insight')
-		label
-			+checkbox('setting_dark_talent_prowess').checkbox.squarebox
-			span(data-i18n='prowess')
-		label
-			+checkbox('setting_dark_talent_resolve').checkbox.squarebox
-			span(data-i18n='resolve')
 	.setting-char
 		span(data-i18n='resistance_bonus')
 		each actions, attribute in actionData
