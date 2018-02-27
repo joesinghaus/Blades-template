@@ -457,6 +457,8 @@ const sheetVersion = "2.7",
 				gatherinfo5: "gatherinfo_wheres_the_weakness",
 				gatherinfo6: "gatherinfo_how_can_I_find",
 				playbook_description: "playbook_ghost_description",
+				setting_stress_label: "drain",
+				setting_trauma_label: "gloom",
 				setting_traumata_set: "ghost",
 				setting_vice_type: "ghost",
 				xp_condition: "playbook_ghost_xp_condition",
@@ -518,6 +520,8 @@ const sheetVersion = "2.7",
 				setting_load_h: "7",
 				setting_extra_stress: "1",
 				setting_show_frame: "1",
+				setting_stress_label: "drain",
+				setting_trauma_label: "wear",
 				setting_traumata_set: "hull",
 				setting_vice_type: "hull",
 				xp_condition: "playbook_hull_xp_condition",
@@ -1182,6 +1186,8 @@ const sheetVersion = "2.7",
 		factions5_header: "factions5",
 		frame: "frame",
 		friends_title: "friends",
+		setting_stress_label: "stress",
+		setting_trauma_label: "trauma",
 		upgrade_6_name: "carriage",
 		upgrade_6_description: "upgrade_carriage_description",
 		upgrade_7_name: "documents",
@@ -1299,6 +1305,7 @@ Object.keys(crewData).forEach(crew => {
 			base[attr] = getTranslationByKey(base[attr]);
 		}
 	});
+	/* Generate crew contacts from translation file */
 	crewData[crew].contact = [...Array(6).keys()].map(i => ({
 		name: getTranslationByKey(`crew_${crew}_contact_${i}`)
 	}));
@@ -1343,6 +1350,8 @@ Object.keys(playbookData).forEach(playbook => {
 			'gatherinfo5',
 			'gatherinfo6',
 			'playbook_description',
+			'setting_stress_label',
+			'setting_trauma_label',
 			'xp_condition',
 			'xp_condition2',
 			'xp_condition3'
@@ -1352,6 +1361,7 @@ Object.keys(playbookData).forEach(playbook => {
 			base[attr] = getTranslationByKey(base[attr]);
 		}
 	});
+	/* Generate playbook friends from translation file */
 	if (!['ghost', 'hull'].includes(playbook)) {
 		playbookData[playbook].friend = [...Array(5).keys()]
 			.map(i => ({
@@ -1369,7 +1379,7 @@ Object.keys(playbookData).forEach(playbook => {
 		item.boxes_chosen = '1';
 	});
 });
-/* FUNCTIONS */
+/* Utility functions - shouldn't need to touch most of these */
 const mySetAttrs = (attrs, options, callback) => {
 		const finalAttrs = Object.keys(attrs).reduce((m, k) => {
 			m[k] = String(attrs[k]);
@@ -1590,7 +1600,7 @@ on('change:crew_type change:playbook', event => {
 		}
 	});
 });
-/* Watch repeating rows for changes and set autogen to false if change happens*/
+/* Watch repeating rows for changes and set autogen to false if change happens */
 autogenSections.forEach(sectionName => {
 	on(`change:repeating_${sectionName}`, event => {
 		getAttrs([`repeating_${sectionName}_autogen`], v => {
@@ -1709,7 +1719,7 @@ on('change:reset_items', () => {
 	setAttr('load', 0);
 	['item', 'playbookitem'].forEach(clearChecks);
 });
-/* Default values for number of upgrades boxes */
+/* Default values for number of upgrades boxes — probably not necessary anymore */
 on('change:repeating_upgrade:boxes_chosen', () => {
 	getAttrs(['repeating_upgrade_numboxes'], v => {
 		if (!['1', '2', '3'].includes(v.repeating_upgrade_numboxes)) {

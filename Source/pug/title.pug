@@ -1,5 +1,6 @@
-//- Title & Version
+// Title & Version
 .topholder.flex
+	// Toggle the type of sheet
 	.type-selector.label
 		input.hidden.sheet-3waybox(type='checkbox', name='attr_sheet_type', value='faction')
 		input.sheet-3waybox(type='radio', name='attr_sheet_type', value='character', checked)
@@ -14,6 +15,7 @@
 		span.version-text(data-i18n='version')
 		span(name='attr_version')
 +hidden-input('show_settings')(value='0').hider
+// Settings
 .settings.flex-wrap
 	.setting-char.generaterow
 		select(name='attr_generate_source_character', title='Choose source')
@@ -60,8 +62,6 @@
 				option(value='1') 10
 				option(value='2') 11
 				option(value='3') 12
-				option(value='4') 13
-				option(value='5') 14
 			span(data-i18n='number_stress_boxes')
 	.setting-char
 		label
@@ -71,18 +71,21 @@
 		label
 			+checkbox('setting_extra_xp').checkbox.squarebox
 			span(data-i18n='show_extra_xp_condition')
+	//- Vampire XP. Can be deleted safely
 	.setting-char
 		label
 			+checkbox('setting_vampirexp').checkbox.squarebox
 			span(data-i18n='extra_xp_boxes')
-	.setting-char
-		label
-			+checkbox('setting_show_strictures').checkbox.squarebox
-			span(data-i18n='show_vampire_strictures')
-	.setting-char
-		label
-			+checkbox('setting_show_frame').checkbox.squarebox
-			span(data-i18n='show_frame_section')
+	if (showStrictures)
+		.setting-char
+			label
+				+checkbox('setting_show_strictures').checkbox.squarebox
+				span(data-i18n='show_vampire_strictures')
+	if (showFrame)
+		.setting-char
+			label
+				+checkbox('setting_show_frame').checkbox.squarebox
+				span(data-i18n='show_frame_section')
 	.setting-char.setting-crew
 		label
 			+checkbox('setting_show_itemdesc')(checked).checkbox.squarebox
@@ -91,14 +94,25 @@
 		label
 			+checkbox('setting_show_cohort').checkbox.squarebox
 			span(data-i18n='show_cohort_section')
-	.setting-crew
+	.setting-char
 		label
-			+checkbox('setting_show_deity').checkbox.squarebox
-			span(data-i18n='show_deity')
-	.setting-crew
+			+text-input('setting_stress_label')(value='Stress')
+			span(data-i18n='stress_label')
+	.setting-char
 		label
-			+checkbox('setting_show_origin').checkbox.squarebox
-			span(data-i18n='show_origin')
+			+text-input('setting_trauma_label')(value='Trauma')
+			span(data-i18n='trauma_label')
+	//- Deity and origin fields. Can be deleted safely
+	if (showDeityOrigin)
+		.setting-crew
+			label
+				+checkbox('setting_show_deity').checkbox.squarebox
+				span(data-i18n='show_deity')
+		.setting-crew
+			label
+				+checkbox('setting_show_origin').checkbox.squarebox
+				span(data-i18n='show_origin')
+	//- Dark talent (for vampires). Can be deleted safely
 	.setting-char
 		span(data-i18n='dark_talent')
 		span
@@ -113,19 +127,15 @@
 			span(data-i18n='resolve')
 	.setting-char
 		span(data-i18n='resistance_bonus')
-		label
-			+number-input('setting_resbonus_insight')(value='0')
-			span(data-i18n='insight')
-		label
-			+number-input('setting_resbonus_prowess')(value='0')
-			span(data-i18n='prowess')
-		label
-			+number-input('setting_resbonus_resolve')(value='0')
-			span(data-i18n='resolve')
+		each actions, attribute in actionData
+			label
+				+number-input(`setting_resbonus_${attribute}`)(value='0')
+				span(data-i18n=attribute)
 	.setting-char
 		label
 			+checkbox('setting_consequence_query').checkbox.squarebox
 			span(data-i18n='query_for_consequence')
+	//- Default load numbers
 	.setting-char
 		span(data-i18n='load:')
 		label
@@ -137,20 +147,23 @@
 		label
 			+number-input('setting_load_h')(value='6')
 			span(data-i18n='heavy')
+	//- If you only have one type of trauma, you can delete the next element
 	.setting-char
 		label
 			select(name='attr_setting_traumata_set', title='Traumata')
 				each val, type in traumaData
 					option(value=type, data-i18n=type)
 			span(data-i18n='traumata')
-	.setting-char
-		label
-			select(name='attr_setting_vice_type', title='Vice')
-				option(value='normal', data-i18n='normal', selected)
-				option(value='ghost', data-i18n='ghost')
-				option(value='hull', data-i18n='hull')
-				option(value='vampire', data-i18n='vampire')
-			span(data-i18n='vice')
+	//- Special vices for the spirit playbooks. Can be deleted safely.
+	if (showSpecialVice)
+		.setting-char
+			label
+				select(name='attr_setting_vice_type', title='Vice')
+					option(value='normal', data-i18n='normal', selected)
+					option(value='ghost', data-i18n='ghost')
+					option(value='hull', data-i18n='hull')
+					option(value='vampire', data-i18n='vampire')
+				span(data-i18n='vice')
 	.setting-char.setting-crew.setting-faction
 		label
 			+checkbox('setting_flexwidth').checkbox.squarebox

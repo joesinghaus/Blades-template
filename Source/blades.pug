@@ -16,6 +16,12 @@
 		Bestial: 'When you suffer physical harm or overindulge your vice, your body twists into a horrific bestial form until you next feed without overindulging.',
 		Bound: 'Your spirit must remain in this body, or be destroyed.'
 	}
+	// Toggles for special sections of the sheet
+	// By default, these will not be output to the generated HTML, you can change these to change it
+	const showStrictures = false,				// vampire strictures
+		showFrame = false,								// hull frame
+		showSpecialVice = false,					// ghost, hull, and vampire vices
+		showDeityOrigin = false;					// show Deity and Origin
 
 
 //- Mixins for code reuse
@@ -48,10 +54,10 @@ mixin hidden-checkbox(name)
 
 mixin autoexpand(name)
 	div(class=['auto-expand', attributes.class])
-		span(name=`attr_${name}`)= content
+		span(name=`attr_${name}`)
 		+textarea(name)(data-i18n-placeholder!=attributes['data-i18n-placeholder'])
-			block
 
+//- Creates a roll button using stat as a bonus
 mixin roll(name, templatedata, stat)
 	button(
 		type='roll',
@@ -59,6 +65,7 @@ mixin roll(name, templatedata, stat)
 		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} {{roll1=[[[[{[[${stat}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[${stat}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[${stat}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[${stat}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[${stat}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[${stat}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[${stat}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[${stat}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[${stat}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[${stat}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[${stat}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[${stat}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(${stat})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(${stat})-(@{bonusdice})]],1}kl1]]d6]]}}`
 	)&attributes(attributes)
 
+//- Creates a fortune roll button
 mixin fortuneroll(name, templatedata, useNotes)
 	button(
 		type='roll',
@@ -66,6 +73,8 @@ mixin fortuneroll(name, templatedata, useNotes)
 		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} {{roll1=[[[[{@{numberofdice},1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}]]-1,1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} ${useNotes ? '{{notes=@{notes_query}}} ' : ''}`
 	)&attributes(attributes)
 
+//- Cohort section
+	isCharacter === true shows an input for quality, instead of generating it from the crew quality
 mixin makecohort(prefix, isCharacter)
 	.cohort
 		+hidden-input(`${prefix}dice`)(value=isCharacter ? '1' : '0')
@@ -98,6 +107,8 @@ mixin makecohort(prefix, isCharacter)
 				+autoexpand(`${prefix}${name.toLowerCase()}`)
 		+textarea(`${prefix}description`).cohort-description
 
+//- Clock section
+	isFaction === true hides the character name
 mixin makeclock(isFaction)
 	+hidden-input('size')(value='').size
 	+autoexpand('name')(data-i18n-placeholder='clock_name').smallcaps

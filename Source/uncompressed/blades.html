@@ -26,7 +26,9 @@
 <input type="hidden" name="attr_crew_xp_max" value="8"/>
 <div class="container">
   <input class="type" type="hidden" name="attr_sheet_type" value="character"/>
+  <!-- Title & Version-->
   <div class="topholder flex">
+    <!-- Toggle the type of sheet-->
     <div class="type-selector label">
       <input class="hidden sheet-3waybox" type="checkbox" name="attr_sheet_type" value="faction"/>
       <input class="sheet-3waybox" type="radio" name="attr_sheet_type" value="character" checked="checked"/>
@@ -39,6 +41,7 @@
     <div class="version"><span class="version-text" data-i18n="version"></span><span name="attr_version"></span></div>
   </div>
   <input class="hider" type="hidden" name="attr_show_settings" value="0"/>
+  <!-- Settings-->
   <div class="settings flex-wrap">
     <div class="setting-char generaterow">
       <select name="attr_generate_source_character" title="Choose source">
@@ -99,8 +102,6 @@
           <option value="1">10</option>
           <option value="2">11</option>
           <option value="3">12</option>
-          <option value="4">13</option>
-          <option value="5">14</option>
         </select><span data-i18n="number_stress_boxes"></span>
       </label>
     </div>
@@ -119,16 +120,6 @@
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_vampirexp" value="1"/><span></span><span data-i18n="extra_xp_boxes"></span>
       </label>
     </div>
-    <div class="setting-char">
-      <label>
-        <input class="checkbox squarebox" type="checkbox" name="attr_setting_show_strictures" value="1"/><span></span><span data-i18n="show_vampire_strictures"></span>
-      </label>
-    </div>
-    <div class="setting-char">
-      <label>
-        <input class="checkbox squarebox" type="checkbox" name="attr_setting_show_frame" value="1"/><span></span><span data-i18n="show_frame_section"></span>
-      </label>
-    </div>
     <div class="setting-char setting-crew">
       <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_show_itemdesc" value="1" checked="checked"/><span></span><span data-i18n="show_item_description"></span>
@@ -139,14 +130,14 @@
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_show_cohort" value="1"/><span></span><span data-i18n="show_cohort_section"></span>
       </label>
     </div>
-    <div class="setting-crew">
+    <div class="setting-char">
       <label>
-        <input class="checkbox squarebox" type="checkbox" name="attr_setting_show_deity" value="1"/><span></span><span data-i18n="show_deity"></span>
+        <input type="text" spellcheck="false" name="attr_setting_stress_label" value="Stress"/><span data-i18n="stress_label"></span>
       </label>
     </div>
-    <div class="setting-crew">
+    <div class="setting-char">
       <label>
-        <input class="checkbox squarebox" type="checkbox" name="attr_setting_show_origin" value="1"/><span></span><span data-i18n="show_origin"></span>
+        <input type="text" spellcheck="false" name="attr_setting_trauma_label" value="Trauma"/><span data-i18n="trauma_label"></span>
       </label>
     </div>
     <div class="setting-char"><span data-i18n="dark_talent"></span><span></span>
@@ -196,16 +187,6 @@
         </select><span data-i18n="traumata"></span>
       </label>
     </div>
-    <div class="setting-char">
-      <label>
-        <select name="attr_setting_vice_type" title="Vice">
-          <option value="normal" data-i18n="normal" selected="selected"></option>
-          <option value="ghost" data-i18n="ghost"></option>
-          <option value="hull" data-i18n="hull"></option>
-          <option value="vampire" data-i18n="vampire"></option>
-        </select><span data-i18n="vice"></span>
-      </label>
-    </div>
     <div class="setting-char setting-crew setting-faction">
       <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_flexwidth" value="1"/><span></span><span data-i18n="flexible_width"></span>
@@ -242,8 +223,11 @@
       </label>
     </div>
   </div>
+  <!-- Character Sheet-->
   <div class="type-character flex">
+    <!-- Left column-->
     <div class="col55 flex-wrap">
+      <!-- Logo, Header text fields-->
       <div class="col100 header flex">
         <div class="col55 bladeslogo"></div>
         <label class="col45 header">
@@ -283,24 +267,15 @@
           </div>
           <input type="hidden" name="attr_vice_purveyor" value=""/>
           <div class="text"><span class="label title" data-i18n="vice_purveyor"></span><span class="uppercase info" data-i18n="vice_info"></span></div>
-          <button class="vicebutton borderbutton" type="roll" name="roll_Vice" value="&{template:bitd} {{charname=@{character_name}}} {{{{subtitle=^{viceroll1}@{stress} ^{stress}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}} {{roll1=[[[[{[[@{vice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{vice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{vice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{vice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{vice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{vice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{vice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{vice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{vice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{vice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{vice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{vice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{vice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{vice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="indulge_vice"></button>
+          <button class="vicebutton borderbutton" type="roll" name="roll_Vice" value="&{template:bitd} {{charname=@{character_name}}} {{{{subtitle=^{viceroll1}@{stress} @{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}} {{roll1=[[[[{[[@{vice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{vice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{vice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{vice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{vice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{vice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{vice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{vice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{vice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{vice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{vice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{vice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{vice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{vice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="indulge_vice"></button>
           <input type="hidden" name="attr_vice" value="0"/>
         </label>
-        <div class="col100 vice ghost"><span class="italic" data-i18n="ghost_viceblurb"></span></div>
-        <div class="col100 vice hull">
-          <label class="flex-wrap">
-            <input type="text" spellcheck="false" name="attr_hull_functions" data-i18n-placeholder="choose_3_functions" placeholder="choose 3 functions"/>
-            <input type="hidden" name="attr_hull_functions" value=""/>
-            <div class="text"><span class="label title" data-i18n="functions"></span><span class="uppercase info" data-i18n="functions_info"></span></div>
-          </label><span class="italic" data-i18n="hull_viceblurb"></span>
-        </div>
-        <div class="col100 vice vampire"><span class="italic" data-i18n="vampire_viceblurb"></span>
-          <button class="vicebutton borderbutton" type="roll" name="roll_Vice" value="&{template:bitd} {{charname=@{character_name}}} {{{{subtitle=^{viceroll1}@{stress} ^{stress}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}} {{roll1=[[[[{[[@{vice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{vice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{vice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{vice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{vice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{vice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{vice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{vice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{vice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{vice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{vice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{vice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{vice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{vice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="indulge_vice"></button>
-        </div>
       </div>
+      <!-- Stress and Trauma-->
       <div class="col100 flex stress def-margin">
+        <!-- Stress markers-->
         <div class="stress1 blackheader">
-          <div class="label" data-i18n="stress"></div>
+          <div class="label"><span name="attr_setting_stress_label"></span></div>
         </div>
         <div class="stress2 blackborder flex">
           <input class="tooth zero" type="radio" name="attr_stress" value="0" checked="checked"/><span></span>
@@ -318,15 +293,12 @@
           <input class="tooth stresstooth" type="radio" name="attr_stress" value="10"/><span></span>
           <input class="hidden extra-teeth" type="checkbox" name="attr_setting_extra_stress" value="2"/>
           <input class="tooth stresstooth" type="radio" name="attr_stress" value="11"/><span></span>
-          <input class="hidden extra-teeth" type="checkbox" name="attr_setting_extra_stress" value="3"/>
           <input class="tooth stresstooth" type="radio" name="attr_stress" value="12"/><span></span>
-          <input class="hidden extra-teeth" type="checkbox" name="attr_setting_extra_stress" value="4"/>
-          <input class="tooth stresstooth" type="radio" name="attr_stress" value="13"/><span></span>
-          <input class="tooth stresstooth" type="radio" name="attr_stress" value="14"/><span></span>
         </div>
+        <!-- Trauma markers-->
         <div class="stress3">
           <div class="blackheader">
-            <div class="label" data-i18n="trauma"></div>
+            <div class="label"><span name="attr_setting_trauma_label"></span></div>
           </div>
           <div class="traumaholder flex">
             <input class="tooth zero" type="radio" name="attr_trauma" value="0" checked="checked"/><span></span>
@@ -338,6 +310,7 @@
             <input class="tooth regulartooth" type="radio" name="attr_trauma" value="5"/><span></span>
           </div>
         </div>
+        <!-- Individual traumata-->
         <div class="stress4 blackborder">
           <input class="input" type="hidden" name="attr_setting_traumata_set" value="normal"/>
           <div class="normal">
@@ -420,7 +393,9 @@
           </div>
         </div>
       </div>
+      <!-- Harm, Healing, Armor, Coin-->
       <div class="col100 flex def-margin">
+        <!-- Harm-->
         <div class="harm col63">
           <div class="blackheader col100">
             <div class="label" data-i18n="harm"></div>
@@ -440,12 +415,15 @@
             <div class="flex-center harmeffect" data-i18n="less_effect"></div>
           </div>
         </div>
+        <!-- Armor, Healing and Coin-->
         <div class="col37 flex-wrap">
+          <!-- Healing-->
           <div class="col45 healing">
             <div class="blackheader col100">
               <button class="label rollbutton inherit" type="roll" name="roll_Recovery" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title-recovery=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for-l}}} {{roll1=[[[[{@{numberofdice},1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}]]-1,1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} " data-i18n="healing"></button>
             </div>
             <div class="col100 healing-progress" data-i18n="progress_clock" data-i18n-title="recoveryblurb"></div>
+            <!-- Healing clock-->
             <input class="size" type="hidden" name="attr_recovery_max" value="4"/>
             <div class="clock-container">
               <div class="spoke-0 all"></div>
@@ -458,6 +436,7 @@
               <div class="clock"></div>
             </div>
           </div>
+          <!-- Armor-->
           <div class="armor col55">
             <div class="blackheader col100">
               <div class="label" data-i18n="armor_uses"></div>
@@ -472,7 +451,9 @@
               <input class="checkbox squarebox" type="checkbox" name="attr_special" value="1"/><span></span><span class="label" data-i18n="special"></span>
             </label>
           </div>
+          <!-- Coin and Stash-->
           <div class="col100 coin-and-stash">
+            <!-- Coin-->
             <div class="col100 coinrow flex">
               <div class="coin flex">
                 <div class="label" data-i18n="coin"></div>
@@ -487,6 +468,7 @@
                 <button class="rollbutton label" type="roll" name="roll_Stash" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title-lifestyle=1}} {{title=^{stash}}} {{subtitle=^{rolls-l}}} {{roll1=[[[[{[[@{stash_dice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{stash_dice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{stash_dice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{stash_dice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{stash_dice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{stash_dice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{stash_dice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{stash_dice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{stash_dice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{stash_dice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{stash_dice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{stash_dice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{stash_dice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{stash_dice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="stash"></button>
               </div>
             </div>
+            <!-- Stash-->
             <div class="col100 stash">
               <input class="zero" type="radio" name="attr_stash" value="0" checked="checked"/><span></span>
               <input class="radiobox" type="radio" name="attr_stash" value="1"/><span></span>
@@ -533,6 +515,7 @@
           </div>
         </div>
       </div>
+      <!-- Special abilities-->
       <div class="col100 def-margin">
         <div class="specialheader col100 label" data-i18n="special_abilities"></div>
         <div class="greyholder col100">
@@ -550,6 +533,7 @@
           </fieldset>
         </div>
       </div>
+      <!-- Advancement-->
       <div class="col100 def-margin">
         <div class="advancement-header flex blackheader">
           <div class="label markxp" data-i18n="mark_xp:"></div>
@@ -596,6 +580,7 @@
           </li>
         </ul>
       </div>
+      <!-- Teamwork-->
       <div class="col45 right-column def-margin">
         <div class="plainheader label" data-i18n="teamwork"></div>
         <div class="teamworkbox" data-i18n="assist_a_teammate"></div>
@@ -603,6 +588,7 @@
         <div class="teamworkbox" data-i18n="protect_a_teammate"></div>
         <div class="teamworkbox" data-i18n="set_up_a_teammate-N"></div>
       </div>
+      <!-- Gather Information-->
       <div class="col55 right-column def-margin">
         <div class="gatherinfo col100">
           <div class="plainheader label" data-i18n="gather_information"></div>
@@ -630,46 +616,20 @@
             </ul>
           </div>
         </div>
-        <input class="hider" type="hidden" name="attr_setting_show_strictures" value="0"/>
-        <div class="strictures col100 def-margin">
-          <div class="plainheader label" data-i18n="strictures"></div>
-          <div><span class="italic" data-i18n="stricturesblurb"></span></div>
-          <div>
-            <label>
-              <input class="checkbox squarebox" type="checkbox" name="attr_stricture_slumber" value="1"/><span></span><span class="label" data-i18n="slumber"></span>
-            </label><span data-i18n="strictures_slumber"></span>
-          </div>
-          <div>
-            <label>
-              <input class="checkbox squarebox" type="checkbox" name="attr_stricture_forbidden" value="1"/><span></span><span class="label" data-i18n="forbidden"></span>
-            </label><span data-i18n="strictures_forbidden"></span>
-          </div>
-          <div>
-            <label>
-              <input class="checkbox squarebox" type="checkbox" name="attr_stricture_repelled" value="1"/><span></span><span class="label" data-i18n="repelled"></span>
-            </label><span data-i18n="strictures_repelled"></span>
-          </div>
-          <div>
-            <label>
-              <input class="checkbox squarebox" type="checkbox" name="attr_stricture_bestial" value="1"/><span></span><span class="label" data-i18n="bestial"></span>
-            </label><span data-i18n="strictures_bestial"></span>
-          </div>
-          <div>
-            <label>
-              <input class="checkbox squarebox" type="checkbox" name="attr_stricture_bound" value="1"/><span></span><span class="label" data-i18n="bound"></span>
-            </label><span data-i18n="strictures_bound"></span>
-          </div>
-        </div>
       </div>
     </div>
+    <!-- Right column-->
     <div class="col45 flex-wrap right-column">
+      <!-- Playbook name and description-->
       <div class="playbook flex">
         <input class="label" type="text" spellcheck="false" name="attr_playbook" data-i18n-placeholder="playbook"/>
         <textarea class="label" spellcheck="false" name="attr_playbook_description" data-i18n-placeholder="playbook_description"></textarea>
         <input class="hider" type="hidden" name="attr_show_playbook_reminder" value="1"/>
         <div class="reminder"><span data-i18n="autofill_reminder_playbook"></span><br/><span data-i18n="list_playbooks"></span></div>
       </div>
+      <!-- Items and Planning-->
       <div class="col53 itemcolumn small-margin">
+        <!-- Load-->
         <div class="loadheader flex col100">
           <div class="label" data-i18n="load"></div>
           <label>
@@ -688,7 +648,9 @@
             <input type="checkbox" name="attr_reset_items" value="1"/><span data-i18n="reset?"></span>
           </label>
         </div>
+        <!-- Items-->
         <div class="itemholder col100 items">
+          <!-- Playbook items-->
           <div class="playbookitems col100 small-repcontrol">
             <fieldset class="repeating_playbookitem">
               <input class="boxes-chosen" type="hidden" name="attr_boxes_chosen" value="0"/>
@@ -717,18 +679,8 @@
                 <textarea spellcheck="false" name="attr_description" data-i18n-placeholder="description"></textarea>
               </div>
             </fieldset>
-            <input class="hider" type="hidden" name="attr_setting_show_frame" value="0"/>
-            <div class="frame small-margin">
-              <input class="smallcaps" type="text" spellcheck="false" name="attr_frame" value="Frame"/>
-              <textarea spellcheck="false" name="attr_frame_description" data-i18n-placeholder="frame_description"></textarea>
-              <fieldset class="repeating_framefeature">
-                <div class="item">
-                  <input class="checkbox circlebox" type="checkbox" name="attr_check" value="1"/><span></span>
-                  <input class="itemname" type="text" spellcheck="false" name="attr_name" data-i18n-placeholder="frame_feature"/>
-                </div>
-              </fieldset>
-            </div>
           </div>
+          <!-- Regular items-->
           <div class="regularitems white-repcontrol col100">
             <fieldset class="repeating_item">
               <input class="input-short" type="hidden" name="attr_short" value="0"/>
@@ -760,6 +712,7 @@
             </fieldset>
           </div>
         </div>
+        <!-- Alchemicals-->
         <div class="col100 def-margin">
           <input class="title-checkbox" type="checkbox" name="attr_show_alchemicals" value="1"/><span class="label plainheader" data-i18n="alchemicals"></span>
           <div class="alchemicals white-repcontrol">
@@ -781,6 +734,7 @@
             </fieldset>
           </div>
         </div>
+        <!-- Planning and Load-->
         <div class="planning col100 def-margin">
           <input class="title-checkbox" type="checkbox" name="attr_show_planning" value="1" checked="checked"/><span class="label plainheader" data-i18n="planning_load"></span>
           <div class="planning-content">
@@ -794,6 +748,7 @@
           </div>
         </div>
       </div>
+      <!-- Action ratings-->
       <div class="col47 right-column actioncolumn small-margin">
         <div class="attribute col100">
           <div class="attribute-title flex col100">
@@ -993,6 +948,7 @@
             </div>
           </div>
         </div>
+        <!-- Cohort-->
         <input class="hider" type="hidden" name="attr_setting_show_cohort" value="0"/>
         <div class="cohort">
           <input type="hidden" name="attr_char_cohort_dice" value="1"/>
@@ -1044,16 +1000,18 @@
           </label>
           <textarea class="cohort-description" spellcheck="false" name="attr_char_cohort_description"></textarea>
         </div>
+        <!-- Bonus die box-->
         <div class="bonusdie col100">
           <div class="col100 label" data-i18n="bonus_die"></div>
           <div class="col100 flex">
             <div class="flex-center bonusdieplus">+</div>
             <div class="bonusdietext">
-              <div class="label" data-i18n="push_yourself"></div><span data-i18n="push_yourself_desc1"></span><span data-i18n="stress"></span><span data-i18n="push_yourself_desc2-N"></span>
+              <div class="label" data-i18n="push_yourself"></div><span data-i18n="push_yourself_desc1"></span><span name="attr_setting_stress_label"></span><span data-i18n="push_yourself_desc2-N"></span>
               <div class="label" data-i18n="devils_bargain"></div>
             </div>
           </div>
         </div>
+        <!-- Friends-->
         <div class="col100 def-margin">
           <div class="specialheader col100 label flex">
             <input class="inherit" type="text" spellcheck="false" name="attr_friends_title" value="Friends"/>
@@ -1075,8 +1033,10 @@
             </fieldset>
           </div>
         </div>
+        <!-- Roll Fortune-->
         <button class="fortunebutton borderbutton" type="roll" name="roll_Fortune" value="&{template:bitd} {{charname=@{character_name}}} {{fortune=1}} {{subtitle=^{rolls-l}}} {{title-fortune=1}} {{title=^{fortune}}} {{roll1=[[[[{@{numberofdice},1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}]]-1,1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} {{notes=@{notes_query}}} " data-i18n="roll_fortune"></button>
       </div>
+      <!-- Clocks-->
       <div class="col100 clocks white-repcontrol def-margin">
         <div class="specialheader label" data-i18n="clocks"></div>
         <fieldset class="repeating_clock">
@@ -1135,8 +1095,11 @@
       <textarea class="notes" spellcheck="false" name="attr_notes" data-i18n-placeholder="notes"></textarea>
     </div>
   </div>
+  <!-- Crew Sheet-->
   <div class="type-crew flex">
+    <!-- Left column-->
     <div class="col55 flex-wrap">
+      <!-- Logo, Header text fields-->
       <div class="col100 header flex-wrap">
         <div class="col55 bladeslogo"></div>
         <div class="col45 crewheader label" data-i18n="crew_sheet"></div>
@@ -1152,23 +1115,8 @@
           <input type="text" spellcheck="false" name="attr_lair"/>
           <div class="label text title" data-i18n="lair"></div>
         </label>
-        <input class="hider" type="hidden" name="attr_setting_show_deity" value="0"/>
-        <label class="col55">
-          <input type="text" spellcheck="false" name="attr_crew_deity"/>
-          <div class="label text title"><span data-i18n="deity"></span></div>
-        </label>
-        <input class="hider" type="hidden" name="attr_setting_show_deity" value="0"/>
-        <label class="col45">
-          <input type="text" spellcheck="false" name="attr_crew_deity_features" data-i18n-placeholder="choose_2_features"/>
-          <input type="hidden" name="attr_crew_deity_features" value=""/>
-          <div class="text"><span class="label title"><span class="space-after" data-i18n="deity"></span><span data-i18n="features"></span></span><span class="uppercase info" data-i18n="deity_features_info"></span></div>
-        </label>
-        <input class="hider" type="hidden" name="attr_setting_show_origin" value="0"/>
-        <label class="col100">
-          <input type="text" spellcheck="false" name="attr_origin"/>
-          <div class="label text title" data-i18n="origin"></div>
-        </label>
       </div>
+      <!-- Rep, Hold, and Tier-->
       <div class="col100 flex rep-and-hold def-margin">
         <div class="rep flex col45">
           <div class="rep1 blackheader">
@@ -1207,6 +1155,7 @@
             </div>
           </div>
         </div>
+        <!-- Hold-->
         <div class="hold flex">
           <div class="hold1 blackheader">
             <div class="label" data-i18n="hold"></div>
@@ -1223,6 +1172,7 @@
             </div>
             <input class="tooth holdtooth" type="radio" name="attr_hold" value="strong" checked="checked"/><span></span>
           </label>
+          <!-- Tier-->
           <div class="blackheader">
             <button class="label inherit rollbutton" type="roll" name="roll_Tier" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title-crew_tier=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their-l}}} {{roll1=[[[[{[[@{crew_tier}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{crew_tier}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{crew_tier}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{crew_tier}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{crew_tier}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{crew_tier}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{crew_tier}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{crew_tier}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{crew_tier}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{crew_tier}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{crew_tier}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{crew_tier}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{crew_tier})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{crew_tier})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="tier"></button>
           </div>
@@ -1235,6 +1185,7 @@
           </div>
         </div>
       </div>
+      <!-- Claims-->
       <div class="claims col100 white-repcontrol">
         <div class="claimsrow flex">
             <input type="hidden" name="attr_claim_1_check" value="0"/>
@@ -1499,8 +1450,11 @@
           </div>
         </fieldset>
       </div>
+      <!-- Heat and Coin-->
       <div class="col100 flex heat-and-vault def-margin">
+        <!-- Heat-->
         <div class="col45 flex heat">
+          <!-- Heat markers-->
           <div class="heat1 blackheader">
             <div class="label" data-i18n="heat"></div>
           </div>
@@ -1516,6 +1470,7 @@
             <input class="tooth stresstooth" type="radio" name="attr_heat" value="8"/><span></span>
             <input class="tooth stresstooth" type="radio" name="attr_heat" value="9"/><span></span>
           </div>
+          <!-- Wanted Level-->
           <div class="heat3">
             <div class="blackheader">
               <button class="label inherit rollbutton" type="roll" name="roll_Wanted" value="&{template:bitd} {{charname=@{character_name}}} {{vice=1}} {{short=1}} {{title-entanglement=1}} {{title=^{entanglement}}} {{subtitle=^{wantedroll1}@{heat} ^{heat}^{wantedroll2}}} {{roll1=[[[[{[[@{wanted}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{wanted}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{wanted}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{wanted}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{wanted}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{wanted}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{wanted}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{wanted}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{wanted}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{wanted}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{wanted}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{wanted}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{wanted})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{wanted})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="wanted"></button>
@@ -1529,6 +1484,7 @@
             </div>
           </div>
         </div>
+        <!-- Coin-->
         <div class="crewcoin col52b">
           <div class="col100 flex">
             <div class="blackheader crewcoin1">
@@ -1562,6 +1518,7 @@
           <div class="col100 crewcoin-desc" data-i18n="upon_crew_advance-N"></div>
         </div>
       </div>
+      <!-- Special abilities-->
       <div class="col100 def-margin">
         <div class="specialheader col100 label" data-i18n="special_abilities"></div>
         <div class="greyholder col100">
@@ -1579,6 +1536,7 @@
           </fieldset>
         </div>
       </div>
+      <!-- Advancement-->
       <div class="col100 def-margin">
         <div class="advancement-header flex blackheader">
           <div class="label markxp" data-i18n="mark_xp:"></div>
@@ -1616,16 +1574,21 @@
         </ul>
       </div>
     </div>
+    <!-- Right column-->
     <div class="col45 flex-wrap right-column">
+      <!-- Crew Type-->
       <div class="playbook flex">
         <input class="label" type="text" spellcheck="false" name="attr_crew_type" data-i18n-placeholder="crew" placeholder="Crew"/>
         <textarea class="label" spellcheck="false" name="attr_crew_description" data-i18n-placeholder="crew_description" placeholder="A short crew description"></textarea>
         <input class="hider" type="hidden" name="attr_show_playbook_reminder" value="1"/>
         <div class="reminder"><span data-i18n="autofill_reminder_crew"></span><br/><span data-i18n="list_crews"></span></div>
       </div>
+      <!-- Upgrades and Hunting Grounds-->
       <div class="col53 small-margin">
+        <!-- Upgrades-->
         <div class="itemheader col100"><span class="label" data-i18n="crew_upgrades"></span></div>
         <div class="itemholder col100 upgrades">
+          <!-- Specific upgrades-->
           <div class="playbookitems small-repcontrol col100">
             <fieldset class="repeating_upgrade">
               <input class="boxes-chosen" type="hidden" name="attr_boxes_chosen" value="0"/>
@@ -1651,6 +1614,7 @@
               </div>
             </fieldset>
           </div>
+          <!-- Regular upgrades-->
           <div class="regularitems flex-wrap col100">
             <div class="item col50"><span class="label" data-i18n="lair"></span></div>
             <div class="item col50"><span class="label" data-i18n="quality"></span></div>
@@ -1865,7 +1829,9 @@
         </div>
         <button class="engagementbutton borderbutton" type="roll" name="roll_Engagement" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title-engagement=1}} {{title=^{engagement}}} {{roll1=[[[[{@{numberofdice},1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}]]-1,1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} " data-i18n="roll_engagement"></button>
       </div>
+      <!-- Cohorts and Contacts-->
       <div class="col47 right-column small-margin">
+        <!-- First Cohort-->
         <div class="cohort">
           <input type="hidden" name="attr_cohort1_dice" value="0"/>
           <input type="hidden" name="attr_cohort1_verb" value="^{roll_their-l}"/>
@@ -1914,6 +1880,7 @@
           </label>
           <textarea class="cohort-description" spellcheck="false" name="attr_cohort1_description"></textarea>
         </div>
+        <!-- Cohort repeating section-->
         <div class="col100 white-repcontrol cohorts">
           <fieldset class="repeating_cohort">
             <div class="cohort">
@@ -1966,6 +1933,7 @@
             </div>
           </fieldset>
         </div>
+        <!-- Contacts-->
         <div class="col100 def-margin">
           <div class="specialheader col100 label flex">
             <input class="inherit" type="text" spellcheck="false" name="attr_contacts_title" value="Contacts"/>
@@ -1984,8 +1952,10 @@
             </fieldset>
           </div>
         </div>
+        <!-- Roll Fortune-->
         <button class="fortunebutton borderbutton" type="roll" name="roll_Fortune_crew" value="&{template:bitd} {{charname=@{character_name}}} {{fortune=1}} {{subtitle=^{roll-l}}} {{title-fortune=1}} {{title=^{fortune}}} {{roll1=[[[[{@{numberofdice},1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}]]-1,1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} {{notes=@{notes_query}}} " data-i18n="roll_fortune"></button>
       </div>
+      <!-- Clocks-->
       <div class="col100 clocks white-repcontrol def-margin">
         <div class="specialheader label" data-i18n="clocks"></div>
         <fieldset class="repeating_crewclock">
@@ -2044,6 +2014,7 @@
       <textarea class="notes" spellcheck="false" name="attr_crew_notes" data-i18n-placeholder="notes"></textarea>
     </div>
   </div>
+  <!-- Faction Sheet-->
   <div class="type-faction flex-wrap">
     <input class="input-clocks-only" type="hidden" name="attr_setting_clocks_only" value="0"/>
     <div class="factiontitle flex col100">
@@ -2729,6 +2700,8 @@ const sheetVersion = "2.7",
 				gatherinfo5: "gatherinfo_wheres_the_weakness",
 				gatherinfo6: "gatherinfo_how_can_I_find",
 				playbook_description: "playbook_ghost_description",
+				setting_stress_label: "drain",
+				setting_trauma_label: "gloom",
 				setting_traumata_set: "ghost",
 				setting_vice_type: "ghost",
 				xp_condition: "playbook_ghost_xp_condition",
@@ -2790,6 +2763,8 @@ const sheetVersion = "2.7",
 				setting_load_h: "7",
 				setting_extra_stress: "1",
 				setting_show_frame: "1",
+				setting_stress_label: "drain",
+				setting_trauma_label: "wear",
 				setting_traumata_set: "hull",
 				setting_vice_type: "hull",
 				xp_condition: "playbook_hull_xp_condition",
@@ -3454,6 +3429,8 @@ const sheetVersion = "2.7",
 		factions5_header: "factions5",
 		frame: "frame",
 		friends_title: "friends",
+		setting_stress_label: "stress",
+		setting_trauma_label: "trauma",
 		upgrade_6_name: "carriage",
 		upgrade_6_description: "upgrade_carriage_description",
 		upgrade_7_name: "documents",
@@ -3571,6 +3548,7 @@ Object.keys(crewData).forEach(crew => {
 			base[attr] = getTranslationByKey(base[attr]);
 		}
 	});
+	/* Generate crew contacts from translation file */
 	crewData[crew].contact = [...Array(6).keys()].map(i => ({
 		name: getTranslationByKey(`crew_${crew}_contact_${i}`)
 	}));
@@ -3615,6 +3593,8 @@ Object.keys(playbookData).forEach(playbook => {
 			'gatherinfo5',
 			'gatherinfo6',
 			'playbook_description',
+			'setting_stress_label',
+			'setting_trauma_label',
 			'xp_condition',
 			'xp_condition2',
 			'xp_condition3'
@@ -3624,6 +3604,7 @@ Object.keys(playbookData).forEach(playbook => {
 			base[attr] = getTranslationByKey(base[attr]);
 		}
 	});
+	/* Generate playbook friends from translation file */
 	if (!['ghost', 'hull'].includes(playbook)) {
 		playbookData[playbook].friend = [...Array(5).keys()]
 			.map(i => ({
@@ -3641,7 +3622,7 @@ Object.keys(playbookData).forEach(playbook => {
 		item.boxes_chosen = '1';
 	});
 });
-/* FUNCTIONS */
+/* Utility functions - shouldn't need to touch most of these */
 const mySetAttrs = (attrs, options, callback) => {
 		const finalAttrs = Object.keys(attrs).reduce((m, k) => {
 			m[k] = String(attrs[k]);
@@ -3862,7 +3843,7 @@ on('change:crew_type change:playbook', event => {
 		}
 	});
 });
-/* Watch repeating rows for changes and set autogen to false if change happens*/
+/* Watch repeating rows for changes and set autogen to false if change happens */
 autogenSections.forEach(sectionName => {
 	on(`change:repeating_${sectionName}`, event => {
 		getAttrs([`repeating_${sectionName}_autogen`], v => {
@@ -3981,7 +3962,7 @@ on('change:reset_items', () => {
 	setAttr('load', 0);
 	['item', 'playbookitem'].forEach(clearChecks);
 });
-/* Default values for number of upgrades boxes */
+/* Default values for number of upgrades boxes — probably not necessary anymore */
 on('change:repeating_upgrade:boxes_chosen', () => {
 	getAttrs(['repeating_upgrade_numboxes'], v => {
 		if (!['1', '2', '3'].includes(v.repeating_upgrade_numboxes)) {

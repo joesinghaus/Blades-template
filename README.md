@@ -47,7 +47,7 @@ In order to add or change special abilities, you need to change the translation.
 "playbook_ability_hedonist_description": "When you indulge your vice, you may adjust the dice outcome by +/-2. An ally who joins you may do the same.",
 ```
 
-### Changing playbooks
+### Changing playbooks/crews
 You will have to edit both the `sheetworkers.js` and the `translation.json` in order to modify playbooks.
 
 1. Add your changed playbook to the `translation.json` file, e.g. `"hacker": "Hacker",`.
@@ -69,11 +69,29 @@ Some remarks on Step 2:
 
 * Everything about a character/crew that's *not* abilities, friends/contacts, or items/upgrades, is detailed in the "base" property. Here, you change default action dots, xp triggers, gather information questions, the names of claims, et cetera. Take a look at the existing playbooks and crews for details.
 
+### Changing factions
+To change the factions, modify the factionData object in the `sheetworkers.js` (line 760+). The faction names (such as "The Circle of Flame") as well the headers (such as "Underworld") are translated, so be sure to change and/or add the corresponding keys in the `translation.json` file, e.g. `"faction_the_circle_of_flame": "The Circle of Flame",` and `"factions1": "Underworld",`.
+
 ### Changing traumas
 To modify traumas, change the traumaData variable at the beginning of `blades.pug`, the traumaData variable in `sheetworkers.js` (line 1083+), and add translations for any newly-added traumas.
 
-### Changing factions
-To change the factions, modify the factionData object in the `sheetworkers.js` (line 760+). The faction names (such as "The Circle of Flame") as well the headers (such as "Underworld") are translated, so be sure to change and/or add the corresponding keys in the `translation.json` file, e.g. `"faction_the_circle_of_flame": "The Circle of Flame",` and `"factions1": "Underworld",`.
+### Changing upgrades
+The crew upgrades are on line 234+ of the crew.pug. However, their default names and descriptions are actually translated values, making changes here somewhat complicated. Let's assume you are changing the "Carriage" upgrade to a 1-box upgrade 'Racing car', then you have to do these things:
+
+1. Change line 249 in `crew.pug` to your desired default. The '6' is the number of the upgrade (make sure this is distinct for all different upgrades), the 2 is the number of boxes in front of the name. The other arguments are the default name and default description.
+2. Change line 1193-1194 of the `sheetworkers.js` to your new translation key and its associated description.
+3. Actually add the translation keys to the `translation.json`.
+
+In order, you might make these changes to the three files:
+```
++makeupgrade(6, 1, 'Racing Car', 'This is a very fast car.')
+...
+upgrade_6_name: "racing_car",
+upgrade_6_description: "upgrade_racing_car_description",
+...
+"racing_car": "Racing Car",
+"upgrade_racing_car_description": "This is a very fast car.",
+```
 
 ## Specialty sections
 The sheet still contains some of the more esoteric parts of the sheet, such as the strictures for vampires. While I do not expect anyone to use them as-is, they remain as a template for how to create custom special sections on the sheet.

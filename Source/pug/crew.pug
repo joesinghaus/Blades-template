@@ -21,11 +21,11 @@ mixin makeupgrade(number, numboxes, def, desc)
 			+checkbox(`upgrade_${number}_expand`).expand
 			+textarea(`upgrade_${number}_description`)(data-i18n-placeholder='description')= desc
 
-//- Crew Sheet
+// Crew Sheet
 .type-crew.flex
-	//- Left column
+	// Left column
 	.col55.flex-wrap
-		//- Logo, Header text fields
+		// Logo, Header text fields
 		.col100.header.flex-wrap
 			.col55.bladeslogo
 			.col45.crewheader.label(data-i18n='crew_sheet')
@@ -38,25 +38,27 @@ mixin makeupgrade(number, numboxes, def, desc)
 			label.col100
 				+text-input('lair')
 				.label.text.title(data-i18n='lair')
-			+hidden-input('setting_show_deity')(value='0').hider
-			label.col55
-				+text-input('crew_deity')
-				.label.text.title
-					span(data-i18n='deity')
-			+hidden-input('setting_show_deity')(value='0').hider
-			label.col45
-				+text-input('crew_deity_features')(data-i18n-placeholder='choose_2_features')
-				+hidden-input('crew_deity_features')(value='')
-				.text
-					span.label.title
-						span(data-i18n='deity').space-after
-						span(data-i18n='features')
-					span.uppercase.info(data-i18n='deity_features_info')
-			+hidden-input('setting_show_origin')(value='0').hider
-			label.col100
-				+text-input('origin')
-				.label.text.title(data-i18n='origin')
-		//- Rep, Hold, and Tier
+			//- Deity and origin fields. Can be deleted safely.
+			if (showDeityOrigin)
+				+hidden-input('setting_show_deity')(value='0').hider
+				label.col55
+					+text-input('crew_deity')
+					.label.text.title
+						span(data-i18n='deity')
+				+hidden-input('setting_show_deity')(value='0').hider
+				label.col45
+					+text-input('crew_deity_features')(data-i18n-placeholder='choose_2_features')
+					+hidden-input('crew_deity_features')(value='')
+					.text
+						span.label.title
+							span(data-i18n='deity').space-after
+							span(data-i18n='features')
+						span.uppercase.info(data-i18n='deity_features_info')
+				+hidden-input('setting_show_origin')(value='0').hider
+				label.col100
+					+text-input('origin')
+					.label.text.title(data-i18n='origin')
+		// Rep, Hold, and Tier
 		.col100.flex.rep-and-hold.def-margin
 			.rep.flex.col45
 				.rep1.blackheader
@@ -67,6 +69,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 							+radio('turf')(value=num)
 					+hidden-input('turf')(value='0').turf-input
 					+radio('rep')(value='0', checked).tooth.zero
+					//- generates 12 rep boxes. The complicated code for the class assigns the necessary CSS classes for turf to work correctly
 					each num in [...Array(13).keys()].slice(1)
 						+radio('rep')(class=['tooth', 'stresstooth', ...((num < 6) ? [] : [...Array(num-6).keys()].map(x => `turf${6-x}`))], value=num)
 				.rep3.blackborder
@@ -74,7 +77,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 						.label(data-i18n='turf')
 					.turfzero-holder
 						+radio('turf')(value='0', checked).zero
-			//- Hold
+			// Hold
 			.hold.flex
 				.hold1.blackheader
 					.label(data-i18n='hold')
@@ -86,14 +89,15 @@ mixin makeupgrade(number, numboxes, def, desc)
 					.black-on-grey
 						.label(data-i18n='strong')
 					+radio('hold')(value='strong', checked).tooth.holdtooth
-				//- Tier
+				// Tier
 				.blackheader
 					+roll('Tier', '{{resist=1}} {{short=1}} {{title-crew_tier=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their-l}}}', '@{crew_tier}')(data-i18n='tier').label.inherit.rollbutton
 				.tier.flex
 					+hidden-checkbox('crew_tier')(value='0', checked).fakeradio
+					//- generates 4 tier circles
 					each num in [1,2,3,4]
 						+checkbox('crew_tier')(value=num).checkbox.circlebox.fakeradio
-		//- Claims
+		// Claims
 		.claims.col100.white-repcontrol
 			.claimsrow.flex
 				each num in [1,2,3,4,5]
@@ -130,26 +134,28 @@ mixin makeupgrade(number, numboxes, def, desc)
 						+claimbox(num)
 						if (num !== 5)
 							+claimbridge(`${num}_${num+1}`, 'hori')
-		//- Heat and Coin
+		// Heat and Coin
 		.col100.flex.heat-and-vault.def-margin
-			//- Heat
+			// Heat
 			.col45.flex.heat
-				//- Heat markers
+				// Heat markers
 				.heat1.blackheader
 					.label(data-i18n='heat')
 				.heat2.blackborder.flex
 					+radio('heat')(value='0', checked).tooth.zero
+					//- generates 9 heat boxes
 					each num in [1,2,3,4,5,6,7,8,9]
 						+radio('heat')(value=num).tooth.stresstooth
-				//- Wanted Level
+				// Wanted Level
 				.heat3
 					.blackheader
 						+roll('Wanted', '{{vice=1}} {{short=1}} {{title-entanglement=1}} {{title=^{entanglement}}} {{subtitle=^{wantedroll1}@{heat} ^{heat}^{wantedroll2}}}', '@{wanted}')(data-i18n='wanted').label.inherit.rollbutton
 					.wantedholder.flex
 						+radio('wanted')(value='0', checked).tooth.zero
+						//- generates 4 wanted boxes
 						each num in [1,2,3,4]
 							+radio('wanted')(value=num).tooth.regulartooth
-			//- Coin
+			// Coin
 			.crewcoin.col52b
 				.col100.flex
 					.blackheader.crewcoin1
@@ -167,7 +173,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 					each num in [9,10,11,12,13,14,15,16]
 						+radio('crewcoin')(value=num).radiobox.vaultcoin
 				.col100.crewcoin-desc(data-i18n='upon_crew_advance-N')
-		//- Special abilities
+		// Special abilities
 		.col100.def-margin
 			.specialheader.col100.label(data-i18n='special_abilities')
 			.greyholder.col100
@@ -177,13 +183,14 @@ mixin makeupgrade(number, numboxes, def, desc)
 						+checkbox('check').checkbox.circlebox
 						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
 						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc
-		//- Advancement
+		// Advancement
 		.col100.def-margin
 			.advancement-header.flex.blackheader
 				.label.markxp(data-i18n='mark_xp:')
 				.label(data-i18n='crew_advancement')
 				.xpholder.flex
 					+radio('crew_xp')(value='0', checked).tooth.zero
+					//- up to 10 XP
 					each num in [1,2,3,4,5,6,7,8,9,10]
 						+radio('crew_xp')(value=num).tooth.xptooth
 			ul.advancement-desc
@@ -196,9 +203,9 @@ mixin makeupgrade(number, numboxes, def, desc)
 				li(data-i18n='xp_contend')
 				li(data-i18n='xp_bolster')
 				li(data-i18n='xp_express')
-	//- Right column
+	// Right column
 	.col45.flex-wrap.right-column
-		//- Crew Type
+		// Crew Type
 		.playbook.flex
 			+text-input('crew_type')(data-i18n-placeholder='crew', placeholder='Crew').label
 			+textarea('crew_description')(data-i18n-placeholder='crew_description', placeholder='A short crew description').label
@@ -207,13 +214,13 @@ mixin makeupgrade(number, numboxes, def, desc)
 				span(data-i18n='autofill_reminder_crew')
 				br
 				span(data-i18n='list_crews')
-		//- Upgrades and Hunting Grounds
+		// Upgrades and Hunting Grounds
 		.col53.small-margin
-			//- Upgrades
+			// Upgrades
 			.itemheader.col100
 				span.label(data-i18n='crew_upgrades')
 			.itemholder.col100.upgrades
-				//- Specific upgrades
+				// Specific upgrades
 				.playbookitems.small-repcontrol.col100
 					fieldset.repeating_upgrade
 						+hidden-input('boxes_chosen')(value='0').boxes-chosen
@@ -233,7 +240,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 						.item-description
 							+checkbox('expand').expand
 							+textarea('description')(data-i18n-placeholder='description')
-				//- Regular upgrades
+				// Regular upgrades
 				.regularitems.flex-wrap.col100
 					.item.col50
 						span.label(data-i18n='lair')
@@ -282,15 +289,15 @@ mixin makeupgrade(number, numboxes, def, desc)
 				+autoexpand('hunting_grounds_type')(data-i18n-placeholder='hunting_grounds').plainheader.label
 				+autoexpand('hunting_grounds_description')(data-i18n-placeholder='hunting_grounds_description').description
 			+fortuneroll('Engagement', '{{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title-engagement=1}} {{title=^{engagement}}}')(data-i18n='roll_engagement').engagementbutton.borderbutton
-		//- Cohorts and Contacts
+		// Cohorts and Contacts
 		.col47.right-column.small-margin
-			//- First Cohort
+			// First Cohort
 			+makecohort('cohort1_')
-			//- Cohort repeating section
+			// Cohort repeating section
 			.col100.white-repcontrol.cohorts
 				fieldset.repeating_cohort
 					+makecohort('')
-			//- Contacts
+			// Contacts
 			.col100.def-margin
 				.specialheader.col100.label.flex
 					+text-input('contacts_title')(value='Contacts').inherit
@@ -301,9 +308,9 @@ mixin makeupgrade(number, numboxes, def, desc)
 							label
 								+checkbox('check').checkbox
 							+autoexpand('name')(data-i18n-placeholder='contact_name')
-			//- Roll Fortune
+			// Roll Fortune
 			+fortuneroll('Fortune_crew', '{{fortune=1}} {{subtitle=^{roll-l}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
-		//- Clocks
+		// Clocks
 		.col100.clocks.white-repcontrol.def-margin
 			.specialheader.label(data-i18n='clocks')
 			fieldset.repeating_crewclock

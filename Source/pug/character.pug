@@ -1,8 +1,8 @@
-//- Character Sheet
+// Character Sheet
 .type-character.flex
-	//- Left column
+	// Left column
 	.col55.flex-wrap
-		//- Logo, Header text fields
+		// Logo, Header text fields
 		.col100.header.flex
 			.col55.bladeslogo
 			label.col45.header
@@ -36,46 +36,53 @@
 				.text
 					span.label.title(data-i18n='vice_purveyor')
 					span.uppercase.info(data-i18n='vice_info')
-				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} ^{stress}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
+				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} @{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
 				+hidden-input('vice')(value='0')
-			.col100.vice.ghost
-				span.italic(data-i18n='ghost_viceblurb')
-			.col100.vice.hull
-				label.flex-wrap
-					+text-input('hull_functions')(data-i18n-placeholder='choose_3_functions', placeholder='choose 3 functions')
-					+hidden-input('hull_functions')(value='')
-					.text
-						span.label.title(data-i18n='functions')
-						span.uppercase.info(data-i18n='functions_info')
-				span.italic(data-i18n='hull_viceblurb')
-			.col100.vice.vampire
-				span.italic(data-i18n='vampire_viceblurb')
-				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} ^{stress}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
-		//- Stress and Trauma
+			//- Special vice sections for spirit playbooks. You can safely delete the following three elements if you don't variant vices
+			if (showSpecialVice)
+				.col100.vice.ghost
+					span.italic(data-i18n='ghost_viceblurb')
+				.col100.vice.hull
+					label.flex-wrap
+						+text-input('hull_functions')(data-i18n-placeholder='choose_3_functions', placeholder='choose 3 functions')
+						+hidden-input('hull_functions')(value='')
+						.text
+							span.label.title(data-i18n='functions')
+							span.uppercase.info(data-i18n='functions_info')
+					span.italic(data-i18n='hull_viceblurb')
+				.col100.vice.vampire
+					span.italic(data-i18n='vampire_viceblurb')
+					+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} @{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
+		// Stress and Trauma
 		.col100.flex.stress.def-margin
-			//- Stress markers
+			// Stress markers
 			.stress1.blackheader
-				.label(data-i18n='stress')
+				.label
+					span(name='attr_setting_stress_label')
 			.stress2.blackborder.flex
 				+radio('stress')(value='0', checked).tooth.zero
-				each num in [...Array(15).keys()].slice(1)
-					if (num > 8 && num < 14)
+				//- This will generate 12 stress boxes and show 9 by default
+				each num in [...Array(13).keys()].slice(1)
+					if (num > 8 && num < 12)
 						+hidden-checkbox('setting_extra_stress')(value=num-9, checked=(num === 9)).extra-teeth
 					+radio('stress')(value=num).tooth.stresstooth
-			//- Trauma markers
+			// Trauma markers
 			.stress3
 				.blackheader
-					.label(data-i18n='trauma')
+					.label
+						span(name='attr_setting_trauma_label')
 				.traumaholder.flex
 					+radio('trauma')(value='0', checked).tooth.zero
+					//- This will generate 5 trauma boxes and show 4 by default
 					each num in [1,2,3,4,5]
 						if (num === 4)
 							+hidden-checkbox('setting_extra_trauma')(value='0', checked).extra-teeth
 						+radio('trauma')(value=num).tooth.regulartooth
-			//- Individual traumata
+			// Individual traumata
 			.stress4.blackborder
 				+hidden-input('setting_traumata_set')(value='normal').input
 				each traumas, type in traumaData
+					//- Splits up traumas into two rows, each of which hold half the traumas
 					div(class=type)
 						.flex
 							each trauma, i in traumas.slice(0, traumas.length / 2)
@@ -89,9 +96,9 @@
 									+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
 								if (i < traumas.length / 2 - 1)
 									span —
-		//- Harm, Healing, Armor, Coin
+		// Harm, Healing, Armor, Coin
 		.col100.flex.def-margin
-			//- Harm
+			// Harm
 			.harm.col63
 				.blackheader.col100
 					.label(data-i18n='harm')
@@ -108,13 +115,14 @@
 					+textarea('harm1_1')
 					+textarea('harm1_2')
 					.flex-center.harmeffect(data-i18n='less_effect')
-			//- Armor, Healing and Coin
+			// Armor, Healing and Coin
 			.col37.flex-wrap
-				//- Healing
+				// Healing
 				.col45.healing
 					.blackheader.col100
 						+fortuneroll('Recovery', '{{resist=1}} {{short=1}} {{title-recovery=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for-l}}}')(data-i18n='healing').label.rollbutton.inherit
 					.col100.healing-progress(data-i18n='progress_clock', data-i18n-title='recoveryblurb')
+					// Healing clock
 					+hidden-input('recovery_max')(value='4').size
 					.clock-container
 						.spoke-0.all
@@ -123,7 +131,7 @@
 						each num in [1,2,3,4]
 							input.input-progress.all(type='radio', name='attr_recovery', value=num, data-i18n-title='recoveryblurb')
 						.clock
-				//- Armor
+				// Armor
 				.armor.col55
 					.blackheader.col100
 						.label(data-i18n='armor_uses')
@@ -131,26 +139,28 @@
 						label
 							+checkbox(val.toLowerCase().replace('+', '')).checkbox.squarebox
 							span.label(data-i18n=val.toLowerCase())
-				//- Coin and Stash
+				// Coin and Stash
 				.col100.coin-and-stash
-					//- Coin
+					// Coin
 					.col100.coinrow.flex
 						.coin.flex
 							.label(data-i18n='coin')
 							+radio('coin')(value='0', checked).zero
+							//- 4 coin by default
 							each num in [1,2,3,4]
 								+radio('coin')(value=num).radiobox
 						.stashbutton-holder
 							+hidden-input('stash_dice')(value='0')
 							+roll('Stash', '{{resist=1}} {{short=1}} {{title-lifestyle=1}} {{title=^{stash}}} {{subtitle=^{rolls-l}}}', '@{stash_dice}')(data-i18n='stash').rollbutton.label
-					//- Stash
+					// Stash
 					.col100.stash
 						+radio('stash')(value='0', checked).zero
+						//- 40 stash boxes, in rows of 10.
 						each num in [...Array(41).keys()].slice(1)
 							+radio('stash')(value=num).radiobox
 							if (num % 10 === 0)
 								br
-		//- Special abilities
+		// Special abilities
 		.col100.def-margin
 			.specialheader.col100.label(data-i18n='special_abilities')
 			.greyholder.col100
@@ -160,12 +170,18 @@
 						+checkbox('check').checkbox.circlebox
 						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
 						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc
-		//- Advancement
+		// Advancement
 		.col100.def-margin
 			.advancement-header.flex.blackheader
 				.label.markxp(data-i18n='mark_xp:')
 				.label(data-i18n='playbook_advancement')
 				.xpholder.flex
+					//- Generates 10 xp boxes, but only show the last two if the vampirexp setting is checked
+						A simplified version without the vampirexp stuff:
+
+						+radio('playbook_xp')(value='0', checked).tooth.zero
+						each num in [1,2,3,4,5,6,7,8]
+							+radio('playbook_xp')(value=num).tooth.xptooth
 					+hidden-input('setting_vampirexp')(value='0').vampirexp
 					+radio('playbook_xp')(value='0', checked).tooth.zero
 					each num in [1,2,3,4,5,6,7,8,9,10]
@@ -184,14 +200,14 @@
 					+autoexpand('xp_condition2')
 				li
 					+autoexpand('xp_condition3')
-		//- Teamwork
+		// Teamwork
 		.col45.right-column.def-margin
 			.plainheader.label(data-i18n='teamwork')
 			.teamworkbox(data-i18n='assist_a_teammate')
 			.teamworkbox(data-i18n='lead_a_group_action')
 			.teamworkbox(data-i18n='protect_a_teammate')
 			.teamworkbox(data-i18n='set_up_a_teammate-N')
-		//- Gather Information
+		// Gather Information
 		.col55.right-column.def-margin
 			.gatherinfo.col100
 				.plainheader.label(data-i18n='gather_information')
@@ -210,20 +226,22 @@
 						li
 							+text-input('gatherinfo6')(data-i18n-placeholder='gatherinfo_how_can_I_find').inherit
 						li(data-i18n='gatherinfo_whats_going_on')
-			+hidden-input('setting_show_strictures')(value='0').hider
-			.strictures.col100.def-margin
-				.plainheader.label(data-i18n='strictures')
-				div
-					span.italic(data-i18n='stricturesblurb')
-				each desc, name in stricturesData
+			if (showStrictures)
+				// Strictures
+				+hidden-input('setting_show_strictures')(value='0').hider
+				.strictures.col100.def-margin
+					.plainheader.label(data-i18n='strictures')
 					div
-						label
-							+checkbox(`stricture_${name.toLowerCase()}`).checkbox.squarebox
-							span.label(data-i18n=name.toLowerCase())
-						span(data-i18n=`strictures_${name.toLowerCase()}`)
-	//- Right column
+						span.italic(data-i18n='stricturesblurb')
+					each desc, name in stricturesData
+						div
+							label
+								+checkbox(`stricture_${name.toLowerCase()}`).checkbox.squarebox
+								span.label(data-i18n=name.toLowerCase())
+							span(data-i18n=`strictures_${name.toLowerCase()}`)
+	// Right column
 	.col45.flex-wrap.right-column
-		//- Playbook
+		// Playbook name and description
 		.playbook.flex
 			+text-input('playbook')(data-i18n-placeholder='playbook').label
 			+textarea('playbook_description')(data-i18n-placeholder='playbook_description').label
@@ -232,9 +250,9 @@
 				span(data-i18n='autofill_reminder_playbook')
 				br
 				span(data-i18n='list_playbooks')
-		//- Items and Planning
+		// Items and Planning
 		.col53.itemcolumn.small-margin
-			//- Load
+			// Load
 			.loadheader.flex.col100
 				.label(data-i18n='load')
 				each val in ['light', 'normal', 'heavy']
@@ -247,9 +265,9 @@
 				span.italic(data-i18n='italics_dont_count')
 				label.text-button
 					+checkbox('reset_items')(data-i18n='reset?')
-			//- Items
+			// Items
 			.itemholder.col100.items
-				//- Playbook items
+				// Playbook items
 				.playbookitems.col100.small-repcontrol
 					fieldset.repeating_playbookitem
 						+hidden-input('boxes_chosen')(value='0').boxes-chosen
@@ -272,15 +290,17 @@
 						.item-description
 							+checkbox('expand').expand
 							+textarea('description')(data-i18n-placeholder='description')
-					+hidden-input('setting_show_frame')(value='0').hider
-					.frame.small-margin
-						+text-input('frame')(value='Frame').smallcaps
-						+textarea('frame_description')(data-i18n-placeholder='frame_description')
-						fieldset.repeating_framefeature
-							.item
-								+checkbox('check').checkbox.circlebox
-								+text-input('name')(data-i18n-placeholder='frame_feature').itemname
-				//- Regular items
+					if (showFrame)
+						// Frame
+						+hidden-input('setting_show_frame')(value='0').hider
+						.frame.small-margin
+							+text-input('frame')(value='Frame').smallcaps
+							+textarea('frame_description')(data-i18n-placeholder='frame_description')
+							fieldset.repeating_framefeature
+								.item
+									+checkbox('check').checkbox.circlebox
+									+text-input('name')(data-i18n-placeholder='frame_feature').itemname
+				// Regular items
 				.regularitems.white-repcontrol.col100
 					fieldset.repeating_item
 						+hidden-input('short')(value='0').input-short
@@ -305,7 +325,7 @@
 							.item-description
 								+checkbox('expand').expand
 								+textarea('description')(data-i18n-placeholder='description')
-			//- Alchemicals
+			// Alchemicals
 			.col100.def-margin
 				input.title-checkbox(type='checkbox', name='attr_show_alchemicals', value='1')
 				span.label.plainheader(data-i18n='alchemicals')
@@ -322,7 +342,7 @@
 						+checkbox('expand').alchemicals-expand
 						+autoexpand('name')
 						+textarea('description').alchemicals-info
-			//- Planning and Load
+			// Planning and Load
 			.planning.col100.def-margin
 				input.title-checkbox(type='checkbox', name='attr_show_planning', value='1', checked)
 				span.label.plainheader(data-i18n='planning_load')
@@ -346,8 +366,10 @@
 					.teamworkbox
 						span.bold(data-i18n='transport')
 						span.italic(data-i18n='detail_transport')
-		//- Action ratings
+		// Action ratings
 		.col47.right-column.actioncolumn.small-margin
+			//- This generates the action ratings. You should only change this section if you want to change something about every
+				action at once. Modifying the names of attributes and actions should be done in the actionData object in blades.pug
 			each actions, attribute in actionData
 				.attribute.col100
 					.attribute-title.flex.col100
@@ -358,6 +380,12 @@
 						+hidden-input(`${attribute}`)(value='0')
 						+hidden-input(`${attribute}_xp_max`)(value='6')
 						.attribute-xp-box.flex
+							//- Generates 8 xp boxes, but only show the last two if the vampirexp setting is checked
+								A simplified version without the vampirexp stuff:
+
+								+radio(`${attribute}_xp`)(value='0', checked).tooth.zero
+								each num in [1,2,3,4,5,6]
+									+radio(`${attribute}_xp`)(value=num).tooth.xptooth
 							+hidden-input('setting_vampirexp')(value='0').vampirexp
 							+radio(`${attribute}_xp`)(value='0', checked).tooth.zero
 							each num in [1,2,3,4,5,6,7,8]
@@ -367,6 +395,14 @@
 					.actions.col100
 						each action in actions
 							.action.flex.col100
+								//- The dark talent toggle will show the fifth attribute box. A simplified version without dark talent:
+
+									+hidden-checkbox(action)(value='0', checked).fakeradio
+									+checkbox(action)(value='1').checkbox.circlebox.fakeradio
+									.divider
+									each num in [2,3,4]
+										+checkbox(action)(value=num).checkbox.circlebox.fakeradio
+									+roll(action, '{{action=1}} {{subtitle=^{rolls-l}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
 								+hidden-input(`setting_dark_talent_${attribute}`)(value='0').darktalent
 								+hidden-checkbox(action)(value='0', checked).fakeradio
 								+checkbox(action)(value='1').checkbox.circlebox.fakeradio
@@ -374,10 +410,10 @@
 								each num in [2,3,4,5]
 									+checkbox(action)(value=num).checkbox.circlebox.fakeradio
 								+roll(action, '{{action=1}} {{subtitle=^{rolls-l}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
-			//- Cohort
+			// Cohort
 			+hidden-input('setting_show_cohort')(value='0').hider
 			+makecohort('char_cohort_', true)
-			//- Bonus die box
+			// Bonus die box
 			.bonusdie.col100
 				.col100.label(data-i18n='bonus_die')
 				.col100.flex
@@ -385,10 +421,10 @@
 					.bonusdietext
 						.label(data-i18n='push_yourself')
 						span(data-i18n='push_yourself_desc1')
-						span(data-i18n='stress')
+						span(name='attr_setting_stress_label')
 						span(data-i18n='push_yourself_desc2-N')
 						.label(data-i18n='devils_bargain')
-			//- Friends
+			// Friends
 			.col100.def-margin
 				.specialheader.col100.label.flex
 					+text-input('friends_title')(value='Friends').inherit
@@ -401,9 +437,9 @@
 							label.down
 								+checkbox('status')(value='down').checkbox
 							+autoexpand('name')(data-i18n-placeholder='friend_name')
-			//- Roll Fortune
+			// Roll Fortune
 			+fortuneroll('Fortune', '{{fortune=1}} {{subtitle=^{rolls-l}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
-		//- Clocks
+		// Clocks
 		.col100.clocks.white-repcontrol.def-margin
 			.specialheader.label(data-i18n='clocks')
 			fieldset.repeating_clock
