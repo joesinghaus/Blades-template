@@ -91,7 +91,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 					+radio('hold')(value='strong', checked).tooth.holdtooth
 				// Tier
 				.blackheader
-					+roll('Tier', '{{resist=1}} {{short=1}} {{title-crew_tier=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their-l}}}', '@{crew_tier}')(data-i18n='tier').label.inherit.rollbutton
+					+roll('Tier', '{{resist=1}} {{short=1}} {{title-crew_tier=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their}}}', '@{crew_tier}')(data-i18n='tier').label.inherit.rollbutton
 				.tier.flex
 					+hidden-checkbox('crew_tier')(value='0', checked).fakeradio
 					//- generates 4 tier circles
@@ -172,7 +172,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 					.crewcoinbar
 					each num in [9,10,11,12,13,14,15,16]
 						+radio('crewcoin')(value=num).radiobox.vaultcoin
-				.col100.crewcoin-desc(data-i18n='upon_crew_advance-N')
+				.col100.crewcoin-desc(data-i18n='upon_crew_advance')
 		// Special abilities
 		.col100.def-margin
 			.specialheader.col100.label(data-i18n='special_abilities')
@@ -309,7 +309,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 								+checkbox('check').checkbox
 							+autoexpand('name')(data-i18n-placeholder='contact_name')
 			// Roll Fortune
-			+fortuneroll('Fortune_crew', '{{fortune=1}} {{subtitle=^{roll-l}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+			+fortuneroll('Fortune_crew', '{{fortune=1}} {{subtitle=^{roll}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
 		// Clocks
 		.col100.clocks.white-repcontrol.def-margin
 			.specialheader.label(data-i18n='clocks')

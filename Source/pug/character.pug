@@ -120,7 +120,7 @@
 				// Healing
 				.col45.healing
 					.blackheader.col100
-						+fortuneroll('Recovery', '{{resist=1}} {{short=1}} {{title-recovery=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for-l}}}')(data-i18n='healing').label.rollbutton.inherit
+						+fortuneroll('Recovery', '{{resist=1}} {{short=1}} {{title-recovery=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for}}}')(data-i18n='healing').label.rollbutton.inherit
 					.col100.healing-progress(data-i18n='progress_clock', data-i18n-title='recoveryblurb')
 					// Healing clock
 					+hidden-input('recovery_max')(value='4').size
@@ -151,7 +151,7 @@
 								+radio('coin')(value=num).radiobox
 						.stashbutton-holder
 							+hidden-input('stash_dice')(value='0')
-							+roll('Stash', '{{resist=1}} {{short=1}} {{title-lifestyle=1}} {{title=^{stash}}} {{subtitle=^{rolls-l}}}', '@{stash_dice}')(data-i18n='stash').rollbutton.label
+							+roll('Stash', '{{resist=1}} {{short=1}} {{title-lifestyle=1}} {{title=^{stash}}} {{subtitle=^{rolls}}}', '@{stash_dice}')(data-i18n='stash').rollbutton.label
 					// Stash
 					.col100.stash
 						+radio('stash')(value='0', checked).zero
@@ -198,7 +198,7 @@
 			.teamworkbox(data-i18n='assist_a_teammate')
 			.teamworkbox(data-i18n='lead_a_group_action')
 			.teamworkbox(data-i18n='protect_a_teammate')
-			.teamworkbox(data-i18n='set_up_a_teammate-N')
+			.teamworkbox(data-i18n='set_up_a_teammate')
 		// Gather Information
 		.col55.right-column.def-margin
 			.gatherinfo.col100
@@ -385,7 +385,7 @@
 								.divider
 								each num in [2,3,4]
 									+checkbox(action)(value=num).checkbox.circlebox.fakeradio
-								+roll(action, '{{action=1}} {{subtitle=^{rolls-l}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
+								+roll(action, '{{action=1}} {{subtitle=^{rolls}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
 			// Cohort
 			+hidden-input('setting_show_cohort')(value='0').hider
 			+makecohort('char_cohort_', true)
@@ -398,7 +398,7 @@
 						.label(data-i18n='push_yourself')
 						span(data-i18n='push_yourself_desc1')
 						span(name='attr_setting_stress_label')
-						span(data-i18n='push_yourself_desc2-N')
+						span(data-i18n='push_yourself_desc2')
 						.label(data-i18n='devils_bargain')
 			// Friends
 			.col100.def-margin
@@ -414,7 +414,7 @@
 								+checkbox('status')(value='down').checkbox
 							+autoexpand('name')(data-i18n-placeholder='friend_name')
 			// Roll Fortune
-			+fortuneroll('Fortune', '{{fortune=1}} {{subtitle=^{rolls-l}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+			+fortuneroll('Fortune', '{{fortune=1}} {{subtitle=^{rolls}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
 		// Clocks
 		.col100.clocks.white-repcontrol.def-margin
 			.specialheader.label(data-i18n='clocks')
