@@ -60,7 +60,9 @@ mixin hidden-checkbox(name)
 mixin autoexpand(name)
 	div(class=['auto-expand', attributes.class])
 		span(name=`attr_${name}`)
+			block
 		+textarea(name)(data-i18n-placeholder!=attributes['data-i18n-placeholder'])
+			block
 
 //- Creates a roll button using stat as a bonus
 mixin roll(name, templatedata, stat)
