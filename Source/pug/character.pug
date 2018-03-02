@@ -189,9 +189,9 @@
 				li
 					+autoexpand('xp_condition_extra')(data-i18n-placeholder='xp_specific_extra')
 				li
-					+autoexpand('xp_condition2') You expressed your beliefs, drives, heritage, or background.
+					+autoexpand('xp_condition2', 'xp_beliefs')
 				li
-					+autoexpand('xp_condition3') You struggled with issues from your vice or traumas during the session.
+					+autoexpand('xp_condition3', 'xp_vice')
 		// Teamwork
 		.col45.right-column.def-margin
 			.plainheader.label(data-i18n='teamwork')
@@ -286,7 +286,7 @@
 						// Frame
 						+hidden-input('setting_show_frame')(value='0').hider
 						.frame.small-margin
-							+text-input('frame')(value='Frame').smallcaps
+							+text-input('frame', 'frame').smallcaps
 							+textarea('frame_description')(data-i18n-placeholder='frame_description')
 							fieldset.repeating_framefeature
 								.item
@@ -403,7 +403,7 @@
 			// Friends
 			.col100.def-margin
 				.specialheader.col100.label.flex
-					+text-input('friends_title')(value='Friends').inherit
+					+text-input('friends_title', 'friends').inherit
 				.greyholder.col100
 					fieldset.repeating_friend
 						.friend-contact.friend.flex

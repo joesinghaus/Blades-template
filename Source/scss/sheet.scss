@@ -506,7 +506,7 @@ textarea.sheet-smallcaps {
 		display: flex;
 		flex-grow: 1;
 	}
-	.sheet-input-short[value="1"] + .sheet-input-expand[value="0"] ~ .sheet-item-container  {
+	.sheet-input-short[value="1"] + .sheet-input-expand[value="0"] ~ .sheet-item-container {
 		width: 96px;
 	}
 	.sheet-col50, .sheet-col100 {
@@ -684,7 +684,7 @@ textarea.sheet-smallcaps {
 	}
 }
 /* ADVANCEMENT BOX*/
-.sheet-advancement-header  {
+.sheet-advancement-header {
 	letter-spacing: 2px;
 }
 .sheet-markxp {
@@ -872,7 +872,7 @@ textarea.sheet-smallcaps {
 	}
 }
 .sheet-clock-container {
-  position: relative;
+	position: relative;
 	padding: 2px;
 	margin: 0 0 5px;
 	z-index: 1;
@@ -897,60 +897,60 @@ textarea.sheet-smallcaps {
 	}
 }
 .sheet-clock {
-  border: 2px solid black;
-  border-radius: 50%;
+	border: 2px solid black;
+	border-radius: 50%;
 	background: white;
 	width: 100%;
 	height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
 }
 [class^="sheet-spoke"] {
-  height: 44px;
-  width: 2px;
-  position: absolute;
-  display: none;
-  left: 0;
-  top: 0;
-  background: black;
+	height: 44px;
+	width: 2px;
+	position: absolute;
+	display: none;
+	left: 0;
+	top: 0;
+	background: black;
 }
 .sheet-spoke-0 {
-  transform: translateX(21px);
+	transform: translateX(21px);
 }
 .sheet-spoke-30 {
-  transform: translateX(21px) rotate(30deg);
+	transform: translateX(21px) rotate(30deg);
 }
 .sheet-spoke-36 {
-  transform: translateX(21px) rotate(36deg);
+	transform: translateX(21px) rotate(36deg);
 }
 .sheet-spoke-45 {
-  transform: translateX(21px) rotate(45deg);
+	transform: translateX(21px) rotate(45deg);
 }
 .sheet-spoke-60 {
-  transform: translateX(21px) rotate(60deg);
+	transform: translateX(21px) rotate(60deg);
 }
 .sheet-spoke-72 {
-  transform: translateX(21px) rotate(72deg);
+	transform: translateX(21px) rotate(72deg);
 }
 .sheet-spoke-90 {
-  transform: translateX(21px) rotate(90deg);
+	transform: translateX(21px) rotate(90deg);
 }
 .sheet-spoke-108 {
-  transform: translateX(21px) rotate(108deg);
+	transform: translateX(21px) rotate(108deg);
 }
 .sheet-spoke-120 {
-  transform: translateX(21px) rotate(120deg);
+	transform: translateX(21px) rotate(120deg);
 }
 .sheet-spoke-135 {
-  transform: translateX(21px) rotate(135deg);
+	transform: translateX(21px) rotate(135deg);
 }
 .sheet-spoke-144 {
-  transform: translateX(21px) rotate(144deg);
+	transform: translateX(21px) rotate(144deg);
 }
 .sheet-spoke-150 {
-  transform: translateX(21px) rotate(150deg);
+	transform: translateX(21px) rotate(150deg);
 }
 .sheet-size-choice {
 	display: flex;
@@ -1181,13 +1181,13 @@ textarea.sheet-smallcaps {
 .sheet-size[value="12"] ~ .sheet-clock-container .sheet-12clock {
 	display: block;
 }
-.sheet-size:not([value=""])  ~ .sheet-size-choice,
+.sheet-size:not([value=""]) ~ .sheet-size-choice,
 .sheet-clocks .sheet-size[value=""] ~ .sheet-broadcast-button,
 .sheet-size[value=""] ~ .sheet-clock-container{
 	display: none;
 }
 .sheet-clock-container .sheet-input-progress[value="0"]:checked ~ .sheet-clock {
-  @include clock(0);
+	@include clock(0);
 }
 .sheet-size[value="4"] ~ .sheet-clock-container .sheet-input-progress {
 	&[value="1"]:checked ~ .sheet-clock {@include clock(90);}
@@ -1315,29 +1315,29 @@ input.sheet-zero {
 	vertical-align: top;
 }
 .sheet-zero + span {
-  height: 11px;
-  width: 11px;
-  margin-top: 1px;
-  margin-right: 2px;
-  vertical-align: top;
-  border: 1px solid black;
-  background: white;
-  border-radius: 50%;
-  position: relative;
+	height: 11px;
+	width: 11px;
+	margin-top: 1px;
+	margin-right: 2px;
+	vertical-align: top;
+	border: 1px solid black;
+	background: white;
+	border-radius: 50%;
+	position: relative;
 }
 .sheet-zero + span::before, .sheet-zero + span::after {
-  position: absolute;
-  width: 1px;
-  content: "";
-  left: 0;
-  background: black;
-  height: 11px;
+	position: absolute;
+	width: 1px;
+	content: "";
+	left: 0;
+	background: black;
+	height: 11px;
 }
 .sheet-zero + span::after {
-  transform: translate(4px,-1px) rotate(135deg);
+	transform: translate(4px,-1px) rotate(135deg);
 }
 .sheet-zero + span::before {
-  transform: translate(4px,-1px) rotate(45deg);
+	transform: translate(4px,-1px) rotate(45deg);
 }
 .sheet-zero:checked + span {
 	visibility: hidden;
@@ -1434,7 +1434,7 @@ input.sheet-zero {
 	text-transform: uppercase;
 	text-align: center;
 	div {
-    background: #d6d8d9;
+		background: #d6d8d9;
 		border-bottom: 1px solid black;
 	}
 	.sheet-harmeffect {
@@ -1456,7 +1456,7 @@ input.sheet-zero {
 		padding: 10px 4px 3px;
 		color: $redtext;
 		overflow: hidden;
-    height: 52px;
+		height: 52px;
 		resize: none;
 		line-height: 16px;
 		text-align: center;
@@ -1929,7 +1929,7 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 	font-weight: bold;
 }
 .sheet-friend .sheet-friendstate[value="down"] ~ .sheet-auto-expand,
-.sheet-contact .sheet-friendstate[value="1"] ~ .sheet-auto-expand  {
+.sheet-contact .sheet-friendstate[value="1"] ~ .sheet-auto-expand {
 	color: $fontblack;
 }
 /* specific adjustments */

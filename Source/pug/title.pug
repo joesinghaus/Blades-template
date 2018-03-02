@@ -22,9 +22,6 @@
 			optgroup
 				each playbook in playbooks
 					option(value=playbook, data-i18n=playbook)
-			optgroup(data-i18n-label='spirit_playbooks')
-				each playbook in spiritPlaybooks
-					option(value=playbook, data-i18n=playbook)
 		label.generatebutton
 			+checkbox('generate_ability')(data-i18n='add_abilities')
 		label.generatebutton
@@ -80,11 +77,11 @@
 			span(data-i18n='show_cohort_section')
 	.setting-char
 		label
-			+text-input('setting_stress_label')(value='Stress')
+			+text-input('setting_stress_label', 'stress')
 			span(data-i18n='stress_label')
 	.setting-char
 		label
-			+text-input('setting_trauma_label')(value='Trauma')
+			+text-input('setting_trauma_label', 'trauma')
 			span(data-i18n='trauma_label')
 	//- Deity and origin fields. Can be deleted safely
 	if (showDeityOrigin)
