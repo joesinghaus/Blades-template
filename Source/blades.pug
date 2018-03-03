@@ -1,24 +1,16 @@
 -
-	const actionData = {
-		insight: ["hunt", "study", "survey", "tinker"],
-		prowess: ["finesse", "prowl", "skirmish", "wreck"],
-		resolve: ["attune", "command", "consort", "sway"]
-	};
-	const traumaData = {
-		normal: ["cold", "haunted", "obsessed", "paranoid", "reckless", "soft", "unstable", "vicious"],
-		ghost: ["chaotic", "destructive", "furious", "obsessive", "territorial", "savage"],
-		hull: ["clanking", "leaking", "fixated", "smoking", "sparking", "unstable"]
-	};
-	const stricturesData = {
-		Slumber: "In downtime, you must spend one activity resting in a dark, silent place (or else suffer 3 stress).",
-		Forbidden: "You cannot enter a private residence without permission from the owner.",
-		Repelled: "Spiritbane charms can hold you at bay. (Take 2 stress to resist the repulsion.)",
-		Bestial: "When you suffer physical harm or overindulge your vice, your body twists into a horrific bestial form until you next feed without overindulging.",
-		Bound: "Your spirit must remain in this body, or be destroyed."
-	}
-	const playbooks = ["cutter", "hound", "leech", "lurk", "slide", "spider", "whisper"],
-		crews = ["assassins", "bravos", "cult", "hawkers", "shadows", "smugglers", "vigilantes"],
-		spiritPlaybooks = ["ghost", "hull", "vampire"];
+	const translation = locals.translation,
+		actionData = locals.data.actions,
+		traumaData = locals.data.traumas,
+		stricturesData = {
+			Slumber: "In downtime, you must spend one activity resting in a dark, silent place (or else suffer 3 stress).",
+			Forbidden: "You cannot enter a private residence without permission from the owner.",
+			Repelled: "Spiritbane charms can hold you at bay. (Take 2 stress to resist the repulsion.)",
+			Bestial: "When you suffer physical harm or overindulge your vice, your body twists into a horrific bestial form until you next feed without overindulging.",
+			Bound: "Your spirit must remain in this body, or be destroyed."
+		},
+		playbooks = Object.keys(locals.data.playbook),
+		crews = Object.keys(locals.data.crew);
 
 	// Toggles for special sections of the sheet
 	// By default, these will not be output to the generated HTML, you can change these to show them
@@ -27,6 +19,7 @@
 		showFrame = false,								// hull frame
 		showSpecialVice = false,					// ghost, hull, and vampire vices
 		showDeityOrigin = false;					// show Deity and Origin
+
 
 
 //- Mixins for code reuse
@@ -39,15 +32,15 @@ mixin radio(name)
 	input(type='radio', class!=attributes.class, name=`attr_${name}`, value!=attributes.value, checked=attributes.checked)
 	span(data-i18n!=attributes['data-i18n'])
 
-mixin text-input(name)
-	input(type='text', spellcheck='false', name=`attr_${name}`)&attributes(attributes)
+mixin text-input(name, i18nvalue)
+	input(type='text', spellcheck='false', name=`attr_${name}`, value=i18nvalue ? translation[i18nvalue] : false)&attributes(attributes)
 
 mixin number-input(name)
 	input(type='number', name=`attr_${name}`)&attributes(attributes)
 
-mixin textarea(name)
+mixin textarea(name, i18nvalue)
 	textarea(spellcheck='false', name=`attr_${name}`)&attributes(attributes)
-		block
+		= i18nvalue ? translation[i18nvalue] : ''
 
 mixin hidden-input(name)
 	input(type='hidden', name=`attr_${name}`)&attributes(attributes)
@@ -57,12 +50,10 @@ mixin hidden-checkbox(name)
 	- delete attributes.class;
 	input(type='checkbox', name=`attr_${name}`, class=['hidden', classes])&attributes(attributes)
 
-mixin autoexpand(name)
+mixin autoexpand(name, i18nvalue)
 	div(class=['auto-expand', attributes.class])
-		span(name=`attr_${name}`)
-			block
-		+textarea(name)(data-i18n-placeholder!=attributes['data-i18n-placeholder'])
-			block
+		span(name=`attr_${name}`)= i18nvalue ? translation[i18nvalue] : ''
+		+textarea(name, i18nvalue)(data-i18n-placeholder!=attributes['data-i18n-placeholder'])
 
 //- Creates a roll button using stat as a bonus
 mixin roll(name, templatedata, stat)
@@ -87,7 +78,7 @@ mixin makecohort(prefix, isCharacter)
 		+hidden-input(`${prefix}dice`)(value=isCharacter ? '1' : '0')
 		+hidden-input(`${prefix}verb`)(value=isCharacter ? '^{rolls_their}' : '^{roll_their}')
 		.cohort-title.flex.col100.label
-			+text-input(`${prefix}name`)(value='Cohort').inherit
+			+text-input(`${prefix}name`, 'cohort').inherit
 			+roll(`${prefix}roll`, '{{resist=1}} {{short=1}} {{charname=@{'+prefix+'name} (^{@{'+prefix+'type}}, @{'+prefix+'subtype})}} {{title-cohort_quality=1}} {{title=^{cohort_quality}}} {{subtitle=@{'+prefix+'verb}}})', `@{${prefix}dice}`)(data-i18n='roll-inf').inherit.rollbutton
 		.cohort-info.flex.col100.uppercase
 			.cohort-dropdown
@@ -205,6 +196,7 @@ include pug/rolltemplate.pug
 script(type='text/worker')
 	|
 	|
+	!= `"use strict";const data=${JSON.stringify(locals.data)};`
 	include:babel(presets=['minify']) sheetworkers.js
 	|
 	|
