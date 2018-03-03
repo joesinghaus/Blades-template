@@ -21,7 +21,7 @@ For changing the **content** of the sheet, you will have to make changes to the 
 Don't be afraid, this is simple! To install all the prerequsites, install [Node.js](https://nodejs.org/en/download/), open a command prompt, and enter
 
 ```
-npm install -g pug pug-cli jstransformer-babel babel-cli
+npm install -g pug pug-cli jstransformer-babel babel-cli babel-preset-minify
 ````
 
 ### Installing SCSS
