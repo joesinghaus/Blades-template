@@ -3,7 +3,7 @@
 This is a template for creating a derivative of the character sheet for Blades in the Dark for use on Roll20. If you have any questions, feel free to contact me on Discord @deceptive.duality#6358.
 
 ## Compiling the sheet
-The sheet uses [pug](https://pugjs.org/) as a HTML preprocessor and [SCSS](https://sass-lang.com/) as a SCSS preprocessor. This means that you need to compile the two main source code files (`Source/blades.pug` and `Source/blades.scss`) into the actual `blades.html` and `blades.css` files. It also uses Babel (via JSTransformer) to minify the Javascript code, though this is optional — if you do not want to deal with installing the Babel-related modules, just change line 173 in `blades.pug` to `include sheetworkers.js`. Once the command line interfaces for pug and SCSS are installed, the sheet is compiled via
+The sheet uses [pug](https://pugjs.org/) as a HTML preprocessor and [SCSS](https://sass-lang.com/) as a SCSS preprocessor. This means that you need to compile the two main source code files (`Source/blades.pug` and `Source/blades.scss`) into the actual `blades.html` and `blades.css` files. It also uses Babel (via JSTransformer) to minify the Javascript code, though this is optional — if you do not want to deal with installing the Babel-related modules, just change line 208 in `blades.pug` to `include sheetworkers.js`. Once the command line interfaces for pug and SCSS are installed, the sheet is compiled via
 
 ```
 pug -o . Source/blades.pug
@@ -22,7 +22,7 @@ For changing the **content** of the sheet, you will have to make changes to the 
 Don't be afraid, this is simple! To install all the prerequsites, install [Node.js](https://nodejs.org/en/download/), open a command prompt, and enter
 
 ```
-npm install -g pug pug-cli jstransformer-babel babel-cli
+npm install -g pug pug-cli jstransformer-babel babel-cli babel-preset-minify
 ````
 
 ### Installing SCSS
