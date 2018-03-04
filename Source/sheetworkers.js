@@ -1,5 +1,5 @@
 const sheetVersion = "2.7";
-/* It's necessary to include the base data at the start of the file
+/* It's necessary to include the base data at the start of the file */
 /* Translate all the data */
 Object.keys(data.crew).forEach(crew => {
 	const base = data.crew[crew].base;
@@ -24,7 +24,7 @@ Object.keys(data.crew).forEach(crew => {
 data.items.forEach(item => {
 	item.boxes_chosen = '1';
 	item.name = getTranslationByKey(item.name);
-	item.description = getTranslationByKey(item.description);
+	item.description = getTranslationByKey(item.description) || '';
 });
 Object.keys(data.translatedDefaults).forEach(k => {
 	data.translatedDefaults[k] = getTranslationByKey(data.translatedDefaults[k]);
@@ -242,6 +242,7 @@ const crewAttributes = [...new Set([].concat(...Object.keys(data.crew).map(x => 
 	spiritPlaybooks = ['ghost', 'hull', 'vampire'],
 	translatedNames = [...Object.keys(data.playbook), ...Object.keys(data.crew)].reduce((m, keyName) => {
 		if (getTranslationByKey(keyName)) m[getTranslationByKey(keyName).toLowerCase()] = keyName;
+		else m[keyName.toLowerCase()] = keyName;
 		return m;
 	}, {});
 /* EVENT HANDLERS */

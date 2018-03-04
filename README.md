@@ -90,7 +90,7 @@ The game logo is on line 635 of `sheet.scss`.
 You will have to edit both the `data.json` and the `translation.json` in order to modify playbooks/crews.
 
 1. Modify the "crew", respectively "playbook" properties in the `data.json` object. You can use one of the standard playbooks as a template.
-2. Change the translation.json to reflect any newly-added translation keys, such as for playbook contacts, items, et cetera. In particular, add the new of your playbook, e.g. `"hacker": "Hacker",`.
+2. Change the translation.json to reflect any newly-added translation keys, such as for playbook contacts, items, et cetera. In particular, add the name of your new playbook, e.g. `"hacker": "Hacker",`.
 
 Some remarks on Step 2:
 * A playbook's **friends** (or a crew's **contacts**) are generated automatically from the translation.json file — hence, when you add your "Hacker" playbook, you also have to add their five hacker friends (as below). Changing the number of contacts or friends can be done by changing the maxFriendsPerPlaybook and max ContactsPerCrew properties in `data.json`.
