@@ -179,7 +179,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 			.greyholder.col100
 				fieldset.repeating_crewability
 					.specialability.flex
-						button.broadcast-button(type='roll', name='roll_Show', value='&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}', data-i18n-title='send_details_to_chat') :
+						+broadcast('Show', '{{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}')
 						+checkbox('check').checkbox.circlebox
 						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
 						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc

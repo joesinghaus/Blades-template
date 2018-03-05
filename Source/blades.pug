@@ -71,6 +71,9 @@ mixin fortuneroll(name, templatedata, useNotes)
 		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} {{roll1=[[[[{@{numberofdice},1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}]]-1,1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} ${useNotes ? '{{notes=@{notes_query}}} ' : ''}`
 	)&attributes(attributes)
 
+mixin broadcast(name, content)
+	button.broadcast-button(type='roll', name=`roll_${name}`, value!= `&{template:bitd-broadcast} ${content}`, data-i18n-title='send_details_to_chat') :
+
 //- Cohort section
 	isCharacter === true shows an input for quality, instead of generating it from the crew quality
 mixin makecohort(prefix, isCharacter)
@@ -110,7 +113,7 @@ mixin makecohort(prefix, isCharacter)
 mixin makeclock(isFaction)
 	+hidden-input('size')(value='').size
 	+autoexpand('name')(data-i18n-placeholder='clock_name').smallcaps
-	button.broadcast-button(type='roll', name='roll_Show', value='&{template:bitd-broadcast}' + (!isFaction ? '{{charname=@{character_name}}} ' : '') + '{{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}', data-i18n-title='send_details_to_chat') :
+	+broadcast('Show', (!isFaction ? '{{charname=@{character_name}}} ' : '') + '{{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}')
 	.size-choice
 		each num in [4,6,8,10,12]
 			label.text-button
@@ -194,9 +197,20 @@ include pug/rolltemplate.pug
 |
 |
 script(type='text/worker')
-	|
-	|
-	!= `"use strict";const data=${JSON.stringify(locals.data)};`
-	include:babel(presets=['minify']) sheetworkers.js
-	|
-	|
+	if (!locals.pretty)
+		|
+		|
+		!= `"use strict";const data=${JSON.stringify(locals.data)};`
+	else
+		| "use strict";
+		| const data =
+		include data.json
+		| ;
+		|
+	if (!locals.pretty && locals.enableBabel)
+		include:babel(presets=['minify']) sheetworkers.js
+		|
+		|
+	else
+		include sheetworkers.js
+

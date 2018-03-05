@@ -83,6 +83,7 @@
 				+hidden-input('setting_traumata_set')(value='normal').input
 				each traumas, type in traumaData
 					//- Splits up traumas into two rows, each of which hold half the traumas
+					//- this pulls the traumas automatically from the traumas property in data.json
 					div(class=type)
 						.flex
 							each trauma, i in traumas.slice(0, traumas.length / 2)
@@ -102,7 +103,7 @@
 			.harm.col63
 				.blackheader.col100
 					.label(data-i18n='harm')
-					button.broadcast-button(type='roll', name='roll_Harm', value='&{template:bitd-broadcast} {{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}}', data-i18n-title='send_details_to_chat') :
+					+broadcast('Harm', '{{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}}')
 				.harmbody
 					.flex-center.harmnumber 3
 					+textarea('harm3').twocols
@@ -166,7 +167,7 @@
 			.greyholder.col100
 				fieldset.repeating_ability
 					.specialability.flex
-						button.broadcast-button(type='roll', name='roll_Show', value='&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}', data-i18n-title='send_details_to_chat') :
+						+broadcast('Show', '{{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}')
 						+checkbox('check').checkbox.circlebox
 						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
 						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc
@@ -362,7 +363,7 @@
 		.col47.right-column.actioncolumn.small-margin
 			//- This generates the action ratings. You should only change this section if you want to change something about every
 				action at once. Modifying the names of attributes and actions (or adding/deleting actions) should be done in the
-				actionData object in blades.pug
+				actions property in data.json
 			each actions, attribute in actionData
 				.attribute.col100
 					.attribute-title.flex.col100

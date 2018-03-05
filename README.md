@@ -3,7 +3,7 @@
 This is a template for creating a derivative of the character sheet for Blades in the Dark for use on Roll20. If you have any questions, feel free to contact me on Discord @deceptive.duality#6358.
 
 ## Compiling the sheet
-The sheet uses [pug](https://pugjs.org/) as a HTML preprocessor and [SCSS](https://sass-lang.com/) as a SCSS preprocessor. This means that you need to compile the two main source code files (`Source/blades.pug` and `Source/blades.scss`) into the actual `blades.html` and `blades.css` files. It also uses Babel (via JSTransformer) to minify the Javascript code, though this is optional — if you do not want to deal with installing the Babel-related modules, just change line 200 in `blades.pug` to `include sheetworkers.js`. Once the command line interfaces for pug and SCSS are installed, the sheet is compiled via
+The sheet uses [pug](https://pugjs.org/) as a HTML preprocessor and [SCSS](https://sass-lang.com/) as a SCSS preprocessor. This means that you need to compile the two main source code files (`Source/blades.pug` and `Source/blades.scss`) into the actual `blades.html` and `blades.css` files. It also uses Babel (via JSTransformer) to minify the Javascript code, though this is optional (read below on how to disable it if it produces problems). Once the command line interfaces for pug and SCSS are installed, the sheet is compiled via
 
 ```
 node build.js
@@ -16,6 +16,11 @@ If you want to change the **look** of the sheet or the roll template, you should
 For changing the **content** of the sheet, you will have to make changes to the pug files (for the HTML), the `translation.json` file (for changing the actual text on the sheet), or to the `data.json` and `sheetworkers.js` files.
 
 **If you do not feel comfortable working with pug or SCSS**, the `Source/uncompressed` folder contains compiled, but human-readable versions of `blades.html` and `blades.css`. Editing them is more work, however (for example for changing action names). It is highly recommended that you at least start by making changes to the .pug files instead.
+
+**If you have made some changes in pug, e.g. action names, and want to transition to doing the rest of the editing in HTML**, you can change the `pretty` option to `true` in the build.js file. This will produce human-readable HTML/CSS for you to edit further.
+
+### Babel problems
+Sometimes the babel filter does not seem to work and produces errors. You can change `enableBabel` to `false` in the build.js file to disable it. It will have no impact on the functionality of the sheet, and it will get rid of this error.
 
 ### Installing pug
 Don't be afraid, this is simple! To install all the prerequsites, install [Node.js](https://nodejs.org/en/download/), open a command prompt, and enter

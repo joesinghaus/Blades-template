@@ -381,7 +381,7 @@
         <div class="harm col63">
           <div class="blackheader col100">
             <div class="label" data-i18n="harm"></div>
-            <button class="broadcast-button" type="roll" name="roll_Harm" value="&amp;{template:bitd-broadcast} {{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}}" data-i18n-title="send_details_to_chat">:</button>
+            <button class="broadcast-button" type="roll" name="roll_Harm" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}}" data-i18n-title="send_details_to_chat">:</button>
           </div>
           <div class="harmbody">
             <div class="flex-center harmnumber">3</div>
@@ -503,7 +503,7 @@
         <div class="greyholder col100">
           <fieldset class="repeating_ability">
             <div class="specialability flex">
-              <button class="broadcast-button" type="roll" name="roll_Show" value="&amp;{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}" data-i18n-title="send_details_to_chat">:</button>
+              <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}" data-i18n-title="send_details_to_chat">:</button>
               <input class="checkbox circlebox" type="checkbox" name="attr_check" value="1"/><span></span>
               <div class="auto-expand abilityname smallcaps"><span name="attr_name"></span>
                 <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="ability_name"></textarea>
@@ -986,7 +986,7 @@
           <div class="auto-expand smallcaps"><span name="attr_name"></span>
             <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="clock_name"></textarea>
           </div>
-          <button class="broadcast-button" type="roll" name="roll_Show" value="&amp;{template:bitd-broadcast}{{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
+          <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
           <div class="size-choice">
             <label class="text-button">
               <input type="radio" name="attr_size" value="4"/><span></span>
@@ -1466,7 +1466,7 @@
         <div class="greyholder col100">
           <fieldset class="repeating_crewability">
             <div class="specialability flex">
-              <button class="broadcast-button" type="roll" name="roll_Show" value="&amp;{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}" data-i18n-title="send_details_to_chat">:</button>
+              <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}" data-i18n-title="send_details_to_chat">:</button>
               <input class="checkbox circlebox" type="checkbox" name="attr_check" value="1"/><span></span>
               <div class="auto-expand abilityname smallcaps"><span name="attr_name"></span>
                 <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="ability_name"></textarea>
@@ -1905,7 +1905,7 @@
           <div class="auto-expand smallcaps"><span name="attr_name"></span>
             <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="clock_name"></textarea>
           </div>
-          <button class="broadcast-button" type="roll" name="roll_Show" value="&amp;{template:bitd-broadcast}{{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
+          <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
           <div class="size-choice">
             <label class="text-button">
               <input type="radio" name="attr_size" value="4"/><span></span>
@@ -2059,7 +2059,7 @@
         <div class="auto-expand smallcaps"><span name="attr_name"></span>
           <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="clock_name"></textarea>
         </div>
-        <button class="broadcast-button" type="roll" name="roll_Show" value="&amp;{template:bitd-broadcast}{{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
+        <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
         <div class="size-choice">
           <label class="text-button">
             <input type="radio" name="attr_size" value="4"/><span></span>
@@ -2184,7 +2184,7 @@
 
 <script type="text/worker">
 "use strict";
-const data= {
+const data = {
 	"crew": {
 		"assassins": {
 			"base": {
@@ -3367,7 +3367,7 @@ const data= {
 	"translatedPlaybookAttributes": ["char_cohort_name", "char_cohort_subtype", "friends_title", "gatherinfo1", "gatherinfo2", "gatherinfo3", "gatherinfo4", "gatherinfo5", "gatherinfo6", "playbook_description", "setting_stress_label", "setting_trauma_label", "xp_condition", "xp_condition2", "xp_condition3"]
 };
 const sheetVersion = "2.7";
-/* It's necessary to include the base data at the start of the file
+/* It's necessary to include the base data at the start of the file */
 /* Translate all the data */
 Object.keys(data.crew).forEach(crew => {
 	const base = data.crew[crew].base;
@@ -3392,7 +3392,7 @@ Object.keys(data.crew).forEach(crew => {
 data.items.forEach(item => {
 	item.boxes_chosen = '1';
 	item.name = getTranslationByKey(item.name);
-	item.description = getTranslationByKey(item.description);
+	item.description = getTranslationByKey(item.description) || '';
 });
 Object.keys(data.translatedDefaults).forEach(k => {
 	data.translatedDefaults[k] = getTranslationByKey(data.translatedDefaults[k]);
@@ -3610,6 +3610,7 @@ const crewAttributes = [...new Set([].concat(...Object.keys(data.crew).map(x => 
 	spiritPlaybooks = ['ghost', 'hull', 'vampire'],
 	translatedNames = [...Object.keys(data.playbook), ...Object.keys(data.crew)].reduce((m, keyName) => {
 		if (getTranslationByKey(keyName)) m[getTranslationByKey(keyName).toLowerCase()] = keyName;
+		else m[keyName.toLowerCase()] = keyName;
 		return m;
 	}, {});
 /* EVENT HANDLERS */
