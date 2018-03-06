@@ -30,9 +30,9 @@ else {
 }
 
 // Build CSS file
-execSync('scss --default-encoding=UTF-8 --sourcemap=none --no-cache --style '+ (options.pretty ? 'expanded' : 'compressed') + ' Source/blades.scss blades.css');
+execSync('scss --default-encoding=UTF-8 --unix-newlines --sourcemap=none --no-cache --style '+ (options.pretty ? 'expanded' : 'compressed') + ' Source/blades.scss blades.css');
 // repair bogus @charset directive
-if (options.pretty) fs.writeFileSync('blades.css', fs.readFileSync('blades.css', 'utf8').replace('@charset "UTF-8";\n', ''));
+if (options.pretty) fs.writeFileSync('blades.css', fs.readFileSync('blades.css', 'utf8').replace(/@charset "UTF-8";(?:\n|\r\n)?/, ''));
 
 // Build HTML
 fs.writeFileSync('blades.html', pug.renderFile('Source/Blades.pug', options));
