@@ -26,7 +26,7 @@ Sometimes the babel filter does not seem to work and produces errors. You can ch
 Don't be afraid, this is simple! To install all the prerequsites, install [Node.js](https://nodejs.org/en/download/), open a command prompt, and enter
 
 ```
-npm install -g pug pug-cli jstransformer-babel babel-cli babel-preset-minify
+npm install -g pug jstransformer-babel babel-cli babel-preset-minify
 ````
 
 ### Installing SCSS

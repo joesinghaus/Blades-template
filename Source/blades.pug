@@ -197,20 +197,4 @@ include pug/rolltemplate.pug
 |
 |
 script(type='text/worker')
-	if (!locals.pretty)
-		|
-		|
-		!= `"use strict";const data=${JSON.stringify(locals.data)};`
-	else
-		| "use strict";
-		| const data =
-		include data.json
-		| ;
-		|
-	if (!locals.pretty && locals.enableBabel)
-		include:babel(presets=['minify']) sheetworkers.js
-		|
-		|
-	else
-		include sheetworkers.js
-
+	!= locals.workers
