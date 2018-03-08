@@ -62,7 +62,7 @@
 			.stress2.blackborder.flex
 				+radio('stress')(value='0', checked).tooth.zero
 				//- This will generate 12 stress boxes and show 9 by default
-				each num in [...Array(13).keys()].slice(1)
+				each num in range(1,12)
 					if (num > 8 && num < 12)
 						+hidden-checkbox('setting_extra_stress')(value=num-9, checked=(num === 9)).extra-teeth
 					+radio('stress')(value=num).tooth.stresstooth
@@ -74,7 +74,7 @@
 				.traumaholder.flex
 					+radio('trauma')(value='0', checked).tooth.zero
 					//- This will generate 5 trauma boxes and show 4 by default
-					each num in [1,2,3,4,5]
+					each num in range(1,5)
 						if (num === 4)
 							+hidden-checkbox('setting_extra_trauma')(value='0', checked).extra-teeth
 						+radio('trauma')(value=num).tooth.regulartooth
@@ -129,17 +129,17 @@
 						.spoke-0.all
 						.spoke-90.all
 						+radio('recovery')(value='0', checked).zero.input-progress
-						each num in [1,2,3,4]
+						each num in range(1,4)
 							input.input-progress.all(type='radio', name='attr_recovery', value=num, data-i18n-title='recoveryblurb')
 						.clock
 				// Armor
 				.armor.col55
 					.blackheader.col100
 						.label(data-i18n='armor_uses')
-					each val in ['Armor', '+Heavy', 'Special']
+					each val in ['armor', '+heavy', 'special']
 						label
-							+checkbox(val.toLowerCase().replace('+', '')).checkbox.squarebox
-							span.label(data-i18n=val.toLowerCase())
+							+checkbox(val.replace('+', '')).checkbox.squarebox
+							span.label(data-i18n=val)
 				// Coin and Stash
 				.col100.coin-and-stash
 					// Coin
@@ -148,7 +148,7 @@
 							.label(data-i18n='coin')
 							+radio('coin')(value='0', checked).zero
 							//- 4 coin by default
-							each num in [1,2,3,4]
+							each num in range(1,4)
 								+radio('coin')(value=num).radiobox
 						.stashbutton-holder
 							+hidden-input('stash_dice')(value='0')
@@ -157,7 +157,7 @@
 					.col100.stash
 						+radio('stash')(value='0', checked).zero
 						//- 40 stash boxes, in rows of 10.
-						each num in [...Array(41).keys()].slice(1)
+						each num in range(1,40)
 							+radio('stash')(value=num).radiobox
 							if (num % 10 === 0)
 								br
@@ -179,7 +179,7 @@
 				.xpholder.flex
 					//- generates 8 xp boxes
 					+radio('playbook_xp')(value='0', checked).tooth.zero
-					each num in [1,2,3,4,5,6,7,8]
+					each num in range(1,8)
 						+radio('playbook_xp')(value=num).tooth.xptooth
 			ul.advancement-desc
 				li(data-i18n='xp_desperate')
@@ -229,9 +229,9 @@
 					each desc, name in stricturesData
 						div
 							label
-								+checkbox(`stricture_${name.toLowerCase()}`).checkbox.squarebox
-								span.label(data-i18n=name.toLowerCase())
-							span(data-i18n=`strictures_${name.toLowerCase()}`)
+								+checkbox(`stricture_${name}`).checkbox.squarebox
+								span.label(data-i18n=name)
+							span(data-i18n=`strictures_${name}`)
 	// Right column
 	.col45.flex-wrap.right-column
 		// Playbook name and description
@@ -326,7 +326,7 @@
 					.bandolier.item
 						span.bandoliers-name(data-i18n='bandoliers')
 						each bannum in [1,2]
-							each checknum in [1,2,3]
+							each checknum in range(1,3)
 								+checkbox(`bandolier${bannum}_check_${checknum}`).checkbox.squarebox
 								if (checknum !== 3)
 									span.floatingbar
@@ -376,7 +376,7 @@
 						.attribute-xp-box.flex
 							//- generate 6 xp boxes
 							+radio(`${attribute}_xp`)(value='0', checked).tooth.zero
-							each num in [1,2,3,4,5,6]
+							each num in range(1,6)
 								+radio(`${attribute}_xp`)(value=num).tooth.xptooth
 					.actions.col100
 						each action in actions
@@ -384,7 +384,7 @@
 								+hidden-checkbox(action)(value='0', checked).fakeradio
 								+checkbox(action)(value='1').checkbox.circlebox.fakeradio
 								.divider
-								each num in [2,3,4]
+								each num in range(2,4)
 									+checkbox(action)(value=num).checkbox.circlebox.fakeradio
 								+roll(action, '{{action=1}} {{subtitle=^{rolls}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
 			// Cohort

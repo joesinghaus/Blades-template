@@ -65,12 +65,12 @@ mixin makeupgrade(number, numboxes, def, desc)
 					.label(data-i18n='rep')
 				.rep2.blackborder.flex
 					.turfbox
-						each num in [1,2,3,4,5,6]
+						each num in range(1,6)
 							+radio('turf')(value=num)
 					+hidden-input('turf')(value='0').turf-input
 					+radio('rep')(value='0', checked).tooth.zero
 					//- generates 12 rep boxes. The complicated code for the class assigns the necessary CSS classes for turf to work correctly
-					each num in [...Array(13).keys()].slice(1)
+					each num in range(1,12)
 						+radio('rep')(class=['tooth', 'stresstooth', ...((num < 6) ? [] : [...Array(num-6).keys()].map(x => `turf${6-x}`))], value=num)
 				.rep3.blackborder
 					.black-on-grey
@@ -95,17 +95,17 @@ mixin makeupgrade(number, numboxes, def, desc)
 				.tier.flex
 					+hidden-checkbox('crew_tier')(value='0', checked).fakeradio
 					//- generates 4 tier circles
-					each num in [1,2,3,4]
+					each num in range(1,4)
 						+checkbox('crew_tier')(value=num).checkbox.circlebox.fakeradio
 		// Claims
 		.claims.col100.white-repcontrol
 			.claimsrow.flex
-				each num in [1,2,3,4,5]
+				each num in range(1,5)
 					+claimbox(num)
 					if (num !== 5)
 						+claimbridge(`${num}_${num+1}`, 'hori')
 			.claims-seprow.flex
-				each num in [1,2,3,4,5]
+				each num in range(1,5)
 					+claimbridge(`${num}_${num+5}`, 'vert')
 			.claimsrow.flex
 				+claimbox(6)
@@ -118,19 +118,19 @@ mixin makeupgrade(number, numboxes, def, desc)
 				+claimbridge('9_10', 'hori')
 				+claimbox(10)
 			.claims-seprow.flex
-				each num in [6,7,8,9,10]
+				each num in range(6,10)
 					+claimbridge(`${num}_${num+5}`, 'vert')
 			.claimsrow.flex
-				each num in [11,12,13,14,15]
+				each num in range(11,15)
 					+claimbox(num)
 					if (num !== 15)
 						+claimbridge(`${num}_${num+1}`, 'hori')
 			fieldset.repeating_claim
 				.claims-seprow.flex
-					each num in [1,2,3,4,5]
+					each num in range(1,5)
 						+claimbridge(`top_${num}`, 'vert')
 				.claimsrow.flex
-					each num in [1,2,3,4,5]
+					each num in range(1,5)
 						+claimbox(num)
 						if (num !== 5)
 							+claimbridge(`${num}_${num+1}`, 'hori')
@@ -144,7 +144,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 				.heat2.blackborder.flex
 					+radio('heat')(value='0', checked).tooth.zero
 					//- generates 9 heat boxes
-					each num in [1,2,3,4,5,6,7,8,9]
+					each num in range(1,9)
 						+radio('heat')(value=num).tooth.stresstooth
 				// Wanted Level
 				.heat3
@@ -153,7 +153,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 					.wantedholder.flex
 						+radio('wanted')(value='0', checked).tooth.zero
 						//- generates 4 wanted boxes
-						each num in [1,2,3,4]
+						each num in range(1,4)
 							+radio('wanted')(value=num).tooth.regulartooth
 			// Coin
 			.crewcoin.col52b
@@ -164,13 +164,13 @@ mixin makeupgrade(number, numboxes, def, desc)
 						.label(data-i18n='vaults')
 				.col100.flex.crewcoin-coins
 					+radio('crewcoin')(value='0', checked).zero
-					each num in [1,2,3,4]
+					each num in range(1,4)
 						+radio('crewcoin')(value=num).radiobox
 					.crewcoinbar
-					each num in [5,6,7,8]
+					each num in range(5,8)
 						+radio('crewcoin')(value=num).radiobox.vaultcoin
 					.crewcoinbar
-					each num in [9,10,11,12,13,14,15,16]
+					each num in range(9,16)
 						+radio('crewcoin')(value=num).radiobox.vaultcoin
 				.col100.crewcoin-desc(data-i18n='upon_crew_advance')
 		// Special abilities
@@ -191,7 +191,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 				.xpholder.flex
 					+radio('crew_xp')(value='0', checked).tooth.zero
 					//- up to 10 XP
-					each num in [1,2,3,4,5,6,7,8,9,10]
+					each num in range(1,10)
 						+radio('crew_xp')(value=num).tooth.xptooth
 			ul.advancement-desc
 				li.nondot(data-i18n='xp_top')
@@ -276,7 +276,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 					+makeupgrade(23, 1, 'personal', 'upgrade_personal_description')
 					.col100
 						.item
-							each num in [1,2,3,4]
+							each num in range(1,4)
 								+checkbox(`upgrade_24_check_${num}`).checkbox.squarebox
 								if (num < 4)
 									span.floatingbar

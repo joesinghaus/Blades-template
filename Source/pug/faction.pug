@@ -21,7 +21,7 @@ mixin makefactions(number, title)
 		+hidden-input('show_faction_generatebutton')(value='1').hider
 		label.generatebutton
 			+checkbox('generate_factions')(data-i18n='generate_factions')
-		+fortuneroll('Fortune_faction', '{{fortune=1}} {{title-fortune=1}} {{title=^{fortune}}} {{short=1}} {{character_name=}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+		+fortuneroll('Fortune_faction', '{{fortune=1}} {{title-fortune=1}} {{title=^{fortune}}} {{short=1}} {{charname=}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
 	.factions.flex
 		.col24b.white-repcontrol
 			+makefactions(1, 'factions1')
