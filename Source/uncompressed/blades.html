@@ -2113,67 +2113,67 @@
   </div>
 </div>
 <rolltemplate class="sheet-rolltemplate-bitd">
-  <div class="sheet-roll-holder{{#action}} sheet-roll-action{{/action}}{{#resist}} sheet-roll-resist{{/resist}}{{#vice}} sheet-roll-vice{{/vice}}{{#fortune}} sheet-roll-fortune{{/fortune}}{{#short}} sheet-roll-short{{/short}}{{#action}}{{^position}} sheet-roll-short{{/position}}{{/action}}">
-    <div class="sheet-roll-header">{{charname}} {{subtitle}}</div>
-    <div class="sheet-roll-title"><span class="{{#small-title}}roll-small-title{{/small-title}}">{{title}}</span></div>
-    <div class="sheet-roll-dice">{{#rollGreater() roll1 0}}{{roll1}}<span class="sheet-comma">,</span> {{/rollGreater() roll1 0}}{{#rollGreater() roll2 0}}{{roll2}}<span class="sheet-comma">,</span> {{/rollGreater() roll2 0}}{{#rollGreater() roll3 0}}{{roll3}}<span class="sheet-comma">,</span> {{/rollGreater() roll3 0}}{{#rollGreater() roll4 0}}{{roll4}}<span class="sheet-comma">,</span> {{/rollGreater() roll4 0}}{{#rollGreater() roll5 0}}{{roll5}}<span class="sheet-comma">,</span> {{/rollGreater() roll5 0}}{{#rollGreater() roll6 0}}{{roll6}}<span class="sheet-comma">,</span> {{/rollGreater() roll6 0}}{{#rollGreater() roll7 0}}{{roll7}}<span class="sheet-comma">,</span> {{/rollGreater() roll7 0}}{{#rollGreater() roll8 0}}{{roll8}}<span class="sheet-comma">,</span> {{/rollGreater() roll8 0}}{{#rollGreater() roll9 0}}{{roll9}}<span class="sheet-comma">,</span> {{/rollGreater() roll9 0}}{{#rollGreater() roll10 0}}{{roll10}}<span class="sheet-comma">,</span> {{/rollGreater() roll10 0}}{{#rollGreater() roll11 0}}{{roll11}}<span class="sheet-comma">,</span> {{/rollGreater() roll11 0}}{{#rollGreater() roll12 0}}{{roll12}}<span class="sheet-comma">,</span> {{/rollGreater() roll12 0}}{{#rollGreater() zerodice 0}}
-      <div class="sheet-zerodice1">{{zerodice}}</div>
-      <div class="sheet-zerodice2" data-i18n="zerodice"></div>{{/rollGreater() zerodice 0}}
+  <div class="holder{{#action}} action{{/action}}{{#resist}} resist{{/resist}}{{#vice}} vice{{/vice}}{{#fortune}} fortune{{/fortune}}{{#short}} short{{/short}}{{#action}}{{^position}} short{{/position}}{{/action}}">
+    <div class="header">{{charname}} {{subtitle}}</div>
+    <div class="title"><span class="{{#small-title}}small-title{{/small-title}}">{{title}}</span></div>
+    <div class="dice">{{#rollGreater() roll1 0}}{{roll1}}<span class="comma">,</span> {{/rollGreater() roll1 0}}{{#rollGreater() roll2 0}}{{roll2}}<span class="comma">,</span> {{/rollGreater() roll2 0}}{{#rollGreater() roll3 0}}{{roll3}}<span class="comma">,</span> {{/rollGreater() roll3 0}}{{#rollGreater() roll4 0}}{{roll4}}<span class="comma">,</span> {{/rollGreater() roll4 0}}{{#rollGreater() roll5 0}}{{roll5}}<span class="comma">,</span> {{/rollGreater() roll5 0}}{{#rollGreater() roll6 0}}{{roll6}}<span class="comma">,</span> {{/rollGreater() roll6 0}}{{#rollGreater() roll7 0}}{{roll7}}<span class="comma">,</span> {{/rollGreater() roll7 0}}{{#rollGreater() roll8 0}}{{roll8}}<span class="comma">,</span> {{/rollGreater() roll8 0}}{{#rollGreater() roll9 0}}{{roll9}}<span class="comma">,</span> {{/rollGreater() roll9 0}}{{#rollGreater() roll10 0}}{{roll10}}<span class="comma">,</span> {{/rollGreater() roll10 0}}{{#rollGreater() roll11 0}}{{roll11}}<span class="comma">,</span> {{/rollGreater() roll11 0}}{{#rollGreater() roll12 0}}{{roll12}}<span class="comma">,</span> {{/rollGreater() roll12 0}}{{#rollGreater() zerodice 0}}
+      <div class="zerodice1">{{zerodice}}</div>
+      <div class="zerodice2" data-i18n="zerodice"></div>{{/rollGreater() zerodice 0}}
     </div>{{#position}}
-    <div class="sheet-roll-position">{{position}}</div>{{/position}}{{#effect}}
-    <div class="sheet-roll-effect">{{effect}}</div>{{/effect}}{{#resist}}{{^short}}
-    <div class="sheet-roll-instructions" data-i18n="resist_instructions"></div>{{/short}}{{/resist}}{{#vice}}{{^short}}
-    <div class="sheet-roll-instructions" data-i18n="vice_instructions"></div>{{/short}}{{/vice}}{{#notes}}
-    <div class="sheet-roll-notes">{{notes}}</div>{{/notes}}
+    <div class="position">{{position}}</div>{{/position}}{{#effect}}
+    <div class="effect">{{effect}}</div>{{/effect}}{{#resist}}{{^short}}
+    <div class="instructions" data-i18n="resist_instructions"></div>{{/short}}{{/resist}}{{#vice}}{{^short}}
+    <div class="instructions" data-i18n="vice_instructions"></div>{{/short}}{{/vice}}{{#notes}}
+    <div class="notes">{{notes}}</div>{{/notes}}
   </div>
 </rolltemplate>
 <rolltemplate class="sheet-rolltemplate-bitd-broadcast">
   <div>
-    <div class="sheet-roll-header">
+    <div class="header">
       <div>{{charname}}</div>
       <div>{{type}}</div>
     </div>{{#content}}
-    <div class="sheet-roll-title">{{title}}</div>
-    <div class="sheet-roll-content">{{content}}</div>{{/content}}{{#clock}}
-    <div class="sheet-roll-flex">
-      <div class="sheet-roll-clock sheet-roll-size-{{clocksize}} sheet-roll-progress-{{clockprogress}}">
-        <div class="sheet-roll-spoke sheet-roll-spoke-0"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-30"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-36"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-45"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-60"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-72"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-90"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-108"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-135"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-144"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-120"></div>
-        <div class="sheet-roll-spoke sheet-roll-spoke-150"></div>
+    <div class="title">{{title}}</div>
+    <div class="content">{{content}}</div>{{/content}}{{#clock}}
+    <div class="flex">
+      <div class="clock size-{{clocksize}} progress-{{clockprogress}}">
+        <div class="spoke-0"></div>
+        <div class="spoke-30"></div>
+        <div class="spoke-36"></div>
+        <div class="spoke-45"></div>
+        <div class="spoke-60"></div>
+        <div class="spoke-72"></div>
+        <div class="spoke-90"></div>
+        <div class="spoke-108"></div>
+        <div class="spoke-135"></div>
+        <div class="spoke-144"></div>
+        <div class="spoke-120"></div>
+        <div class="spoke-150"></div>
       </div>
-      <div class="sheet-roll-title">{{title}}</div>
+      <div class="title">{{title}}</div>
     </div>{{/clock}}{{#harm}}
-    <div class="sheet-roll-title" data-i18n="harm"></div>
-    <table class="sheet-roll-harm">
+    <div class="title" data-i18n="harm"></div>
+    <table class="harm">
       <tr>
         <td>3</td>
         <td>{{#harm3}}
-          <div class="sheet-roll-harm-inner">{{harm3}}</div> {{/harm3}}
+          <div class="harm-inner">{{harm3}}</div> {{/harm3}}
         </td>
         <td data-i18n="need_help"></td>
       </tr>
       <tr>
         <td>2</td>
         <td>{{#harm2_1}}
-          <div class="sheet-roll-harm-inner">{{harm2_1}}</div> {{/harm2_1}}{{#harm2_2}}
-          <div class="sheet-roll-harm-inner">{{harm2_2}}</div> {{/harm2_2}}
+          <div class="harm-inner">{{harm2_1}}</div> {{/harm2_1}}{{#harm2_2}}
+          <div class="harm-inner">{{harm2_2}}</div> {{/harm2_2}}
         </td>
         <td data-i18n="minus1d"></td>
       </tr>
       <tr>
         <td>1</td>
         <td>{{#harm1_1}}
-          <div class="sheet-roll-harm-inner">{{harm1_1}}</div> {{/harm1_1}}{#harm1_2}}
-          <div class="sheet-roll-harm-inner">{{harm1_2}}</div> {{/harm1_2}}
+          <div class="harm-inner">{{harm1_1}}</div> {{/harm1_1}}{#harm1_2}}
+          <div class="harm-inner">{{harm1_2}}</div> {{/harm1_2}}
         </td>
         <td data-i18n="less_effect"></td>
       </tr>

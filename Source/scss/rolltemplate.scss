@@ -13,7 +13,7 @@ $broadcast-white: #ccc;
 
 /* Container */
 .sheet-rolltemplate-bitd {
-	.sheet-roll-holder {
+	.sheet-holder {
 		margin-left: -45px;
 		margin-right: -1px;
 		padding: 0 30px;
@@ -25,22 +25,22 @@ $broadcast-white: #ccc;
 		overflow: hidden;
 		font-variant-numeric: lining-nums;
 	}
-	.sheet-roll-holder.sheet-roll-resist.sheet-roll-short,
-	.sheet-roll-holder.sheet-roll-vice.sheet-roll-short {
+	.sheet-holder.sheet-resist.sheet-short,
+	.sheet-holder.sheet-vice.sheet-short {
 		height: 171px;
 	}
-	.sheet-roll-holder.sheet-roll-action.sheet-roll-short {
+	.sheet-holder.sheet-action.sheet-short {
 		height: 195px;
 	}
-	.sheet-roll-holder.sheet-roll-fortune.sheet-roll-short {
+	.sheet-holder.sheet-fortune.sheet-short {
 		min-height: 199px;
 	}
-	.sheet-roll-action,
-	.sheet-roll-resist,
-	.sheet-roll-vice {
+	.sheet-action,
+	.sheet-resist,
+	.sheet-vice {
 		height: 258px;
 	}
-	.sheet-roll-fortune {
+	.sheet-fortune {
 		background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/rolltemplate/rolltemplate-fortune.jpg');
 		background-position: bottom right;
 		background-repeat: no-repeat;
@@ -49,13 +49,13 @@ $broadcast-white: #ccc;
 		min-height: 250px;
 	}
 	/* Background images */
-	.sheet-roll-action {
+	.sheet-action {
 		background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/rolltemplate/rolltemplate-action.gif');
 	}
-	.sheet-roll-resist {
+	.sheet-resist {
 		background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/rolltemplate/rolltemplate-resist.jpg');
 	}
-	.sheet-roll-vice {
+	.sheet-vice {
 		background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/rolltemplate/rolltemplate-vice.jpg');
 	}
 	/* Images */
@@ -64,7 +64,7 @@ $broadcast-white: #ccc;
 		height: 100%;
 	}
 	/* Header */
-	.sheet-roll-header {
+	.sheet-header {
 		display: -webkit-box;
 		margin: 16px 0 0;
 		font-size: 15px;
@@ -76,55 +76,55 @@ $broadcast-white: #ccc;
 		font-variant: small-caps;
 		text-overflow: ellipsis;
 	}
-	.sheet-roll-resist .sheet-roll-header {
+	.sheet-resist .sheet-header {
 		color: $resistcolor;
 	}
-	.sheet-roll-vice .sheet-roll-header {
+	.sheet-vice .sheet-header {
 		color: white;
 	}
-	.sheet-roll-fortune .sheet-roll-header {
+	.sheet-fortune .sheet-header {
 		color: $fortunecolor;
 	}
-	.sheet-roll-action .sheet-roll-header {
+	.sheet-action .sheet-header {
 		color: $actioncolor;
 	}
-	> .sheet-roll-action .sheet-roll-header,
-	> .sheet-roll-fortune .sheet-roll-header {
+	> .sheet-action .sheet-header,
+	> .sheet-fortune .sheet-header {
 		letter-spacing: 1px;
 		font-weight: 800;
 	}
-	.sheet-roll-holder.sheet-roll-fortune.sheet-roll-short .sheet-roll-header {
+	.sheet-holder.sheet-fortune.sheet-short .sheet-header {
 		margin-bottom: -51px;
 	}
 	/* Title */
-	.sheet-roll-title {
+	.sheet-title {
 		color: white;
 		text-transform: uppercase;
 		font-weight: bold;
 	}
-	.sheet-roll-action .sheet-roll-title,
-	.sheet-roll-fortune .sheet-roll-title {
+	.sheet-action .sheet-title,
+	.sheet-fortune .sheet-title {
 		margin: 22px 0 0;
 		font-size: 36px;
 		line-height: 31px;
 		height: 31px;
 	}
-	.sheet-roll-vice .sheet-roll-title,
-	.sheet-roll-resist .sheet-roll-title {
+	.sheet-vice .sheet-title,
+	.sheet-resist .sheet-title {
 		margin: 11px 0 0;
 		font-size: 24px;
 		line-height: 24px;
 		height: 24px;
 	}
-	.sheet-roll-fortune .sheet-roll-title {
+	.sheet-fortune .sheet-title {
 		color: black;
 	}
-	.sheet-roll-small-title {
+	.sheet-small-title {
 		font-size: 28px;
 	}
 	/* Position and Effect */
-	.sheet-roll-position,
-	.sheet-roll-effect {
+	.sheet-position,
+	.sheet-effect {
 			display: inline-block;
 			box-sizing: border-box;
 			width: 50%;
@@ -134,38 +134,38 @@ $broadcast-white: #ccc;
 			letter-spacing: 1px;
 			padding: 20px 0 0;
 	}
-	.sheet-roll-effect {
+	.sheet-effect {
 			padding-left: 14px;
 	}
 	/* Dice */
-	.sheet-roll-dice {
+	.sheet-dice {
 		height: 27px;
 		font-size: 19px;
 		line-height: 20px;
 		color: white;
 	}
-	.sheet-roll-action .sheet-roll-dice {
+	.sheet-action .sheet-dice {
 		margin: 47px 0 19px;
 	}
-	.sheet-roll-resist .sheet-roll-dice,
-	.sheet-roll-vice .sheet-roll-dice {
+	.sheet-resist .sheet-dice,
+	.sheet-vice .sheet-dice {
 		margin: 35px 0 23px;
 	}
-	.sheet-roll-fortune .sheet-roll-dice {
+	.sheet-fortune .sheet-dice {
 		margin: 15px 0 10px;
 		color: $fortunecolor;
 	}
 	/* Zerodice dice holder */
-	.sheet-roll-action .sheet-zerodice1 {
+	.sheet-action .sheet-zerodice1 {
 		text-shadow: 0px 0px 6px rgb(255, 158, 0);
 		color: white;
 	}
-	.sheet-roll-fortune .sheet-zerodice1 {
+	.sheet-fortune .sheet-zerodice1 {
 		text-shadow: 0px 0px 6px rgb(136, 219, 215);
 		color: $fortunecolor-light;
 	}
-	.sheet-roll-vice .sheet-zerodice1,
-	.sheet-roll-resist .sheet-zerodice1 {
+	.sheet-vice .sheet-zerodice1,
+	.sheet-resist .sheet-zerodice1 {
 		text-shadow: 0px 0px 6px rgb(9, 199, 208);
 		color: white;
 	}
@@ -176,16 +176,16 @@ $broadcast-white: #ccc;
 		margin-top: 7px;
 		font-style: italic;
 	}
-	.sheet-roll-vice .sheet-zerodice2,
-	.sheet-roll-resist .sheet-zerodice2 {
+	.sheet-vice .sheet-zerodice2,
+	.sheet-resist .sheet-zerodice2 {
 		text-shadow: 0px 0px 6px rgb(9, 199, 208);
 		color: $resistcolor-light;
 	}
-	.sheet-roll-action .sheet-zerodice2 {
+	.sheet-action .sheet-zerodice2 {
 		text-shadow: 0px 0px 6px rgb(255, 158, 0);
 		color: $actioncolor-light
 	}
-	.sheet-roll-fortune .sheet-zerodice2 {
+	.sheet-fortune .sheet-zerodice2 {
 		width: 60%;
 		text-shadow: 0px 0px 6px rgb(136, 219, 215);
 		color: $fortunecolor-light;
@@ -203,19 +203,19 @@ $broadcast-white: #ccc;
 	}
 
 	/* Instructions and Notes */
-	.sheet-roll-instructions {
+	.sheet-instructions {
 		padding: 15px 0 0;
 		line-height: 1.3;
 	}
-	.sheet-roll-resist .sheet-roll-instructions {
+	.sheet-resist .sheet-instructions {
 		color: $resistcolor-notes;
 		font-size: 13px;
 	}
-	.sheet-roll-vice .sheet-roll-instructions {
+	.sheet-vice .sheet-instructions {
 		color: $vicecolor-notes;
 		font-size: 11px;
 	}
-	.sheet-roll-notes {
+	.sheet-notes {
 		width: 56%;
 		line-height: 1.2;
 		font-size: 13px;
@@ -234,7 +234,7 @@ $broadcast-white: #ccc;
 	width: 299px;
 	background-color: $broadcast;
 
-	.sheet-roll-header {
+	.sheet-header {
 		color: $actioncolor;
 		font-size: 15px;
 		line-height: 19px;
@@ -242,17 +242,17 @@ $broadcast-white: #ccc;
 		letter-spacing: 1px;
 		font-weight: 800;
 	}
-	.sheet-roll-flex {
+	.sheet-flex {
 		display: flex;
 		align-items: center;
 		margin: 5px 0 0;
 	}
-	.sheet-roll-flex .sheet-roll-title {
+	.sheet-flex .sheet-title {
 		margin: 0;
 		font-size: 20px;
 		line-height: 1.2;
 	}
-	.sheet-roll-title {
+	.sheet-title {
 		margin: 9px 0 0;
 		color: white;
 		text-transform: uppercase;
@@ -260,7 +260,7 @@ $broadcast-white: #ccc;
 		font-size: 23px;
 		line-height: 29px;
 	}
-	.sheet-roll-content {
+	.sheet-content {
 		padding: 15px 0 5px;
 		line-height: 1.3;
 		font-size: 13px;
@@ -271,43 +271,43 @@ $broadcast-white: #ccc;
 		display: block;
 		height: 31px;
 	}
-	.sheet-roll-harm {
+	.sheet-harm {
 		color: white;
 		width: 100%;
 		margin: 15px 0 0;
 		border: 1px solid white;
 	}
-	.sheet-roll-harm td {
+	.sheet-harm td {
 		text-align: center;
 		padding: 5px;
 		border: 1px solid white;
 	}
-	.sheet-roll-harm td:first-child {
+	.sheet-harm td:first-child {
 		width: 10px;
 	}
-	.sheet-roll-harm td:nth-child(2n+1) {
+	.sheet-harm td:nth-child(2n+1) {
 		font-weight: bold;
 	}
-	.sheet-roll-harm td:nth-child(2) {
+	.sheet-harm td:nth-child(2) {
 		padding: 5px 0;
 	}
-	.sheet-roll-harm td:last-child {
+	.sheet-harm td:last-child {
 		width: 60px;
 		letter-spacing: 0.5px;
 		text-transform: uppercase;
 	}
-	.sheet-roll-harm-inner {
+	.sheet-harm-inner {
 		color: $actioncolor;
 		padding: 0 5px;
 	}
-	.sheet-roll-harm-inner:first-child:not(:last-child) {
+	.sheet-harm-inner:first-child:not(:last-child) {
 		padding-bottom: 2.5px;
 		border-bottom: 1px solid white;
 	}
-	.sheet-roll-harm-inner:last-child:not(:first-child) {
+	.sheet-harm-inner:last-child:not(:first-child) {
 		padding-top: 2.5px;
 	}
-	.sheet-roll-clock {
+	.sheet-clock {
 		width: 88px;
 		flex: 0 0 auto;
 		box-sizing: border-box;
@@ -318,116 +318,116 @@ $broadcast-white: #ccc;
 		border-radius: 50%;
 		margin-right: 4px;
 	}
-	.sheet-roll-spoke {
+	[class^='sheet-spoke'] {
 		height: 88px;
 		width: 4px;
 		position: absolute;
 		background: black;
+		&:not(.sheet-spoke-0) {
+			display: none;
+		}
 	}
-	.sheet-roll-spoke:not(.sheet-roll-spoke-0) {
-		display: none;
-	}
-	.sheet-roll-size-4 .sheet-roll-spoke-90,
-	.sheet-roll-size-6 .sheet-roll-spoke-60,
-	.sheet-roll-size-6 .sheet-roll-spoke-120,
-	.sheet-roll-size-8 .sheet-roll-spoke-45,
-	.sheet-roll-size-8 .sheet-roll-spoke-90,
-	.sheet-roll-size-8 .sheet-roll-spoke-135,
-	.sheet-roll-size-10 .sheet-roll-spoke-36,
-	.sheet-roll-size-10 .sheet-roll-spoke-72,
-	.sheet-roll-size-10 .sheet-roll-spoke-108,
-	.sheet-roll-size-10 .sheet-roll-spoke-144,
-	.sheet-roll-size-12 .sheet-roll-spoke-30,
-	.sheet-roll-size-12 .sheet-roll-spoke-60,
-	.sheet-roll-size-12 .sheet-roll-spoke-90,
-	.sheet-roll-size-12 .sheet-roll-spoke-120,
-	.sheet-roll-size-12 .sheet-roll-spoke-150 {
+	.sheet-size-4 .sheet-spoke-90,
+	.sheet-size-6 .sheet-spoke-60,
+	.sheet-size-6 .sheet-spoke-120,
+	.sheet-size-8 .sheet-spoke-45,
+	.sheet-size-8 .sheet-spoke-90,
+	.sheet-size-8 .sheet-spoke-135,
+	.sheet-size-10 .sheet-spoke-36,
+	.sheet-size-10 .sheet-spoke-72,
+	.sheet-size-10 .sheet-spoke-108,
+	.sheet-size-10 .sheet-spoke-144,
+	.sheet-size-12 .sheet-spoke-30,
+	.sheet-size-12 .sheet-spoke-60,
+	.sheet-size-12 .sheet-spoke-90,
+	.sheet-size-12 .sheet-spoke-120,
+	.sheet-size-12 .sheet-spoke-150 {
 		display: block;
 	}
-	.sheet-roll-spoke-0 {
+	.sheet-spoke-0 {
 		transform: translate(39px, -4px);
 	}
-	.sheet-roll-spoke-30 {
+	.sheet-spoke-30 {
 		transform: translate(39px, -4px) rotate(30deg);
 	}
-	.sheet-roll-spoke-36 {
+	.sheet-spoke-36 {
 		transform: translate(39px, -4px) rotate(36deg);
 	}
-	.sheet-roll-spoke-45 {
+	.sheet-spoke-45 {
 		transform: translate(39px, -4px) rotate(45deg);
 	}
-	.sheet-roll-spoke-60 {
+	.sheet-spoke-60 {
 		transform: translate(39px, -4px) rotate(60deg);
 	}
-	.sheet-roll-spoke-72 {
+	.sheet-spoke-72 {
 		transform: translate(39px, -4px) rotate(72deg);
 	}
-	.sheet-roll-spoke-90 {
+	.sheet-spoke-90 {
 		transform: translate(39px, -4px) rotate(90deg);
 	}
-	.sheet-roll-spoke-108 {
+	.sheet-spoke-108 {
 		transform: translate(39px, -4px) rotate(108deg);
 	}
-	.sheet-roll-spoke-120 {
+	.sheet-spoke-120 {
 		transform: translate(39px, -4px) rotate(120deg);
 	}
-	.sheet-roll-spoke-135 {
+	.sheet-spoke-135 {
 		transform: translate(39px, -4px) rotate(135deg);
 	}
-	.sheet-roll-spoke-144 {
+	.sheet-spoke-144 {
 		transform: translate(39px, -4px) rotate(144deg);
 	}
-	.sheet-roll-spoke-150 {
+	.sheet-spoke-150 {
 		transform: translate(39px, -4px) rotate(150deg);
 	}
-	.sheet-roll-size-4 {
-		&.sheet-roll-progress-1 {@include clock(90);}
-		&.sheet-roll-progress-2 {@include clock(180);}
-		&.sheet-roll-progress-3 {@include clock(270);}
-		&.sheet-roll-progress-4 {@include clock(360);}
+	.sheet-size-4 {
+		&.sheet-progress-1 {@include clock(90);}
+		&.sheet-progress-2 {@include clock(180);}
+		&.sheet-progress-3 {@include clock(270);}
+		&.sheet-progress-4 {@include clock(360);}
 	}
-	.sheet-roll-size-6 {
-		&.sheet-roll-progress-1 {@include clock(60);}
-		&.sheet-roll-progress-2 {@include clock(120);}
-		&.sheet-roll-progress-3 {@include clock(180);}
-		&.sheet-roll-progress-4 {@include clock(240);}
-		&.sheet-roll-progress-5 {@include clock(300);}
-		&.sheet-roll-progress-6 {@include clock(360);}
+	.sheet-size-6 {
+		&.sheet-progress-1 {@include clock(60);}
+		&.sheet-progress-2 {@include clock(120);}
+		&.sheet-progress-3 {@include clock(180);}
+		&.sheet-progress-4 {@include clock(240);}
+		&.sheet-progress-5 {@include clock(300);}
+		&.sheet-progress-6 {@include clock(360);}
 	}
-	.sheet-roll-size-8 {
-		&.sheet-roll-progress-1 {@include clock(45);}
-		&.sheet-roll-progress-2 {@include clock(90);}
-		&.sheet-roll-progress-3 {@include clock(135);}
-		&.sheet-roll-progress-4 {@include clock(180);}
-		&.sheet-roll-progress-5 {@include clock(225);}
-		&.sheet-roll-progress-6 {@include clock(270);}
-		&.sheet-roll-progress-7 {@include clock(315);}
-		&.sheet-roll-progress-8 {@include clock(360);}
+	.sheet-size-8 {
+		&.sheet-progress-1 {@include clock(45);}
+		&.sheet-progress-2 {@include clock(90);}
+		&.sheet-progress-3 {@include clock(135);}
+		&.sheet-progress-4 {@include clock(180);}
+		&.sheet-progress-5 {@include clock(225);}
+		&.sheet-progress-6 {@include clock(270);}
+		&.sheet-progress-7 {@include clock(315);}
+		&.sheet-progress-8 {@include clock(360);}
 	}
-	.sheet-roll-size-10 {
-		&.sheet-roll-progress-1 {@include clock(36);}
-		&.sheet-roll-progress-2 {@include clock(72);}
-		&.sheet-roll-progress-3 {@include clock(108);}
-		&.sheet-roll-progress-4 {@include clock(144);}
-		&.sheet-roll-progress-5 {@include clock(180);}
-		&.sheet-roll-progress-6 {@include clock(216);}
-		&.sheet-roll-progress-7 {@include clock(252);}
-		&.sheet-roll-progress-8 {@include clock(288);}
-		&.sheet-roll-progress-9 {@include clock(324);}
-		&.sheet-roll-progress-10 {@include clock(360);}
+	.sheet-size-10 {
+		&.sheet-progress-1 {@include clock(36);}
+		&.sheet-progress-2 {@include clock(72);}
+		&.sheet-progress-3 {@include clock(108);}
+		&.sheet-progress-4 {@include clock(144);}
+		&.sheet-progress-5 {@include clock(180);}
+		&.sheet-progress-6 {@include clock(216);}
+		&.sheet-progress-7 {@include clock(252);}
+		&.sheet-progress-8 {@include clock(288);}
+		&.sheet-progress-9 {@include clock(324);}
+		&.sheet-progress-10 {@include clock(360);}
 	}
-	.sheet-roll-size-12 {
-		&.sheet-roll-progress-1 {@include clock(30);}
-		&.sheet-roll-progress-2 {@include clock(60);}
-		&.sheet-roll-progress-3 {@include clock(90);}
-		&.sheet-roll-progress-4 {@include clock(120);}
-		&.sheet-roll-progress-5 {@include clock(150);}
-		&.sheet-roll-progress-6 {@include clock(180);}
-		&.sheet-roll-progress-7 {@include clock(210);}
-		&.sheet-roll-progress-8 {@include clock(240);}
-		&.sheet-roll-progress-9 {@include clock(270);}
-		&.sheet-roll-progress-10 {@include clock(300);}
-		&.sheet-roll-progress-11 {@include clock(330);}
-		&.sheet-roll-progress-12 {@include clock(360);}
+	.sheet-size-12 {
+		&.sheet-progress-1 {@include clock(30);}
+		&.sheet-progress-2 {@include clock(60);}
+		&.sheet-progress-3 {@include clock(90);}
+		&.sheet-progress-4 {@include clock(120);}
+		&.sheet-progress-5 {@include clock(150);}
+		&.sheet-progress-6 {@include clock(180);}
+		&.sheet-progress-7 {@include clock(210);}
+		&.sheet-progress-8 {@include clock(240);}
+		&.sheet-progress-9 {@include clock(270);}
+		&.sheet-progress-10 {@include clock(300);}
+		&.sheet-progress-11 {@include clock(330);}
+		&.sheet-progress-12 {@include clock(360);}
 	}
 }
