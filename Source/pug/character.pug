@@ -38,7 +38,7 @@
 					span.uppercase.info(data-i18n='vice_info')
 				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} @{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
 				+hidden-input('vice')(value='0')
-			//- Special vice sections for spirit playbooks. You can safely delete the following three elements if you don't variant vices
+			//- Special vice sections for spirit playbooks. You can safely delete the following three elements if you don't need variant vices
 			if (showSpecialVice)
 				.col100.vice.ghost
 					span.italic(data-i18n='ghost_viceblurb')
@@ -219,6 +219,7 @@
 						li
 							+text-input('gatherinfo6')(data-i18n-placeholder='gatherinfo_how_can_I_find').inherit
 						li(data-i18n='gatherinfo_whats_going_on')
+			//- Strictures: can be deleted safely
 			if (showStrictures)
 				// Strictures
 				+hidden-input('setting_show_strictures')(value='0').hider
@@ -226,7 +227,7 @@
 					.plainheader.label(data-i18n='strictures')
 					div
 						span.italic(data-i18n='stricturesblurb')
-					each desc, name in stricturesData
+					each name in ['slumber', 'forbidden', 'repelled', 'bestial', 'bound']
 						div
 							label
 								+checkbox(`stricture_${name}`).checkbox.squarebox
@@ -283,6 +284,7 @@
 						.item-description
 							+checkbox('expand').expand
 							+textarea('description')(data-i18n-placeholder='description')
+					//- Frame: can be deleted safely
 					if (showFrame)
 						// Frame
 						+hidden-input('setting_show_frame')(value='0').hider

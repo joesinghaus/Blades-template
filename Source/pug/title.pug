@@ -57,11 +57,13 @@
 		label
 			+checkbox('setting_extra_xp').checkbox.squarebox
 			span(data-i18n='show_extra_xp_condition')
+	//- Strictures: can be deleted safely
 	if (showStrictures)
 		.setting-char
 			label
 				+checkbox('setting_show_strictures').checkbox.squarebox
 				span(data-i18n='show_vampire_strictures')
+	//- Frame: can be deleted safely
 	if (showFrame)
 		.setting-char
 			label
