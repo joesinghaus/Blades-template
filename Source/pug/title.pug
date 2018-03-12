@@ -19,9 +19,8 @@
 .settings.flex-wrap
 	.setting-char.generaterow
 		select(name='attr_generate_source_character', title='Choose source')
-			optgroup
-				each playbook in playbooks
-					option(value=playbook, data-i18n=playbook)
+			each playbook in playbooks
+				option(value=playbook, data-i18n=playbook)
 		label.generatebutton
 			+checkbox('generate_ability')(data-i18n='add_abilities')
 		label.generatebutton
@@ -97,7 +96,7 @@
 				span(data-i18n='show_origin')
 	.setting-char
 		span(data-i18n='resistance_bonus')
-		each actions, attribute in actionData
+		each attribute in Object.keys(actionData)
 			label
 				+number-input(`setting_resbonus_${attribute}`)(value='0')
 				span(data-i18n=attribute)
@@ -121,7 +120,7 @@
 	.setting-char
 		label
 			select(name='attr_setting_traumata_set', title='Traumata')
-				each val, type in traumaData
+				each type in Object.keys(traumaData)
 					option(value=type, data-i18n=type)
 			span(data-i18n='traumata')
 	//- Special vices for the spirit playbooks. Can be deleted safely.
