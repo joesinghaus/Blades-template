@@ -55,17 +55,14 @@ rolltemplate.sheet-rolltemplate-bitd-broadcast
 		table.harm
 			tr
 				td 3
-				td
-					| {{#harm3}} #[.harm-inner {{harm3}}] {{/harm3}}
+				td #[.harm-inner {{harm3}}]
 				td(data-i18n='need_help')
 			tr
 				td 2
-				td
-					| {{#harm2_1}} #[.harm-inner {{harm2_1}}] {{/harm2_1}}{{#harm2_2}} #[.harm-inner {{harm2_2}}] {{/harm2_2}}
+				td {{#harm2_1}} #[.harm-inner {{harm2_1}}] {{/harm2_1}} {{#harm2_2}} #[.harm-inner {{harm2_2}}] {{/harm2_2}}
 				td(data-i18n='minus1d')
 			tr
 				td 1
-				td
-					| {{#harm1_1}} #[.harm-inner {{harm1_1}}] {{/harm1_1}}{#harm1_2}} #[.harm-inner {{harm1_2}}] {{/harm1_2}}
+				td {{#harm1_1}} #[.harm-inner {{harm1_1}}] {{/harm1_1}} {{#harm1_2}} #[.harm-inner {{harm1_2}}] {{/harm1_2}}
 				td(data-i18n='less_effect')
 		| {{/harm}}
