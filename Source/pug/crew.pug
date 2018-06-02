@@ -91,14 +91,15 @@ mixin makeupgrade(number, numboxes, def, desc)
 					+radio('hold')(value='strong', checked).tooth.holdtooth
 				// Tier
 				.blackheader
-					+roll('Tier', '{{resist=1}} {{short=1}} {{title-crew_tier=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their}}}', '@{crew_tier}')(data-i18n='tier').label.inherit.rollbutton
+					+roll('Tier', '{{resist=1}} {{short=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their}}} @{crew_tier_formula}')(data-i18n='tier').label.inherit.rollbutton
+					+hidden-input('crew_tier_formula')(value=zerodiceFormula)
 				.tier.flex
 					+hidden-checkbox('crew_tier')(value='0', checked).fakeradio
 					//- generates 4 tier circles
 					each num in range(1,4)
 						+checkbox('crew_tier')(value=num).checkbox.circlebox.fakeradio
 		// Claims
-		.claims.col100.white-repcontrol
+		.claims.col100.free-repcontrol
 			.claimsrow.flex
 				each num in range(1,5)
 					+claimbox(num)
@@ -149,7 +150,8 @@ mixin makeupgrade(number, numboxes, def, desc)
 				// Wanted Level
 				.heat3
 					.blackheader
-						+roll('Wanted', '{{vice=1}} {{short=1}} {{title-entanglement=1}} {{title=^{entanglement}}} {{subtitle=^{wantedroll1}@{heat} ^{heat}^{wantedroll2}}}', '@{wanted}')(data-i18n='wanted').label.inherit.rollbutton
+						+roll('Wanted', '{{vice=1}} {{short=1}} {{title=^{entanglement}}} {{subtitle=^{wantedroll1}@{heat}&nbsp;^{heat}^{wantedroll2}}} @{wanted_formula}')(data-i18n='wanted').label.inherit.rollbutton
+						+hidden-input('wanted_formula')(value=zerodiceFormula)
 					.wantedholder.flex
 						+radio('wanted')(value='0', checked).tooth.zero
 						//- generates 4 wanted boxes
@@ -221,7 +223,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 				span.label(data-i18n='crew_upgrades')
 			.itemholder.col100.upgrades
 				// Specific upgrades
-				.playbookitems.small-repcontrol.col100
+				.playbookitems.col100.free-repcontrol
 					fieldset.repeating_upgrade
 						+hidden-input('boxes_chosen')(value='0').boxes-chosen
 						.item.numboxes-chooser
@@ -287,17 +289,17 @@ mixin makeupgrade(number, numboxes, def, desc)
 			.hunting-grounds.col100.def-margin
 				+autoexpand('hunting_grounds_type')(data-i18n-placeholder='hunting_grounds').plainheader.label
 				+autoexpand('hunting_grounds_description')(data-i18n-placeholder='hunting_grounds_description').description
-			+fortuneroll('Engagement', '{{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title-engagement=1}} {{title=^{engagement}}}')(data-i18n='roll_engagement').engagementbutton.borderbutton
+			+fortuneroll('Engagement', '{{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title=^{engagement}}}')(data-i18n='roll_engagement').engagementbutton.borderbutton
 		// Cohorts and Contacts
 		.col47.right-column.small-margin
 			// First Cohort
 			+makecohort('cohort1_')
 			// Cohort repeating section
-			.col100.white-repcontrol.cohorts
+			.col100.cohorts.free-repcontrol
 				fieldset.repeating_cohort
 					+makecohort('')
 			// Contacts
-			.col100.def-margin
+			.col100.def-margin.contacts
 				.specialheader.col100.label.flex
 					+text-input('contacts_title', 'contacts').inherit
 				.greyholder.col100
@@ -307,10 +309,12 @@ mixin makeupgrade(number, numboxes, def, desc)
 							label
 								+checkbox('check').checkbox
 							+autoexpand('name')(data-i18n-placeholder='contact_name')
+						+checkbox(null).expand
+						+textarea('description')(data-i18n-placeholder='notes').description
 			// Roll Fortune
-			+fortuneroll('Fortune_crew', '{{fortune=1}} {{subtitle=^{roll}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+			+fortuneroll('Fortune_crew', '{{fortune=1}} {{subtitle=^{roll}}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
 		// Clocks
-		.col100.clocks.white-repcontrol.def-margin
+		.col100.clocks.def-margin.free-repcontrol
 			.specialheader.label(data-i18n='clocks')
 			fieldset.repeating_crewclock
 				+makeclock

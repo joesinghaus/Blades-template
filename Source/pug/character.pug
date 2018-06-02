@@ -36,8 +36,8 @@
 				.text
 					span.label.title(data-i18n='vice_purveyor')
 					span.uppercase.info(data-i18n='vice_info')
-				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} @{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
-				+hidden-input('vice')(value='0')
+				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title=^{vice}}} @{vice_formula}')(data-i18n='indulge_vice').vicebutton.borderbutton
+				+hidden-input('vice_formula')(value=zerodiceFormula)
 			//- Special vice sections for spirit playbooks. You can safely delete the following three elements if you don't need variant vices
 			if (showSpecialVice)
 				.col100.vice.ghost
@@ -52,7 +52,7 @@
 					span.italic(data-i18n='hull_viceblurb')
 				.col100.vice.vampire
 					span.italic(data-i18n='vampire_viceblurb')
-					+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress} @{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}}', '@{vice}')(data-i18n='indulge_vice').vicebutton.borderbutton
+				+roll('Vice', '{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title=^{vice}}} @{vice_formula}')(data-i18n='indulge_vice').vicebutton.borderbutton
 		// Stress and Trauma
 		.col100.flex.stress.def-margin
 			// Stress markers
@@ -121,7 +121,7 @@
 				// Healing
 				.col45.healing
 					.blackheader.col100
-						+fortuneroll('Recovery', '{{resist=1}} {{short=1}} {{title-recovery=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for}}}')(data-i18n='healing').label.rollbutton.inherit
+						+fortuneroll('Recovery', '{{resist=1}} {{short=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for}}}')(data-i18n='healing').label.rollbutton.inherit
 					.col100.healing-progress(data-i18n='progress_clock', data-i18n-title='recoveryblurb')
 					// Healing clock
 					+hidden-input('recovery_max')(value='4').size
@@ -151,8 +151,8 @@
 							each num in range(1,4)
 								+radio('coin')(value=num).radiobox
 						.stashbutton-holder
-							+hidden-input('stash_dice')(value='0')
-							+roll('Stash', '{{resist=1}} {{short=1}} {{title-lifestyle=1}} {{title=^{stash}}} {{subtitle=^{rolls}}}', '@{stash_dice}')(data-i18n='stash').rollbutton.label
+							+hidden-input('stash_formula')(value=zerodiceFormula)
+							+roll('Stash', '{{resist=1}} {{short=1}} {{title=^{stash}}} {{subtitle=^{rolls}}} @{stash_formula}')(data-i18n='stash').rollbutton.label
 					// Stash
 					.col100.stash
 						+radio('stash')(value='0', checked).zero
@@ -262,7 +262,7 @@
 			// Items
 			.itemholder.col100.items
 				// Playbook items
-				.playbookitems.col100.small-repcontrol
+				.playbookitems.col100.free-repcontrol
 					fieldset.repeating_playbookitem
 						+hidden-input('boxes_chosen')(value='0').boxes-chosen
 						.item.numboxes-chooser
@@ -296,7 +296,7 @@
 									+checkbox('check').checkbox.circlebox
 									+text-input('name')(data-i18n-placeholder='frame_feature').itemname
 				// Regular items
-				.regularitems.white-repcontrol.col100
+				.regularitems.col100.free-repcontrol.free-repcontrol
 					fieldset.repeating_item
 						+hidden-input('short')(value='0').input-short
 						+hidden-input('expand')(value='0').input-expand
@@ -324,7 +324,7 @@
 			.col100.def-margin
 				input.title-checkbox(type='checkbox', name='attr_show_alchemicals', value='1')
 				span.label.plainheader(data-i18n='alchemicals')
-				.alchemicals.white-repcontrol
+				.alchemicals.free-repcontrol
 					.bandolier.item
 						span.bandoliers-name(data-i18n='bandoliers')
 						each bannum in [1,2]
@@ -370,10 +370,9 @@
 				.attribute.col100
 					.attribute-title.flex.col100
 						+roll(attribute,
-							'{{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-' + attribute + '=1}} {{title=^{' + attribute + '}}}',
-							`@{${attribute}}+@{setting_resbonus_${attribute}}`
-							)(data-i18n=attribute, data-i18n-title=`${attribute}_description`).rollbutton.label
+							'{{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title=^{'+attribute+'}}} @{'+attribute+'_formula}')(data-i18n=attribute, data-i18n-title=`${attribute}_description`).rollbutton.label
 						+hidden-input(`${attribute}`)(value='0')
+						+hidden-input(`${attribute}_formula`)(value=zerodiceFormula)
 						+hidden-input(`${attribute}_xp_max`)(value='6')
 						.attribute-xp-box.flex
 							//- generate 6 xp boxes
@@ -383,12 +382,13 @@
 					.actions.col100
 						each action in actions
 							.action.flex.col100
+								+hidden-input(`${action}_formula`)(value=zerodiceFormula)
 								+hidden-checkbox(action)(value='0', checked).fakeradio
 								+checkbox(action)(value='1').checkbox.circlebox.fakeradio
 								.divider
 								each num in range(2,4)
 									+checkbox(action)(value=num).checkbox.circlebox.fakeradio
-								+roll(action, '{{action=1}} {{subtitle=^{rolls}}} {{title-' + action + '=1}} {{title=^{' + action + '}}} {{@{position_query}}} {{effect=@{effect_query}}}', `@{${action}}`)(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
+								+roll(action, '{{action=1}} {{subtitle=^{rolls}}} {{title=^{'+action+'}}} {{@{position_query}}} {{effect=@{effect_query}}} @{'+action+'_formula}')(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
 			// Cohort
 			+hidden-input('setting_show_cohort')(value='0').hider
 			+makecohort('char_cohort_', true)
@@ -404,7 +404,7 @@
 						span(data-i18n='push_yourself_desc2')
 						.label(data-i18n='devils_bargain')
 			// Friends
-			.col100.def-margin
+			.col100.def-margin.friends
 				.specialheader.col100.label.flex
 					+text-input('friends_title', 'friends').inherit
 				.greyholder.col100
@@ -416,10 +416,12 @@
 							label.down
 								+checkbox('status')(value='down').checkbox
 							+autoexpand('name')(data-i18n-placeholder='friend_name')
+						+checkbox(null).expand
+						+textarea('description')(data-i18n-placeholder='notes').description
 			// Roll Fortune
-			+fortuneroll('Fortune', '{{fortune=1}} {{subtitle=^{rolls}}} {{title-fortune=1}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+			+fortuneroll('Fortune', '{{fortune=1}} {{subtitle=^{rolls}}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
 		// Clocks
-		.col100.clocks.white-repcontrol.def-margin
+		.col100.clocks.def-margin.free-repcontrol
 			.specialheader.label(data-i18n='clocks')
 			fieldset.repeating_clock
 				+makeclock

@@ -11,18 +11,24 @@ $vicecolor-notes: #c9c9c9;
 $broadcast: #180d06;
 $broadcast-white: #ccc;
 
+.withoutavatars {
+	.sheet-rolltemplate-bitd .sheet-holder { margin-left: -15px }
+	.sheet-rolltemplate-bitd-broadcast { margin-left: -15px }
+}
+
 /* Container */
 .sheet-rolltemplate-bitd {
 	.sheet-holder {
-		margin-left: -45px;
-		margin-right: -1px;
-		padding: 0 30px;
+		margin: 0 -5px -4px -45px;
+		padding: 0 20px 0 30px;
+		max-width: 299px;
 		box-sizing: border-box;
 		font-family: Georgia, "Bitstream Charter", "Times New Roman", serif;
-		width: 299px;
 		user-select: none;
 		cursor: default;
 		overflow: hidden;
+		position: relative;
+		background-repeat: no-repeat;
 		font-variant-numeric: lining-nums;
 	}
 	.sheet-holder.sheet-resist.sheet-short,
@@ -75,19 +81,14 @@ $broadcast-white: #ccc;
 		overflow: hidden;
 		font-variant: small-caps;
 		text-overflow: ellipsis;
+		&.sheet-narrow {
+			width: calc(100% - 52px);
+		}
 	}
-	.sheet-resist .sheet-header {
-		color: $resistcolor;
-	}
-	.sheet-vice .sheet-header {
-		color: white;
-	}
-	.sheet-fortune .sheet-header {
-		color: $fortunecolor;
-	}
-	.sheet-action .sheet-header {
-		color: $actioncolor;
-	}
+	.sheet-resist .sheet-header { color: $resistcolor }
+	.sheet-vice .sheet-header { color: white }
+	.sheet-fortune .sheet-header { color: $fortunecolor }
+	.sheet-action .sheet-header { color: $actioncolor }
 	> .sheet-action .sheet-header,
 	> .sheet-fortune .sheet-header {
 		letter-spacing: 1px;
@@ -96,11 +97,31 @@ $broadcast-white: #ccc;
 	.sheet-holder.sheet-fortune.sheet-short .sheet-header {
 		margin-bottom: -51px;
 	}
+	/* Image */
+	.sheet-char-image {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		line-height: 0;
+		a {
+			cursor: default;
+			pointer-events: none;
+		}
+		img {
+			max-width: 60px;
+			max-height: 80px;
+		}
+	}
 	/* Title */
 	.sheet-title {
 		color: white;
+		position: relative;
 		text-transform: uppercase;
 		font-weight: bold;
+		img {
+			display: block;
+			height: 100%;
+		}
 	}
 	.sheet-action .sheet-title,
 	.sheet-fortune .sheet-title {
@@ -116,26 +137,18 @@ $broadcast-white: #ccc;
 		line-height: 24px;
 		height: 24px;
 	}
-	.sheet-fortune .sheet-title {
-		color: black;
-	}
-	.sheet-small-title {
-		font-size: 28px;
-	}
+	.sheet-fortune .sheet-title { color: black }
+	.sheet-small-title { font-size: 28px }
 	/* Position and Effect */
+	.sheet-position { width: 133px }
 	.sheet-position,
 	.sheet-effect {
 			display: inline-block;
 			box-sizing: border-box;
-			width: 50%;
 			color: white;
 			text-transform: uppercase;
 			font-size: 12px;
 			letter-spacing: 1px;
-			padding: 20px 0 0;
-	}
-	.sheet-effect {
-			padding-left: 14px;
 	}
 	/* Dice */
 	.sheet-dice {
@@ -144,13 +157,9 @@ $broadcast-white: #ccc;
 		line-height: 20px;
 		color: white;
 	}
-	.sheet-action .sheet-dice {
-		margin: 47px 0 19px;
-	}
+	.sheet-action .sheet-dice { margin: 47px 0 37px }
 	.sheet-resist .sheet-dice,
-	.sheet-vice .sheet-dice {
-		margin: 35px 0 23px;
-	}
+	.sheet-vice .sheet-dice { margin: 35px 0 23px }
 	.sheet-fortune .sheet-dice {
 		margin: 15px 0 10px;
 		color: $fortunecolor;
@@ -226,12 +235,13 @@ $broadcast-white: #ccc;
 
 /* BROADCAST TEMPLATE */
 .sheet-rolltemplate-bitd-broadcast {
-	margin: 0 -1px 0 -45px;
-	padding: 16px 20px 15px;
+	margin: 0 -5px -4px -45px;
+	max-width: 299px;
+	padding: 16px 10px 15px 20px;
 	overflow: hidden;
 	box-sizing: border-box;
+	position: relative;
 	font-family: Georgia, "Bitstream Charter", "Times New Roman", serif;
-	width: 299px;
 	background-color: $broadcast;
 
 	.sheet-header {
@@ -241,10 +251,29 @@ $broadcast-white: #ccc;
 		font-variant: small-caps;
 		letter-spacing: 1px;
 		font-weight: 800;
+		&.sheet-narrow {
+			width: calc(100% - 62px);
+		}
+	}
+		/* Image */
+	.sheet-char-image {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		line-height: 0;
+		a {
+			cursor: default;
+			pointer-events: none;
+		}
+		img {
+			max-width: 60px;
+			max-height: 80px;
+		}
 	}
 	.sheet-flex {
 		display: flex;
 		align-items: center;
+		clear: both;
 		margin: 5px 0 0;
 	}
 	.sheet-flex .sheet-title {
@@ -256,20 +285,22 @@ $broadcast-white: #ccc;
 		margin: 9px 0 0;
 		color: white;
 		text-transform: uppercase;
+		position: relative;
 		font-weight: bold;
+		word-wrap: normal;
 		font-size: 23px;
 		line-height: 29px;
+		img {
+			margin: 9px 0 0;
+			display: block;
+			height: 31px;
+		}
 	}
 	.sheet-content {
 		padding: 15px 0 5px;
 		line-height: 1.3;
 		font-size: 13px;
 		color: $broadcast-white;
-	}
-	img {
-		margin: 9px 0 0;
-		display: block;
-		height: 31px;
 	}
 	.sheet-harm {
 		color: white;
@@ -282,15 +313,9 @@ $broadcast-white: #ccc;
 		padding: 5px;
 		border: 1px solid white;
 	}
-	.sheet-harm td:first-child {
-		width: 10px;
-	}
-	.sheet-harm td:nth-child(2n+1) {
-		font-weight: bold;
-	}
-	.sheet-harm td:nth-child(2) {
-		padding: 5px 0;
-	}
+	.sheet-harm td:first-child { width: 10px }
+	.sheet-harm td:nth-child(2n+1) { font-weight: bold }
+	.sheet-harm td:nth-child(2) { padding: 5px 0 }
 	.sheet-harm td:last-child {
 		width: 60px;
 		letter-spacing: 0.5px;

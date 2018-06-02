@@ -1,4 +1,6 @@
-const sheetVersion = "2.7";
+/* global data, getTranslationByKey, getAttrs, setAttrs, on, getSectionIDs, generateRowID, removeRepeatingRow */
+const sheetVersion = "1.0";
+const sheetName = "Blades in the Dark";
 /* It's necessary to include the base data at the start of the file */
 /* Translate all the data */
 Object.keys(data.crew).forEach(crew => {
@@ -65,6 +67,18 @@ Object.keys(data.playbook).forEach(playbook => {
 		item.boxes_chosen = '1';
 	});
 });
+const playbookAbilityMap = new Map([...Object.values(data.playbook).map(x => x.ability).reduce((m, v) => {
+	v.forEach(a => m.add(a));
+	return m;
+}, new Set())].map(x => {
+	return [x.name.toLowerCase(), x.description];
+}));
+const crewAbilityMap = new Map([...Object.values(data.crew).map(x => x.crewability).reduce((m, v) => {
+	v.forEach(a => m.add(a));
+	return m;
+}, new Set())].map(x => {
+	return [x.name.toLowerCase(), x.description];
+}));
 /* Utility functions - shouldn't need to touch most of these */
 const mySetAttrs = (attrs, options, callback) => {
 		const finalAttrs = Object.keys(attrs).reduce((m, k) => {
@@ -124,6 +138,30 @@ const mySetAttrs = (attrs, options, callback) => {
 			});
 		});
 	},
+	diceMagic = num => {
+		const replaceEntities = string => {
+			const entities = {
+				'[': '#91',
+				'}': '#125',
+				',': '#44',
+			};
+			return string.replace(/[\[},]/g, c => '&' + entities[c] + ';');
+		};
+		const range = end => [...Array(end+1).keys()].slice(1);
+		if (num > 0)
+			return replaceEntities(range(num).reduce((m, k) => `${m} {{roll${k}=[[d6]]}}`, ''));
+		else return replaceEntities(' {{zerodice=[[d6]], [[d6]]}}');
+	},
+	buildRollFormula = base => {
+		return `?{@{bonusdice}|` +
+			[0,1,2,3,4,5,6,-1,-2,-3].map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join('|') +
+			'}';
+	},
+	buildNumdiceFormula = () => {
+		return `?{${getTranslationByKey('numberofdice')}|` +
+			[0, 1, 2, 3, 4 , 5, 6].map(n => `${n},${diceMagic(n)}`).join('|') +
+			'}';
+	},
 	emptyFirstRowIfUnnamed = sectionName => {
 		getSectionIDs(`repeating_${sectionName}`, idList => {
 			const id = idList[0];
@@ -169,34 +207,43 @@ const mySetAttrs = (attrs, options, callback) => {
 		});
 	},
 	calculateResistance = name => {
-		getAttrs(data.actions[name], v => {
-			const total = Object.keys(v).map(x => v[x])
+		getAttrs([...data.actions[name], `setting_resbonus_${name}`], v => {
+			const total = data.actions[name].map(x => v[x])
 				.reduce((s, c) => s + (String(c) === '0' ? 0 : 1), 0);
 			setAttr(name, total);
+			setAttr(`${name}_formula`, buildRollFormula(total + parseInt(v[`setting_resbonus_${name}`])));
 		});
 	},
 	calculateVice = () => {
 		getAttrs(Object.keys(data.actions), v => {
-			setAttr('vice', Math.min(...Object.keys(v).map(x => parseInt(v[x]) || 0)));
+			const total = Math.min(...Object.keys(v).map(x => parseInt(v[x]) || 0));
+			setAttr('vice_formula', buildRollFormula(total));
 		});
 	},
-	calculateStashDice = stash => setAttr('stash_dice', Math.floor(parseInt(stash) / 10)),
-	calculateCohortDice = prefixes => {
-		const sourceAttrs = [
-			'crew_tier',
-			...prefixes.map(p => `${p}_impaired`),
-			...prefixes.map(p => `${p}_type`),
-		];
-		getAttrs(sourceAttrs, v => {
-			const setting = {};
-			prefixes.forEach(prefix => {
-				const dice = (parseInt(v.crew_tier) || 0) - (parseInt(v[`${prefix}_impaired`]) || 0) +
-					((v[`${prefix}_type`] === 'elite' || v[`${prefix}_type`] === 'expert') ? 1 : 0);
-				setting[`${prefix}_dice`] = dice;
+		calculateStashFormula = () => getAttrs(['stash'], v => {
+			setAttr('stash_formula', buildRollFormula(Math.floor(parseInt(v.stash) / 10)));
+		}),
+		calculateWantedFormula = () => getAttrs(['wanted'], v => {
+			setAttr('wanted_formula', buildRollFormula(v.wanted));
+		}),
+		calculateCohortDice = prefixes => {
+			const sourceAttrs = [
+				'crew_tier',
+				...prefixes.map(p => `${p}_impaired`),
+				...prefixes.map(p => `${p}_type`),
+				...prefixes.map(p => `${p}_roll_formula`),
+			];
+			getAttrs(sourceAttrs, v => {
+				const setting = {};
+				prefixes.forEach(prefix => {
+					const dice = (parseInt(v.crew_tier) || 0) - (parseInt(v[`${prefix}_impaired`]) || 0) +
+						((v[`${prefix}_type`] === 'elite' || v[`${prefix}_type`] === 'expert') ? 1 : 0),
+						formula = buildRollFormula(dice);
+					if (formula !== v[`${prefix}_roll_formula`]) setting[`${prefix}_roll_formula`] = formula;
+				});
+				setAttrs(setting);
 			});
-			setAttrs(setting);
-		});
-	};
+		};
 /* CONSTANTS */
 const crewAttributes = [...new Set([].concat(...Object.keys(data.crew).map(x => Object.keys(data.crew[x].base))))],
 	playbookAttributes = [...new Set([].concat(...Object.keys(data.playbook).map(x => Object.keys(data.playbook[x].base))))],
@@ -251,7 +298,7 @@ on('change:crew_type change:playbook', event => {
 	getAttrs(['playbook', 'crew_type', 'changed_attributes', 'setting_autofill', ...watchedAttributes], v => {
 		const changedAttributes = (v.changed_attributes || '').split(','),
 			sourceName = translatedNames[(event.sourceAttribute === 'crew_type' ? v.crew_type : v.playbook).toLowerCase()],
-			fillBaseData = (data, defaultAttrNames) => {
+			fillBaseData = (inputData, defaultAttrNames) => {
 				if (data) {
 					const finalSettings = defaultAttrNames.filter(name => !changedAttributes.includes(name))
 						// do not reset attributes which have been changed by the user
@@ -263,8 +310,8 @@ on('change:crew_type change:playbook', event => {
 							m[name] = data.defaultValues[name] || '';
 							return m;
 						}, {});
-					Object.keys(data).filter(name => !changedAttributes.includes(name))
-						.forEach(name => (finalSettings[name] = data[name]));
+					Object.keys(inputData).filter(name => !changedAttributes.includes(name))
+						.forEach(name => (finalSettings[name] = inputData[name]));
 					mySetAttrs(finalSettings);
 				}
 			};
@@ -287,6 +334,26 @@ on('change:crew_type change:playbook', event => {
 		}
 	});
 });
+const fillPlaybookAbility = () => {
+	const prefix = 'repeating_ability';
+	getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
+		if (!v[`${prefix}_description`]) {
+			const description = playbookAbilityMap.get((v[`${prefix}_name`] || '').toLowerCase());
+			if (description) setAttr(`${prefix}_description`, description);
+		}
+	});
+};
+const fillCrewAbility = () => {
+	const prefix = 'repeating_crewability';
+	getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
+		if (!v[`${prefix}_description`]) {
+			const description = crewAbilityMap.get((v[`${prefix}_name`] || '').toLowerCase());
+			if (description) setAttr(`${prefix}_description`, description);
+		}
+	});
+};
+on('change:repeating_ability:name', fillPlaybookAbility);
+on('change:repeating_crewability:name', fillCrewAbility);
 /* Watch repeating rows for changes and set autogen to false if change happens */
 autogenSections.forEach(sectionName => {
 	on(`change:repeating_${sectionName}`, event => {
@@ -311,11 +378,14 @@ watchedAttributes.forEach(name => {
 });
 /* Register attribute/action event handlers */
 Object.keys(data.actions).forEach(attrName => {
-	on(data.actions[attrName].map(x => `change:${x}`).join(' '), () => calculateResistance(attrName));
+		on([...data.actions[attrName], `setting_resbonus_${attrName}`]
+			.map(x => `change:${x}`).join(' '), () => calculateResistance(attrName)
+		);
 	on(`change:${attrName}`, calculateVice);
 });
 /* Calculate stash */
-on('change:stash', event => calculateStashDice(event.newValue));
+on('change:stash', calculateStashFormula);
+on('change:wanted', calculateWantedFormula);
 /* Calculate trauma */
 on('change:setting_traumata_set ' + traumaDataFlat.map(x => `change:trauma_${x}`).join(' '), event => {
 	getAttrs(['setting_traumata_set', ...traumaDataFlat.map(x => `trauma_${x}`)], v => {
@@ -354,10 +424,10 @@ on('change:repeating_cohort', () => calculateCohortDice(['repeating_cohort']));
 on('change:crew_tier', () => {
 	getSectionIDs('repeating_cohort', a => calculateCohortDice(a.map(id => `repeating_cohort_${id}`)));
 });
-on('change:char_cohort_quality change:char_cohort_impaired', () => {
+on('change:char_cohort_quality change:char_cohort_impaired change:setting_show_cohort', () => {
 	getAttrs(['char_cohort_quality', 'char_cohort_impaired'], v => {
 		const dice = (parseInt(v.char_cohort_quality) || 0) - (parseInt(v.char_cohort_impaired) || 0);
-		setAttr('char_cohort_dice', dice);
+		setAttr('char_cohort_roll_formula', buildRollFormula(dice));
 	});
 });
 /* Set correct verb for cohort roll button */
@@ -379,6 +449,7 @@ handleBoxesFill('bandolier2_check_');
 		if (String(event.newValue) === '0' && event.sourceType === 'player') {
 			setAttr(name, (parseInt(event.previousValue) || 1) - 1);
 		}
+		setAttr(`${name}_formula`, buildRollFormula(event.newValue || '0'));
 	});
 });
 /* Item reset button */
@@ -400,30 +471,13 @@ on('change:reset_items', () => {
 	['item', 'playbookitem'].forEach(clearChecks);
 });
 /* Default values for number of upgrades boxes — probably not necessary anymore */
-on('change:repeating_upgrade:boxes_chosen', () => {
-	getAttrs(['repeating_upgrade_numboxes'], v => {
-		if (!['1', '2', '3'].includes(v.repeating_upgrade_numboxes)) {
-			setAttr('repeating_upgrade_numboxes', '1');
-		}
-	});
-});
-/* Bonus dice via dropdown or text input */
-on('change:setting_text_bonus_query sheet:opened', () => {
-	getAttrs(['setting_text_bonus_query', 'bonusdice', 'numberofdice'], v => {
-		const setting = {};
-		if (String(v.setting_text_bonus_query) === '1') {
-			setting.bonusdice = `(?{${getTranslationByKey('bonusdice')}|0})`;
-			setting.numberofdice = `(?{${getTranslationByKey('numberofdice')}|0})`;
-		}
-		else {
-			setting.bonusdice = `?{${getTranslationByKey('bonusdice')}|0|1|2|3|4|5|6|-1|-2|-3}`;
-			setting.numberofdice = `?{${getTranslationByKey('numberofdice')}|0|1|2|3|4|5|6}`;
-			if (setting.bonusdice === v.bonusdice) delete setting.bonusdice;
-			if (setting.numberofdice === v.numberofdice) delete setting.numberofdice;
-		}
-		mySetAttrs(setting);
-	});
-});
+// on('change:repeating_upgrade:boxes_chosen', () => {
+// 	getAttrs(['repeating_upgrade_numboxes'], v => {
+// 		if (!['1', '2', '3'].includes(v.repeating_upgrade_numboxes)) {
+// 			setAttr('repeating_upgrade_numboxes', '1');
+// 		}
+// 	});
+// });
 /* Resistance query */
 on('change:setting_consequence_query sheet:opened', () => {
 	getAttrs(['setting_consequence_query'], v => {
@@ -444,6 +498,33 @@ autoExpandFields.forEach(name => {
 		});
 	});
 });
+/* Clean chat image URL */
+on('change:chat_image', event => {
+	const match = (event.newValue || '').match(/^(https:\/\/s3\.amazonaws\.com\/files\.d20\.io\/images\/.*\.jpg)\?\d+$/);
+	if (match) setAttr('chat_image', match[1]);
+});
+/* Number of dice prompt */
+on('sheet:opened', () => {
+	/* Set up translated attributes */
+	const translatedAttrs = {
+		bonusdice: getTranslationByKey('bonusdice'),
+		effect_query: getTranslationByKey('effect_query'),
+		notes_query: `?{${getTranslationByKey('notes')}}`,
+		numberofdice: buildNumdiceFormula(),
+		position_query: `?{${getTranslationByKey('position')}|` +
+			`${getTranslationByKey('risky')},position=${getTranslationByKey('risky')}|` +
+			`${getTranslationByKey('controlled')},position=${getTranslationByKey('controlled')}|` +
+			`${getTranslationByKey('desperate')},position=${getTranslationByKey('desperate')}|` +
+			`${getTranslationByKey('fortune_roll')},position=}`,
+	};
+	getAttrs(Object.keys(translatedAttrs), v => {
+		const setting = {};
+		Object.keys(translatedAttrs).forEach(name => {
+			if (v[name] !== translatedAttrs[name]) setting[name] = translatedAttrs[name];
+		});
+		mySetAttrs(setting);
+	});
+});
 /* INITIALISATION AND UPGRADES */
 on('sheet:opened', () => {
 	getAttrs(['sheet_type', 'changed_attributes', 'crew_type', 'playbook'], v => {
@@ -452,28 +533,10 @@ on('sheet:opened', () => {
 		/* Remove reminder box if we have playbook or crew name */
 		if (v.playbook || v.crew_type) setAttr('show_playbook_reminder', '0');
 	});
-	/* Set up translated queries */
-	const queries = {
-		effect_query: getTranslationByKey('effect_query'),
-		notes_query: `?{${getTranslationByKey('notes')}}`,
-		position_query: `?{${getTranslationByKey('position')}|` +
-			`${getTranslationByKey('risky')},position=${getTranslationByKey('risky')}|` +
-			`${getTranslationByKey('controlled')},position=${getTranslationByKey('controlled')}|` +
-			`${getTranslationByKey('desperate')},position=${getTranslationByKey('desperate')}|` +
-			`${getTranslationByKey('fortune_roll')},position=}`
-	};
-	getAttrs(Object.keys(queries), v => {
-		const setting = {};
-		Object.keys(queries).forEach(name => {
-			if (v[name] !== queries[name]) setting[name] = queries[name];
-		});
-		mySetAttrs(setting);
-	});
 	/* Setup and upgrades */
 	getAttrs(['version'], v => {
 		const upgradeSheet = version => {
-				const versionMajor = version && parseInt(version.split('.')[0]),
-					versionMinor = version && parseInt(version.split('.')[1]);
+				const [major, minor] = version && version.split('.').map(x => parseInt(x));
 				console.log(`Found version ${version}.`);
 			},
 			initialiseSheet = () => {
@@ -499,7 +562,7 @@ on('sheet:opened', () => {
 		// Set version number
 		mySetAttrs({
 			version: sheetVersion,
-			character_sheet: `Blades in the Dark v${sheetVersion}`,
+			character_sheet: `${sheetName} v${sheetVersion}`,
 		});
 	});
 });

@@ -1,5 +1,5 @@
 mixin makefactions(number, title)
-	.factions-header.flex.uppercase
+	.factions-header.flex.uppercase&attributes(attributes)
 		+text-input(`factions${number}_header`, title).faction-name.label
 		span.faction-tier(data-i18n='tier')
 		span.faction-hold(data-i18n='hold')
@@ -14,23 +14,23 @@ mixin makefactions(number, title)
 			+textarea('notes')(data-i18n-placeholder='faction_notes')
 
 // Faction Sheet
++hidden-input('setting_clocks_only')(value='0').input-clocks-only
 .type-faction.flex-wrap
-	+hidden-input('setting_clocks_only')(value='0').input-clocks-only
 	.factiontitle.flex.col100
 		+text-input('factions_title', 'factions_title').label
 		+hidden-input('show_faction_generatebutton')(value='1').hider
 		label.generatebutton
 			+checkbox('generate_factions')(data-i18n='generate_factions')
-		+fortuneroll('Fortune_faction', '{{fortune=1}} {{title-fortune=1}} {{title=^{fortune}}} {{short=1}} {{charname=}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
-	.factions.flex
-		.col24b.white-repcontrol
+		+fortuneroll('Fortune_faction', '{{fortune=1}} {{title=^{fortune}}} {{short=1}} {{charname=}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+	.factions.flex.free-repcontrol
+		.col24b
 			+makefactions(1, 'factions1')
-		.col24b.white-repcontrol
+		.col24b
 			+makefactions(2, 'factions2')
-		.col24b.white-repcontrol
+		.col24b
 			+makefactions(3, 'factions3')
-			+makefactions(4, 'factions4')
-		.col24b.white-repcontrol
+			+makefactions(4, 'factions4').sheet-def-margin
+		.col24b
 			+makefactions(5, 'factions5')
 			.warblurb.def-margin
 				.label(data-i18n='war')
@@ -40,7 +40,7 @@ mixin makefactions(number, title)
 					li(data-i18n='warblurb3')
 					li(data-i18n='warblurb4')
 					li(data-i18n='warblurb5')
-	.clocks.col55.white-repcontrol
+	.clocks.col55.free-repcontrol
 		.specialheader.label(data-i18n='clocks')
 		fieldset.repeating_factionclock
 			+makeclock

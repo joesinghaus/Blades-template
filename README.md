@@ -2,6 +2,17 @@
 
 This is a template for creating a derivative of the character sheet for Blades in the Dark for use on Roll20. If you have any questions, feel free to contact me on Discord @deceptive.duality#6358.
 
+## Changelog
+
+### June 2, 2018
+Apart from bugfixes, some changes made to the Blades sheet were backported to the templated version. Moreover, this template vas reset to internal version number 1.0, since a new sheet really should not start at 2.7. The following innovations of the Blades sheet were backported:
+
+* Friend/contact notes
+* Automatically filling ability description upon entering names
+* Character picture on chat rolls
+* Pre-calculated number of dice
+* Restyled repeating section controls to use symbols instead of text
+
 ## Compiling the sheet
 The sheet uses [pug](https://pugjs.org/) as a HTML preprocessor and [SCSS](https://sass-lang.com/) as a SCSS preprocessor. This means that you need to compile the two main source code files (`Source/blades.pug` and `Source/blades.scss`) into the actual `blades.html` and `blades.css` files. It also uses Babel (via JSTransformer) to minify the Javascript code, though this is optional (read below on how to disable it if it produces problems). Once the command line interfaces for pug and SCSS are installed, the sheet is compiled via
 

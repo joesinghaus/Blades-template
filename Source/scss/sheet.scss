@@ -260,6 +260,10 @@ $redtext: #c43c35;
 		line-height: 16px;
 		border-radius: 3px;
 		border: 1px solid $lightest;
+		&.sheet-wide {
+			width: 200px;
+			margin-right: 8px;
+		}
 	}
 	select {
 		width: 80px;
@@ -490,11 +494,6 @@ textarea.sheet-smallcaps {
 }
 .sheet-playbookitems {
 	background: $lightest;
-}
-.sheet-playbookitems, .sheet-regularitems {
-	.repcontrol {
-		height: 29px;
-	}
 }
 .sheet-regularitems {
 	.repcontainer {
@@ -843,16 +842,14 @@ textarea.sheet-smallcaps {
 /* CLOCKS */
 .sheet-clocks {
 	.repcontainer {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-start;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		padding-top: 2px;
+		grid-gap: 4px 1%;
 	}
 	.repitem {
 		display: flex;
 		padding: 4px 2px;
-		width: 49.5%;
-		margin: 4px 0 0;
 		background: $lightest;
 		align-items: start;
 	}
@@ -965,30 +962,19 @@ textarea.sheet-smallcaps {
 	flex-wrap: wrap;
 }
 /* Faction clocks */
-.sheet-type-faction .sheet-clocks {
-	.repcontainer {
-		justify-content: flex-start;
-	}
-	.repitem {
-		margin: 4px .8% 0 0;
-		width: 32.8%;
-	}
+.sheet-input-clocks-only[value="0"] + .sheet-type-faction .sheet-clocks .repcontainer {
+	grid-column-gap: .7%;
+	grid-template-columns: repeat(3,1fr);
 }
-.sheet-input-clocks-only[value="0"] ~ .sheet-clocks .repitem:nth-of-type(3n),
-.sheet-input-clocks-only[value="1"] ~ .sheet-clocks .repitem:nth-of-type(4n) {
-	margin-right: 0;
-}
-.sheet-input-clocks-only[value="1"] {
-	~ .sheet-clocks {
+.sheet-input-clocks-only[value="1"] + .sheet-type-faction {
+	.sheet-clocks {
 		width: 100%;
-		.repitem {
-			margin: 4px .4% 0 0;
-			width: 24.7%;
+		.repcontainer {
+			grid-column-gap: .4%;
+			grid-template-columns: repeat(4,1fr);
 		}
 	}
-	~ .sheet-factiontitle, ~ .sheet-factions, ~ .sheet-right-column {
-		display: none;
-	}
+	.sheet-factiontitle, .sheet-factions, .sheet-notes { display: none }
 }
 .sheet-size[value="4"] ~ .sheet-clock-container {
 	input:not(.sheet-zero) {
@@ -1415,6 +1401,30 @@ input.sheet-zero {
 	text-align: justify;
 }
 /* FRIENDS/CONTACTS */
+.sheet-friends, .sheet-contacts {
+	input.sheet-expand { top: 11px }
+	.sheet-expand + span { top: 8px }
+	input.sheet-expand, .sheet-expand + span { right: 3px }
+
+	.sheet-expand:not(:checked) + span::before { content: "◀" }
+	.sheet-expand:checked + span::before { content: "▼" }
+
+	.sheet-expand:not(:checked) ~ .sheet-description {
+		height: 0px !important;
+		border: none;
+		min-height: 0;
+		padding: 0;
+	}
+
+	.sheet-description {
+		font-size: 11px;
+		padding: 2px 3px;
+		line-height: 14px;
+		height: 46px;
+		min-height: 18px;
+		border-bottom: 1px solid #b4b4b4;
+	}
+}
 .sheet-friend-contact .sheet-auto-expand {
 	font-size: 12px;
 	color: $lighterblack;
@@ -1659,36 +1669,38 @@ input.sheet-zero {
 	text-align: center;
 }
 /* REPEATING SECTION CONTROLS */
-.repcontrol button {
-	padding: 6px;
-	background-image: none;
-	background: $lightest;
-	color: $lightblack;
-	border-radius: 0;
-	border-color: $darkgrey;
-	transition: all 0.2s;
-	font-family: inherit;
-	font-variant: small-caps;
-	font-weight: bold;
-	&:hover {
-		color: black;
-		border-color: black;
-		background: $lighter;
+/* REPEATING SECTION CONTROLS */
+.repcontrol {
+	display: flex;
+	.repcontrol_edit {
+		margin-left: auto;
+		order: 1;
+	}
+	button {
+		background: transparent;
+		color: $lightblack;
+		border-radius: 0;
+		border-color: $darkgrey;
+		transition: all 0.2s;
+		font-family: pictos;
+		font-size: 0;
+		font-weight: bold;
+		padding: 5px 3px 2px;
+		line-height: 8px;
+		&:hover {
+			color: black;
+			border-color: black;
+			background: $lighter;
+		}
+		&.repcontrol_edit::after { content: "(" }
+		&.repcontrol_add::after { content: "&" }
+		&.repcontrol_edit::after, &.repcontrol_add::after { font-size: 12px }
 	}
 }
+.repcontainer.editmode + .repcontrol button.repcontrol_edit::after { content: ")" }
+.sheet-free-repcontrol .repcontrol{ margin-top: 3px }
 
-.sheet-white-repcontrol .repcontrol button.btn {
-	background: white;
-}
-.sheet-small-repcontrol .repcontrol button,
-.sheet-white-repcontrol .repcontrol button {
-	margin-top: 5px;
-	font-size: 12px;
-	padding: 2px;
-}
-.sheet-cohorts.sheet-white-repcontrol .repcontrol button {
-	margin-top: 0;
-}
+
 .itemcontrol {
 	z-index: 20;
 }
@@ -2052,9 +2064,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 	top: -6px;
 }
 /* COHORTS */
-.sheet-cohorts .repcontrol {
-	height: 28px;
-}
 .sheet-cohort-title {
 	font-size: 11px;
 	input[type=text] {
@@ -2333,9 +2342,6 @@ input.sheet-title-checkbox {
 	height: 40px;
 }
 /* FACTIONS PAGE */
-.sheet-type-faction .repcontrol {
-	height: 38px;
-}
 .sheet-factions {
 	justify-content: space-between;
 }

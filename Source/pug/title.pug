@@ -143,16 +143,15 @@
 			span(data-i18n='show_outline')
 	.setting-char.setting-crew.setting-faction
 		label
-			+checkbox('setting_text_bonus_query').checkbox.squarebox
-			span(data-i18n='text_input_bonusdice')
-	.setting-char.setting-crew.setting-faction
-		label
 			+checkbox('setting_show_broadcast')(checked).checkbox.squarebox
 			span(data-i18n='show_broadcast')
 	.setting-char.setting-crew
 		label
 			+checkbox('setting_autofill')(checked).checkbox.squarebox
 			span(data-i18n='fill_fields')
+	.setting-char.setting-crew
+		+text-input('chat_image')(value='').wide
+		span(data-i18n='chat_image')
 	.setting-char.setting-crew.setting-faction.kirsty-option
 		label
 			+checkbox('setting_usekirsty').checkbox.squarebox

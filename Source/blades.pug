@@ -5,8 +5,9 @@
 		playbooks = Object.keys(locals.data.playbook),
 		crews = Object.keys(locals.data.crew);
 
-	// Toggles for special sections of the sheet
-	// By default, these will not be output to the generated HTML, you can change these to show them
+	/** Toggles for special sections of the sheet
+	 *  By default, these will not be output to the generated HTML, you can change these to show them
+	 */
 
 	const showStrictures = false,				// vampire strictures
 		showFrame = false,								// hull frame
@@ -15,6 +16,7 @@
 
 	// Javascript really needs a range function
 	const range = (start, end) => [...Array(end+1).keys()].slice(start);
+	const zerodiceFormula = '?{@{bonusdice}|0, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|1, {{roll1=&#91;&#91;d6]]&#125;&#125;|2, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125;|3, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125; {{roll3=&#91;&#91;d6]]&#125;&#125;|4, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125; {{roll3=&#91;&#91;d6]]&#125;&#125; {{roll4=&#91;&#91;d6]]&#125;&#125;|5, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125; {{roll3=&#91;&#91;d6]]&#125;&#125; {{roll4=&#91;&#91;d6]]&#125;&#125; {{roll5=&#91;&#91;d6]]&#125;&#125;|6, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125; {{roll3=&#91;&#91;d6]]&#125;&#125; {{roll4=&#91;&#91;d6]]&#125;&#125; {{roll5=&#91;&#91;d6]]&#125;&#125; {{roll6=&#91;&#91;d6]]&#125;&#125;|-1, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-2, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-3, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}';
 
 
 //- Mixins for code reuse
@@ -26,6 +28,7 @@ mixin checkbox(name, extraclass)
 mixin radio(name)
 	input(type='radio', class!=attributes.class, name=`attr_${name}`, value!=attributes.value, checked=attributes.checked)
 	span(data-i18n!=attributes['data-i18n'])
+		block
 
 mixin text-input(name, i18nvalue)
 	input(type='text', spellcheck='false', name=`attr_${name}`, value=i18nvalue ? translation[i18nvalue] : false)&attributes(attributes)
@@ -55,9 +58,7 @@ mixin roll(name, templatedata, stat)
 	button(
 		type='roll',
 		name=`roll_${name}`,
-		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} ` +
-			range(1,12).map(x => `{{roll${x}=[[[[{[[${stat}+@{bonusdice}${(x==1) ? '' : `-${x-1}`}}]],1}kl1]]d6]]}}`).join(' ') +
-			` {{zerodice=[[[[{[[1-(${stat})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(${stat})-(@{bonusdice})]],1}kl1]]d6]]}}`
+		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} {{charimage=@{chat_image}}}`
 	)&attributes(attributes)
 
 //- Creates a fortune roll button
@@ -65,24 +66,21 @@ mixin fortuneroll(name, templatedata, useNotes)
 	button(
 		type='roll',
 		name=`roll_${name}`,
-		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} ` +
-			range(1,6).map(x => `{{roll${x}=[[[[{[[@{numberofdice}${(x==1) ? '' : `-${x-1}`}]],1}kl1]]d6]]}}`).join(' ') +
-			' {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} ' +
-			(useNotes ? '{{notes=@{notes_query}}} ' : '')
+		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} @{numberofdice} {{charimage=@{chat_image}}} ${useNotes ? '{{notes=@{notes_query}}} ' : ''}`
 	)&attributes(attributes)
 
 mixin broadcast(name, content)
-	button.broadcast-button(type='roll', name=`roll_${name}`, value!= `&{template:bitd-broadcast} ${content}`, data-i18n-title='send_details_to_chat') :
+	button.broadcast-button(type='roll', name=`roll_${name}`, value!= `&{template:bitd-broadcast} ${content} {{charimage=@{chat_image}}}`, data-i18n-title='send_details_to_chat') :
 
 //- Cohort section
 	isCharacter === true shows an input for quality, instead of generating it from the crew quality
 mixin makecohort(prefix, isCharacter)
 	.cohort
-		+hidden-input(`${prefix}dice`)(value=isCharacter ? '1' : '0')
 		+hidden-input(`${prefix}verb`)(value=isCharacter ? '^{rolls_their}' : '^{roll_their}')
+		+hidden-input(`${prefix}roll_formula`)(value=zerodiceFormula)
 		.cohort-title.flex.col100.label
 			+text-input(`${prefix}name`, 'cohort').inherit
-			+roll(`${prefix}roll`, '{{resist=1}} {{short=1}} {{charname=@{'+prefix+'name} (^{@{'+prefix+'type}}, @{'+prefix+'subtype})}} {{title-cohort_quality=1}} {{title=^{cohort_quality}}} {{subtitle=@{'+prefix+'verb}}})', `@{${prefix}dice}`)(data-i18n='roll-inf').inherit.rollbutton
+			+roll(`${prefix}roll`, '{{resist=1}} {{short=1}} {{charname=@{'+prefix+'name} (^{@{'+prefix+'type}}, @{'+prefix+'subtype})}} {{title=^{cohort_quality}}} {{subtitle=@{'+prefix+'verb}}}) @{'+prefix+'roll_formula}')(data-i18n='roll-inf').inherit.rollbutton
 		.cohort-info.flex.col100.uppercase
 			.cohort-dropdown
 				div
@@ -160,8 +158,8 @@ mixin makeclock(isFaction)
 +hidden-input('setting_usekirsty')(value='0').use-kirsty
 +hidden-input('setting_flexwidth')(value='0').flexwidth
 +hidden-input('changed_attributes')(value='')
-+hidden-input('bonusdice')(value='?{Bonus dice|0|1|2|3|4|5|6|-1|-2|-3}')
-+hidden-input('numberofdice')(value='?{Number of dice|0|1|2|3|4|5|6}')
++hidden-input('bonusdice')(value='Bonus dice')
++hidden-input('numberofdice')(value='?{Number of dice|0, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|1, {{roll1=&#91;&#91;d6]]&#125;&#125;|2, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125;|3, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125; {{roll3=&#91;&#91;d6]]&#125;&#125;|4, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125; {{roll3=&#91;&#91;d6]]&#125;&#125; {{roll4=&#91;&#91;d6]]&#125;&#125;|5, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125; {{roll3=&#91;&#91;d6]]&#125;&#125; {{roll4=&#91;&#91;d6]]&#125;&#125; {{roll5=&#91;&#91;d6]]&#125;&#125;|6, {{roll1=&#91;&#91;d6]]&#125;&#125; {{roll2=&#91;&#91;d6]]&#125;&#125; {{roll3=&#91;&#91;d6]]&#125;&#125; {{roll4=&#91;&#91;d6]]&#125;&#125; {{roll5=&#91;&#91;d6]]&#125;&#125; {{roll6=&#91;&#91;d6]]&#125;&#125;}')
 +hidden-input('notes_query')(value='?{Notes}')
 +hidden-input('position_query')(value='?{Position|Risky,position=Risky|Controlled,position=Controlled|Desperate,position=Desperate|Fortune roll,position=}')
 +hidden-input('effect_query')(value='?{Effect|Standard|Limited|Great|Extreme|Zero}')

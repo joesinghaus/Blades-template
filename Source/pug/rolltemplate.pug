@@ -1,7 +1,10 @@
 //- ROLL TEMPLATE
 rolltemplate.sheet-rolltemplate-bitd
 	div(class!='holder{{#action}} action{{/action}}{{#resist}} resist{{/resist}}{{#vice}} vice{{/vice}}{{#fortune}} fortune{{/fortune}}{{#short}} short{{/short}}{{#action}}{{^position}} short{{/position}}{{/action}}')
-		.header {{charname}} {{subtitle}}
+		| {{#charimage}}
+		.char-image [Image]({{charimage}})
+		| {{/charimage}}
+		div(class!='header{{#charimage}} narrow{{/charimage}}') {{charname}} {{subtitle}}
 		.title
 			span(class='{{#small-title}}small-title{{/small-title}}') {{title}}
 		.dice
@@ -13,11 +16,7 @@ rolltemplate.sheet-rolltemplate-bitd
 			.zerodice1 {{zerodice}}
 			.zerodice2(data-i18n='zerodice')
 			| {{/rollGreater() zerodice 0}}
-		| {{#position}}
-		.position {{position}}
-		| {{/position}}{{#effect}}
-		.effect {{effect}}
-		| {{/effect}}{{#resist}}{{^short}}
+		| {{#position}}#[.position {{position}}]{{/position}}{{#effect}}#[.effect {{effect}}]{{/effect}}{{#resist}}{{^short}}
 		.instructions(data-i18n='resist_instructions')
 		| {{/short}}{{/resist}}{{#vice}}{{^short}}
 		.instructions(data-i18n='vice_instructions')
@@ -28,7 +27,10 @@ rolltemplate.sheet-rolltemplate-bitd
 //- BROADCAST
 rolltemplate.sheet-rolltemplate-bitd-broadcast
 	div
-		.header
+		| {{#charimage}}{{^clock}}
+		.char-image [Image]({{charimage}})
+		| {{/clock}}{{/charimage}}
+		div(class!='header{{#charimage}}{{^clock}} narrow{{/clock}}{{/charimage}}')
 			div {{charname}}
 			div {{type}}
 		| {{#content}}

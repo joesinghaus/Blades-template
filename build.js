@@ -33,12 +33,12 @@ if (config.enableBabel && !config.pretty) {
 }
 
 // Build CSS file
-const sassopts = '--default-encoding=UTF-8 --unix-newlines --sourcemap=none --no-cache --style ' + (config.pretty ? 'expanded' : 'compressed'),
-	cssOutput = execSync(`scss ${sassopts} Source/blades.scss`, {encoding: 'utf8'}).replace(/^@charset "UTF-8";\s*/, '');
+const sassopts = `--no-source-map --style ${(config.pretty ? 'expanded' : 'compressed')}`,
+	cssOutput = execSync(`sass ${sassopts} Source/blades.scss`, {encoding: 'utf8'}).replace(/^@charset "UTF-8";\s*/, '');
 fs.writeFileSync('blades.css', cssOutput);
 
 // Build HTML
 const htmlOutput = pug.renderFile('Source/Blades.pug', options).trim().replace(/\n+/g, '\n');
-fs.writeFileSync('blades.html', htmlOutput);
+fs.writeFileSync('blades.html', `${htmlOutput}\n`);
 
 console.log(`Sheet build completed. Time taken: ${(process.hrtime(t0)[0] + (process.hrtime(t0)[1] / 1e9)).toFixed(3)} s.`);
