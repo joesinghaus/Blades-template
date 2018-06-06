@@ -84,9 +84,9 @@
 .charsheet li::before {
   transform: rotate(45deg) scale(0.9);
   font-family: Georgia, serif;
-  content: '■';
+  content: "■";
   left: 0;
-  top: -.1em;
+  top: -0.1em;
   position: absolute;
 }
 .charsheet button[type=roll].sheet-inherit, .charsheet input[type=text].sheet-inherit {
@@ -96,7 +96,7 @@
   letter-spacing: inherit;
 }
 .charsheet .sheet-space-after::after {
-  content: ' ';
+  content: " ";
 }
 
 .sheet-focus-shadow[value="1"] ~ .sheet-container textarea:focus, .sheet-focus-shadow[value="1"] ~ .sheet-container input[type=text]:focus, .sheet-focus-shadow[value="1"] ~ .sheet-container input[type=number]:focus {
@@ -166,14 +166,14 @@
   color: red;
 }
 .sheet-type-selector .sheet-3waybox:not(:checked) + .sheet-3waybox,
-.sheet-type-selector input[value="character"]:not(:checked) ~ span[data-i18n="character_mode"],
-.sheet-type-selector input[value="crew"]:not(:checked) ~ span[data-i18n="crew_mode"],
-.sheet-type-selector input[value="faction"][type=radio]:not(:checked) ~ span[data-i18n="faction_mode"] {
+.sheet-type-selector input[value=character]:not(:checked) ~ span[data-i18n=character_mode],
+.sheet-type-selector input[value=crew]:not(:checked) ~ span[data-i18n=crew_mode],
+.sheet-type-selector input[value=faction][type=radio]:not(:checked) ~ span[data-i18n=faction_mode] {
   display: none;
 }
 
 /* SETTINGS */
-.sheet-type[value="character"] ~ .sheet-settings > :not(.sheet-setting-char), .sheet-type[value="crew"] ~ .sheet-settings > :not(.sheet-setting-crew), .sheet-type[value="faction"] ~ .sheet-settings > :not(.sheet-setting-faction) {
+.sheet-type[value=character] ~ .sheet-settings > :not(.sheet-setting-char), .sheet-type[value=crew] ~ .sheet-settings > :not(.sheet-setting-crew), .sheet-type[value=faction] ~ .sheet-settings > :not(.sheet-setting-faction) {
   display: none;
 }
 
@@ -228,6 +228,10 @@
   border-radius: 3px;
   border: 1px solid #d8d8d8;
 }
+.sheet-settings input[type=text].sheet-wide {
+  width: 200px;
+  margin-right: 8px;
+}
 .sheet-settings select {
   width: 80px;
   margin: 0 7px 0 0;
@@ -257,7 +261,7 @@
   max-width: 1190px;
 }
 
-.sheet-type:not([value="character"]) ~ .sheet-type-character, .sheet-type:not([value="crew"]) ~ .sheet-type-crew, .sheet-type:not([value="faction"]) ~ .sheet-type-faction {
+.sheet-type:not([value=character]) ~ .sheet-type-character, .sheet-type:not([value=crew]) ~ .sheet-type-crew, .sheet-type:not([value=faction]) ~ .sheet-type-faction {
   display: none;
 }
 
@@ -487,10 +491,6 @@ textarea.sheet-smallcaps {
 
 .sheet-playbookitems {
   background: #d8d8d8;
-}
-
-.sheet-playbookitems .repcontrol, .sheet-regularitems .repcontrol {
-  height: 29px;
 }
 
 .sheet-regularitems .repcontainer {
@@ -798,10 +798,10 @@ textarea.sheet-smallcaps {
   min-height: 22px;
   color: #c43c35;
 }
-.sheet-header input[type="hidden"][value=""] + div > .sheet-title::after {
+.sheet-header input[type=hidden][value=""] + div > .sheet-title::after {
   content: ": ";
 }
-.sheet-header input[type="hidden"]:not([value=""]) + div > .sheet-info {
+.sheet-header input[type=hidden]:not([value=""]) + div > .sheet-info {
   display: none;
 }
 .sheet-header .sheet-col55:not(:first-child) {
@@ -820,7 +820,7 @@ textarea.sheet-smallcaps {
 .sheet-header .sheet-info {
   font-size: 8px;
 }
-.sheet-header .sheet-vice-input:not([value="normal"]) ~ .sheet-normal, .sheet-header .sheet-vice-input:not([value="ghost"]) ~ .sheet-ghost, .sheet-header .sheet-vice-input:not([value="hull"]) ~ .sheet-hull, .sheet-header .sheet-vice-input:not([value="vampire"]) ~ .sheet-vampire {
+.sheet-header .sheet-vice-input:not([value=normal]) ~ .sheet-normal, .sheet-header .sheet-vice-input:not([value=ghost]) ~ .sheet-ghost, .sheet-header .sheet-vice-input:not([value=hull]) ~ .sheet-hull, .sheet-header .sheet-vice-input:not([value=vampire]) ~ .sheet-vampire {
   display: none;
 }
 .sheet-header .sheet-vice {
@@ -836,16 +836,14 @@ textarea.sheet-smallcaps {
 
 /* CLOCKS */
 .sheet-clocks .repcontainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 2px;
+  grid-gap: 4px 1%;
 }
 .sheet-clocks .repitem {
   display: flex;
   padding: 4px 2px;
-  width: 49.5%;
-  margin: 4px 0 0;
   background: #d8d8d8;
   align-items: start;
 }
@@ -902,7 +900,7 @@ textarea.sheet-smallcaps {
   z-index: -1;
 }
 
-[class^="sheet-spoke"] {
+[class^=sheet-spoke] {
   height: 44px;
   width: 2px;
   position: absolute;
@@ -974,27 +972,19 @@ textarea.sheet-smallcaps {
 }
 
 /* Faction clocks */
-.sheet-type-faction .sheet-clocks .repcontainer {
-  justify-content: flex-start;
-}
-.sheet-type-faction .sheet-clocks .repitem {
-  margin: 4px .8% 0 0;
-  width: 32.8%;
+.sheet-input-clocks-only[value="0"] + .sheet-type-faction .sheet-clocks .repcontainer {
+  grid-column-gap: 0.7%;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.sheet-input-clocks-only[value="0"] ~ .sheet-clocks .repitem:nth-of-type(3n),
-.sheet-input-clocks-only[value="1"] ~ .sheet-clocks .repitem:nth-of-type(4n) {
-  margin-right: 0;
-}
-
-.sheet-input-clocks-only[value="1"] ~ .sheet-clocks {
+.sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-clocks {
   width: 100%;
 }
-.sheet-input-clocks-only[value="1"] ~ .sheet-clocks .repitem {
-  margin: 4px .4% 0 0;
-  width: 24.7%;
+.sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-clocks .repcontainer {
+  grid-column-gap: 0.4%;
+  grid-template-columns: repeat(4, 1fr);
 }
-.sheet-input-clocks-only[value="1"] ~ .sheet-factiontitle, .sheet-input-clocks-only[value="1"] ~ .sheet-factions, .sheet-input-clocks-only[value="1"] ~ .sheet-right-column {
+.sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-factiontitle, .sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-factions, .sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-notes {
   display: none;
 }
 
@@ -1521,6 +1511,36 @@ input.sheet-zero {
 }
 
 /* FRIENDS/CONTACTS */
+.sheet-friends input.sheet-expand, .sheet-contacts input.sheet-expand {
+  top: 11px;
+}
+.sheet-friends .sheet-expand + span, .sheet-contacts .sheet-expand + span {
+  top: 8px;
+}
+.sheet-friends input.sheet-expand, .sheet-friends .sheet-expand + span, .sheet-contacts input.sheet-expand, .sheet-contacts .sheet-expand + span {
+  right: 3px;
+}
+.sheet-friends .sheet-expand:not(:checked) + span::before, .sheet-contacts .sheet-expand:not(:checked) + span::before {
+  content: "◀";
+}
+.sheet-friends .sheet-expand:checked + span::before, .sheet-contacts .sheet-expand:checked + span::before {
+  content: "▼";
+}
+.sheet-friends .sheet-expand:not(:checked) ~ .sheet-description, .sheet-contacts .sheet-expand:not(:checked) ~ .sheet-description {
+  height: 0px !important;
+  border: none;
+  min-height: 0;
+  padding: 0;
+}
+.sheet-friends .sheet-description, .sheet-contacts .sheet-description {
+  font-size: 11px;
+  padding: 2px 3px;
+  line-height: 14px;
+  height: 46px;
+  min-height: 18px;
+  border-bottom: 1px solid #b4b4b4;
+}
+
 .sheet-friend-contact .sheet-auto-expand {
   font-size: 12px;
   color: #555;
@@ -1537,7 +1557,7 @@ input.sheet-zero {
 
 .sheet-harmbody {
   display: grid;
-  grid: 52px / 12px auto auto 59px;
+  grid: 52px/12px auto auto 59px;
   font-weight: 800;
   text-transform: uppercase;
   text-align: center;
@@ -1776,37 +1796,47 @@ input.sheet-zero {
 }
 
 /* REPEATING SECTION CONTROLS */
+/* REPEATING SECTION CONTROLS */
+.repcontrol {
+  display: flex;
+}
+.repcontrol .repcontrol_edit {
+  margin-left: auto;
+  order: 1;
+}
 .repcontrol button {
-  padding: 6px;
-  background-image: none;
-  background: #d8d8d8;
+  background: transparent;
   color: #777;
   border-radius: 0;
   border-color: #b4b4b4;
   transition: all 0.2s;
-  font-family: inherit;
-  font-variant: small-caps;
+  font-family: pictos;
+  font-size: 0;
   font-weight: bold;
+  padding: 5px 3px 2px;
+  line-height: 8px;
 }
 .repcontrol button:hover {
   color: black;
   border-color: black;
   background: #c7c7c7;
 }
-
-.sheet-white-repcontrol .repcontrol button.btn {
-  background: white;
+.repcontrol button.repcontrol_edit::after {
+  content: "(";
 }
-
-.sheet-small-repcontrol .repcontrol button,
-.sheet-white-repcontrol .repcontrol button {
-  margin-top: 5px;
+.repcontrol button.repcontrol_add::after {
+  content: "&";
+}
+.repcontrol button.repcontrol_edit::after, .repcontrol button.repcontrol_add::after {
   font-size: 12px;
-  padding: 2px;
 }
 
-.sheet-cohorts.sheet-white-repcontrol .repcontrol button {
-  margin-top: 0;
+.repcontainer.editmode + .repcontrol button.repcontrol_edit::after {
+  content: ")";
+}
+
+.sheet-free-repcontrol .repcontrol {
+  margin-top: 3px;
 }
 
 .itemcontrol {
@@ -1859,9 +1889,9 @@ input.sheet-zero {
 .sheet-stress4 div {
   justify-content: space-between;
 }
-.sheet-stress4 .sheet-input:not([value="normal"]) ~ .sheet-normal,
-.sheet-stress4 .sheet-input:not([value="ghost"]) ~ .sheet-ghost,
-.sheet-stress4 .sheet-input:not([value="hull"]) ~ .sheet-hull {
+.sheet-stress4 .sheet-input:not([value=normal]) ~ .sheet-normal,
+.sheet-stress4 .sheet-input:not([value=ghost]) ~ .sheet-ghost,
+.sheet-stress4 .sheet-input:not([value=hull]) ~ .sheet-hull {
   display: none;
 }
 .sheet-stress4 .sheet-ghost, .sheet-stress4 .sheet-hull {
@@ -2086,7 +2116,7 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 /* Change text colour when boxes are checked*/
 .sheet-specialability .sheet-checkbox:checked ~ .sheet-abilityname,
 .sheet-item .sheet-checkbox:checked ~ .sheet-itemname,
-.sheet-friend .sheet-friendstate[value="up"] ~ .sheet-auto-expand {
+.sheet-friend .sheet-friendstate[value=up] ~ .sheet-auto-expand {
   color: red;
 }
 
@@ -2094,7 +2124,7 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
   font-weight: bold;
 }
 
-.sheet-friend .sheet-friendstate[value="down"] ~ .sheet-auto-expand,
+.sheet-friend .sheet-friendstate[value=down] ~ .sheet-auto-expand,
 .sheet-contact .sheet-friendstate[value="1"] ~ .sheet-auto-expand {
   color: #333;
 }
@@ -2234,10 +2264,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 }
 
 /* COHORTS */
-.sheet-cohorts .repcontrol {
-  height: 28px;
-}
-
 .sheet-cohort-title {
   font-size: 11px;
 }
@@ -2515,7 +2541,7 @@ input.sheet-title-checkbox {
   left: -100%;
 }
 .sheet-alchemicals .sheet-alchemicals-expand + span::before {
-  content: '■';
+  content: "■";
   font-family: serif;
 }
 .sheet-alchemicals .sheet-alchemicals-expand:checked + span {
@@ -2542,10 +2568,6 @@ input.sheet-title-checkbox {
 }
 
 /* FACTIONS PAGE */
-.sheet-type-faction .repcontrol {
-  height: 38px;
-}
-
 .sheet-factions {
   justify-content: space-between;
 }
@@ -2653,7 +2675,7 @@ input.sheet-expand, .sheet-expand + span {
   font-size: 14px;
 }
 .sheet-warblurb li {
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   padding-left: 1em;
 }
 
@@ -2762,7 +2784,7 @@ button[type=roll].sheet-broadcast-button {
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey,
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-playbook input[type="text"],
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-playbook input[type=text],
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-plainheader,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-itemheader :first-child,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-loadheader :first-child,
@@ -2772,8 +2794,8 @@ button[type=roll].sheet-broadcast-button {
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-claimbox .sheet-label,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-lairbox,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-crewheader,
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factiontitle input[type="text"],
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factions-header input[type="text"] {
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factiontitle input[type=text],
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factions-header input[type=text] {
   font-family: Kirsty, Georgia, serif;
 }
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-claimbox .sheet-label {
@@ -2788,7 +2810,7 @@ button[type=roll].sheet-broadcast-button {
   font-size: 13px;
   font-weight: 400;
 }
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factions-header input[type="text"],
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factions-header input[type=text],
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-bonusdie > .sheet-label:first-child {
   font-size: 14px;
   font-weight: 400;
@@ -2801,29 +2823,52 @@ button[type=roll].sheet-broadcast-button {
   font-size: 29px;
   letter-spacing: 0;
 }
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factiontitle input[type="text"] {
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factiontitle input[type=text] {
   font-size: 32px;
 }
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-playbook input[type="text"] {
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-playbook input[type=text] {
   font-size: 40px;
   letter-spacing: 0;
 }
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader button[type="roll"].sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader button[type="roll"].sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey button[type="roll"].sheet-label {
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader button[type=roll].sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader button[type=roll].sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey button[type=roll].sheet-label {
   font-size: 12px;
   font-weight: 400;
 }
 
 /* ROLL TEMPLATES */
+/* Colors */
+.withoutavatars .sheet-rolltemplate-bitd .sheet-holder {
+  margin-left: -15px;
+}
+.withoutavatars .sheet-rolltemplate-bitd-broadcast {
+  margin-left: -15px;
+}
+
+/* Container */
+.sheet-rolltemplate-bitd {
+  /* Background images */
+  /* Images */
+  /* Header */
+  /* Image */
+  /* Title */
+  /* Position and Effect */
+  /* Dice */
+  /* Zerodice dice holder */
+  /* Zerodice text */
+  /* Inlinerolls */
+  /* Instructions and Notes */
+}
 .sheet-rolltemplate-bitd .sheet-holder {
-  margin-left: -45px;
-  margin-right: -1px;
-  padding: 0 30px;
+  margin: 0 -5px -4px -45px;
+  padding: 0 20px 0 30px;
+  max-width: 299px;
   box-sizing: border-box;
   font-family: Georgia, "Bitstream Charter", "Times New Roman", serif;
-  width: 299px;
   user-select: none;
   cursor: default;
   overflow: hidden;
+  position: relative;
+  background-repeat: no-repeat;
   font-variant-numeric: lining-nums;
 }
 .sheet-rolltemplate-bitd .sheet-holder.sheet-resist.sheet-short,
@@ -2874,6 +2919,9 @@ button[type=roll].sheet-broadcast-button {
   font-variant: small-caps;
   text-overflow: ellipsis;
 }
+.sheet-rolltemplate-bitd .sheet-header.sheet-narrow {
+  width: calc(100% - 52px);
+}
 .sheet-rolltemplate-bitd .sheet-resist .sheet-header {
   color: #8da8bb;
 }
@@ -2894,10 +2942,29 @@ button[type=roll].sheet-broadcast-button {
 .sheet-rolltemplate-bitd .sheet-holder.sheet-fortune.sheet-short .sheet-header {
   margin-bottom: -51px;
 }
+.sheet-rolltemplate-bitd .sheet-char-image {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  line-height: 0;
+}
+.sheet-rolltemplate-bitd .sheet-char-image a {
+  cursor: default;
+  pointer-events: none;
+}
+.sheet-rolltemplate-bitd .sheet-char-image img {
+  max-width: 60px;
+  max-height: 80px;
+}
 .sheet-rolltemplate-bitd .sheet-title {
   color: white;
+  position: relative;
   text-transform: uppercase;
   font-weight: bold;
+}
+.sheet-rolltemplate-bitd .sheet-title img {
+  display: block;
+  height: 100%;
 }
 .sheet-rolltemplate-bitd .sheet-action .sheet-title,
 .sheet-rolltemplate-bitd .sheet-fortune .sheet-title {
@@ -2919,19 +2986,17 @@ button[type=roll].sheet-broadcast-button {
 .sheet-rolltemplate-bitd .sheet-small-title {
   font-size: 28px;
 }
+.sheet-rolltemplate-bitd .sheet-position {
+  width: 133px;
+}
 .sheet-rolltemplate-bitd .sheet-position,
 .sheet-rolltemplate-bitd .sheet-effect {
   display: inline-block;
   box-sizing: border-box;
-  width: 50%;
   color: white;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 1px;
-  padding: 20px 0 0;
-}
-.sheet-rolltemplate-bitd .sheet-effect {
-  padding-left: 14px;
 }
 .sheet-rolltemplate-bitd .sheet-dice {
   height: 27px;
@@ -2940,7 +3005,7 @@ button[type=roll].sheet-broadcast-button {
   color: white;
 }
 .sheet-rolltemplate-bitd .sheet-action .sheet-dice {
-  margin: 47px 0 19px;
+  margin: 47px 0 37px;
 }
 .sheet-rolltemplate-bitd .sheet-resist .sheet-dice,
 .sheet-rolltemplate-bitd .sheet-vice .sheet-dice {
@@ -3014,13 +3079,15 @@ button[type=roll].sheet-broadcast-button {
 
 /* BROADCAST TEMPLATE */
 .sheet-rolltemplate-bitd-broadcast {
-  margin: 0 -1px 0 -45px;
-  padding: 16px 20px 15px;
+  margin: 0 -5px -4px -45px;
+  max-width: 299px;
+  padding: 16px 10px 15px 20px;
   overflow: hidden;
   box-sizing: border-box;
+  position: relative;
   font-family: Georgia, "Bitstream Charter", "Times New Roman", serif;
-  width: 299px;
   background-color: #180d06;
+  /* Image */
 }
 .sheet-rolltemplate-bitd-broadcast .sheet-header {
   color: #e74a10;
@@ -3030,9 +3097,27 @@ button[type=roll].sheet-broadcast-button {
   letter-spacing: 1px;
   font-weight: 800;
 }
+.sheet-rolltemplate-bitd-broadcast .sheet-header.sheet-narrow {
+  width: calc(100% - 62px);
+}
+.sheet-rolltemplate-bitd-broadcast .sheet-char-image {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  line-height: 0;
+}
+.sheet-rolltemplate-bitd-broadcast .sheet-char-image a {
+  cursor: default;
+  pointer-events: none;
+}
+.sheet-rolltemplate-bitd-broadcast .sheet-char-image img {
+  max-width: 60px;
+  max-height: 80px;
+}
 .sheet-rolltemplate-bitd-broadcast .sheet-flex {
   display: flex;
   align-items: center;
+  clear: both;
   margin: 5px 0 0;
 }
 .sheet-rolltemplate-bitd-broadcast .sheet-flex .sheet-title {
@@ -3044,20 +3129,22 @@ button[type=roll].sheet-broadcast-button {
   margin: 9px 0 0;
   color: white;
   text-transform: uppercase;
+  position: relative;
   font-weight: bold;
+  word-wrap: normal;
   font-size: 23px;
   line-height: 29px;
+}
+.sheet-rolltemplate-bitd-broadcast .sheet-title img {
+  margin: 9px 0 0;
+  display: block;
+  height: 31px;
 }
 .sheet-rolltemplate-bitd-broadcast .sheet-content {
   padding: 15px 0 5px;
   line-height: 1.3;
   font-size: 13px;
   color: #ccc;
-}
-.sheet-rolltemplate-bitd-broadcast img {
-  margin: 9px 0 0;
-  display: block;
-  height: 31px;
 }
 .sheet-rolltemplate-bitd-broadcast .sheet-harm {
   color: white;
@@ -3106,13 +3193,13 @@ button[type=roll].sheet-broadcast-button {
   border-radius: 50%;
   margin-right: 4px;
 }
-.sheet-rolltemplate-bitd-broadcast [class^='sheet-spoke'] {
+.sheet-rolltemplate-bitd-broadcast [class^=sheet-spoke] {
   height: 88px;
   width: 4px;
   position: absolute;
   background: black;
 }
-.sheet-rolltemplate-bitd-broadcast [class^='sheet-spoke']:not(.sheet-spoke-0) {
+.sheet-rolltemplate-bitd-broadcast [class^=sheet-spoke]:not(.sheet-spoke-0) {
   display: none;
 }
 .sheet-rolltemplate-bitd-broadcast .sheet-size-4 .sheet-spoke-90,

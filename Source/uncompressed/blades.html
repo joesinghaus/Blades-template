@@ -6,8 +6,8 @@
 <input class="use-kirsty" type="hidden" name="attr_setting_usekirsty" value="0"/>
 <input class="flexwidth" type="hidden" name="attr_setting_flexwidth" value="0"/>
 <input type="hidden" name="attr_changed_attributes" value=""/>
-<input type="hidden" name="attr_bonusdice" value="?{Bonus dice|0|1|2|3|4|5|6|-1|-2|-3}"/>
-<input type="hidden" name="attr_numberofdice" value="?{Number of dice|0|1|2|3|4|5|6}"/>
+<input type="hidden" name="attr_bonusdice" value="Bonus dice"/>
+<input type="hidden" name="attr_numberofdice" value="?{Number of dice|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
 <input type="hidden" name="attr_notes_query" value="?{Notes}"/>
 <input type="hidden" name="attr_position_query" value="?{Position|Risky,position=Risky|Controlled,position=Controlled|Desperate,position=Desperate|Fortune roll,position=}"/>
 <input type="hidden" name="attr_effect_query" value="?{Effect|Standard|Limited|Great|Extreme|Zero}"/>
@@ -179,11 +179,6 @@
     </div>
     <div class="setting-char setting-crew setting-faction">
       <label>
-        <input class="checkbox squarebox" type="checkbox" name="attr_setting_text_bonus_query" value="1"/><span></span><span data-i18n="text_input_bonusdice"></span>
-      </label>
-    </div>
-    <div class="setting-char setting-crew setting-faction">
-      <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_show_broadcast" value="1" checked="checked"/><span></span><span data-i18n="show_broadcast"></span>
       </label>
     </div>
@@ -191,6 +186,9 @@
       <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_autofill" value="1" checked="checked"/><span></span><span data-i18n="fill_fields"></span>
       </label>
+    </div>
+    <div class="setting-char setting-crew">
+      <input class="wide" type="text" spellcheck="false" name="attr_chat_image" value=""/><span data-i18n="chat_image"></span>
     </div>
     <div class="setting-char setting-crew setting-faction kirsty-option">
       <label>
@@ -247,8 +245,8 @@
           </div>
           <input type="hidden" name="attr_vice_purveyor" value=""/>
           <div class="text"><span class="label title" data-i18n="vice_purveyor"></span><span class="uppercase info" data-i18n="vice_info"></span></div>
-          <button class="vicebutton borderbutton" type="roll" name="roll_Vice" value="&{template:bitd} {{charname=@{character_name}}} {{{{subtitle=^{viceroll1}@{stress} @{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title-vice=1}} {{title=^{vice}}}}} {{roll1=[[[[{[[@{vice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{vice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{vice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{vice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{vice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{vice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{vice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{vice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{vice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{vice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{vice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{vice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{vice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{vice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="indulge_vice"></button>
-          <input type="hidden" name="attr_vice" value="0"/>
+          <button class="vicebutton borderbutton" type="roll" name="roll_Vice" value="&{template:bitd} {{charname=@{character_name}}} {{{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title=^{vice}}} @{vice_formula} {{charimage=@{chat_image}}}" data-i18n="indulge_vice"></button>
+          <input type="hidden" name="attr_vice_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
         </label>
       </div>
       <!-- Stress and Trauma-->
@@ -379,7 +377,7 @@
         <div class="harm col63">
           <div class="blackheader col100">
             <div class="label" data-i18n="harm"></div>
-            <button class="broadcast-button" type="roll" name="roll_Harm" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}}" data-i18n-title="send_details_to_chat">:</button>
+            <button class="broadcast-button" type="roll" name="roll_Harm" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}} {{charimage=@{chat_image}}}" data-i18n-title="send_details_to_chat">:</button>
           </div>
           <div class="harmbody">
             <div class="flex-center harmnumber">3</div>
@@ -400,7 +398,7 @@
           <!-- Healing-->
           <div class="col45 healing">
             <div class="blackheader col100">
-              <button class="label rollbutton inherit" type="roll" name="roll_Recovery" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title-recovery=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for}}} {{roll1=[[[[{[[@{numberofdice}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}-1]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} " data-i18n="healing"></button>
+              <button class="label rollbutton inherit" type="roll" name="roll_Recovery" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for}}} @{numberofdice} {{charimage=@{chat_image}}} " data-i18n="healing"></button>
             </div>
             <div class="col100 healing-progress" data-i18n="progress_clock" data-i18n-title="recoveryblurb"></div>
             <!-- Healing clock-->
@@ -444,8 +442,8 @@
                 <input class="radiobox" type="radio" name="attr_coin" value="4"/><span></span>
               </div>
               <div class="stashbutton-holder">
-                <input type="hidden" name="attr_stash_dice" value="0"/>
-                <button class="rollbutton label" type="roll" name="roll_Stash" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title-lifestyle=1}} {{title=^{stash}}} {{subtitle=^{rolls}}} {{roll1=[[[[{[[@{stash_dice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{stash_dice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{stash_dice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{stash_dice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{stash_dice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{stash_dice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{stash_dice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{stash_dice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{stash_dice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{stash_dice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{stash_dice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{stash_dice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{stash_dice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{stash_dice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="stash"></button>
+                <input type="hidden" name="attr_stash_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
+                <button class="rollbutton label" type="roll" name="roll_Stash" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title=^{stash}}} {{subtitle=^{rolls}}} @{stash_formula} {{charimage=@{chat_image}}}" data-i18n="stash"></button>
               </div>
             </div>
             <!-- Stash-->
@@ -501,7 +499,7 @@
         <div class="greyholder col100">
           <fieldset class="repeating_ability">
             <div class="specialability flex">
-              <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}" data-i18n-title="send_details_to_chat">:</button>
+              <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}} {{charimage=@{chat_image}}}" data-i18n-title="send_details_to_chat">:</button>
               <input class="checkbox circlebox" type="checkbox" name="attr_check" value="1"/><span></span>
               <div class="auto-expand abilityname smallcaps"><span name="attr_name"></span>
                 <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="ability_name"></textarea>
@@ -627,7 +625,7 @@
         <!-- Items-->
         <div class="itemholder col100 items">
           <!-- Playbook items-->
-          <div class="playbookitems col100 small-repcontrol">
+          <div class="playbookitems col100 free-repcontrol">
             <fieldset class="repeating_playbookitem">
               <input class="boxes-chosen" type="hidden" name="attr_boxes_chosen" value="0"/>
               <div class="item numboxes-chooser">
@@ -657,7 +655,7 @@
             </fieldset>
           </div>
           <!-- Regular items-->
-          <div class="regularitems white-repcontrol col100">
+          <div class="regularitems col100 free-repcontrol free-repcontrol">
             <fieldset class="repeating_item">
               <input class="input-short" type="hidden" name="attr_short" value="0"/>
               <input class="input-expand" type="hidden" name="attr_expand" value="0"/>
@@ -691,7 +689,7 @@
         <!-- Alchemicals-->
         <div class="col100 def-margin">
           <input class="title-checkbox" type="checkbox" name="attr_show_alchemicals" value="1"/><span class="label plainheader" data-i18n="alchemicals"></span>
-          <div class="alchemicals white-repcontrol">
+          <div class="alchemicals free-repcontrol">
             <div class="bandolier item"><span class="bandoliers-name" data-i18n="bandoliers"></span>
               <input class="checkbox squarebox" type="checkbox" name="attr_bandolier1_check_1" value="1"/><span></span><span class="floatingbar"></span>
               <input class="checkbox squarebox" type="checkbox" name="attr_bandolier1_check_2" value="1"/><span></span><span class="floatingbar"></span>
@@ -728,8 +726,9 @@
       <div class="col47 right-column actioncolumn small-margin">
         <div class="attribute col100">
           <div class="attribute-title flex col100">
-            <button class="rollbutton label" type="roll" name="roll_insight" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-insight=1}} {{title=^{insight}}} {{roll1=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{insight}+@{setting_resbonus_insight}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{insight}+@{setting_resbonus_insight})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{insight}+@{setting_resbonus_insight})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="insight" data-i18n-title="insight_description"></button>
+            <button class="rollbutton label" type="roll" name="roll_insight" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title=^{insight}}} @{insight_formula} {{charimage=@{chat_image}}}" data-i18n="insight" data-i18n-title="insight_description"></button>
             <input type="hidden" name="attr_insight" value="0"/>
+            <input type="hidden" name="attr_insight_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
             <input type="hidden" name="attr_insight_xp_max" value="6"/>
             <div class="attribute-xp-box flex">
               <input class="tooth zero" type="radio" name="attr_insight_xp" value="0" checked="checked"/><span></span>
@@ -743,47 +742,52 @@
           </div>
           <div class="actions col100">
             <div class="action flex col100">
+              <input type="hidden" name="attr_hunt_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_hunt" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_hunt" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_hunt" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_hunt" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_hunt" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_hunt" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-hunt=1}} {{title=^{hunt}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{hunt}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{hunt}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{hunt}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{hunt}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{hunt}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{hunt}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{hunt}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{hunt}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{hunt}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{hunt}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{hunt}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{hunt}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{hunt})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{hunt})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="hunt" data-i18n-title="hunt_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_hunt" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{hunt}}} {{@{position_query}}} {{effect=@{effect_query}}} @{hunt_formula} {{charimage=@{chat_image}}}" data-i18n="hunt" data-i18n-title="hunt_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_study_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_study" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_study" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_study" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_study" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_study" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_study" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-study=1}} {{title=^{study}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{study}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{study}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{study}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{study}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{study}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{study}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{study}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{study}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{study}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{study}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{study}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{study}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{study})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{study})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="study" data-i18n-title="study_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_study" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{study}}} {{@{position_query}}} {{effect=@{effect_query}}} @{study_formula} {{charimage=@{chat_image}}}" data-i18n="study" data-i18n-title="study_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_survey_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_survey" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_survey" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_survey" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_survey" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_survey" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_survey" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-survey=1}} {{title=^{survey}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{survey}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{survey}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{survey}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{survey}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{survey}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{survey}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{survey}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{survey}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{survey}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{survey}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{survey}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{survey}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{survey})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{survey})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="survey" data-i18n-title="survey_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_survey" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{survey}}} {{@{position_query}}} {{effect=@{effect_query}}} @{survey_formula} {{charimage=@{chat_image}}}" data-i18n="survey" data-i18n-title="survey_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_tinker_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_tinker" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_tinker" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_tinker" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_tinker" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_tinker" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_tinker" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-tinker=1}} {{title=^{tinker}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{tinker}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{tinker}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{tinker}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{tinker}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{tinker}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{tinker}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{tinker}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{tinker}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{tinker}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{tinker}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{tinker}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{tinker}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{tinker})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{tinker})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="tinker" data-i18n-title="tinker_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_tinker" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{tinker}}} {{@{position_query}}} {{effect=@{effect_query}}} @{tinker_formula} {{charimage=@{chat_image}}}" data-i18n="tinker" data-i18n-title="tinker_description"></button>
             </div>
           </div>
         </div>
         <div class="attribute col100">
           <div class="attribute-title flex col100">
-            <button class="rollbutton label" type="roll" name="roll_prowess" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-prowess=1}} {{title=^{prowess}}} {{roll1=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{prowess}+@{setting_resbonus_prowess}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{prowess}+@{setting_resbonus_prowess})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{prowess}+@{setting_resbonus_prowess})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="prowess" data-i18n-title="prowess_description"></button>
+            <button class="rollbutton label" type="roll" name="roll_prowess" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title=^{prowess}}} @{prowess_formula} {{charimage=@{chat_image}}}" data-i18n="prowess" data-i18n-title="prowess_description"></button>
             <input type="hidden" name="attr_prowess" value="0"/>
+            <input type="hidden" name="attr_prowess_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
             <input type="hidden" name="attr_prowess_xp_max" value="6"/>
             <div class="attribute-xp-box flex">
               <input class="tooth zero" type="radio" name="attr_prowess_xp" value="0" checked="checked"/><span></span>
@@ -797,47 +801,52 @@
           </div>
           <div class="actions col100">
             <div class="action flex col100">
+              <input type="hidden" name="attr_finesse_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_finesse" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_finesse" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_finesse" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_finesse" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_finesse" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_finesse" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-finesse=1}} {{title=^{finesse}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{finesse}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{finesse}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{finesse}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{finesse}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{finesse}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{finesse}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{finesse}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{finesse}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{finesse}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{finesse}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{finesse}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{finesse}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{finesse})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{finesse})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="finesse" data-i18n-title="finesse_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_finesse" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{finesse}}} {{@{position_query}}} {{effect=@{effect_query}}} @{finesse_formula} {{charimage=@{chat_image}}}" data-i18n="finesse" data-i18n-title="finesse_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_prowl_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_prowl" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_prowl" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_prowl" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_prowl" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_prowl" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_prowl" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-prowl=1}} {{title=^{prowl}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{prowl}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{prowl}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{prowl}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{prowl}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{prowl}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{prowl}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{prowl}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{prowl}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{prowl}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{prowl}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{prowl}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{prowl}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{prowl})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{prowl})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="prowl" data-i18n-title="prowl_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_prowl" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{prowl}}} {{@{position_query}}} {{effect=@{effect_query}}} @{prowl_formula} {{charimage=@{chat_image}}}" data-i18n="prowl" data-i18n-title="prowl_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_skirmish_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_skirmish" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_skirmish" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_skirmish" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_skirmish" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_skirmish" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_skirmish" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-skirmish=1}} {{title=^{skirmish}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{skirmish}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{skirmish}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{skirmish}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{skirmish}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{skirmish}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{skirmish}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{skirmish}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{skirmish}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{skirmish}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{skirmish}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{skirmish}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{skirmish}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{skirmish})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{skirmish})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="skirmish" data-i18n-title="skirmish_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_skirmish" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{skirmish}}} {{@{position_query}}} {{effect=@{effect_query}}} @{skirmish_formula} {{charimage=@{chat_image}}}" data-i18n="skirmish" data-i18n-title="skirmish_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_wreck_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_wreck" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_wreck" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_wreck" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_wreck" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_wreck" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_wreck" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-wreck=1}} {{title=^{wreck}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{wreck}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{wreck}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{wreck}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{wreck}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{wreck}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{wreck}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{wreck}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{wreck}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{wreck}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{wreck}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{wreck}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{wreck}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{wreck})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{wreck})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="wreck" data-i18n-title="wreck_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_wreck" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{wreck}}} {{@{position_query}}} {{effect=@{effect_query}}} @{wreck_formula} {{charimage=@{chat_image}}}" data-i18n="wreck" data-i18n-title="wreck_description"></button>
             </div>
           </div>
         </div>
         <div class="attribute col100">
           <div class="attribute-title flex col100">
-            <button class="rollbutton label" type="roll" name="roll_resolve" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-resolve=1}} {{title=^{resolve}}} {{roll1=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{resolve}+@{setting_resbonus_resolve}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{resolve}+@{setting_resbonus_resolve})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{resolve}+@{setting_resbonus_resolve})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="resolve" data-i18n-title="resolve_description"></button>
+            <button class="rollbutton label" type="roll" name="roll_resolve" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title=^{resolve}}} @{resolve_formula} {{charimage=@{chat_image}}}" data-i18n="resolve" data-i18n-title="resolve_description"></button>
             <input type="hidden" name="attr_resolve" value="0"/>
+            <input type="hidden" name="attr_resolve_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
             <input type="hidden" name="attr_resolve_xp_max" value="6"/>
             <div class="attribute-xp-box flex">
               <input class="tooth zero" type="radio" name="attr_resolve_xp" value="0" checked="checked"/><span></span>
@@ -851,51 +860,55 @@
           </div>
           <div class="actions col100">
             <div class="action flex col100">
+              <input type="hidden" name="attr_attune_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_attune" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_attune" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_attune" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_attune" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_attune" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_attune" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-attune=1}} {{title=^{attune}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{attune}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{attune}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{attune}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{attune}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{attune}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{attune}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{attune}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{attune}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{attune}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{attune}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{attune}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{attune}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{attune})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{attune})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="attune" data-i18n-title="attune_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_attune" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{attune}}} {{@{position_query}}} {{effect=@{effect_query}}} @{attune_formula} {{charimage=@{chat_image}}}" data-i18n="attune" data-i18n-title="attune_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_command_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_command" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_command" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_command" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_command" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_command" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_command" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-command=1}} {{title=^{command}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{command}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{command}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{command}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{command}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{command}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{command}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{command}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{command}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{command}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{command}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{command}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{command}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{command})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{command})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="command" data-i18n-title="command_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_command" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{command}}} {{@{position_query}}} {{effect=@{effect_query}}} @{command_formula} {{charimage=@{chat_image}}}" data-i18n="command" data-i18n-title="command_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_consort_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_consort" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_consort" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_consort" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_consort" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_consort" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_consort" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-consort=1}} {{title=^{consort}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{consort}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{consort}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{consort}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{consort}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{consort}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{consort}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{consort}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{consort}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{consort}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{consort}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{consort}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{consort}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{consort})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{consort})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="consort" data-i18n-title="consort_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_consort" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{consort}}} {{@{position_query}}} {{effect=@{effect_query}}} @{consort_formula} {{charimage=@{chat_image}}}" data-i18n="consort" data-i18n-title="consort_description"></button>
             </div>
             <div class="action flex col100">
+              <input type="hidden" name="attr_sway_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <input class="hidden fakeradio" type="checkbox" name="attr_sway" value="0" checked="checked"/>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_sway" value="1"/><span></span>
               <div class="divider"></div>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_sway" value="2"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_sway" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_sway" value="4"/><span></span>
-              <button class="rollbutton label" type="roll" name="roll_sway" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title-sway=1}} {{title=^{sway}}} {{@{position_query}}} {{effect=@{effect_query}}} {{roll1=[[[[{[[@{sway}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{sway}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{sway}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{sway}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{sway}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{sway}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{sway}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{sway}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{sway}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{sway}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{sway}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{sway}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{sway})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{sway})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="sway" data-i18n-title="sway_description"></button>
+              <button class="rollbutton label" type="roll" name="roll_sway" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{subtitle=^{rolls}}} {{title=^{sway}}} {{@{position_query}}} {{effect=@{effect_query}}} @{sway_formula} {{charimage=@{chat_image}}}" data-i18n="sway" data-i18n-title="sway_description"></button>
             </div>
           </div>
         </div>
         <!-- Cohort-->
         <input class="hider" type="hidden" name="attr_setting_show_cohort" value="0"/>
         <div class="cohort">
-          <input type="hidden" name="attr_char_cohort_dice" value="1"/>
           <input type="hidden" name="attr_char_cohort_verb" value="^{rolls_their}"/>
+          <input type="hidden" name="attr_char_cohort_roll_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
           <div class="cohort-title flex col100 label">
             <input class="inherit" type="text" spellcheck="false" name="attr_char_cohort_name" value="Cohort"/>
-            <button class="inherit rollbutton" type="roll" name="roll_char_cohort_roll" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{charname=@{char_cohort_name} (^{@{char_cohort_type}}, @{char_cohort_subtype})}} {{title-cohort_quality=1}} {{title=^{cohort_quality}}} {{subtitle=@{char_cohort_verb}}}) {{roll1=[[[[{[[@{char_cohort_dice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{char_cohort_dice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{char_cohort_dice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{char_cohort_dice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{char_cohort_dice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{char_cohort_dice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{char_cohort_dice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{char_cohort_dice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{char_cohort_dice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{char_cohort_dice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{char_cohort_dice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{char_cohort_dice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{char_cohort_dice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{char_cohort_dice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="roll-inf"></button>
+            <button class="inherit rollbutton" type="roll" name="roll_char_cohort_roll" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{charname=@{char_cohort_name} (^{@{char_cohort_type}}, @{char_cohort_subtype})}} {{title=^{cohort_quality}}} {{subtitle=@{char_cohort_verb}}}) @{char_cohort_roll_formula} {{charimage=@{chat_image}}}" data-i18n="roll-inf"></button>
           </div>
           <div class="cohort-info flex col100 uppercase">
             <div class="cohort-dropdown">
@@ -952,7 +965,7 @@
           </div>
         </div>
         <!-- Friends-->
-        <div class="col100 def-margin">
+        <div class="col100 def-margin friends">
           <div class="specialheader col100 label flex">
             <input class="inherit" type="text" spellcheck="false" name="attr_friends_title" value="Friends"/>
           </div>
@@ -970,36 +983,38 @@
                   <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="friend_name"></textarea>
                 </div>
               </div>
+              <input class="expand" type="checkbox" name="attr_null" value="1"/><span></span>
+              <textarea class="description" spellcheck="false" name="attr_description" data-i18n-placeholder="notes"></textarea>
             </fieldset>
           </div>
         </div>
         <!-- Roll Fortune-->
-        <button class="fortunebutton borderbutton" type="roll" name="roll_Fortune" value="&{template:bitd} {{charname=@{character_name}}} {{fortune=1}} {{subtitle=^{rolls}}} {{title-fortune=1}} {{title=^{fortune}}} {{roll1=[[[[{[[@{numberofdice}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}-1]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} {{notes=@{notes_query}}} " data-i18n="roll_fortune"></button>
+        <button class="fortunebutton borderbutton" type="roll" name="roll_Fortune" value="&{template:bitd} {{charname=@{character_name}}} {{fortune=1}} {{subtitle=^{rolls}}} {{title=^{fortune}}} @{numberofdice} {{charimage=@{chat_image}}} {{notes=@{notes_query}}} " data-i18n="roll_fortune"></button>
       </div>
       <!-- Clocks-->
-      <div class="col100 clocks white-repcontrol def-margin">
+      <div class="col100 clocks def-margin free-repcontrol">
         <div class="specialheader label" data-i18n="clocks"></div>
         <fieldset class="repeating_clock">
           <input class="size" type="hidden" name="attr_size" value=""/>
           <div class="auto-expand smallcaps"><span name="attr_name"></span>
             <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="clock_name"></textarea>
           </div>
-          <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
+          <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}} {{charimage=@{chat_image}}}" data-i18n-title="send_details_to_chat">:</button>
           <div class="size-choice">
             <label class="text-button">
-              <input type="radio" name="attr_size" value="4"/><span></span>
+              <input type="radio" name="attr_size" value="4"/><span>4</span>
             </label>
             <label class="text-button">
-              <input type="radio" name="attr_size" value="6"/><span></span>
+              <input type="radio" name="attr_size" value="6"/><span>6</span>
             </label>
             <label class="text-button">
-              <input type="radio" name="attr_size" value="8"/><span></span>
+              <input type="radio" name="attr_size" value="8"/><span>8</span>
             </label>
             <label class="text-button">
-              <input type="radio" name="attr_size" value="10"/><span></span>
+              <input type="radio" name="attr_size" value="10"/><span>10</span>
             </label>
             <label class="text-button">
-              <input type="radio" name="attr_size" value="12"/><span></span>
+              <input type="radio" name="attr_size" value="12"/><span>12</span>
             </label>
           </div>
           <div class="clock-container">
@@ -1114,7 +1129,8 @@
           </label>
           <!-- Tier-->
           <div class="blackheader">
-            <button class="label inherit rollbutton" type="roll" name="roll_Tier" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title-crew_tier=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their}}} {{roll1=[[[[{[[@{crew_tier}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{crew_tier}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{crew_tier}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{crew_tier}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{crew_tier}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{crew_tier}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{crew_tier}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{crew_tier}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{crew_tier}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{crew_tier}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{crew_tier}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{crew_tier}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{crew_tier})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{crew_tier})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="tier"></button>
+            <button class="label inherit rollbutton" type="roll" name="roll_Tier" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their}}} @{crew_tier_formula} {{charimage=@{chat_image}}}" data-i18n="tier"></button>
+            <input type="hidden" name="attr_crew_tier_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
           </div>
           <div class="tier flex">
             <input class="hidden fakeradio" type="checkbox" name="attr_crew_tier" value="0" checked="checked"/>
@@ -1126,7 +1142,7 @@
         </div>
       </div>
       <!-- Claims-->
-      <div class="claims col100 white-repcontrol">
+      <div class="claims col100 free-repcontrol">
         <div class="claimsrow flex">
             <input type="hidden" name="attr_claim_1_check" value="0"/>
             <div class="claimbox">
@@ -1413,7 +1429,8 @@
           <!-- Wanted Level-->
           <div class="heat3">
             <div class="blackheader">
-              <button class="label inherit rollbutton" type="roll" name="roll_Wanted" value="&{template:bitd} {{charname=@{character_name}}} {{vice=1}} {{short=1}} {{title-entanglement=1}} {{title=^{entanglement}}} {{subtitle=^{wantedroll1}@{heat} ^{heat}^{wantedroll2}}} {{roll1=[[[[{[[@{wanted}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{wanted}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{wanted}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{wanted}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{wanted}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{wanted}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{wanted}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{wanted}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{wanted}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{wanted}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{wanted}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{wanted}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{wanted})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{wanted})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="wanted"></button>
+              <button class="label inherit rollbutton" type="roll" name="roll_Wanted" value="&{template:bitd} {{charname=@{character_name}}} {{vice=1}} {{short=1}} {{title=^{entanglement}}} {{subtitle=^{wantedroll1}@{heat}&nbsp;^{heat}^{wantedroll2}}} @{wanted_formula} {{charimage=@{chat_image}}}" data-i18n="wanted"></button>
+              <input type="hidden" name="attr_wanted_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
             </div>
             <div class="wantedholder flex">
               <input class="tooth zero" type="radio" name="attr_wanted" value="0" checked="checked"/><span></span>
@@ -1464,7 +1481,7 @@
         <div class="greyholder col100">
           <fieldset class="repeating_crewability">
             <div class="specialability flex">
-              <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}" data-i18n-title="send_details_to_chat">:</button>
+              <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}} {{charimage=@{chat_image}}}" data-i18n-title="send_details_to_chat">:</button>
               <input class="checkbox circlebox" type="checkbox" name="attr_check" value="1"/><span></span>
               <div class="auto-expand abilityname smallcaps"><span name="attr_name"></span>
                 <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="ability_name"></textarea>
@@ -1529,7 +1546,7 @@
         <div class="itemheader col100"><span class="label" data-i18n="crew_upgrades"></span></div>
         <div class="itemholder col100 upgrades">
           <!-- Specific upgrades-->
-          <div class="playbookitems small-repcontrol col100">
+          <div class="playbookitems col100 free-repcontrol">
             <fieldset class="repeating_upgrade">
               <input class="boxes-chosen" type="hidden" name="attr_boxes_chosen" value="0"/>
               <div class="item numboxes-chooser">
@@ -1767,17 +1784,17 @@
             <textarea spellcheck="false" name="attr_hunting_grounds_description" data-i18n-placeholder="hunting_grounds_description"></textarea>
           </div>
         </div>
-        <button class="engagementbutton borderbutton" type="roll" name="roll_Engagement" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title-engagement=1}} {{title=^{engagement}}} {{roll1=[[[[{[[@{numberofdice}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}-1]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} " data-i18n="roll_engagement"></button>
+        <button class="engagementbutton borderbutton" type="roll" name="roll_Engagement" value="&{template:bitd} {{charname=@{character_name}}} {{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title=^{engagement}}} @{numberofdice} {{charimage=@{chat_image}}} " data-i18n="roll_engagement"></button>
       </div>
       <!-- Cohorts and Contacts-->
       <div class="col47 right-column small-margin">
         <!-- First Cohort-->
         <div class="cohort">
-          <input type="hidden" name="attr_cohort1_dice" value="0"/>
           <input type="hidden" name="attr_cohort1_verb" value="^{roll_their}"/>
+          <input type="hidden" name="attr_cohort1_roll_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
           <div class="cohort-title flex col100 label">
             <input class="inherit" type="text" spellcheck="false" name="attr_cohort1_name" value="Cohort"/>
-            <button class="inherit rollbutton" type="roll" name="roll_cohort1_roll" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{charname=@{cohort1_name} (^{@{cohort1_type}}, @{cohort1_subtype})}} {{title-cohort_quality=1}} {{title=^{cohort_quality}}} {{subtitle=@{cohort1_verb}}}) {{roll1=[[[[{[[@{cohort1_dice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{cohort1_dice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{cohort1_dice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{cohort1_dice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{cohort1_dice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{cohort1_dice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{cohort1_dice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{cohort1_dice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{cohort1_dice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{cohort1_dice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{cohort1_dice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{cohort1_dice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{cohort1_dice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{cohort1_dice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="roll-inf"></button>
+            <button class="inherit rollbutton" type="roll" name="roll_cohort1_roll" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{charname=@{cohort1_name} (^{@{cohort1_type}}, @{cohort1_subtype})}} {{title=^{cohort_quality}}} {{subtitle=@{cohort1_verb}}}) @{cohort1_roll_formula} {{charimage=@{chat_image}}}" data-i18n="roll-inf"></button>
           </div>
           <div class="cohort-info flex col100 uppercase">
             <div class="cohort-dropdown">
@@ -1821,14 +1838,14 @@
           <textarea class="cohort-description" spellcheck="false" name="attr_cohort1_description"></textarea>
         </div>
         <!-- Cohort repeating section-->
-        <div class="col100 white-repcontrol cohorts">
+        <div class="col100 cohorts free-repcontrol">
           <fieldset class="repeating_cohort">
             <div class="cohort">
-              <input type="hidden" name="attr_dice" value="0"/>
               <input type="hidden" name="attr_verb" value="^{roll_their}"/>
+              <input type="hidden" name="attr_roll_formula" value="?{@{bonusdice}|0, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|1, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|2, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|3, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|4, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|5, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|6, {{roll1=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll2=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll3=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll4=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll5=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125; {{roll6=&amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-1, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-2, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;|-3, {{zerodice=&amp;#91;&amp;#91;d6]]&amp;#44; &amp;#91;&amp;#91;d6]]&amp;#125;&amp;#125;}"/>
               <div class="cohort-title flex col100 label">
                 <input class="inherit" type="text" spellcheck="false" name="attr_name" value="Cohort"/>
-                <button class="inherit rollbutton" type="roll" name="roll_roll" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{charname=@{name} (^{@{type}}, @{subtype})}} {{title-cohort_quality=1}} {{title=^{cohort_quality}}} {{subtitle=@{verb}}}) {{roll1=[[[[{[[@{dice}+@{bonusdice}}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{dice}+@{bonusdice}-1}]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{dice}+@{bonusdice}-2}]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{dice}+@{bonusdice}-3}]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{dice}+@{bonusdice}-4}]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{dice}+@{bonusdice}-5}]],1}kl1]]d6]]}} {{roll7=[[[[{[[@{dice}+@{bonusdice}-6}]],1}kl1]]d6]]}} {{roll8=[[[[{[[@{dice}+@{bonusdice}-7}]],1}kl1]]d6]]}} {{roll9=[[[[{[[@{dice}+@{bonusdice}-8}]],1}kl1]]d6]]}} {{roll10=[[[[{[[@{dice}+@{bonusdice}-9}]],1}kl1]]d6]]}} {{roll11=[[[[{[[@{dice}+@{bonusdice}-10}]],1}kl1]]d6]]}} {{roll12=[[[[{[[@{dice}+@{bonusdice}-11}]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{dice})-(@{bonusdice})]],1}kl1]]d6]], [[[[{[[1-(@{dice})-(@{bonusdice})]],1}kl1]]d6]]}}" data-i18n="roll-inf"></button>
+                <button class="inherit rollbutton" type="roll" name="roll_roll" value="&{template:bitd} {{charname=@{character_name}}} {{resist=1}} {{short=1}} {{charname=@{name} (^{@{type}}, @{subtype})}} {{title=^{cohort_quality}}} {{subtitle=@{verb}}}) @{roll_formula} {{charimage=@{chat_image}}}" data-i18n="roll-inf"></button>
               </div>
               <div class="cohort-info flex col100 uppercase">
                 <div class="cohort-dropdown">
@@ -1874,7 +1891,7 @@
           </fieldset>
         </div>
         <!-- Contacts-->
-        <div class="col100 def-margin">
+        <div class="col100 def-margin contacts">
           <div class="specialheader col100 label flex">
             <input class="inherit" type="text" spellcheck="false" name="attr_contacts_title" value="Contacts"/>
           </div>
@@ -1889,36 +1906,38 @@
                   <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="contact_name"></textarea>
                 </div>
               </div>
+              <input class="expand" type="checkbox" name="attr_null" value="1"/><span></span>
+              <textarea class="description" spellcheck="false" name="attr_description" data-i18n-placeholder="notes"></textarea>
             </fieldset>
           </div>
         </div>
         <!-- Roll Fortune-->
-        <button class="fortunebutton borderbutton" type="roll" name="roll_Fortune_crew" value="&{template:bitd} {{charname=@{character_name}}} {{fortune=1}} {{subtitle=^{roll}}} {{title-fortune=1}} {{title=^{fortune}}} {{roll1=[[[[{[[@{numberofdice}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}-1]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} {{notes=@{notes_query}}} " data-i18n="roll_fortune"></button>
+        <button class="fortunebutton borderbutton" type="roll" name="roll_Fortune_crew" value="&{template:bitd} {{charname=@{character_name}}} {{fortune=1}} {{subtitle=^{roll}}} {{title=^{fortune}}} @{numberofdice} {{charimage=@{chat_image}}} {{notes=@{notes_query}}} " data-i18n="roll_fortune"></button>
       </div>
       <!-- Clocks-->
-      <div class="col100 clocks white-repcontrol def-margin">
+      <div class="col100 clocks def-margin free-repcontrol">
         <div class="specialheader label" data-i18n="clocks"></div>
         <fieldset class="repeating_crewclock">
           <input class="size" type="hidden" name="attr_size" value=""/>
           <div class="auto-expand smallcaps"><span name="attr_name"></span>
             <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="clock_name"></textarea>
           </div>
-          <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
+          <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}} {{charimage=@{chat_image}}}" data-i18n-title="send_details_to_chat">:</button>
           <div class="size-choice">
             <label class="text-button">
-              <input type="radio" name="attr_size" value="4"/><span></span>
+              <input type="radio" name="attr_size" value="4"/><span>4</span>
             </label>
             <label class="text-button">
-              <input type="radio" name="attr_size" value="6"/><span></span>
+              <input type="radio" name="attr_size" value="6"/><span>6</span>
             </label>
             <label class="text-button">
-              <input type="radio" name="attr_size" value="8"/><span></span>
+              <input type="radio" name="attr_size" value="8"/><span>8</span>
             </label>
             <label class="text-button">
-              <input type="radio" name="attr_size" value="10"/><span></span>
+              <input type="radio" name="attr_size" value="10"/><span>10</span>
             </label>
             <label class="text-button">
-              <input type="radio" name="attr_size" value="12"/><span></span>
+              <input type="radio" name="attr_size" value="12"/><span>12</span>
             </label>
           </div>
           <div class="clock-container">
@@ -1955,18 +1974,18 @@
     </div>
   </div>
   <!-- Faction Sheet-->
+  <input class="input-clocks-only" type="hidden" name="attr_setting_clocks_only" value="0"/>
   <div class="type-faction flex-wrap">
-    <input class="input-clocks-only" type="hidden" name="attr_setting_clocks_only" value="0"/>
     <div class="factiontitle flex col100">
       <input class="label" type="text" spellcheck="false" name="attr_factions_title" value="Factions of Doskvol"/>
       <input class="hider" type="hidden" name="attr_show_faction_generatebutton" value="1"/>
       <label class="generatebutton">
         <input type="checkbox" name="attr_generate_factions" value="1"/><span data-i18n="generate_factions"></span>
       </label>
-      <button class="fortunebutton borderbutton" type="roll" name="roll_Fortune_faction" value="&{template:bitd} {{charname=@{character_name}}} {{fortune=1}} {{title-fortune=1}} {{title=^{fortune}}} {{short=1}} {{charname=}} {{roll1=[[[[{[[@{numberofdice}]],1}kl1]]d6]]}} {{roll2=[[[[{[[@{numberofdice}-1]],1}kl1]]d6]]}} {{roll3=[[[[{[[@{numberofdice}-2]],1}kl1]]d6]]}} {{roll4=[[[[{[[@{numberofdice}-3]],1}kl1]]d6]]}} {{roll5=[[[[{[[@{numberofdice}-4]],1}kl1]]d6]]}} {{roll6=[[[[{[[@{numberofdice}-5]],1}kl1]]d6]]}} {{zerodice=[[[[{[[1-(@{numberofdice})]],1}kl1]]d6]], [[[[{[[1-(@{numberofdice})]],1}kl1]]d6]]}} {{notes=@{notes_query}}} " data-i18n="roll_fortune"></button>
+      <button class="fortunebutton borderbutton" type="roll" name="roll_Fortune_faction" value="&{template:bitd} {{charname=@{character_name}}} {{fortune=1}} {{title=^{fortune}}} {{short=1}} {{charname=}} @{numberofdice} {{charimage=@{chat_image}}} {{notes=@{notes_query}}} " data-i18n="roll_fortune"></button>
     </div>
-    <div class="factions flex">
-      <div class="col24b white-repcontrol">
+    <div class="factions flex free-repcontrol">
+      <div class="col24b">
           <div class="factions-header flex uppercase">
             <input class="faction-name label" type="text" spellcheck="false" name="attr_factions1_header" value="Underworld"/><span class="faction-tier" data-i18n="tier"></span><span class="faction-hold" data-i18n="hold"></span><span class="faction-status" data-i18n="status"></span>
           </div>
@@ -1981,7 +2000,7 @@
             </div>
           </fieldset>
       </div>
-      <div class="col24b white-repcontrol">
+      <div class="col24b">
           <div class="factions-header flex uppercase">
             <input class="faction-name label" type="text" spellcheck="false" name="attr_factions2_header" value="Institutions"/><span class="faction-tier" data-i18n="tier"></span><span class="faction-hold" data-i18n="hold"></span><span class="faction-status" data-i18n="status"></span>
           </div>
@@ -1996,7 +2015,7 @@
             </div>
           </fieldset>
       </div>
-      <div class="col24b white-repcontrol">
+      <div class="col24b">
           <div class="factions-header flex uppercase">
             <input class="faction-name label" type="text" spellcheck="false" name="attr_factions3_header" value="Labor &amp; Trade"/><span class="faction-tier" data-i18n="tier"></span><span class="faction-hold" data-i18n="hold"></span><span class="faction-status" data-i18n="status"></span>
           </div>
@@ -2010,7 +2029,7 @@
               <textarea spellcheck="false" name="attr_notes" data-i18n-placeholder="faction_notes"></textarea>
             </div>
           </fieldset>
-          <div class="factions-header flex uppercase">
+          <div class="factions-header flex uppercase sheet-def-margin">
             <input class="faction-name label" type="text" spellcheck="false" name="attr_factions4_header" value="The Fringe"/><span class="faction-tier" data-i18n="tier"></span><span class="faction-hold" data-i18n="hold"></span><span class="faction-status" data-i18n="status"></span>
           </div>
           <fieldset class="repeating_factions4">
@@ -2024,7 +2043,7 @@
             </div>
           </fieldset>
       </div>
-      <div class="col24b white-repcontrol">
+      <div class="col24b">
           <div class="factions-header flex uppercase">
             <input class="faction-name label" type="text" spellcheck="false" name="attr_factions5_header" value="Citizenry"/><span class="faction-tier" data-i18n="tier"></span><span class="faction-hold" data-i18n="hold"></span><span class="faction-status" data-i18n="status"></span>
           </div>
@@ -2050,29 +2069,29 @@
         </div>
       </div>
     </div>
-    <div class="clocks col55 white-repcontrol">
+    <div class="clocks col55 free-repcontrol">
       <div class="specialheader label" data-i18n="clocks"></div>
       <fieldset class="repeating_factionclock">
         <input class="size" type="hidden" name="attr_size" value=""/>
         <div class="auto-expand smallcaps"><span name="attr_name"></span>
           <textarea spellcheck="false" name="attr_name" data-i18n-placeholder="clock_name"></textarea>
         </div>
-        <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}" data-i18n-title="send_details_to_chat">:</button>
+        <button class="broadcast-button" type="roll" name="roll_Show" value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}} {{charimage=@{chat_image}}}" data-i18n-title="send_details_to_chat">:</button>
         <div class="size-choice">
           <label class="text-button">
-            <input type="radio" name="attr_size" value="4"/><span></span>
+            <input type="radio" name="attr_size" value="4"/><span>4</span>
           </label>
           <label class="text-button">
-            <input type="radio" name="attr_size" value="6"/><span></span>
+            <input type="radio" name="attr_size" value="6"/><span>6</span>
           </label>
           <label class="text-button">
-            <input type="radio" name="attr_size" value="8"/><span></span>
+            <input type="radio" name="attr_size" value="8"/><span>8</span>
           </label>
           <label class="text-button">
-            <input type="radio" name="attr_size" value="10"/><span></span>
+            <input type="radio" name="attr_size" value="10"/><span>10</span>
           </label>
           <label class="text-button">
-            <input type="radio" name="attr_size" value="12"/><span></span>
+            <input type="radio" name="attr_size" value="12"/><span>12</span>
           </label>
         </div>
         <div class="clock-container">
@@ -2111,23 +2130,24 @@
   </div>
 </div>
 <rolltemplate class="sheet-rolltemplate-bitd">
-  <div class="holder{{#action}} action{{/action}}{{#resist}} resist{{/resist}}{{#vice}} vice{{/vice}}{{#fortune}} fortune{{/fortune}}{{#short}} short{{/short}}{{#action}}{{^position}} short{{/position}}{{/action}}">
-    <div class="header">{{charname}} {{subtitle}}</div>
+  <div class="holder{{#action}} action{{/action}}{{#resist}} resist{{/resist}}{{#vice}} vice{{/vice}}{{#fortune}} fortune{{/fortune}}{{#short}} short{{/short}}{{#action}}{{^position}} short{{/position}}{{/action}}">{{#charimage}}
+    <div class="char-image">[Image]({{charimage}})</div>{{/charimage}}
+    <div class="header{{#charimage}} narrow{{/charimage}}">{{charname}} {{subtitle}}</div>
     <div class="title"><span class="{{#small-title}}small-title{{/small-title}}">{{title}}</span></div>
     <div class="dice">{{#rollGreater() roll1 0}}{{roll1}}<span class="comma">,</span> {{/rollGreater() roll1 0}}{{#rollGreater() roll2 0}}{{roll2}}<span class="comma">,</span> {{/rollGreater() roll2 0}}{{#rollGreater() roll3 0}}{{roll3}}<span class="comma">,</span> {{/rollGreater() roll3 0}}{{#rollGreater() roll4 0}}{{roll4}}<span class="comma">,</span> {{/rollGreater() roll4 0}}{{#rollGreater() roll5 0}}{{roll5}}<span class="comma">,</span> {{/rollGreater() roll5 0}}{{#rollGreater() roll6 0}}{{roll6}}<span class="comma">,</span> {{/rollGreater() roll6 0}}{{#rollGreater() roll7 0}}{{roll7}}<span class="comma">,</span> {{/rollGreater() roll7 0}}{{#rollGreater() roll8 0}}{{roll8}}<span class="comma">,</span> {{/rollGreater() roll8 0}}{{#rollGreater() roll9 0}}{{roll9}}<span class="comma">,</span> {{/rollGreater() roll9 0}}{{#rollGreater() roll10 0}}{{roll10}}<span class="comma">,</span> {{/rollGreater() roll10 0}}{{#rollGreater() roll11 0}}{{roll11}}<span class="comma">,</span> {{/rollGreater() roll11 0}}{{#rollGreater() roll12 0}}{{roll12}}<span class="comma">,</span> {{/rollGreater() roll12 0}}{{#rollGreater() zerodice 0}}
       <div class="zerodice1">{{zerodice}}</div>
       <div class="zerodice2" data-i18n="zerodice"></div>{{/rollGreater() zerodice 0}}
     </div>{{#position}}
-    <div class="position">{{position}}</div>{{/position}}{{#effect}}<!--
- --><div class="effect">{{effect}}</div>{{/effect}}{{#resist}}{{^short}}
+    <div class="position">{{position}}</div>{{/position}}{{#effect}}<div class="effect">{{effect}}</div>{{/effect}}{{#resist}}{{^short}}
     <div class="instructions" data-i18n="resist_instructions"></div>{{/short}}{{/resist}}{{#vice}}{{^short}}
     <div class="instructions" data-i18n="vice_instructions"></div>{{/short}}{{/vice}}{{#notes}}
     <div class="notes">{{notes}}</div>{{/notes}}
   </div>
 </rolltemplate>
 <rolltemplate class="sheet-rolltemplate-bitd-broadcast">
-  <div>
-    <div class="header">
+  <div>{{#charimage}}{{^clock}}
+    <div class="char-image">[Image]({{charimage}})</div>{{/clock}}{{/charimage}}
+    <div class="header{{#charimage}}{{^clock}} narrow{{/clock}}{{/charimage}}">
       <div>{{charname}}</div>
       <div>{{type}}</div>
     </div>{{#content}}
@@ -3361,7 +3381,9 @@ const data = {
 	"translatedCrewAttributes": ["claim_1_name", "claim_2_name", "claim_3_name", "claim_4_name", "claim_5_name", "claim_6_name", "claim_7_name", "claim_8_name", "claim_9_name", "claim_10_name", "claim_11_name", "claim_12_name", "claim_13_name", "claim_14_name", "claim_15_name", "claim_1_desc", "claim_2_desc", "claim_3_desc", "claim_4_desc", "claim_5_desc", "claim_6_desc", "claim_7_desc", "claim_8_desc", "claim_9_desc", "claim_10_desc", "claim_11_desc", "claim_12_desc", "claim_13_desc", "claim_14_desc", "claim_15_desc", "cohort1_description", "cohort1_name", "cohort1_subtype", "crew_description", "crew_xp_condition", "hunting_grounds_type", "hunting_grounds_description", "upgrade_6_name", "upgrade_8_name"],
 	"translatedPlaybookAttributes": ["char_cohort_name", "char_cohort_subtype", "friends_title", "gatherinfo1", "gatherinfo2", "gatherinfo3", "gatherinfo4", "gatherinfo5", "gatherinfo6", "playbook_description", "setting_stress_label", "setting_trauma_label", "xp_condition", "xp_condition2", "xp_condition3"]
 };
-const sheetVersion = "2.7";
+/* global data, getTranslationByKey, getAttrs, setAttrs, on, getSectionIDs, generateRowID, removeRepeatingRow */
+const sheetVersion = "1.0";
+const sheetName = "Blades in the Dark";
 /* It's necessary to include the base data at the start of the file */
 /* Translate all the data */
 Object.keys(data.crew).forEach(crew => {
@@ -3428,6 +3450,18 @@ Object.keys(data.playbook).forEach(playbook => {
 		item.boxes_chosen = '1';
 	});
 });
+const playbookAbilityMap = new Map([...Object.values(data.playbook).map(x => x.ability).reduce((m, v) => {
+	v.forEach(a => m.add(a));
+	return m;
+}, new Set())].map(x => {
+	return [x.name.toLowerCase(), x.description];
+}));
+const crewAbilityMap = new Map([...Object.values(data.crew).map(x => x.crewability).reduce((m, v) => {
+	v.forEach(a => m.add(a));
+	return m;
+}, new Set())].map(x => {
+	return [x.name.toLowerCase(), x.description];
+}));
 /* Utility functions - shouldn't need to touch most of these */
 const mySetAttrs = (attrs, options, callback) => {
 		const finalAttrs = Object.keys(attrs).reduce((m, k) => {
@@ -3487,6 +3521,30 @@ const mySetAttrs = (attrs, options, callback) => {
 			});
 		});
 	},
+	diceMagic = num => {
+		const replaceEntities = string => {
+			const entities = {
+				'[': '#91',
+				'}': '#125',
+				',': '#44',
+			};
+			return string.replace(/[\[},]/g, c => '&' + entities[c] + ';');
+		};
+		const range = end => [...Array(end+1).keys()].slice(1);
+		if (num > 0)
+			return replaceEntities(range(num).reduce((m, k) => `${m} {{roll${k}=[[d6]]}}`, ''));
+		else return replaceEntities(' {{zerodice=[[d6]], [[d6]]}}');
+	},
+	buildRollFormula = base => {
+		return `?{@{bonusdice}|` +
+			[0,1,2,3,4,5,6,-1,-2,-3].map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join('|') +
+			'}';
+	},
+	buildNumdiceFormula = () => {
+		return `?{${getTranslationByKey('numberofdice')}|` +
+			[0, 1, 2, 3, 4 , 5, 6].map(n => `${n},${diceMagic(n)}`).join('|') +
+			'}';
+	},
 	emptyFirstRowIfUnnamed = sectionName => {
 		getSectionIDs(`repeating_${sectionName}`, idList => {
 			const id = idList[0];
@@ -3532,34 +3590,43 @@ const mySetAttrs = (attrs, options, callback) => {
 		});
 	},
 	calculateResistance = name => {
-		getAttrs(data.actions[name], v => {
-			const total = Object.keys(v).map(x => v[x])
+		getAttrs([...data.actions[name], `setting_resbonus_${name}`], v => {
+			const total = data.actions[name].map(x => v[x])
 				.reduce((s, c) => s + (String(c) === '0' ? 0 : 1), 0);
 			setAttr(name, total);
+			setAttr(`${name}_formula`, buildRollFormula(total + parseInt(v[`setting_resbonus_${name}`])));
 		});
 	},
 	calculateVice = () => {
 		getAttrs(Object.keys(data.actions), v => {
-			setAttr('vice', Math.min(...Object.keys(v).map(x => parseInt(v[x]) || 0)));
+			const total = Math.min(...Object.keys(v).map(x => parseInt(v[x]) || 0));
+			setAttr('vice_formula', buildRollFormula(total));
 		});
 	},
-	calculateStashDice = stash => setAttr('stash_dice', Math.floor(parseInt(stash) / 10)),
-	calculateCohortDice = prefixes => {
-		const sourceAttrs = [
-			'crew_tier',
-			...prefixes.map(p => `${p}_impaired`),
-			...prefixes.map(p => `${p}_type`),
-		];
-		getAttrs(sourceAttrs, v => {
-			const setting = {};
-			prefixes.forEach(prefix => {
-				const dice = (parseInt(v.crew_tier) || 0) - (parseInt(v[`${prefix}_impaired`]) || 0) +
-					((v[`${prefix}_type`] === 'elite' || v[`${prefix}_type`] === 'expert') ? 1 : 0);
-				setting[`${prefix}_dice`] = dice;
+		calculateStashFormula = () => getAttrs(['stash'], v => {
+			setAttr('stash_formula', buildRollFormula(Math.floor(parseInt(v.stash) / 10)));
+		}),
+		calculateWantedFormula = () => getAttrs(['wanted'], v => {
+			setAttr('wanted_formula', buildRollFormula(v.wanted));
+		}),
+		calculateCohortDice = prefixes => {
+			const sourceAttrs = [
+				'crew_tier',
+				...prefixes.map(p => `${p}_impaired`),
+				...prefixes.map(p => `${p}_type`),
+				...prefixes.map(p => `${p}_roll_formula`),
+			];
+			getAttrs(sourceAttrs, v => {
+				const setting = {};
+				prefixes.forEach(prefix => {
+					const dice = (parseInt(v.crew_tier) || 0) - (parseInt(v[`${prefix}_impaired`]) || 0) +
+						((v[`${prefix}_type`] === 'elite' || v[`${prefix}_type`] === 'expert') ? 1 : 0),
+						formula = buildRollFormula(dice);
+					if (formula !== v[`${prefix}_roll_formula`]) setting[`${prefix}_roll_formula`] = formula;
+				});
+				setAttrs(setting);
 			});
-			setAttrs(setting);
-		});
-	};
+		};
 /* CONSTANTS */
 const crewAttributes = [...new Set([].concat(...Object.keys(data.crew).map(x => Object.keys(data.crew[x].base))))],
 	playbookAttributes = [...new Set([].concat(...Object.keys(data.playbook).map(x => Object.keys(data.playbook[x].base))))],
@@ -3614,7 +3681,7 @@ on('change:crew_type change:playbook', event => {
 	getAttrs(['playbook', 'crew_type', 'changed_attributes', 'setting_autofill', ...watchedAttributes], v => {
 		const changedAttributes = (v.changed_attributes || '').split(','),
 			sourceName = translatedNames[(event.sourceAttribute === 'crew_type' ? v.crew_type : v.playbook).toLowerCase()],
-			fillBaseData = (data, defaultAttrNames) => {
+			fillBaseData = (inputData, defaultAttrNames) => {
 				if (data) {
 					const finalSettings = defaultAttrNames.filter(name => !changedAttributes.includes(name))
 						// do not reset attributes which have been changed by the user
@@ -3626,8 +3693,8 @@ on('change:crew_type change:playbook', event => {
 							m[name] = data.defaultValues[name] || '';
 							return m;
 						}, {});
-					Object.keys(data).filter(name => !changedAttributes.includes(name))
-						.forEach(name => (finalSettings[name] = data[name]));
+					Object.keys(inputData).filter(name => !changedAttributes.includes(name))
+						.forEach(name => (finalSettings[name] = inputData[name]));
 					mySetAttrs(finalSettings);
 				}
 			};
@@ -3650,6 +3717,26 @@ on('change:crew_type change:playbook', event => {
 		}
 	});
 });
+const fillPlaybookAbility = () => {
+	const prefix = 'repeating_ability';
+	getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
+		if (!v[`${prefix}_description`]) {
+			const description = playbookAbilityMap.get((v[`${prefix}_name`] || '').toLowerCase());
+			if (description) setAttr(`${prefix}_description`, description);
+		}
+	});
+};
+const fillCrewAbility = () => {
+	const prefix = 'repeating_crewability';
+	getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
+		if (!v[`${prefix}_description`]) {
+			const description = crewAbilityMap.get((v[`${prefix}_name`] || '').toLowerCase());
+			if (description) setAttr(`${prefix}_description`, description);
+		}
+	});
+};
+on('change:repeating_ability:name', fillPlaybookAbility);
+on('change:repeating_crewability:name', fillCrewAbility);
 /* Watch repeating rows for changes and set autogen to false if change happens */
 autogenSections.forEach(sectionName => {
 	on(`change:repeating_${sectionName}`, event => {
@@ -3674,11 +3761,14 @@ watchedAttributes.forEach(name => {
 });
 /* Register attribute/action event handlers */
 Object.keys(data.actions).forEach(attrName => {
-	on(data.actions[attrName].map(x => `change:${x}`).join(' '), () => calculateResistance(attrName));
+		on([...data.actions[attrName], `setting_resbonus_${attrName}`]
+			.map(x => `change:${x}`).join(' '), () => calculateResistance(attrName)
+		);
 	on(`change:${attrName}`, calculateVice);
 });
 /* Calculate stash */
-on('change:stash', event => calculateStashDice(event.newValue));
+on('change:stash', calculateStashFormula);
+on('change:wanted', calculateWantedFormula);
 /* Calculate trauma */
 on('change:setting_traumata_set ' + traumaDataFlat.map(x => `change:trauma_${x}`).join(' '), event => {
 	getAttrs(['setting_traumata_set', ...traumaDataFlat.map(x => `trauma_${x}`)], v => {
@@ -3717,10 +3807,10 @@ on('change:repeating_cohort', () => calculateCohortDice(['repeating_cohort']));
 on('change:crew_tier', () => {
 	getSectionIDs('repeating_cohort', a => calculateCohortDice(a.map(id => `repeating_cohort_${id}`)));
 });
-on('change:char_cohort_quality change:char_cohort_impaired', () => {
+on('change:char_cohort_quality change:char_cohort_impaired change:setting_show_cohort', () => {
 	getAttrs(['char_cohort_quality', 'char_cohort_impaired'], v => {
 		const dice = (parseInt(v.char_cohort_quality) || 0) - (parseInt(v.char_cohort_impaired) || 0);
-		setAttr('char_cohort_dice', dice);
+		setAttr('char_cohort_roll_formula', buildRollFormula(dice));
 	});
 });
 /* Set correct verb for cohort roll button */
@@ -3742,6 +3832,7 @@ handleBoxesFill('bandolier2_check_');
 		if (String(event.newValue) === '0' && event.sourceType === 'player') {
 			setAttr(name, (parseInt(event.previousValue) || 1) - 1);
 		}
+		setAttr(`${name}_formula`, buildRollFormula(event.newValue || '0'));
 	});
 });
 /* Item reset button */
@@ -3763,30 +3854,13 @@ on('change:reset_items', () => {
 	['item', 'playbookitem'].forEach(clearChecks);
 });
 /* Default values for number of upgrades boxes — probably not necessary anymore */
-on('change:repeating_upgrade:boxes_chosen', () => {
-	getAttrs(['repeating_upgrade_numboxes'], v => {
-		if (!['1', '2', '3'].includes(v.repeating_upgrade_numboxes)) {
-			setAttr('repeating_upgrade_numboxes', '1');
-		}
-	});
-});
-/* Bonus dice via dropdown or text input */
-on('change:setting_text_bonus_query sheet:opened', () => {
-	getAttrs(['setting_text_bonus_query', 'bonusdice', 'numberofdice'], v => {
-		const setting = {};
-		if (String(v.setting_text_bonus_query) === '1') {
-			setting.bonusdice = `(?{${getTranslationByKey('bonusdice')}|0})`;
-			setting.numberofdice = `(?{${getTranslationByKey('numberofdice')}|0})`;
-		}
-		else {
-			setting.bonusdice = `?{${getTranslationByKey('bonusdice')}|0|1|2|3|4|5|6|-1|-2|-3}`;
-			setting.numberofdice = `?{${getTranslationByKey('numberofdice')}|0|1|2|3|4|5|6}`;
-			if (setting.bonusdice === v.bonusdice) delete setting.bonusdice;
-			if (setting.numberofdice === v.numberofdice) delete setting.numberofdice;
-		}
-		mySetAttrs(setting);
-	});
-});
+// on('change:repeating_upgrade:boxes_chosen', () => {
+// 	getAttrs(['repeating_upgrade_numboxes'], v => {
+// 		if (!['1', '2', '3'].includes(v.repeating_upgrade_numboxes)) {
+// 			setAttr('repeating_upgrade_numboxes', '1');
+// 		}
+// 	});
+// });
 /* Resistance query */
 on('change:setting_consequence_query sheet:opened', () => {
 	getAttrs(['setting_consequence_query'], v => {
@@ -3807,6 +3881,33 @@ autoExpandFields.forEach(name => {
 		});
 	});
 });
+/* Clean chat image URL */
+on('change:chat_image', event => {
+	const match = (event.newValue || '').match(/^(https:\/\/s3\.amazonaws\.com\/files\.d20\.io\/images\/.*\.jpg)\?\d+$/);
+	if (match) setAttr('chat_image', match[1]);
+});
+/* Number of dice prompt */
+on('sheet:opened', () => {
+	/* Set up translated attributes */
+	const translatedAttrs = {
+		bonusdice: getTranslationByKey('bonusdice'),
+		effect_query: getTranslationByKey('effect_query'),
+		notes_query: `?{${getTranslationByKey('notes')}}`,
+		numberofdice: buildNumdiceFormula(),
+		position_query: `?{${getTranslationByKey('position')}|` +
+			`${getTranslationByKey('risky')},position=${getTranslationByKey('risky')}|` +
+			`${getTranslationByKey('controlled')},position=${getTranslationByKey('controlled')}|` +
+			`${getTranslationByKey('desperate')},position=${getTranslationByKey('desperate')}|` +
+			`${getTranslationByKey('fortune_roll')},position=}`,
+	};
+	getAttrs(Object.keys(translatedAttrs), v => {
+		const setting = {};
+		Object.keys(translatedAttrs).forEach(name => {
+			if (v[name] !== translatedAttrs[name]) setting[name] = translatedAttrs[name];
+		});
+		mySetAttrs(setting);
+	});
+});
 /* INITIALISATION AND UPGRADES */
 on('sheet:opened', () => {
 	getAttrs(['sheet_type', 'changed_attributes', 'crew_type', 'playbook'], v => {
@@ -3815,28 +3916,10 @@ on('sheet:opened', () => {
 		/* Remove reminder box if we have playbook or crew name */
 		if (v.playbook || v.crew_type) setAttr('show_playbook_reminder', '0');
 	});
-	/* Set up translated queries */
-	const queries = {
-		effect_query: getTranslationByKey('effect_query'),
-		notes_query: `?{${getTranslationByKey('notes')}}`,
-		position_query: `?{${getTranslationByKey('position')}|` +
-			`${getTranslationByKey('risky')},position=${getTranslationByKey('risky')}|` +
-			`${getTranslationByKey('controlled')},position=${getTranslationByKey('controlled')}|` +
-			`${getTranslationByKey('desperate')},position=${getTranslationByKey('desperate')}|` +
-			`${getTranslationByKey('fortune_roll')},position=}`
-	};
-	getAttrs(Object.keys(queries), v => {
-		const setting = {};
-		Object.keys(queries).forEach(name => {
-			if (v[name] !== queries[name]) setting[name] = queries[name];
-		});
-		mySetAttrs(setting);
-	});
 	/* Setup and upgrades */
 	getAttrs(['version'], v => {
 		const upgradeSheet = version => {
-				const versionMajor = version && parseInt(version.split('.')[0]),
-					versionMinor = version && parseInt(version.split('.')[1]);
+				const [major, minor] = version && version.split('.').map(x => parseInt(x));
 				console.log(`Found version ${version}.`);
 			},
 			initialiseSheet = () => {
@@ -3862,7 +3945,7 @@ on('sheet:opened', () => {
 		// Set version number
 		mySetAttrs({
 			version: sheetVersion,
-			character_sheet: `Blades in the Dark v${sheetVersion}`,
+			character_sheet: `${sheetName} v${sheetVersion}`,
 		});
 	});
 });
