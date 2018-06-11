@@ -1,3 +1,5 @@
+/* Variants of grey */
+/* red */
 /* GENERALITIES */
 .charsheet {
   color: #333;
@@ -2871,6 +2873,11 @@ button[type=roll].sheet-broadcast-button {
   background-repeat: no-repeat;
   font-variant-numeric: lining-nums;
 }
+.sheet-rolltemplate-bitd .sheet-action {
+  display: grid;
+  grid: auto/133px 116px;
+  align-content: start;
+}
 .sheet-rolltemplate-bitd .sheet-holder.sheet-resist.sheet-short,
 .sheet-rolltemplate-bitd .sheet-holder.sheet-vice.sheet-short {
   height: 171px;
@@ -2908,6 +2915,7 @@ button[type=roll].sheet-broadcast-button {
   height: 100%;
 }
 .sheet-rolltemplate-bitd .sheet-header {
+  grid-column: span 2;
   display: -webkit-box;
   margin: 16px 0 0;
   font-size: 15px;
@@ -2957,6 +2965,7 @@ button[type=roll].sheet-broadcast-button {
   max-height: 80px;
 }
 .sheet-rolltemplate-bitd .sheet-title {
+  grid-column: span 2;
   color: white;
   position: relative;
   text-transform: uppercase;
@@ -2986,19 +2995,15 @@ button[type=roll].sheet-broadcast-button {
 .sheet-rolltemplate-bitd .sheet-small-title {
   font-size: 28px;
 }
-.sheet-rolltemplate-bitd .sheet-position {
-  width: 133px;
-}
 .sheet-rolltemplate-bitd .sheet-position,
 .sheet-rolltemplate-bitd .sheet-effect {
-  display: inline-block;
-  box-sizing: border-box;
   color: white;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 1px;
 }
 .sheet-rolltemplate-bitd .sheet-dice {
+  grid-column: span 2;
   height: 27px;
   font-size: 19px;
   line-height: 20px;

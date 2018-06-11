@@ -8,15 +8,15 @@ rolltemplate.sheet-rolltemplate-bitd
 		.title
 			span(class='{{#small-title}}small-title{{/small-title}}') {{title}}
 		.dice
-			each num in range(1,12)
-				= `{{#rollGreater() roll${num} 0}}{{roll${num}}}`
-				span.comma ,
-				= ` {{/rollGreater() roll${num} 0}}`
-			| {{#rollGreater() zerodice 0}}
+			| {{^zerodice}}{{dice}}{{/zerodice}}{{#zerodice}}
 			.zerodice1 {{zerodice}}
 			.zerodice2(data-i18n='zerodice')
-			| {{/rollGreater() zerodice 0}}
-		| {{#position}}#[.position {{position}}]{{/position}}{{#effect}}#[.effect {{effect}}]{{/effect}}{{#resist}}{{^short}}
+			| {{/zerodice}}
+		| {{#position}}
+		.position {{position}}
+		| {{/position}}{{#effect}}
+		.effect {{effect}}
+		| {{/effect}}{{#resist}}{{^short}}
 		.instructions(data-i18n='resist_instructions')
 		| {{/short}}{{/resist}}{{#vice}}{{^short}}
 		.instructions(data-i18n='vice_instructions')
@@ -61,10 +61,10 @@ rolltemplate.sheet-rolltemplate-bitd-broadcast
 				td(data-i18n='need_help')
 			tr
 				td 2
-				td {{#harm2_1}} #[.harm-inner {{harm2_1}}] {{/harm2_1}} {{#harm2_2}} #[.harm-inner {{harm2_2}}] {{/harm2_2}}
+				td {{#harm2_1}}#[.harm-inner {{harm2_1}}]{{/harm2_1}}{{#harm2_2}}#[.harm-inner {{harm2_2}}]{{/harm2_2}}
 				td(data-i18n='minus1d')
 			tr
 				td 1
-				td {{#harm1_1}} #[.harm-inner {{harm1_1}}] {{/harm1_1}} {{#harm1_2}} #[.harm-inner {{harm1_2}}] {{/harm1_2}}
+				td {{#harm1_1}}#[.harm-inner {{harm1_1}}]{{/harm1_1}}{{#harm1_2}}#[.harm-inner {{harm1_2}}]{{/harm1_2}}
 				td(data-i18n='less_effect')
 		| {{/harm}}

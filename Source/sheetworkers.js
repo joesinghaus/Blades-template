@@ -149,7 +149,7 @@ const mySetAttrs = (attrs, options, callback) => {
 		};
 		const range = end => [...Array(end+1).keys()].slice(1);
 		if (num > 0)
-			return replaceEntities(range(num).reduce((m, k) => `${m} {{roll${k}=[[d6]]}}`, ''));
+			return replaceEntities(` {{dice=${range(num).map(() => `[[d6]]`).join(", ")}}}`);
 		else return replaceEntities(' {{zerodice=[[d6]], [[d6]]}}');
 	},
 	buildRollFormula = base => {

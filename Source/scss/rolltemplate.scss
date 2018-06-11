@@ -31,6 +31,11 @@ $broadcast-white: #ccc;
 		background-repeat: no-repeat;
 		font-variant-numeric: lining-nums;
 	}
+	.sheet-action {
+		display: grid;
+		grid: auto / 133px 116px;
+		align-content: start;
+	}
 	.sheet-holder.sheet-resist.sheet-short,
 	.sheet-holder.sheet-vice.sheet-short {
 		height: 171px;
@@ -71,6 +76,7 @@ $broadcast-white: #ccc;
 	}
 	/* Header */
 	.sheet-header {
+		grid-column: span 2;
 		display: -webkit-box;
 		margin: 16px 0 0;
 		font-size: 15px;
@@ -114,6 +120,7 @@ $broadcast-white: #ccc;
 	}
 	/* Title */
 	.sheet-title {
+		grid-column: span 2;
 		color: white;
 		position: relative;
 		text-transform: uppercase;
@@ -140,18 +147,16 @@ $broadcast-white: #ccc;
 	.sheet-fortune .sheet-title { color: black }
 	.sheet-small-title { font-size: 28px }
 	/* Position and Effect */
-	.sheet-position { width: 133px }
 	.sheet-position,
 	.sheet-effect {
-			display: inline-block;
-			box-sizing: border-box;
-			color: white;
-			text-transform: uppercase;
-			font-size: 12px;
-			letter-spacing: 1px;
+		color: white;
+		text-transform: uppercase;
+		font-size: 12px;
+		letter-spacing: 1px;
 	}
 	/* Dice */
 	.sheet-dice {
+		grid-column: span 2;
 		height: 27px;
 		font-size: 19px;
 		line-height: 20px;
