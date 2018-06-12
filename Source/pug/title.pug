@@ -4,10 +4,10 @@
 	.type-selector.label
 		input.hidden.sheet-3waybox(type='checkbox', name='attr_sheet_type', value='faction')
 		input.sheet-3waybox(type='radio', name='attr_sheet_type', value='character', checked)
-		input.sheet-3waybox(type='radio', name='attr_sheet_type', value='crew')
+		input.sheet-3waybox(type='radio', name='attr_sheet_type', value='craft')
 		input.sheet-3waybox(type='radio', name='attr_sheet_type', value='faction')
 		span(data-i18n='character_mode')
-		span(data-i18n='crew_mode')
+		span(data-i18n='craft_mode')
 		span(data-i18n='faction_mode')
 	label.settings-checkbox
 		+checkbox('show_settings') y
@@ -24,17 +24,13 @@
 		label.generatebutton
 			+checkbox('generate_ability')(data-i18n='add_abilities')
 		label.generatebutton
-			+checkbox('generate_friend')(data-i18n='add_friends')
-		label.generatebutton
 			+checkbox('generate_playbookitem')(data-i18n='add_items')
-	.setting-crew.generaterow
-		select(name='attr_generate_source_crew', title='Choose source')
-			each crew in crews
-				option(value=crew, data-i18n=crew)
+	.setting-craft.generaterow
+		select(name='attr_generate_source_craft', title='Choose source')
+			each craft in crafts
+				option(value=craft, data-i18n=craft)
 		label.generatebutton
-			+checkbox('generate_crewability')(data-i18n='add_abilities')
-		label.generatebutton
-			+checkbox('generate_contact')(data-i18n='add_contacts')
+			+checkbox('generate_craftability')(data-i18n='add_abilities')
 		label.generatebutton
 			+checkbox('generate_upgrade')(data-i18n='add_upgrades')
 	.setting-faction.generaterow
@@ -42,33 +38,17 @@
 			+checkbox('generate_factions')(data-i18n='generate_factions')
 	.setting-char
 		label
-			select(name='attr_setting_extra_stress', title='Stress Boxes')
-				option(value='0', selected) 9
-				option(value='1') 10
-				option(value='2') 11
-				option(value='3') 12
-			span(data-i18n='number_stress_boxes')
-	.setting-char
-		label
 			+checkbox('setting_extra_trauma').checkbox.squarebox
 			span(data-i18n='show_extra_trauma_box')
-	.setting-char.setting-crew
+	.setting-char
+		label
+			+checkbox('setting_show_utility_belts').checkbox.squarebox
+			span(data-i18n='utility_belts')
+	.setting-char.setting-craft
 		label
 			+checkbox('setting_extra_xp').checkbox.squarebox
 			span(data-i18n='show_extra_xp_condition')
-	//- Strictures: can be deleted safely
-	if (showStrictures)
-		.setting-char
-			label
-				+checkbox('setting_show_strictures').checkbox.squarebox
-				span(data-i18n='show_vampire_strictures')
-	//- Frame: can be deleted safely
-	if (showFrame)
-		.setting-char
-			label
-				+checkbox('setting_show_frame').checkbox.squarebox
-				span(data-i18n='show_frame_section')
-	.setting-char.setting-crew
+	.setting-char.setting-craft
 		label
 			+checkbox('setting_show_itemdesc')(checked).checkbox.squarebox
 			span(data-i18n='show_item_description')
@@ -78,28 +58,21 @@
 			span(data-i18n='show_cohort_section')
 	.setting-char
 		label
-			+text-input('setting_stress_label', 'stress')
-			span(data-i18n='stress_label')
-	.setting-char
-		label
-			+text-input('setting_trauma_label', 'trauma')
-			span(data-i18n='trauma_label')
-	//- Deity and origin fields. Can be deleted safely
-	if (showDeityOrigin)
-		.setting-crew
-			label
-				+checkbox('setting_show_deity').checkbox.squarebox
-				span(data-i18n='show_deity')
-		.setting-crew
-			label
-				+checkbox('setting_show_origin').checkbox.squarebox
-				span(data-i18n='show_origin')
+			+checkbox('setting_extra_armor').checkbox.squarebox
+			span(data-i18n='show_extra_armor')
 	.setting-char
 		span(data-i18n='resistance_bonus')
 		each attribute in Object.keys(actionData)
 			label
 				+number-input(`setting_resbonus_${attribute}`)(value='0')
 				span(data-i18n=attribute)
+	.setting-craft
+		select(name="attr_setting_craft_layout")
+			option(value="", data-i18n="custom")
+			option(value="cannibal", data-i18n="cannibal_craft")
+			option(value="orb", data-i18n="dark_orb")
+			option(value="splitter", data-i18n="planet_splitter")
+		span(data-i18n="module_layout")
 	.setting-char
 		label
 			+checkbox('setting_consequence_query').checkbox.squarebox
@@ -116,43 +89,18 @@
 		label
 			+number-input('setting_load_h')(value='6')
 			span(data-i18n='heavy')
-	//- If you only have one type of trauma, you can delete the next element
-	.setting-char
-		label
-			select(name='attr_setting_traumata_set', title='Traumata')
-				each type in Object.keys(traumaData)
-					option(value=type, data-i18n=type)
-			span(data-i18n='traumata')
-	//- Special vices for the spirit playbooks. Can be deleted safely.
-	if (showSpecialVice)
-		.setting-char
-			label
-				select(name='attr_setting_vice_type', title='Vice')
-					option(value='normal', data-i18n='normal', selected)
-					option(value='ghost', data-i18n='ghost')
-					option(value='hull', data-i18n='hull')
-					option(value='vampire', data-i18n='vampire')
-				span(data-i18n='vice')
-	.setting-char.setting-crew.setting-faction
+	.setting-char.setting-craft.setting-faction
 		label
 			+checkbox('setting_flexwidth').checkbox.squarebox
 			span(data-i18n='flexible_width')
-	.setting-char.setting-crew.setting-faction
-		label
-			+checkbox('setting_focus_shadow')(checked).checkbox.squarebox
-			span(data-i18n='show_outline')
-	.setting-char.setting-crew.setting-faction
-		label
-			+checkbox('setting_show_broadcast')(checked).checkbox.squarebox
-			span(data-i18n='show_broadcast')
-	.setting-char.setting-crew
+	.setting-char.setting-craft
 		label
 			+checkbox('setting_autofill')(checked).checkbox.squarebox
 			span(data-i18n='fill_fields')
-	.setting-char.setting-crew
+	.setting-char.setting-craft
 		+text-input('chat_image')(value='').wide
 		span(data-i18n='chat_image')
-	.setting-char.setting-crew.setting-faction.kirsty-option
+	.setting-char.setting-craft.setting-faction.kirsty-option
 		label
 			+checkbox('setting_usekirsty').checkbox.squarebox
 			span(data-i18n='use_kirsty')

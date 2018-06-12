@@ -1,23 +1,17 @@
 -
 	const translation = locals.translation,
 		actionData = locals.data.actions,
-		traumaData = locals.data.traumas,
+		traumas = locals.data.traumas,
 		playbooks = Object.keys(locals.data.playbook),
-		crews = Object.keys(locals.data.crew);
+		crafts = Object.keys(locals.data.craft);
 
 	/** Toggles for special sections of the sheet
 	 *  By default, these will not be output to the generated HTML, you can change these to show them
 	 */
 
-	const showStrictures = false,				// vampire strictures
-		showFrame = false,								// hull frame
-		showSpecialVice = false,					// ghost, hull, and vampire vices
-		showDeityOrigin = false;					// show Deity and Origin
-
 	// Javascript really needs a range function
 	const range = (start, end) => [...Array(end+1).keys()].slice(start);
 	const zerodiceFormula = '?{@{bonusdice}|0, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|1, {{dice=&#91;&#91;d6]]&#125;&#125;|2, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|3, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|4, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|5, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|6, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-1, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-2, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-3, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}';
-
 
 //- Mixins for code reuse
 mixin checkbox(name, extraclass)
@@ -73,11 +67,11 @@ mixin broadcast(name, content)
 	button.broadcast-button(type='roll', name=`roll_${name}`, value!= `&{template:bitd-broadcast} ${content} {{charimage=@{chat_image}}}`, data-i18n-title='send_details_to_chat') :
 
 //- Cohort section
-	isCharacter === true shows an input for quality, instead of generating it from the crew quality
+	isCharacter === true shows an input for quality, instead of generating it from the craft quality
 mixin makecohort(prefix, isCharacter)
 	.cohort
 		+hidden-input(`${prefix}verb`)(value=isCharacter ? '^{rolls_their}' : '^{roll_their}')
-		+hidden-input(`${prefix}roll_formula`)(value=zerodiceFormula)
+		+hidden-input(`${prefix}roll_formula`)(value="?{@{bonusdice}|0, {{dice=&#91;&#91;d6]]&#125;&#125;|1, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|2, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|3, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|4, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|5, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|6, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-1, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-2, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-3, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}")
 		.cohort-title.flex.col100.label
 			+text-input(`${prefix}name`, 'cohort').inherit
 			+roll(`${prefix}roll`, '{{resist=1}} {{short=1}} {{charname=@{'+prefix+'name} (^{@{'+prefix+'type}}, @{'+prefix+'subtype})}} {{title=^{cohort_quality}}} {{subtitle=@{'+prefix+'verb}}}) @{'+prefix+'roll_formula}')(data-i18n='roll-inf').inherit.rollbutton
@@ -91,15 +85,19 @@ mixin makecohort(prefix, isCharacter)
 					+radio(`${prefix}type`)(value='elite', data-i18n='elite')
 				div
 					+radio(`${prefix}type`)(value='expert', checked=isCharacter, data-i18n='expert')
-			+text-input(`${prefix}subtype`)(data-i18n-placeholder=isCharacter ? 'hunter' : 'gang_type').sheet-inherit
-			if (isCharacter)
-				.label.cohort-quality-label(data-i18n='quality_abbreviated') Q:
-				+number-input(`${prefix}quality`)(min='0', max='5', value='1').label
+			+text-input(`${prefix}subtype`)(data-i18n-placeholder=isCharacter ? 'robot' : 'gang_type').sheet-inherit
 		.cohort-condition.flex.col100
 			each name in ['weak', 'impaired', 'broken', 'armor']
 				label
 					span(class='cohort-condition-name ' + (name ==='armor' ? 'label' : 'uppercase'), data-i18n=name)
 					+checkbox(prefix + name).tooth.stresstooth
+		.flex
+			label.cohort-edgeflaw.col50
+				span.uppercase(data-i18n="scale")
+				+number-input(`${prefix}scale`)(value=isCharacter ? "0" : "2")
+			label.cohort-edgeflaw.col50
+				span.uppercase.wide(data-i18n="quality")
+				+number-input(`${prefix}quality`)(value=isCharacter ? "2" : "1")
 		each name in ['edges', 'flaws']
 			label.cohort-edgeflaw
 				span.uppercase(data-i18n=name)
@@ -152,8 +150,6 @@ mixin makeclock(isFaction)
 		img(src=`https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/${tooth}.png`)
 
 //- Global setttings
-+hidden-input('setting_focus_shadow')(value='1').focus-shadow
-+hidden-input('setting_show_broadcast')(value='1').show-broadcast
 +hidden-input('setting_show_itemdesc')(value='1').show-itemdesc
 +hidden-input('setting_usekirsty')(value='0').use-kirsty
 +hidden-input('setting_flexwidth')(value='0').flexwidth
@@ -174,18 +170,18 @@ mixin makeclock(isFaction)
 +hidden-input('playbook_xp_max')(value='8')
 +hidden-input('rep_max')(value='12')
 +hidden-input('turf_max')(value='6')
-+hidden-input('crew_tier_max')(value='4')
++hidden-input('craft_tier_max')(value='4')
 +hidden-input('heat_max')(value='9')
 +hidden-input('wanted_max')(value='4')
-+hidden-input('crewcoin_max')(value='16')
-+hidden-input('crew_xp_max')(value='8')
++hidden-input('craftcoin_max')(value='16')
++hidden-input('craft_xp_max')(value='8')
 
 //- Actual sheet
 .container
 	+hidden-input('sheet_type')(value='character').type
 	include pug/title.pug
 	include pug/character.pug
-	include pug/crew.pug
+	include pug/craft.pug
 	include pug/faction.pug
 
 //- Strange syntax is meant fo force a line break

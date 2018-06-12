@@ -1,0 +1,283 @@
+mixin makeupgrade(number, numboxes, def, desc)
+	div
+		.item
+			+checkbox(`upgrade_${number}_check_1`).checkbox.squarebox
+			if (numboxes === 2)
+				+checkbox(`upgrade_${number}_check_2`).checkbox.squarebox
+			+text-input(`upgrade_${number}_name`, def).itemname
+		.item-description
+			+checkbox(`upgrade_${number}_expand`).expand
+			+textarea(`upgrade_${number}_description`, desc)(data-i18n-placeholder='description')
+
+mixin module(name, bridgeLoc, bridgeNames)
+	.hexagon&attributes(attributes)
+		label.module-check
+			+checkbox(`module_${name}_check`)
+		if (bridgeLoc === "bottom")
+			+bridge(bridgeNames[0]).bottom-left
+			+bridge(bridgeNames[1]).bottom-right
+		if (bridgeLoc === "top")
+			+bridge(bridgeNames[0]).top-left
+			+bridge(bridgeNames[1]).top-right
+		+autoexpand(`module_${name}_name`)(data-i18n-placeholder="module_name").name
+		+autoexpand(`module_${name}_desc`)(data-i18n-placeholder="description").desc
+
+mixin bridge(name)
+	label.bridge&attributes(attributes)
+		+checkbox(`module_bridge_${name}`)(checked).bridge-check
+
+// Craft Sheet
+.type-craft.flex
+	// Left column
+	.col58.flex-wrap
+		// Logo, Header text fields
+		.col100.header.flex-wrap
+			.col55.bladeslogo
+			label.col80
+				+text-input('craft_name')
+				.label.text.title(data-i18n='name')
+			label.col20
+				+text-input('craft_scale')
+				.label.text.title(data-i18n='scale')
+			label.col55
+				+autoexpand('craft_background')
+				+hidden-input('craft_background')(value='')
+				.text
+					span.label.title(data-i18n='background')
+					span.uppercase.info(data-i18n='craft_background_info')
+			label.col45
+				+autoexpand('craft_ai')
+				+hidden-input('craft_ai')(value='')
+				.text
+					span.label.title(data-i18n='ai')
+					span.uppercase.info(data-i18n='ai_info')
+			label.col100
+				+text-input('craft_look')
+				.label.text.title(data-i18n='look')
+		// Stress
+		.stress.flex.col100.def-margin
+			.stress1.blackheader
+				.label(data-i18n="stress")
+			.stress2.blackborder.flex
+				+radio('craft_stress')(value='0', checked).tooth.zero
+				each num in range(1,16)
+					+radio('craft_stress')(value=num).tooth.stresstooth
+			// Trauma markers
+			.stress3
+				.blackheader
+					.label(data-i18n="trauma")
+				.traumaholder.flex
+					+radio('craft_trauma')(value='0', checked).tooth.zero
+					each num in range(1,6)
+						+radio('craft_trauma')(value=num).tooth.regulartooth
+		.harm-trauma-profit.def-margin
+			// Harm
+			.harm
+				.blackheader.col100
+					.label(data-i18n='harm')
+					+broadcast('Harm', '{{charname=@{character_name}}} {{harm=1}} {{harm3=@{craft_harm3}}} {{harm2_1=@{craft_harm2_1}}} {{harm2_2=@{craft_harm2_2}}} {{harm1_1=@{craft_harm1_1}}} {{harm1_2=@{craft_harm1_2}}}')
+				.harmbody
+					.flex-center.harmnumber 3
+					+textarea('craft_harm3').twocols
+					.flex-center.harmeffect(data-i18n='need_help')
+					.flex-center.harmnumber 2
+					+textarea('craft_harm2_1')
+					+textarea('craft_harm2_2')
+					.flex-center.harmeffect(data-i18n='minus1d')
+					.flex-center.harmnumber 1
+					+textarea('craft_harm1_1')
+					+textarea('craft_harm1_2')
+					.flex-center.harmeffect(data-i18n='less_effect')
+			.trauma.blackborder
+				div
+					.flex
+						each trauma, i in traumas.slice(0, 3)
+							label.text-button
+								+checkbox(`craft_trauma_${trauma}`)(data-i18n=trauma)
+							if (i < 2)
+								span —
+					.flex
+						each trauma, i in traumas.slice(3, 6)
+							label.text-button
+								+checkbox(`craft_trauma_${trauma}`)(data-i18n=trauma)
+							if (i < 2)
+								span —
+					.flex
+						each trauma, i in traumas.slice(6, 10)
+							label.text-button
+								+checkbox(`craft_trauma_${trauma}`)(data-i18n=trauma)
+							if (i < 3)
+								span —
+			.profit
+				.blackheader.label
+					+hidden-input("profit_formula")(value=zerodiceFormula)
+					+roll('Profit', '{{resist=1}} {{short=1}} {{title=^{profit_scale}}} {{subtitle=^{rolls}}} @{profit_formula}')(data-i18n='profit').label.rollbutton.inherit
+				.profits
+					+radio('profit')(value='0', checked).zero
+					each num in range(1,7)
+						+radio('profit')(value=num, class=["radiobox", num == 7 ? "last" : ""])
+					br
+					each num in range(8,14)
+						+radio('profit')(value=num, class=["radiobox", num == 14 ? "last" : ""])
+		// Modules
+		+hidden-input("setting_craft_layout")(value="").layout-input
+		.modules
+			//First row
+			.empty
+			+module("1", "bottom", ["1_6", "1_7"]).layout
+			.empty-3.layout.layout-splitter
+			+bridge("1_2").horizontal.layout.layout-splitter
+			+module("2", "bottom", ["2_7", "2_8"]).layout.layout-cannibal.layout-orb
+			.empty-3.layout.layout-splitter
+			+bridge("2_3").horizontal
+			+module("3", "bottom", ["3_8", "3_9"])
+			+bridge("3_4").horizontal
+			+module("4", "bottom", ["4_9", "4_10"])
+			+bridge("4_5").horizontal
+			+module("5", "bottom", ["5_10", "5_11"])
+			.empty
+			// Second row
+			+module("6").layout.layout-splitter
+			.empty-3.layout.left-column
+			+bridge("6_7").horizontal.layout.layout-splitter
+			+module("7").layout.layout-splitter.layout-orb
+			.empty-3.layout.layout-cannibal
+			+bridge("7_8").horizontal
+			+module("8").layout.layout-splitter.layout-orb
+			.empty-3.layout.layout-cannibal
+			+bridge("8_9").horizontal
+			+module("9").layout.layout-cannibal.layout-splitter.layout-n
+			.hexagon.core.layout.layout-orb
+				div(data-i18n="core")
+			+bridge("9_10").horizontal
+			+module("10").layout.layout-orb
+			.hexagon.core.layout.layout-n.layout-cannibal.layout-splitter
+				div(data-i18n="core")
+			+bridge("10_11").horizontal
+			+module("11")
+			//Third row
+			.empty
+			+module("12", "top", ["6_12", "7_12"]).layout
+			.empty-3.layout.layout-splitter
+			+bridge("12_13").horizontal.layout.layout-splitter
+			+module("13", "top", ["7_13", "8_13"]).layout.layout-cannibal
+			.empty-3.layout.layout-orb.layout-splitter
+			+bridge("13_14").horizontal
+			+module("14", "top", ["8_14", "9_14"]).layout.layout-cannibal.layout-orb
+			.empty-3.layout.layout-splitter
+			+bridge("14_15").horizontal
+			+module("15", "top", ["9_15", "10_15"])
+			+bridge("15_16").horizontal
+			+module("16", "top", ["10_16", "11_16"]).layout.layout-cannibal.layout-splitter
+			.empty-3.layout.layout-orb
+			.empty
+		// Special abilities
+		.col100
+			.specialheader.label(data-i18n='special_abilities')
+			.greyholder
+				fieldset.repeating_craftability
+					.specialability.flex
+						+broadcast('Show', '{{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}')
+						+checkbox('check').checkbox.circlebox
+						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
+						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc
+		// Advancement
+		.def-margin
+			.advancement-header.flex.blackheader
+				.label.markxp(data-i18n='mark_xp:')
+				.label(data-i18n='craft_advancement')
+				.xpholder.flex
+					+radio('craft_xp')(value='0', checked).tooth.zero
+					each num in range(1,8)
+						+radio('craft_xp')(value=num).tooth.xptooth
+			ul.advancement-desc
+				li.nondot(data-i18n='xp_top')
+				li
+					+autoexpand('craft_xp_condition')(data-i18n-placeholder='xp_craft_specific')
+				+hidden-input('setting_extra_xp')(value='0').hider
+				li
+					+autoexpand('xp_condition_extra')(data-i18n-placeholder='xp_specific_extra')
+				li(data-i18n='xp_express')
+				li(data-i18n='xp_craft_trauma')
+	// Right column
+	.col42.flex-wrap.right-column
+		// Craft Type
+		.playbook.flex
+			+text-input('craft_type')(data-i18n-placeholder='craft', placeholder='Craft').label
+			+hidden-input('show_playbook_reminder')(value='1').hider
+			.reminder
+				span(data-i18n='autofill_reminder_craft')
+				br
+				span(data-i18n='list_crafts')
+		// Upgrades
+		.col50.small-margin
+			// Upgrades
+			.itemheader.col100
+				span.label(data-i18n='craft_upgrades')
+			// Specific upgrades
+			.playbookitems.itemholder.col100.free-repcontrol
+				fieldset.repeating_upgrade
+					+hidden-input('boxes_chosen')(value='0').boxes-chosen
+					.item.numboxes-chooser
+						div(data-i18n='how_many_boxes')
+						+number-input('numboxes')(min='1', max='3', value='1')
+						label
+							+checkbox('boxes_chosen')(data-i18n='ok')
+					.item
+						+hidden-input('numboxes')(value='1').numboxes
+						+checkbox('check_1').checkbox.squarebox
+						span.floatingbar.boxesgeq2
+						+checkbox('check_2', 'boxesgeq2').checkbox.squarebox
+						span.floatingbar.boxesgeq3.boxesgeq2
+						+checkbox('check_3', 'boxesgeq2 boxesgeq3').checkbox.squarebox
+						+autoexpand('name')(data-i18n-placeholder='an_upgrade').itemname
+					.item-description
+						+checkbox('expand').expand
+						+textarea('description')(data-i18n-placeholder='description')
+			.core-upgrade.small-margin
+				+autoexpand("core_upgrade_name")(data-i18n-placeholder='core_name').plainheader.label
+				+autoexpand("core_upgrade_desc")(data-i18n-placeholder='description').description
+		// Regular upgrades
+		.col50.right-column.small-margin
+			.upgrades.itemholder.col100
+				.item
+					span.label(data-i18n='core')
+				.item
+					span.label(data-i18n='training')
+				+makeupgrade("armor", 2, "armor", "upgrade_armor_desc")
+				+makeupgrade("guts", 1, "guts", "upgrade_training_desc")
+				+makeupgrade("brig", 1, "brig", "upgrade_brig_desc")
+				+makeupgrade("savvy", 1, "savvy", "upgrade_training_desc")
+				+makeupgrade("security", 2, "security", "upgrade_security_desc")
+				+makeupgrade("systems", 1, "systems", "upgrade_training_desc")
+				+makeupgrade("storage", 2, "storage", "upgrade_storage_desc")
+				+makeupgrade("personal", 1, "personal", "upgrade_training_desc")
+				+makeupgrade("weapons", 1, "weapons", "upgrade_weapons_desc")
+				.item
+				+makeupgrade("workshop", 1, "workshop", "upgrade_workshop_desc")
+				.sheet-mastery
+					.item
+						each num in range(1,4)
+							+checkbox(`upgrade_mastery_check_${num}`).checkbox.squarebox
+							if (num < 4)
+								span.floatingbar
+						+text-input('upgrade_mastery_name', 'mastery').itemname
+					.item-description
+						+checkbox('upgrade_mastery_expand').expand
+						+textarea('upgrade_mastery_description', 'upgrade_mastery_desc')(data-i18n-placeholder='description')
+			// Roll Fortune
+			+fortuneroll('Engagement', '{{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title=^{engagement}}}')(data-i18n='roll_engagement').fortunebutton.borderbutton
+			+fortuneroll('Fortune_craft', '{{fortune=1}} {{subtitle=^{roll}}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+		// Cohorts
+		.cohorts.col100.small-margin.free-repcontrol
+			.plainheader.label(data-i18n="cohorts")
+			// Cohort repeating section
+			.col100.cohorts.free-repcontrol
+				fieldset.repeating_cohort
+					+makecohort('')
+		// Clocks
+		.col100.clocks.small-margin.free-repcontrol
+			.specialheader.label(data-i18n='clocks')
+			fieldset.repeating_craftclock
+				+makeclock
+		+textarea('craft_notes')(data-i18n-placeholder='notes').notes

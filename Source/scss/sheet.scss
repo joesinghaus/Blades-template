@@ -8,6 +8,7 @@ $headergrey: #808080;
 $lightblack: #777;
 $lighterblack: #555;
 $fontblack: #333;
+$modulegrey: rgba(216, 216, 216, 1);
 
 /* red */
 $redtext: #c43c35;
@@ -97,6 +98,7 @@ $redtext: #c43c35;
 			display: inline-block;
 			transition: all 0.2s, opacity 0s;
 		}
+		&.sheet-last + span { margin-right: 0 !important }
 	}
 
 	ul {
@@ -115,7 +117,11 @@ $redtext: #c43c35;
 			position: absolute;
 		}
 	}
-
+	textarea, input[type=text], input[type=number] {
+		&:focus {
+			box-shadow: inset 0 0 1px 1px rgba(66,66,66,.3), 0 0 2px 1px rgba(66,66,66,.3);
+		}
+	}
 	button[type=roll].sheet-inherit, input[type=text].sheet-inherit {
 		font: inherit;
 		color: inherit;
@@ -124,13 +130,6 @@ $redtext: #c43c35;
 	}
 	.sheet-space-after::after {
 		content: ' ';
-	}
-}
-.sheet-focus-shadow[value="1"] ~ .sheet-container {
-	textarea, input[type=text], input[type=number] {
-		&:focus {
-			box-shadow: inset 0 0 1px 1px rgba(66,66,66,.3), 0 0 2px 1px rgba(66,66,66,.3);
-		}
 	}
 }
 .sheet-hidden {
@@ -146,6 +145,9 @@ $redtext: #c43c35;
 	}
 }
 /* Version text */
+.sheet-type[value="craft"] ~ .sheet-topholder {
+	margin: 0 0 7px calc(58% + 5px);
+}
 .sheet-topholder {
 	line-height: 22px;
 	margin: 0 0 7px calc(55% + 5px);
@@ -196,7 +198,7 @@ $redtext: #c43c35;
 	}
 	.sheet-3waybox:not(:checked) + .sheet-3waybox,
 	input[value="character"]:not(:checked) ~ span[data-i18n="character_mode"],
-	input[value="crew"]:not(:checked) ~ span[data-i18n="crew_mode"],
+	input[value="craft"]:not(:checked) ~ span[data-i18n="craft_mode"],
 	input[value="faction"][type=radio]:not(:checked) ~ span[data-i18n="faction_mode"] {
 		display: none;
 	}
@@ -204,7 +206,7 @@ $redtext: #c43c35;
 /* SETTINGS */
 .sheet-type {
 	&[value="character"] ~ .sheet-settings > :not(.sheet-setting-char),
-	&[value="crew"] ~ .sheet-settings > :not(.sheet-setting-crew),
+	&[value="craft"] ~ .sheet-settings > :not(.sheet-setting-craft),
 	&[value="faction"] ~ .sheet-settings > :not(.sheet-setting-faction) {
 		display: none;
 	}
@@ -266,7 +268,7 @@ $redtext: #c43c35;
 		}
 	}
 	select {
-		width: 80px;
+		width: 120px;
 		margin: 0 7px 0 0;
 		padding: 0;
 		height: 18px;
@@ -299,7 +301,7 @@ $redtext: #c43c35;
 }
 .sheet-type {
 	&:not([value="character"]) ~ .sheet-type-character,
-	&:not([value="crew"]) ~ .sheet-type-crew,
+	&:not([value="craft"]) ~ .sheet-type-craft,
 	&:not([value="faction"]) ~ .sheet-type-faction {
 		display: none;
 	}
@@ -308,13 +310,6 @@ $redtext: #c43c35;
 .sheet-blackheader {
 	background: black;
 	color: white;
-	&.sheet-rep1, &.sheet-hold1 {
-		padding-top: 3px;
-		line-height: 13px;
-	}
-	&.sheet-hold1 {
-		padding-left: 2px;
-	}
 }
 .sheet-blackheader, .sheet-black-on-grey, .sheet-greyheader {
 	font-size: 11px;
@@ -405,36 +400,19 @@ $redtext: #c43c35;
 .sheet-right-column {
 	padding-left: 5px;
 }
-.sheet-col47 {
-	width: 47%
-}
-.sheet-col53 {
-	width: 53%;
-}
-.sheet-col37 {
-	width: 37%;
-}
-.sheet-col24b {
-	width: 24.25%;
-}
-.sheet-col50 {
-	width: 50%;
-}
-.sheet-col52b {
-	width: 52%;
-}
-.sheet-col55 {
-	width: 55%;
-}
-.sheet-col45{
-	width: 45%;
-}
-.sheet-col63 {
-	width: 63%;
-}
-.sheet-col100 {
-	width: 100%;
-}
+.sheet-col20 { width: 20% }
+.sheet-col37 { width: 37% }
+.sheet-col42 { width: 42% }
+.sheet-col45{ width: 45% }
+.sheet-col47 { width: 47% }
+.sheet-col50 { width: 50% }
+.sheet-col52b { width: 52% }
+.sheet-col53 { width: 53% }
+.sheet-col55 { width: 55% }
+.sheet-col58 { width: 58% }
+.sheet-col63 { width: 63% }
+.sheet-col80 { width: 80% }
+.sheet-col100 { width: 100% }
 /* FONT STYLES */
 .sheet-label,
 input[type=text].sheet-label,
@@ -486,8 +464,14 @@ textarea.sheet-smallcaps {
 .sheet-itemcolumn {
 	max-width: 249px;
 }
-.sheet-itemholder > div {
+.sheet-playbookitems, .sheet-regularitems {
 	padding: 5px;
+}
+.sheet-upgrades {
+	display: grid;
+	grid: auto / 1fr 1fr;
+	.sheet-mastery { grid-column: span 2 }
+	> div { position: relative }
 }
 .sheet-item-container {
 	flex-grow: 1;
@@ -496,6 +480,9 @@ textarea.sheet-smallcaps {
 	background: $lightest;
 }
 .sheet-regularitems {
+	&.sheet-flex-wrap {
+		padding: 5px 0;
+	}
 	.repcontainer {
 		display: flex;
 		flex-wrap: wrap;
@@ -507,9 +494,6 @@ textarea.sheet-smallcaps {
 	}
 	.sheet-input-short[value="1"] + .sheet-input-expand[value="0"] ~ .sheet-item-container {
 		width: 96px;
-	}
-	.sheet-col50, .sheet-col100 {
-		position: relative;
 	}
 }
 .sheet-item {
@@ -547,14 +531,6 @@ textarea.sheet-smallcaps {
 		font-size: 11px;
 		vertical-align: top;
 		letter-spacing: 1px;
-
-		&.sheet-upgradecosts {
-			font-size: 8px;
-		}
-	}
-	.sheet-upgradecosts {
-		font-size: 11px;
-		padding-left: 3px;
 	}
 	.sheet-upgradecaption {
 		margin-top: 3px;
@@ -631,16 +607,22 @@ textarea.sheet-smallcaps {
 .sheet-bladeslogo {
 	border-right: 12px solid transparent;
 	height: 43px;
-	background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/logo.png');
-	background-size: 102% auto;
+	background-image: url('https://i.imgur.com/vA7fNLv.png');
+	background-size: 89% auto;
 	background-repeat: no-repeat;
 }
-.sheet-crewheader {
-	color: $headergrey;
-	font-size: 28px;
-	align-self: flex-start;
-	letter-spacing: -2px;
-	line-height: 31px;
+/* CORE UPGRADE */
+.sheet-core-upgrade {
+	.sheet-plainheader {
+		line-height: 18px;
+		min-height: 20px;
+	}
+	.sheet-description {
+		font-size: 10px;
+		min-height: 26px;
+		line-height: 13px;
+		text-align: justify;
+	}
 }
 /* LOAD */
 .sheet-itemheader,
@@ -686,13 +668,10 @@ textarea.sheet-smallcaps {
 .sheet-advancement-header {
 	letter-spacing: 2px;
 }
-.sheet-markxp {
-	margin-right: auto;
-}
 .sheet-xpholder {
 	letter-spacing: 0;
 	font-size: 0;
-	margin-left: 8px;
+	margin: 0 8px 0 auto;
 }
 .sheet-advancement-desc, .sheet-warblurb {
 	li {
@@ -729,23 +708,12 @@ textarea.sheet-smallcaps {
 	position: relative;
 	background: $lightest;
 	input[type=text] {
-		flex: 0 0 auto;
+		width: 100%;
 		margin: 0 2px;
 		padding-left: 5px;
 		letter-spacing: -1px;
 		font-size: 35px;
 		line-height: 40px;
-	}
-	textarea {
-		height: 42px;
-		flex: 0 0 auto;
-		font-size: 10px;
-		padding-left: 3px;
-		letter-spacing: 1px;
-		color: $headergrey;
-		resize: none;
-		overflow: hidden;
-		line-height: 14px;
 	}
 	.sheet-reminder {
 		position: absolute;
@@ -760,27 +728,9 @@ textarea.sheet-smallcaps {
 		padding: 3px;
 	}
 }
-.sheet-type-character .sheet-playbook {
-	input[type=text] {
-		width: calc(64% - 10px);
-	}
-	textarea {
-		width: calc(36% + 6px);
-	}
-}
-.sheet-type-crew .sheet-playbook {
-	input[type=text] {
-		width: calc(74% - 7px);
-	}
-	textarea {
-		width: calc(26% + 3px);
-	}
-}
 
 /* HEADER */
 .sheet-header {
-	flex-wrap: wrap;
-	align-items: flex-end;
 	label {
 		flex-wrap: wrap;
 	}
@@ -791,7 +741,6 @@ textarea.sheet-smallcaps {
 		line-height: 1.3;
 		text-align: left;
 		padding: 3px 0 0 2px;
-		margin: 3px 0 0;
 		min-height: 22px;
 		color: $redtext;
 	}
@@ -803,17 +752,19 @@ textarea.sheet-smallcaps {
 			display: none;
 		}
 	}
-	.sheet-col55:not(:first-child) {
+	.sheet-col55:not(:first-child),
+	.sheet-col80:not(:first-child) {
 		padding-right: 2.5%;
 	}
 	.sheet-text {
 		color: black;
 		text-align: justify;
-		padding: 3px 0 2px;
+		padding: 3px 0 0;
 		line-height: 13px;
 	}
 	.sheet-title {
 		font-size: 10px;
+		vertical-align: top;
 		letter-spacing: 1px;
 	}
 	.sheet-info {
@@ -1242,10 +1193,8 @@ textarea.sheet-smallcaps {
 /* TEETH */
 input.sheet-stresstooth,
 input.sheet-xptooth,
-input.sheet-holdtooth,
 .sheet-stresstooth + span,
-.sheet-xptooth + span,
-.sheet-holdtooth + span {
+.sheet-xptooth + span {
 	height: 25px;
 }
 input.sheet-regulartooth,
@@ -1279,13 +1228,11 @@ input.sheet-tooth {
 	background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/xptooth-white.png');
 }
 .sheet-stresstooth[type=radio] + span,
-.sheet-stresstooth[type=checkbox]:checked + span,
-.sheet-holdtooth:checked + span {
+.sheet-stresstooth[type=checkbox]:checked + span {
 	background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/stresstooth-red.png');
 }
 .sheet-stresstooth[type=checkbox] + span,
-.sheet-tooth:checked ~ .sheet-stresstooth[type=radio] + span,
-.sheet-holdtooth + span {
+.sheet-tooth:checked ~ .sheet-stresstooth[type=radio] + span {
 	background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/stresstooth-white.png');
 }
 .sheet-regulartooth + span {
@@ -1328,61 +1275,28 @@ input.sheet-zero {
 .sheet-zero:checked + span {
 	visibility: hidden;
 }
-.sheet-coin .sheet-zero + span {
-	position: relative;
-	bottom: 1px;
-	margin-right: auto;
-}
-.sheet-stash {
+.sheet-profits {
 	input.sheet-zero, .sheet-zero + span {
 		position: absolute;
-		left: -3px;
-		top: 3px;
+		left: -15px;
+		top: 0;
 	}
 }
-.sheet-crewcoin {
-	input.sheet-zero, .sheet-zero + span {
-		position: absolute;
-		left: -9px;
-		top: 3px;
-	}
-}
-.sheet-stress2, .sheet-rep2, .sheet-heat2 {
+.sheet-stress2 {
 	input.sheet-zero, .sheet-zero + span {
 		position: absolute;
 		left: -13px;
 		top: 13px;
 	}
 }
-/* TURF RADIOS */
-.sheet-turfbox input[type=radio] {
-	height: 12px;
-	width: calc(100%/12);
-}
-.sheet-turf-input[value="1"] ~ input[type=radio].sheet-turf1 + span,
-.sheet-turf-input[value="2"] ~ input[type=radio].sheet-turf2 + span,
-.sheet-turf-input[value="3"] ~ input[type=radio].sheet-turf3 + span,
-.sheet-turf-input[value="4"] ~ input[type=radio].sheet-turf4 + span,
-.sheet-turf-input[value="5"] ~ input[type=radio].sheet-turf5 + span,
-.sheet-turf-input[value="6"] ~ input[type=radio].sheet-turf6 + span {
-	background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/stresstooth-black.png');
-}
-.sheet-tooth:checked ~ .sheet-stresstooth.sheet-turf6 + span {
-	background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/stresstooth-halfgrey.png');
-}
 /* SPECIAL ABILITIES*/
-.sheet-specialability,
-.sheet-friend-contact {
+.sheet-specialability {
 	border-bottom: 1px solid $darkgrey;
 	width: 100%;
 	align-items: start;
 }
 .sheet-specialability {
 	padding: 4px;
-}
-.sheet-friend-contact {
-	padding: 6px 4px;
-	align-items: center;
 }
 .sheet-abilityname {
 	width: calc(28% - 22px);
@@ -1400,46 +1314,19 @@ input.sheet-zero {
 	padding: 2px 1px;
 	text-align: justify;
 }
-/* FRIENDS/CONTACTS */
-.sheet-friends, .sheet-contacts {
-	input.sheet-expand { top: 11px }
-	.sheet-expand + span { top: 8px }
-	input.sheet-expand, .sheet-expand + span { right: 3px }
-
-	.sheet-expand:not(:checked) + span::before { content: "◀" }
-	.sheet-expand:checked + span::before { content: "▼" }
-
-	.sheet-expand:not(:checked) ~ .sheet-description {
-		height: 0px !important;
-		border: none;
-		min-height: 0;
-		padding: 0;
-	}
-
-	.sheet-description {
-		font-size: 11px;
-		padding: 2px 3px;
-		line-height: 14px;
-		height: 46px;
-		min-height: 18px;
-		border-bottom: 1px solid #b4b4b4;
-	}
-}
-.sheet-friend-contact .sheet-auto-expand {
-	font-size: 12px;
-	color: $lighterblack;
-	min-height: 20px;
-	line-height: 16px;
-	flex: 1 1 0;
-	padding: 2px 0 2px 3px;
-}
 /* HARM */
+.sheet-harm-trauma-profit {
+	display: grid;
+	grid: auto / 58% 42%;
+}
 .sheet-harm {
 	position: relative;
+	grid-row: 1/3;
+	grid-column: 1;
 }
 .sheet-harmbody {
 	display: grid;
-	grid: 52px / 12px auto auto 59px;
+	grid: 38px / 12px auto auto 59px;
 	font-weight: 800;
 	text-transform: uppercase;
 	text-align: center;
@@ -1463,10 +1350,10 @@ input.sheet-zero {
 	}
 	textarea {
 		font-size: 12px;
-		padding: 10px 4px 3px;
+		padding: 3px 4px;
 		color: $redtext;
 		overflow: hidden;
-		height: 52px;
+		height: 38px;
 		resize: none;
 		line-height: 16px;
 		text-align: center;
@@ -1495,117 +1382,119 @@ input.sheet-zero {
 		margin: 0 auto;
 	}
 }
-.sheet-armor {
-	label {
-		margin: 3px 0 3px 10px;
-		height: 18px;
-		font-size: 11px;
-		text-align: center;
-		line-height: 18px;
+.sheet-armor-label {
+	margin: 3px 0 3px 10px;
+	height: 18px;
+	font-size: 11px;
+	text-align: center;
+	line-height: 18px;
+	input:checked ~ span {
+		color: red;
+	}
+	.sheet-checkbox + span {
+		margin: 3px;
+		order: 2;
 	}
 	.sheet-label {
 		flex-grow: 1;
 		order: 1;
 	}
-	input:checked ~ span {
-		color: red;
-	}
 	.sheet-checkbox + span {
 		border: 1px solid black;
-		margin: 3px;
-		order: 2;
 	}
 }
-/* COIN */
-.sheet-coin-and-stash {
-	width: 96%;
-	margin: 1px 0 0 4%;
-}
-.sheet-coinrow .sheet-label {
+.sheet-extra-armor-label {
 	font-size: 11px;
-	margin-right: auto;
-}
-.sheet-coin {
-	border-bottom: 1px solid $greyborder;
-	border-right: 1px solid $greyborder;
-	width: 70%;
-	height: 19px;
-	padding: 1px 3px 0 0;
-	align-items: center;
-}
-.sheet-stashbutton-holder {
-	border-top: 1px solid $greyborder;
+	margin-top: -6px;
+	justify-content: flex-end;
 	display: flex;
+	font-weight: bold;
 	align-items: center;
-	justify-content: center;
-	width: 30%;
-	height: 19px;
-	padding-bottom: 1px;
+	span:first-child { margin-right: 5px }
+	.sheet-checkbox + span {
+		border: 1px solid black;
+	}
 }
-/* STASH */
-.sheet-stash {
-	padding: 4px 0 0 10px;
-	line-height: 19px;
-	margin-bottom: -10px;
+/* ARMATURES */
+.sheet-armature {
+	display: grid;
+	grid: auto / 1.2fr .8fr 2fr;
+	grid-gap: 3px;
+	background: #f5f5f5;
+	margin: 3px 0;
+	border-bottom: 1px dotted #666;
+	padding: 3px 0 3px 3px;
+
+	.sheet-name {
+		grid-area: 1 / 1 / auto / 3;
+	}
+	.sheet-desc {
+    grid-area: 2 / 1 / auto / 3;
+		font-size: 11px;
+		margin-bottom: 4px;
+		line-height: 15px;
+		min-height: 15px;
+	}
+	.sheet-harm {
+		grid-area: 3 / 1 / 5 / 3;
+		.sheet-harmbody {
+			grid: 38px/12px auto auto;
+			border-right: 1px solid black;
+		}
+	}
+	.sheet-repairclock {
+    grid-column: 1;
+		padding-left: 5px;
+		.sheet-label {
+			font-size: 10px;
+			margin-right: 11px;
+		}
+	}
+	.sheet-armor-label {
+    grid-column: 2;
+	}
+	.sheet-features {
+		grid-row: 1/7;
+		.sheet-blurb {
+			font-size: 10px;
+			line-height: 12px;
+		}
+	}
+	.sheet-chosen-frame {
+		&[value="s"] {
+			~ .sheet-medium, ~ .sheet-large { display: none }
+		}
+		&[value="m"] {
+			~ .sheet-small, ~ .sheet-large { display: none }
+		}
+		&[value="l"] {
+			~ .sheet-small, ~ .sheet-medium { display: none }
+		}
+	}
+}
+/* CRAFT COIN */
+.sheet-profit {
+	padding-left: 5px;
+}
+.sheet-profits {
+	margin: 9px auto 0;
 	position: relative;
-}
-/* CREW COIN */
-.sheet-crewcoin-coins {
-	padding: 4px 0 0 3px;
-	position: relative;
-}
-.sheet-crewcoin-desc {
-	font-size: 10px;
+	width: 135px;
+	text-align: center;
 	line-height: 14px;
-	padding-left: 3px;
-	font-style: italic;
-}
-.sheet-crewcoinbar {
-	border-left: 1px solid $lighter;
-	height: 15px;
-	width: 3px;
-	margin: -1px auto 0;
 }
 /* LEFT-FILLED RADIO BOXES */
-.sheet-crewcoin {
+.sheet-profits {
 	input.sheet-radiobox {
-		width: 12px;
-		height: 12px;
-		margin-right: -12px;
+		width: 14px;
+		height: 14px;
+		vertical-align: top;
+		margin-right: -14px;
 	}
 	.sheet-radiobox + span {
-		width: 11px;
-		height: 11px;
-		margin-right: auto;
-	}
-	input:checked ~ .sheet-radiobox.sheet-vaultcoin + span {
-		border-color: $lighter;
-	}
-}
-.sheet-coin-and-stash {
-	input.sheet-radiobox {
 		width: 13px;
 		height: 13px;
-		vertical-align: top;
-		margin-right: -13px;
-	}
-	.sheet-radiobox + span {
-		width: 12px;
-		height: 12px;
-		vertical-align: top;
-	}
-}
-.sheet-coinrow .sheet-radiobox + span {
-	margin-right: auto;
-}
-.sheet-radiobox:hover + span {
-	opacity: 0.7;
-}
-.sheet-radiobox:last-of-type + span {
-	margin-right: 0;
-}
-.sheet-coin, .sheet-crewcoin {
-	.sheet-radiobox + span {
+		margin-right: 7px;
 		background: red;
 		border: 1px solid black;
 	}
@@ -1613,40 +1502,11 @@ input.sheet-zero {
 		background: white;
 	}
 }
-.sheet-stash {
-	.sheet-radiobox + span {
-		background: black;
-		margin-right: calc((100% - 126px)/9);
-	}
-	input:checked ~ .sheet-radiobox + span {
-		background: $lighter;
-	}
-	input.sheet-radiobox:nth-of-type(10n+1) {
-		margin: -2px -17px 0 3px;
-		width: 15px;
-		height: 15px;
-	}
-	.sheet-radiobox:nth-of-type(10n+1) + span {
-		width: 14px;
-		height: 14px;
-		border: 1px solid black;
-		margin-left: 3px;
-		margin-right: 0;
-		position:relative;
-		top: -2px;
-	}
+.sheet-radiobox:hover + span {
+	opacity: 0.7;
 }
-/* HUNTING GROUNDS */
-.sheet-hunting-grounds {
-	.sheet-plainheader {
-		min-height: 20px;
-		line-height: 18px;
-	}
-	.sheet-description {
-		font-size: 12px;
-		min-height: 32px;
-		line-height: 16px;
-	}
+.sheet-radiobox:last-of-type + span {
+	margin-right: 0;
 }
 /* BONUS DIE SECTION */
 .sheet-bonusdie .sheet-label {
@@ -1668,7 +1528,6 @@ input.sheet-zero {
 	line-height: 14px;
 	text-align: center;
 }
-/* REPEATING SECTION CONTROLS */
 /* REPEATING SECTION CONTROLS */
 .repcontrol {
 	display: flex;
@@ -1698,7 +1557,7 @@ input.sheet-zero {
 	}
 }
 .repcontainer.editmode + .repcontrol button.repcontrol_edit::after { content: ")" }
-.sheet-free-repcontrol .repcontrol{ margin-top: 3px }
+.sheet-free-repcontrol .repcontrol { margin-top: 3px }
 
 
 .itemcontrol {
@@ -1712,13 +1571,7 @@ input.sheet-zero {
 	padding: 1px 7px;
 }
 /* STRESS, REP, et cetera */
-.sheet-rep-and-hold, .sheet-heat-and-vault {
-	justify-content: space-between;
-}
-.sheet-hold {
-	width: 53%;
-}
-.sheet-stress, .sheet-rep, .sheet-hold, .sheet-heat {
+.sheet-stress {
 	height: 25px;
 }
 .sheet-stress1 {
@@ -1732,62 +1585,28 @@ input.sheet-zero {
 	flex: 1 0 68px;
 	text-align: center;
 }
-.sheet-stress4 {
+.sheet-type-character .sheet-trauma {
 	flex: 2 0 217px;
-	line-height: 13px;
-	font-size: 9px;
+	font-size: 8px;
 	padding: 1px 0 0 2px;
+}
+.sheet-type-craft .sheet-trauma {
+	flex: 1 0 217px;
+	font-size: 9px;
+	padding: 1px 0 0 5px;
+}
+.sheet-trauma {
+	line-height: 13px;
 	text-transform: uppercase;
 	div {
 		justify-content: space-between;
 	}
-	.sheet-input:not([value="normal"]) ~ .sheet-normal,
-	.sheet-input:not([value="ghost"]) ~ .sheet-ghost,
-	.sheet-input:not([value="hull"]) ~ .sheet-hull {
-		display: none;
-	}
-	.sheet-ghost, .sheet-hull {
-		letter-spacing: 1px;
-	}
 }
-.sheet-traumaholder, .sheet-wantedholder {
+.sheet-traumaholder {
 	height: 13px;
 	padding-left: 2px;
 }
-.sheet-rep1 {
-	width: 33px;
-}
-.sheet-rep2 {
-	width: 134px;
-	position: relative;
-}
-.sheet-turfbox {
-	display: flex;
-	position: absolute;
-	flex-flow	: row-reverse;
-	z-index: 2;
-	width: 100%;
-}
-.sheet-turfzero-holder {
-	margin-left: 2px;
-}
-.sheet-hold > div,
-.sheet-hold > label,
-.sheet-heat > div,
-.sheet-rep > div,
-.sheet-crewcoin2 {
-	flex-grow: 1;
-}
-.sheet-heat2 {
-	width: 107px;
-	position: relative;
-}
-.sheet-crewcoin1 {
-	width: 26%;
-}
 .sheet-regulartooth + span,
-.sheet-rep .sheet-tooth + span,
-.sheet-heat2 .sheet-tooth + span,
 .sheet-stress2 .sheet-tooth + span {
 	margin-right: auto;
 }
@@ -1798,11 +1617,6 @@ input.sheet-zero {
 	~ .sheet-tooth, + span ~ span {
 		display: none;
 	}
-}
-/* small fixes */
-.sheet-rep input.sheet-tooth {
-	width: 11px;
-	margin-right: -11px;
 }
 /* NOTES */
 .sheet-notes {
@@ -1816,7 +1630,7 @@ input.sheet-zero {
 	height: 378px;
 	min-height: 378px;
 }
-.sheet-type-character, .sheet-type-crew {
+.sheet-type-character, .sheet-type-craft {
 	.sheet-notes {
 	margin-top: 15px;
 	}
@@ -1848,10 +1662,6 @@ button[type=roll].sheet-rollbutton {
 	flex: 0 0 86px;
 	font-size: 13px;
 }
-.sheet-coinrow button[type=roll].sheet-rollbutton {
-	font-size: 11px;
-	color: $lightblack;
-}
 .sheet-blackheader button[type=roll].sheet-rollbutton {
 	margin:auto;
 }
@@ -1860,26 +1670,19 @@ button[type=roll].sheet-borderbutton {
 	font-size: 13px;
 	border-color: $darkgrey;
 }
-button[type=roll].sheet-vicebutton {
-	float: right;
-	margin: 5px 3px -5px auto;
-	line-height: 13px;
-	padding: 4px;
-}
 button[type=roll].sheet-fortunebutton {
 	width: 100%;
 	height: 30px;
 	margin: 10px 0 0;
 }
+.sheet-type-craft button[type=roll].sheet-fortunebutton {
+	width: 140px;
+	height: 26px;
+	margin: 5px calc(50% - 70px) 0;
+}
 .sheet-type-faction button[type=roll].sheet-fortunebutton {
 	width: 100px;
 	margin: 0;
-}
-button[type=roll].sheet-engagementbutton {
-	width: calc(100% - 20px);
-	padding: 2px 5px;
-	height: 30px;
-	margin: 10px 10px 0;
 }
 button[type=roll].sheet-rollbutton:hover {
 	color: red;
@@ -1921,28 +1724,10 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 .sheet-checkbox.sheet-squarebox-small:checked + span {
 	background: black;
 }
-.sheet-claimbridge {
-	position: relative;
-}
-.sheet-claimbridge input, .sheet-claimbridge span {
-	width: 100%;
-	height: 100%;
-}
-.sheet-claimbridge input:checked + span {
-	background: $lightest;
-}
 /* Change text colour when boxes are checked*/
 .sheet-specialability .sheet-checkbox:checked ~ .sheet-abilityname,
-.sheet-item .sheet-checkbox:checked ~ .sheet-itemname,
-.sheet-friend .sheet-friendstate[value="up"] ~ .sheet-auto-expand {
+.sheet-item .sheet-checkbox:checked ~ .sheet-itemname {
 	color: red;
-}
-.sheet-friend-contact .sheet-friendstate:not([value="0"]) ~ .sheet-auto-expand {
-	font-weight: bold;
-}
-.sheet-friend .sheet-friendstate[value="down"] ~ .sheet-auto-expand,
-.sheet-contact .sheet-friendstate[value="1"] ~ .sheet-auto-expand {
-	color: $fontblack;
 }
 /* specific adjustments */
 .sheet-specialability .sheet-checkbox,
@@ -1970,59 +1755,9 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 .sheet-action .sheet-fakeradio:checked ~ .sheet-fakeradio + span {
 	background: $lighter;
 }
-.sheet-tier .sheet-fakeradio:checked ~ .sheet-fakeradio + span {
-	background: white;
-}
-/* Friend triangles */
-.sheet-friend-contact {
-	.sheet-checkbox + span {
-		width: 0;
-		height: 0;
-		background: transparent;
-		border-color: transparent;
-	}
-	label {
-		width: 12px;
-		height: 12px;
-		position: relative;
-	}
-}
-.sheet-friend label {
-	&.sheet-up {
-		margin-right: 1px;
-		top: -1px;
-		.sheet-checkbox + span {
-			border-width: 0 5px 10px;
-			border-bottom-color: white;
-		}
-		.sheet-checkbox:checked + span {
-			border-bottom-color: red;
-		}
-	}
-	&.sheet-down {
-		top: 5px;
-		.sheet-checkbox + span {
-			border-width: 10px 5px 0;
-			border-top-color: white;
-		}
-		.sheet-checkbox:checked + span {
-			border-top-color: black;
-		}
-	}
-}
-.sheet-contact label {
-	top: 1px;
-	.sheet-checkbox + span {
-		border-width: 5px 0 5px 10px;
-		border-left-color: white;
-	}
-	.sheet-checkbox:checked + span {
-		border-left-color: black;
-	}
-}
 /* ACTION RATINGS */
 .sheet-attribute,
-.sheet-cohort {
+.sheet-type-character .sheet-cohort {
 	margin-bottom: 10px;
 }
 .sheet-attribute-title,
@@ -2080,23 +1815,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 		flex: 1 1 0;
 		padding: 0 3px;
 	}
-	input[type=number] {
-		flex: 0 0 auto;
-		color: inherit;
-		background: transparent;
-		border: none;
-		border-radius: 0;
-		padding: 0 0 0 4px;
-		line-height: inherit;
-		width: 13px;
-		-moz-appearance: textfield;
-		font-size: 11px;
-		font-family: "Times New Roman", Times, serif;
-		&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
-			margin: 0;
-			-webkit-appearance: none;
-		}
-	}
 }
 .sheet-cohort-quality-label {
 	flex: 0 0 auto;
@@ -2136,19 +1854,36 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 		}
 	}
 }
+
 .sheet-cohort-edgeflaw {
 	font-size: 9px;
 	line-height: 10px;
-	margin: 2px 0;
+	margin: 2px 0 0;
 	align-items: start;
 	.sheet-uppercase {
 		width: 34px;
 		padding: 2px 0;
+		&.sheet-wide { width: 45px }
 	}
 	.sheet-auto-expand {
 		width: calc(100% - 34px);
 		min-height: 14px;
 		padding: 2px 3px;
+	}
+	input[type=number] {
+		flex: 1 0 auto;
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		padding: 2px 3px;
+		height: 14px;
+		-moz-appearance: textfield;
+		font-size: 10px;
+		font-family: "Times New Roman", Times, serif;
+		&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+			margin: 0;
+			-webkit-appearance: none;
+		}
 	}
 }
 .sheet-cohort-description {
@@ -2158,86 +1893,185 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 	height: 50px;
 	border-bottom: 1px solid $lightest;
 }
-/* CLAIMS */
-.sheet-claims {
-	margin-top: 15px;
+.sheet-cohorts .repcontainer {
+	display: grid;
+	grid: auto / repeat(2, 1fr);
+	grid-gap: 5px 3px;
 }
-.sheet-claimsrow {
-	align-items: center;
-	> div, > label {
-		flex: 0 0 auto;
+/* MODULES */
+.sheet-layout-input[value="cannibal"] + .sheet-modules .sheet-layout:not(.sheet-layout-cannibal),
+.sheet-layout-input[value="orb"] + .sheet-modules .sheet-layout:not(.sheet-layout-orb),
+.sheet-layout-input[value="splitter"] + .sheet-modules .sheet-layout:not(.sheet-layout-splitter),
+.sheet-layout-input[value=""] + .sheet-modules .sheet-layout-n,
+.sheet-layout-input[value=""] + .sheet-modules .sheet-empty-3 {
+	display: none;
+}
+.sheet-layout-input[value="cannibal"], .sheet-layout-input[value="orb"] {
+	+ .sheet-modules {
+		grid-template-columns: 33.5px repeat(9, 9px 33.5px);
 	}
 }
-.sheet-claimbox,
-.sheet-lairbox {
-	height: 66px;
+.sheet-layout-input[value="cannibal"] + .sheet-modules {
+	background-image: url(https://i.imgur.com/AHg2oKi.png);
+	background-size: 481px 100%;
+	background-position: 0px 48%;
 }
-.sheet-claims-seprow {
-	height: 12px;
-	justify-content: space-between;
+.sheet-layout-input[value="orb"] + .sheet-modules {
+	background-image: url(https://i.imgur.com/7Q1wKfU.png);
+	background-size: 437px 100%;
+	background-position: 50% 48%;
 }
-.sheet-lairbox {
-	background: $lightblack;
-	width: 18.4%;
-	font-size: 13px;
-	color: white;
-	letter-spacing: 1px;
+.sheet-layout-input[value="splitter"] + .sheet-modules {
+	background-image: url(https://i.imgur.com/oGPllSm.png);
+	background-size: 500px 97%;
 }
-.sheet-claims-horisep {
-	height: 12px;
-	display: flex;
-	width: 2%;
-}
-.sheet-claims-vertsep {
-	display: flex;
-	width: 12px;
-	margin: 0 calc(9.2% - 6px);
-}
-.sheet-claimbox {
-	background: $lightest;
-	width: 18.4%;
-	position: relative;
-	transition: all 0.2s;
-	.sheet-label {
-		height: 30px;
-		padding: 4px 0 2px;
-		line-height: 12px;
-	}
-	textarea {
+.sheet-modules {
+	display: grid;
+	width: 500px;
+	margin: 10px auto;
+	padding: 10px 0;
+	justify-content: center;
+	background-repeat: no-repeat;
+	grid: repeat(3, 76px) 11px / 33.5px repeat(11, 9px 33.5px);
+
+	.sheet-empty { grid-column: span 2 }
+	.sheet-empty-3 { grid-column: span 3 }
+
+	.sheet-auto-expand {
 		text-align: center;
+		position: relative;
+		z-index: 3;
+		top: -8px;
+	}
+	.sheet-auto-expand.sheet-name {
+		margin: 0 auto;
 		font-size: 9px;
-		resize: none;
-		&.sheet-claim-desc {
-			height: 36px;
-			padding: 2px 2.5% 4px;
-			line-height: 10px;
+		min-height: 18px;
+		max-height: 27px;
+		line-height: 9px;
+		width: 85%;
+		font-weight: bold;
+	}
+	.sheet-auto-expand.sheet-desc {
+		font-size: 8px;
+		padding: 0 2px;
+		line-height: 9px;
+		min-height: 18px;
+		max-height: 45px;
+	}
+}
+.sheet-hexagon {
+  position: relative;
+  grid-column: span 3;
+  width: 76px;
+  height: 43.88px;
+  background-color: $modulegrey;
+  margin: 21.94px 0;
+  border-left: solid 2px #333;
+  border-right: solid 2px #333;
+
+  &::before, &::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1;
+    width: 53.74px;
+    height: 53.74px;
+    transform: scaleY(0.5774) rotate(-45deg);
+    background-color: inherit;
+    left: 9.1299px;
+  }
+
+  &::before {
+    top: -26.8701px;
+    border-top: solid 2.8284px #333;
+    border-right: solid 2.8284px #333;
+  }
+
+  &::after {
+    bottom: -26.8701px;
+    border-bottom: solid 2.8284px #333;
+    border-left: solid 2.8284px #333;
+  }
+  &.sheet-core {
+		font-size: 13px;
+		font-weight: bold;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 3;
+		background: #333;
+		div {
+			z-index: 2;
+		}
+  }
+  .sheet-module-check {
+		position: absolute;
+		top: -22.8701px;
+		z-index: 3;
+		width: 15.74px;
+		border: 2px solid;
+		height: 15.74px;
+		transform: scaleY(0.5774) rotate(-45deg);
+		left: 28.1299px;
+		input[type="checkbox"] { position: absolute }
+		span {
+			background-color: $lightest;
+			width: 100%;
+			height: 100%;
+		}
+		input:checked + span { background-color: #333 }
+  }
+}
+.sheet-bridge {
+	z-index: 1;
+	height: 20px;
+	width: 17px;
+	&.sheet-horizontal {
+		position: relative;
+		top: 33px;
+		left: -4px;
+	}
+	&.sheet-bottom-left {
+		position: absolute;
+		transform: translate(5px, 50px) rotate(-60deg);
+		z-index: 2;
+	}
+	&.sheet-bottom-right {
+		position: absolute;
+		transform: translate(49px, 50px) rotate(60deg);
+		z-index: 2;
+	}
+	&.sheet-top-left {
+		position: absolute;
+		transform: translate(8px, -27px) rotate(60deg);
+		z-index: 2;
+	}
+	&.sheet-top-right {
+		position: absolute;
+		transform: translate(48px, -27px) rotate(-60deg);
+		z-index: 2;
+	}
+
+	.sheet-bridge-check {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		+ span {
+			height: 100%;
+			width: 100%;
+			background-color: $modulegrey;
+			border-top: 2px solid #333;
+			border-bottom: 2px solid #333;
+		}
+		&:not(:checked) + span {
+			display: none;
 		}
 	}
-	label {
-		position: absolute;
-		bottom: 1px;
-		left: 1px;
-	}
+	&:hover .sheet-bridge-check + span { opacity: 1 }
 }
-input[value="1"] + .sheet-claimbox {
-	background: $lighter;
-}
-/* STRICTURES */
-.sheet-strictures {
-	font-size: 11px;
-	line-height: 1.6;
-	text-align: justify;
-	label {
-		margin-right: 3px;
-		display: inline-flex;
-		vertical-align: top;
-		align-items: center;
-	}
-	span.sheet-label::after {
-		content: ":";
-	}
-}
-/* ALCHEMICALS */
+/* TITLE CHECKBOX */
 .sheet-title-checkbox ~ div {
 	height: auto;
 	transition: all 0.2s;
@@ -2255,25 +2089,24 @@ input.sheet-title-checkbox {
 .sheet-title-checkbox:hover + span {
 	color: red;
 }
-.sheet-alchemicals {
+/* UTILITY BELT */
+.sheet-utilitybelt {
 	padding: 0 5px;
 	line-height: 16px;
-}
-.sheet-bandolier-desc {
-	line-height: 12px;
-	margin-top: 2px;
-	font-size: 10px;
-	font-style: italic;
-}
-.sheet-bandoliers-name {
-	margin-right: 7px;
-	font-size: 12px;
-	line-height: 18px;
-}
-.sheet-bandolier input:nth-of-type(3) + span {
-	margin-right: 8px;
-}
-.sheet-alchemicals {
+	.sheet-desc {
+		line-height: 12px;
+		margin-top: 2px;
+		font-size: 10px;
+		font-style: italic;
+	}
+	.sheet-belt-name {
+		margin-right: 7px;
+		font-size: 12px;
+		line-height: 18px;
+	}
+	.sheet-item input:nth-of-type(3) + span {
+		margin-right: 8px;
+	}
 	.repcontainer {
 		display: flex;
 		flex-flow: row wrap;
@@ -2289,19 +2122,19 @@ input.sheet-title-checkbox {
 		line-height: 14px;
 		width: calc(100% - 8px);
 	}
-	input.sheet-alchemicals-expand {
+	input.sheet-gadget-expand {
 		width: 10px;
 		position: absolute;
 		height: 16px;
 	}
-	.sheet-alchemicals-expand + span {
+	.sheet-gadget-expand + span {
 		transform: rotate(45deg) scale(0.9);
 		position: absolute;
 	}
-	.sheet-alchemicals-expand:not(:checked) ~ .sheet-alchemicals-info {
+	.sheet-gadget-expand:not(:checked) ~ .sheet-gadget-info {
 		display: none;
 	}
-	.sheet-alchemicals-info {
+	.sheet-gadget-info {
 		position: relative;
 		font-size: 9px;
 		z-index: 2;
@@ -2312,14 +2145,14 @@ input.sheet-title-checkbox {
 		padding: 2px;
 		border: 1px solid $lightest;
 	}
-	.repitem:nth-child(even) .sheet-alchemicals-info {
+	.repitem:nth-child(even) .sheet-gadget-info {
 		left: -100%;
 	}
-	.sheet-alchemicals-expand + span::before {
+	.sheet-gadget-expand + span::before {
 		content: '■';
 		font-family: serif;
 	}
-	.sheet-alchemicals-expand:checked + span {
+	.sheet-gadget-expand:checked + span {
 		color: red;
 	}
 	.itemcontrol .btn {
@@ -2336,36 +2169,44 @@ input.sheet-title-checkbox {
 		align-items: start;
 	}
 }
-/* FRAME */
-.sheet-frame textarea {
-	font-size: 11px;
-	height: 40px;
-}
 /* FACTIONS PAGE */
 .sheet-factions {
-	justify-content: space-between;
+	display: grid;
+	grid: auto / repeat(4, 1fr);
+	grid-gap: 10px;
+
+	.sheet-aboard-craft {
+		grid-column: 1/4;
+		.repcontainer {
+			display: grid;
+			grid-column-gap: 10px;
+			grid: auto / repeat(3, 1fr);
+		}
+	}
 }
 .sheet-factiontitle {
 	margin-bottom: 10px;
 	align-items: center;
-}
-.sheet-factiontitle input[type=text] {
-	font-size: 26px;
-	margin-right: auto;
-	width: 60%;
+	 input[type=text] {
+		font-size: 26px;
+		margin-right: auto;
+		width: 70%;
+	}
 }
 .sheet-factions-header {
 	width: 100%;
 	height: 24px;
 	align-items: center;
 	line-height: 14px;
-	background: $lighter;
-}
-.sheet-factions-header input[type=text] {
-	padding-left: 3px;
-}
-.sheet-factions-header span {
-	font-size: 7px;
+	background: black;
+	input[type=text] {
+		padding-left: 3px;
+		color: #FFF;
+	}
+	span {
+		font-size: 7px;
+		color: #FFF;
+	}
 }
 input.sheet-expand, .sheet-expand + span {
 	position: absolute;
@@ -2413,30 +2254,15 @@ input.sheet-expand, .sheet-expand + span {
 }
 /* Column widths */
 .sheet-faction-name, input[type=text].sheet-faction-name {
-	width: 65%;
+	width: 70%;
 }
-.sheet-faction-tier, input[type=text].sheet-faction-tier {
-	width: 10%;
-	text-align: center;
-}
-.sheet-faction-hold, input[type=text].sheet-faction-hold {
-	width: 10%;
+.sheet-faction-scale, input[type=text].sheet-faction-scale {
+	width: 15%;
 	text-align: center;
 }
 .sheet-faction-status, input[type=number].sheet-faction-status {
 	width: 15%;
 	text-align: center;
-}
-/* War blurb */
-.sheet-warblurb {
-	text-align: justify;
-	.sheet-label {
-		font-size: 14px;
-	}
-	li {
-		margin-bottom: .5em;
-		padding-left: 1em;
-	}
 }
 /* Generate button */
 label.sheet-generatebutton {
@@ -2492,9 +2318,6 @@ label.sheet-generatebutton {
 	}
 }
 /* Broadcast buttons */
-.sheet-show-broadcast[value="0"] ~ .sheet-container .sheet-broadcast-button {
-	display: none;
-}
 button[type=roll].sheet-broadcast-button {
 	font-family: pictos;
 	position: absolute;
@@ -2545,7 +2368,7 @@ button[type=roll].sheet-broadcast-button {
 	.sheet-cohort-title,
 	.sheet-claimbox .sheet-label,
 	.sheet-lairbox,
-	.sheet-crewheader,
+	.sheet-craftheader,
 	.sheet-factiontitle input[type="text"],
 	.sheet-factions-header input[type="text"] {
 		font-family: Kirsty, Georgia, serif;
@@ -2571,7 +2394,7 @@ button[type=roll].sheet-broadcast-button {
 		font-size: 15px;
 		font-weight: 400;
 	}
-	.sheet-crewheader {
+	.sheet-craftheader {
 		font-size: 29px;
 		letter-spacing: 0;
 	}

@@ -1,13 +1,28 @@
+-
+	const armatureFeatures = [
+		"atmospheric_thrusters",
+		"reflexes",
+		"life_like_appearance",
+		"magnetic_adhesive_clamps",
+		"interior",
+		"plating",
+		"full_spectrum_sensors",
+		"secure_data_recorder",
+		"interface_umbilicals",
+		"nanomachine_symbiotes",
+		"built_in_gear"
+	];
+
 // Character Sheet
 .type-character.flex
 	// Left column
 	.col55.flex-wrap
 		// Logo, Header text fields
-		.col100.header.flex
+		.col100.header.flex-wrap
 			.col55.bladeslogo
 			label.col45.header
-				+text-input('crew')
-				.label.text.title(data-i18n='crew')
+				+text-input('craft')
+				.label.text.title(data-i18n='craft')
 			label.col55
 				+text-input('name')
 				.label.text.title(data-i18n='name')
@@ -18,86 +33,54 @@
 				+text-input('look')
 				.label.text.title(data-i18n='look')
 			label.col55
-				+autoexpand('heritage')
-				+hidden-input('heritage')(value='')
+				+autoexpand('biology')
+				+hidden-input('biology')(value='')
 				.text
-					span.label.title(data-i18n='heritage')
-					span.uppercase.info(data-i18n='heritage_info')
+					span.label.title(data-i18n='biology')
+					span.uppercase.info(data-i18n='biology_info')
 			label.col45
 				+autoexpand('background')
 				+hidden-input('background')(value='')
 				.text
 					span.label.title(data-i18n='background')
 					span.uppercase.info(data-i18n='background_info')
-			+hidden-input('setting_vice_type')(value='normal').vice-input
-			label.col100.vice.normal
-				+autoexpand('vice_purveyor')
-				+hidden-input('vice_purveyor')(value='')
-				.text
-					span.label.title(data-i18n='vice_purveyor')
-					span.uppercase.info(data-i18n='vice_info')
-				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title=^{vice}}} @{vice_formula}')(data-i18n='indulge_vice').vicebutton.borderbutton
-				+hidden-input('vice_formula')(value=zerodiceFormula)
-			//- Special vice sections for spirit playbooks. You can safely delete the following three elements if you don't need variant vices
-			if (showSpecialVice)
-				.col100.vice.ghost
-					span.italic(data-i18n='ghost_viceblurb')
-				.col100.vice.hull
-					label.flex-wrap
-						+text-input('hull_functions')(data-i18n-placeholder='choose_3_functions', placeholder='choose 3 functions')
-						+hidden-input('hull_functions')(value='')
-						.text
-							span.label.title(data-i18n='functions')
-							span.uppercase.info(data-i18n='functions_info')
-					span.italic(data-i18n='hull_viceblurb')
-				.col100.vice.vampire
-					span.italic(data-i18n='vampire_viceblurb')
-				+roll('Vice', '{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title=^{vice}}} @{vice_formula}')(data-i18n='indulge_vice').vicebutton.borderbutton
 		// Stress and Trauma
 		.col100.flex.stress.def-margin
 			// Stress markers
 			.stress1.blackheader
-				.label
-					span(name='attr_setting_stress_label')
+				.label(data-i18n="stress")
 			.stress2.blackborder.flex
 				+radio('stress')(value='0', checked).tooth.zero
-				//- This will generate 12 stress boxes and show 9 by default
-				each num in range(1,12)
-					if (num > 8 && num < 12)
-						+hidden-checkbox('setting_extra_stress')(value=num-9, checked=(num === 9)).extra-teeth
+				each num in range(1,8)
 					+radio('stress')(value=num).tooth.stresstooth
 			// Trauma markers
 			.stress3
 				.blackheader
-					.label
-						span(name='attr_setting_trauma_label')
+					.label(data-i18n="trauma")
 				.traumaholder.flex
 					+radio('trauma')(value='0', checked).tooth.zero
-					//- This will generate 5 trauma boxes and show 4 by default
 					each num in range(1,5)
 						if (num === 4)
 							+hidden-checkbox('setting_extra_trauma')(value='0', checked).extra-teeth
 						+radio('trauma')(value=num).tooth.regulartooth
 			// Individual traumata
-			.stress4.blackborder
-				+hidden-input('setting_traumata_set')(value='normal').input
-				each traumas, type in traumaData
-					//- Splits up traumas into two rows, each of which hold half the traumas
-					//- this pulls the traumas automatically from the traumas property in data.json
-					div(class=type)
-						.flex
-							each trauma, i in traumas.slice(0, traumas.length / 2)
-								label.text-button
-									+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
-								if (i < traumas.length / 2 - 1)
-									span —
-						.flex
-							each trauma, i in traumas.slice(traumas.length / 2)
-								label.text-button
-									+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
-								if (i < traumas.length / 2 - 1)
-									span —
-		// Harm, Healing, Armor, Coin
+			.trauma.blackborder
+				//- Splits up traumas into two rows, each of which hold half the traumas
+				//- this pulls the traumas automatically from the traumas property in data.json
+				div
+					.flex
+						each trauma, i in traumas.slice(0, traumas.length / 2)
+							label.text-button
+								+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
+							if (i < traumas.length / 2 - 1)
+								span —
+					.flex
+						each trauma, i in traumas.slice(traumas.length / 2)
+							label.text-button
+								+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
+							if (i < traumas.length / 2 - 1)
+								span —
+		// Harm, Healing, Armor
 		.col100.flex.def-margin
 			// Harm
 			.harm.col63
@@ -116,7 +99,7 @@
 					+textarea('harm1_1')
 					+textarea('harm1_2')
 					.flex-center.harmeffect(data-i18n='less_effect')
-			// Armor, Healing and Coin
+			// Armor and Healing
 			.col37.flex-wrap
 				// Healing
 				.col45.healing
@@ -136,35 +119,20 @@
 				.armor.col55
 					.blackheader.col100
 						.label(data-i18n='armor_uses')
-					each val in ['armor', '+heavy', 'special']
-						label
-							+checkbox(val.replace('+', '')).checkbox.squarebox
+					each val in ['armor', 'heavy', 'special']
+						label.armor-label
+							+checkbox(val).checkbox.squarebox
 							span.label(data-i18n=val)
-				// Coin and Stash
-				.col100.coin-and-stash
-					// Coin
-					.col100.coinrow.flex
-						.coin.flex
-							.label(data-i18n='coin')
-							+radio('coin')(value='0', checked).zero
-							//- 4 coin by default
-							each num in range(1,4)
-								+radio('coin')(value=num).radiobox
-						.stashbutton-holder
-							+hidden-input('stash_formula')(value=zerodiceFormula)
-							+roll('Stash', '{{resist=1}} {{short=1}} {{title=^{stash}}} {{subtitle=^{rolls}}} @{stash_formula}')(data-i18n='stash').rollbutton.label
-					// Stash
-					.col100.stash
-						+radio('stash')(value='0', checked).zero
-						//- 40 stash boxes, in rows of 10.
-						each num in range(1,40)
-							+radio('stash')(value=num).radiobox
-							if (num % 10 === 0)
-								br
+					+hidden-input("setting_extra_armor")(value="0").hider
+					.extra-armor-label
+						span +
+						+checkbox("armor_special_2").checkbox.squarebox
+						+checkbox("armor_special_3").checkbox.squarebox
+						+checkbox("armor_special_4").checkbox.squarebox
 		// Special abilities
-		.col100.def-margin
-			.specialheader.col100.label(data-i18n='special_abilities')
-			.greyholder.col100
+		.def-margin
+			.specialheader.label(data-i18n='special_abilities')
+			.greyholder
 				fieldset.repeating_ability
 					.specialability.flex
 						+broadcast('Show', '{{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}')
@@ -172,12 +140,11 @@
 						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
 						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc
 		// Advancement
-		.col100.def-margin
+		.def-margin
 			.advancement-header.flex.blackheader
 				.label.markxp(data-i18n='mark_xp:')
 				.label(data-i18n='playbook_advancement')
 				.xpholder.flex
-					//- generates 8 xp boxes
 					+radio('playbook_xp')(value='0', checked).tooth.zero
 					each num in range(1,8)
 						+radio('playbook_xp')(value=num).tooth.xptooth
@@ -189,56 +156,61 @@
 				+hidden-input('setting_extra_xp')(value='0').hider
 				li
 					+autoexpand('xp_condition_extra')(data-i18n-placeholder='xp_specific_extra')
-				li
-					+autoexpand('xp_condition2', 'xp_beliefs')
-				li
-					+autoexpand('xp_condition3', 'xp_vice')
+				li(data-i18n="xp_beliefs")
+				li(data-i18n="xp_trauma")
+		// Planning and Load
+		.planning.col45.def-margin
+			input.title-checkbox(type='checkbox', name='attr_show_planning', value='1', checked)
+			span.label.plainheader(data-i18n='planning_load')
+			.planning-content
+				.planningdesc(data-i18n='planningdesc')
+				.teamworkbox
+					span.bold(data-i18n='assault')
+					span.italic(data-i18n='detail_assault')
+				.teamworkbox
+					span.bold(data-i18n='deception')
+					span.italic(data-i18n='detail_deception')
+				.teamworkbox
+					span.bold(data-i18n='stealth')
+					span.italic(data-i18n='detail_stealth')
+				.teamworkbox
+					span.bold(data-i18n='social')
+					span.italic(data-i18n='detail_social')
+				.teamworkbox
+					span.bold(data-i18n='tech')
+					span.italic(data-i18n='detail_tech')
+				.teamworkbox
+					span.bold(data-i18n='transport')
+					span.italic(data-i18n='detail_transport')
 		// Teamwork
-		.col45.right-column.def-margin
+		.col52b.right-column.def-margin
 			.plainheader.label(data-i18n='teamwork')
 			.teamworkbox(data-i18n='assist_a_teammate')
 			.teamworkbox(data-i18n='lead_a_group_action')
 			.teamworkbox(data-i18n='protect_a_teammate')
 			.teamworkbox(data-i18n='set_up_a_teammate')
-		// Gather Information
-		.col55.right-column.def-margin
-			.gatherinfo.col100
-				.plainheader.label(data-i18n='gather_information')
-				div
-					ul
-						li
-							+text-input('gatherinfo1')(data-i18n-placeholder='gatherinfo_what_do_they_intend').inherit
-						li
-							+text-input('gatherinfo2')(data-i18n-placeholder='gatherinfo_how_can_I_get_them').inherit
-						li
-							+text-input('gatherinfo3')(data-i18n-placeholder='gatherinfo_what_are_they_really').inherit
-						li
-							+text-input('gatherinfo4')(data-i18n-placeholder='gatherinfo_what_should_I_look').inherit
-						li
-							+text-input('gatherinfo5')(data-i18n-placeholder='gatherinfo_wheres_the_weakness').inherit
-						li
-							+text-input('gatherinfo6')(data-i18n-placeholder='gatherinfo_how_can_I_find').inherit
-						li(data-i18n='gatherinfo_whats_going_on')
-			//- Strictures: can be deleted safely
-			if (showStrictures)
-				// Strictures
-				+hidden-input('setting_show_strictures')(value='0').hider
-				.strictures.col100.def-margin
-					.plainheader.label(data-i18n='strictures')
-					div
-						span.italic(data-i18n='stricturesblurb')
-					each name in ['slumber', 'forbidden', 'repelled', 'bestial', 'bound']
-						div
-							label
-								+checkbox(`stricture_${name}`).checkbox.squarebox
-								span.label(data-i18n=name)
-							span(data-i18n=`strictures_${name}`)
+			// Utility belt
+			+hidden-input("setting_show_utility_belts")(value="0").hider
+			.right-column.def-margin
+				.label.plainheader(data-i18n='utility_belts')
+				.utilitybelt.free-repcontrol
+					.item
+						span.belt-name(data-i18n='belts')
+						each bnum in [1,2]
+							each checknum in range(1,3)
+								+checkbox(`utility_belt${bnum}_check_${checknum}`).checkbox.squarebox
+								if (checknum !== 3)
+									span.floatingbar
+					.desc(data-i18n='utility_belts_blurb')
+					fieldset.repeating_gadget
+						+checkbox('expand').gadget-expand
+						+autoexpand('name')
+						+textarea('description').gadget-info
 	// Right column
 	.col45.flex-wrap.right-column
 		// Playbook name and description
 		.playbook.flex
 			+text-input('playbook')(data-i18n-placeholder='playbook').label
-			+textarea('playbook_description')(data-i18n-placeholder='playbook_description').label
 			+hidden-input('show_playbook_reminder')(value='1').hider
 			.reminder
 				span(data-i18n='autofill_reminder_playbook')
@@ -284,17 +256,6 @@
 						.item-description
 							+checkbox('expand').expand
 							+textarea('description')(data-i18n-placeholder='description')
-					//- Frame: can be deleted safely
-					if (showFrame)
-						// Frame
-						+hidden-input('setting_show_frame')(value='0').hider
-						.frame.small-margin
-							+text-input('frame', 'frame').smallcaps
-							+textarea('frame_description')(data-i18n-placeholder='frame_description')
-							fieldset.repeating_framefeature
-								.item
-									+checkbox('check').checkbox.circlebox
-									+text-input('name')(data-i18n-placeholder='frame_feature').itemname
 				// Regular items
 				.regularitems.col100.free-repcontrol.free-repcontrol
 					fieldset.repeating_item
@@ -320,52 +281,8 @@
 							.item-description
 								+checkbox('expand').expand
 								+textarea('description')(data-i18n-placeholder='description')
-			// Alchemicals
-			.col100.def-margin
-				input.title-checkbox(type='checkbox', name='attr_show_alchemicals', value='1')
-				span.label.plainheader(data-i18n='alchemicals')
-				.alchemicals.free-repcontrol
-					.bandolier.item
-						span.bandoliers-name(data-i18n='bandoliers')
-						each bannum in [1,2]
-							each checknum in range(1,3)
-								+checkbox(`bandolier${bannum}_check_${checknum}`).checkbox.squarebox
-								if (checknum !== 3)
-									span.floatingbar
-					.bandolier-desc(data-i18n='when_you_use_bandolier')
-					fieldset.repeating_alchemical
-						+checkbox('expand').alchemicals-expand
-						+autoexpand('name')
-						+textarea('description').alchemicals-info
-			// Planning and Load
-			.planning.col100.def-margin
-				input.title-checkbox(type='checkbox', name='attr_show_planning', value='1', checked)
-				span.label.plainheader(data-i18n='planning_load')
-				.planning-content
-					.planningdesc(data-i18n='planningdesc')
-					.teamworkbox
-						span.bold(data-i18n='assault')
-						span.italic(data-i18n='detail_assault')
-					.teamworkbox
-						span.bold(data-i18n='occult')
-						span.italic(data-i18n='detail_occult')
-					.teamworkbox
-						span.bold(data-i18n='deception')
-						span.italic(data-i18n='detail_deception')
-					.teamworkbox
-						span.bold(data-i18n='social')
-						span.italic(data-i18n='detail_social')
-					.teamworkbox
-						span.bold(data-i18n='stealth')
-						span.italic(data-i18n='detail_stealth')
-					.teamworkbox
-						span.bold(data-i18n='transport')
-						span.italic(data-i18n='detail_transport')
 		// Action ratings
 		.col47.right-column.actioncolumn.small-margin
-			//- This generates the action ratings. You should only change this section if you want to change something about every
-				action at once. Modifying the names of attributes and actions (or adding/deleting actions) should be done in the
-				actions property in data.json
 			each actions, attribute in actionData
 				.attribute.col100
 					.attribute-title.flex.col100
@@ -399,29 +316,60 @@
 					.flex-center.bonusdieplus +
 					.bonusdietext
 						.label(data-i18n='push_yourself')
-						span(data-i18n='push_yourself_desc1')
-						span(name='attr_setting_stress_label')
-						span(data-i18n='push_yourself_desc2')
+						div(data-i18n='push_yourself_desc')
 						.label(data-i18n='devils_bargain')
-			// Friends
-			.col100.def-margin.friends
-				.specialheader.col100.label.flex
-					+text-input('friends_title', 'friends').inherit
-				.greyholder.col100
-					fieldset.repeating_friend
-						.friend-contact.friend.flex
-							+hidden-input('status')(value='0').friendstate
-							label.up
-								+checkbox('status')(value='up').checkbox
-							label.down
-								+checkbox('status')(value='down').checkbox
-							+autoexpand('name')(data-i18n-placeholder='friend_name')
-						+checkbox(null).expand
-						+textarea('description')(data-i18n-placeholder='notes').description
 			// Roll Fortune
 			+fortuneroll('Fortune', '{{fortune=1}} {{subtitle=^{rolls}}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+		.col100.armatures.def-margin.free-repcontrol
+			.specialheader.label(data-i18n="armatures")
+			fieldset.repeating_armature
+				.armature
+					+text-input("armature_name")(data-i18n-placeholder="name").name.label
+					+autoexpand("armature_description")(data-i18n-placeholder="description").desc
+					.harm
+						.blackheader.col100
+							.label(data-i18n='harm')
+							+broadcast('Harm', '{{charname=@{armature_name}}} {{harm=1}} {{harm3=@{armature_harm3}}} {{harm2_1=@{armature_harm2_1}}} {{harm2_2=@{armature_harm2_2}}} {{harm1_1=@{armature_harm1_1}}} {{harm1_2=@{armature_harm1_2}}}')
+						.harmbody
+							.flex-center.harmnumber 3
+							+textarea('armature_harm3').twocols
+							.flex-center.harmnumber 2
+							+textarea('armature_harm2_1')
+							+textarea('armature_harm2_2')
+							.flex-center.harmnumber 1
+							+textarea('armature_harm1_1')
+							+textarea('armature_harm1_2')
+					.repairclock.flex
+						.label(data-i18n="repair")
+						+hidden-input('armature_recovery_max')(value='4').size
+						.clock-container
+							.spoke-0.all
+							.spoke-90.all
+							+radio('armature_recovery')(value='0', checked).zero.input-progress
+							each num in range(1,4)
+								input.input-progress.all(type='radio', name='attr_armature_recovery', value=num)
+							.clock
+					label.armor-label
+						+checkbox("armature_armor").checkbox.squarebox
+						span.label(data-i18n="armor")
+					.features
+						+hidden-input("armature_frame")(value="0").chosen-frame
+						.item.small
+							+checkbox('armature_frame')(value="s").checkbox.squarebox
+							span(data-i18n="small_frame_blurb").blurb
+						.item.medium
+							+checkbox('armature_frame')(value="m").checkbox.squarebox
+							span(data-i18n="medium_frame_blurb").blurb
+						.item.large
+							+checkbox('armature_frame')(value="l").checkbox.squarebox
+							span(data-i18n="large_frame_blurb").blurb
+						.specialheader.label(data-i18n="frame_features")
+						each feature in armatureFeatures
+							.item
+								+checkbox(`armature_${feature}`).checkbox.squarebox
+								span(data-i18n=feature).itemname
 		// Clocks
-		.col100.clocks.def-margin.free-repcontrol
+		.col100.clocks.small-margin.free-repcontrol
 			.specialheader.label(data-i18n='clocks')
 			fieldset.repeating_clock
 				+makeclock
