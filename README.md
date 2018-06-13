@@ -2,7 +2,7 @@
 
 This is a template for creating a derivative of the character sheet for Blades in the Dark for use on Roll20. If you have any questions, feel free to contact me on Discord @deceptive.duality#6358.
 
-If you want to see an example of a complete sheet created from this template, have a look at the [A Nocturne](https://github.com/joesinghaus/Blades-template/tree/A-Nocturne) branch of this repository.
+This is the main version of this template, still containing all the Blades-specific data such as items, playbooks, crews, and factions. If you want to start from a clean sheet for a fresh hack, it is probably best to start from the [clean version](https://github.com/joesinghaus/Blades-template/tree/clean-sheet) instead, and use this branch only for insight in how to structure your data. If you want to see an example of a complete sheet created from this template, have a look at the [A Nocturne](https://github.com/joesinghaus/Blades-template/tree/A-Nocturne) branch of this repository.
 
 ## Changelog
 
