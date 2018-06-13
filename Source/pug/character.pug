@@ -29,36 +29,19 @@
 				.text
 					span.label.title(data-i18n='background')
 					span.uppercase.info(data-i18n='background_info')
-			+hidden-input('setting_vice_type')(value='normal').vice-input
 			label.col100.vice.normal
 				+autoexpand('vice_purveyor')
 				+hidden-input('vice_purveyor')(value='')
 				.text
 					span.label.title(data-i18n='vice_purveyor')
 					span.uppercase.info(data-i18n='vice_info')
-				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title=^{vice}}} @{vice_formula}')(data-i18n='indulge_vice').vicebutton.borderbutton
+				+roll('Vice', '{{{{subtitle=^{viceroll1}@{stress}&nbsp;^{stress}^{viceroll2}}} {{vice=1}} {{title=^{vice}}} @{vice_formula}')(data-i18n='indulge_vice').vicebutton.borderbutton
 				+hidden-input('vice_formula')(value=zerodiceFormula)
-			//- Special vice sections for spirit playbooks. You can safely delete the following three elements if you don't need variant vices
-			if (showSpecialVice)
-				.col100.vice.ghost
-					span.italic(data-i18n='ghost_viceblurb')
-				.col100.vice.hull
-					label.flex-wrap
-						+text-input('hull_functions')(data-i18n-placeholder='choose_3_functions', placeholder='choose 3 functions')
-						+hidden-input('hull_functions')(value='')
-						.text
-							span.label.title(data-i18n='functions')
-							span.uppercase.info(data-i18n='functions_info')
-					span.italic(data-i18n='hull_viceblurb')
-				.col100.vice.vampire
-					span.italic(data-i18n='vampire_viceblurb')
-				+roll('Vice', '{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{vice=1}} {{title=^{vice}}} @{vice_formula}')(data-i18n='indulge_vice').vicebutton.borderbutton
 		// Stress and Trauma
 		.col100.flex.stress.def-margin
 			// Stress markers
 			.stress1.blackheader
-				.label
-					span(name='attr_setting_stress_label')
+				.label(data-i18n="stress")
 			.stress2.blackborder.flex
 				+radio('stress')(value='0', checked).tooth.zero
 				//- This will generate 12 stress boxes and show 9 by default
@@ -69,8 +52,7 @@
 			// Trauma markers
 			.stress3
 				.blackheader
-					.label
-						span(name='attr_setting_trauma_label')
+					.label(data-i18n="trauma")
 				.traumaholder.flex
 					+radio('trauma')(value='0', checked).tooth.zero
 					//- This will generate 5 trauma boxes and show 4 by default
@@ -80,23 +62,21 @@
 						+radio('trauma')(value=num).tooth.regulartooth
 			// Individual traumata
 			.stress4.blackborder
-				+hidden-input('setting_traumata_set')(value='normal').input
-				each traumas, type in traumaData
-					//- Splits up traumas into two rows, each of which hold half the traumas
-					//- this pulls the traumas automatically from the traumas property in data.json
-					div(class=type)
-						.flex
-							each trauma, i in traumas.slice(0, traumas.length / 2)
-								label.text-button
-									+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
-								if (i < traumas.length / 2 - 1)
-									span —
-						.flex
-							each trauma, i in traumas.slice(traumas.length / 2)
-								label.text-button
-									+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
-								if (i < traumas.length / 2 - 1)
-									span —
+				//- Splits up traumas into two rows, each of which hold half the traumas
+				//- this pulls the traumas automatically from the traumas property in data.json
+				div
+					.flex
+						each trauma, i in traumaData.slice(0, traumaData.length / 2)
+							label.text-button
+								+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
+							if (i < traumaData.length / 2 - 1)
+								span —
+					.flex
+						each trauma, i in traumaData.slice(traumaData.length / 2)
+							label.text-button
+								+checkbox(`trauma_${trauma}`)(data-i18n=trauma)
+							if (i < traumaData.length / 2 - 1)
+								span —
 		// Harm, Healing, Armor, Coin
 		.col100.flex.def-margin
 			// Harm
@@ -136,9 +116,9 @@
 				.armor.col55
 					.blackheader.col100
 						.label(data-i18n='armor_uses')
-					each val in ['armor', '+heavy', 'special']
+					each val in ['armor', 'heavy', 'special']
 						label
-							+checkbox(val.replace('+', '')).checkbox.squarebox
+							+checkbox(val).checkbox.squarebox
 							span.label(data-i18n=val)
 				// Coin and Stash
 				.col100.coin-and-stash
@@ -219,20 +199,6 @@
 						li
 							+text-input('gatherinfo6')(data-i18n-placeholder='gatherinfo_how_can_I_find').inherit
 						li(data-i18n='gatherinfo_whats_going_on')
-			//- Strictures: can be deleted safely
-			if (showStrictures)
-				// Strictures
-				+hidden-input('setting_show_strictures')(value='0').hider
-				.strictures.col100.def-margin
-					.plainheader.label(data-i18n='strictures')
-					div
-						span.italic(data-i18n='stricturesblurb')
-					each name in ['slumber', 'forbidden', 'repelled', 'bestial', 'bound']
-						div
-							label
-								+checkbox(`stricture_${name}`).checkbox.squarebox
-								span.label(data-i18n=name)
-							span(data-i18n=`strictures_${name}`)
 	// Right column
 	.col45.flex-wrap.right-column
 		// Playbook name and description
@@ -284,17 +250,6 @@
 						.item-description
 							+checkbox('expand').expand
 							+textarea('description')(data-i18n-placeholder='description')
-					//- Frame: can be deleted safely
-					if (showFrame)
-						// Frame
-						+hidden-input('setting_show_frame')(value='0').hider
-						.frame.small-margin
-							+text-input('frame', 'frame').smallcaps
-							+textarea('frame_description')(data-i18n-placeholder='frame_description')
-							fieldset.repeating_framefeature
-								.item
-									+checkbox('check').checkbox.circlebox
-									+text-input('name')(data-i18n-placeholder='frame_feature').itemname
 				// Regular items
 				.regularitems.col100.free-repcontrol.free-repcontrol
 					fieldset.repeating_item
@@ -399,9 +354,7 @@
 					.flex-center.bonusdieplus +
 					.bonusdietext
 						.label(data-i18n='push_yourself')
-						span(data-i18n='push_yourself_desc1')
-						span(name='attr_setting_stress_label')
-						span(data-i18n='push_yourself_desc2')
+						span(data-i18n="push_yourself_desc")
 						.label(data-i18n='devils_bargain')
 			// Friends
 			.col100.def-margin.friends

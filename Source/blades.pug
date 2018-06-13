@@ -5,15 +5,6 @@
 		playbooks = Object.keys(locals.data.playbook),
 		crews = Object.keys(locals.data.crew);
 
-	/** Toggles for special sections of the sheet
-	 *  By default, these will not be output to the generated HTML, you can change these to show them
-	 */
-
-	const showStrictures = false,				// vampire strictures
-		showFrame = false,								// hull frame
-		showSpecialVice = false,					// ghost, hull, and vampire vices
-		showDeityOrigin = false;					// show Deity and Origin
-
 	// Javascript really needs a range function
 	const range = (start, end) => [...Array(end+1).keys()].slice(start);
 	const zerodiceFormula = '?{@{bonusdice}|0, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|1, {{dice=&#91;&#91;d6]]&#125;&#125;|2, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|3, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|4, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|5, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|6, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-1, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-2, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-3, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}';
@@ -53,7 +44,7 @@ mixin autoexpand(name, i18nvalue)
 		span(name=`attr_${name}`)= i18nvalue ? translation[i18nvalue] : ''
 		+textarea(name, i18nvalue)(data-i18n-placeholder!=attributes['data-i18n-placeholder'])
 
-//- Creates a roll button using stat as a bonus
+//- Creates a normal roll button
 mixin roll(name, templatedata, stat)
 	button(
 		type='roll',
@@ -69,6 +60,7 @@ mixin fortuneroll(name, templatedata, useNotes)
 		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} @{numberofdice} {{charimage=@{chat_image}}} ${useNotes ? '{{notes=@{notes_query}}} ' : ''}`
 	)&attributes(attributes)
 
+//- Creates a broadcast button
 mixin broadcast(name, content)
 	button.broadcast-button(type='roll', name=`roll_${name}`, value!= `&{template:bitd-broadcast} ${content} {{charimage=@{chat_image}}}`, data-i18n-title='send_details_to_chat') :
 

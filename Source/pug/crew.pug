@@ -38,26 +38,6 @@ mixin makeupgrade(number, numboxes, def, desc)
 			label.col100
 				+text-input('lair')
 				.label.text.title(data-i18n='lair')
-			//- Deity and origin fields. Can be deleted safely.
-			if (showDeityOrigin)
-				+hidden-input('setting_show_deity')(value='0').hider
-				label.col55
-					+text-input('crew_deity')
-					.label.text.title
-						span(data-i18n='deity')
-				+hidden-input('setting_show_deity')(value='0').hider
-				label.col45
-					+text-input('crew_deity_features')(data-i18n-placeholder='choose_2_features')
-					+hidden-input('crew_deity_features')(value='')
-					.text
-						span.label.title
-							span(data-i18n='deity').space-after
-							span(data-i18n='features')
-						span.uppercase.info(data-i18n='deity_features_info')
-				+hidden-input('setting_show_origin')(value='0').hider
-				label.col100
-					+text-input('origin')
-					.label.text.title(data-i18n='origin')
 		// Rep, Hold, and Tier
 		.col100.flex.rep-and-hold.def-margin
 			.rep.flex.col45
@@ -248,20 +228,6 @@ mixin makeupgrade(number, numboxes, def, desc)
 						span.label(data-i18n='lair')
 					.item.col50
 						span.label(data-i18n='quality')
-					+makeupgrade(6, 2, 'carriage', 'upgrade_carriage_description')
-					+makeupgrade(7, 1, 'documents', 'upgrade_documents_description')
-					+makeupgrade(8, 2, 'boat', 'upgrade_boat_description')
-					+makeupgrade(9, 1, 'gear', 'upgrade_gear_description')
-					+makeupgrade(10, 1, 'hidden', 'upgrade_hidden_description')
-					+makeupgrade(11, 1, 'implements', 'upgrade_implements_description')
-					+makeupgrade(12, 1, 'quarters', 'upgrade_quarters_description')
-					+makeupgrade(13, 1, 'supplies', 'upgrade_supplies_description')
-					+makeupgrade(14, 2, 'secure', 'upgrade_secure_description')
-					+makeupgrade(15, 1, 'tools', 'upgrade_tools_description')
-					+makeupgrade(16, 2, 'vault', 'upgrade_vault_description')
-					+makeupgrade(17, 1, 'weapons', 'upgrade_weapons_description')
-					+makeupgrade(18, 1, 'workshop', 'upgrade_workshop_description')
-					.item.col50
 					.item.upgradecaption.col50
 						span.label(data-i18n='training')
 					.item.upgradecaption.col50
