@@ -16,7 +16,7 @@
 
 	// Javascript really needs a range function
 	const range = (start, end) => [...Array(end+1).keys()].slice(start);
-	const zerodiceFormula = '?{@{bonusdice}|0, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|1, {{dice=&#91;&#91;d6]]&#125;&#125;|2, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|3, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|4, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|5, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|6, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-1, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-2, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-3, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}';
+	const zerodiceFormula = ' {{?{@{bonusdice}|0,zerodice=[[d6]]&#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&#44; [[d6]]|3,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]|4,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|5,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|6,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|-1,zerodice=[[d6]]&#44; [[d6]]|-2,zerodice=[[d6]]&#44; [[d6]]|-3,zerodice=[[d6]]&#44; [[d6]]}}}';
 
 
 //- Mixins for code reuse
@@ -159,7 +159,7 @@ mixin makeclock(isFaction)
 +hidden-input('setting_flexwidth')(value='0').flexwidth
 +hidden-input('changed_attributes')(value='')
 +hidden-input('bonusdice')(value='Bonus dice')
-+hidden-input('numberofdice')(value='?{Number of dice|0, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|1, {{dice=&#91;&#91;d6]]&#125;&#125;|2, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|3, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|4, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|5, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|6, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}')
++hidden-input('numberofdice')(value=' {{?{Number of dice|0,zerodice=[[d6]]&#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&#44; [[d6]]|3,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]|4,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|5,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|6,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]}}}')
 +hidden-input('notes_query')(value='?{Notes}')
 +hidden-input('position_query')(value='?{Position|Risky,position=Risky|Controlled,position=Controlled|Desperate,position=Desperate|Fortune roll,position=}')
 +hidden-input('effect_query')(value='?{Effect|Standard|Limited|Great|Extreme|Zero}')

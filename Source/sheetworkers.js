@@ -20,13 +20,13 @@ Object.keys(data.crew).forEach(crew => {
 	}));
 	data.crew[crew].upgrade.forEach(upgrade => {
 		upgrade.name = getTranslationByKey(upgrade.name);
-		upgrade.boxes_chosen = '1';
+		upgrade.boxes_chosen = "1";
 	});
 });
 data.items.forEach(item => {
-	item.boxes_chosen = '1';
+	item.boxes_chosen = "1";
 	item.name = getTranslationByKey(item.name);
-	item.description = getTranslationByKey(item.description) || '';
+	item.description = getTranslationByKey(item.description) || "";
 });
 Object.keys(data.translatedDefaults).forEach(k => {
 	data.translatedDefaults[k] = getTranslationByKey(data.translatedDefaults[k]);
@@ -64,7 +64,7 @@ Object.keys(data.playbook).forEach(playbook => {
 	}));
 	data.playbook[playbook].playbookitem.forEach(item => {
 		item.name = getTranslationByKey(item.name);
-		item.boxes_chosen = '1';
+		item.boxes_chosen = "1";
 	});
 });
 const playbookAbilityMap = new Map([...Object.values(data.playbook).map(x => x.ability).reduce((m, v) => {
@@ -115,52 +115,43 @@ const mySetAttrs = (attrs, options, callback) => {
 				const existingRowNames = idList.map(id => v[`repeating_${sectionName}_${id}_name`]),
 					createdIDs = [],
 					setting = dataList.filter(o => !existingRowNames.includes(o.name))
-					.map(o => {
-						let rowID;
-						while (!rowID) {
-							let newID = generateRowID();
-							if (!createdIDs.includes(newID)) {
-								rowID = newID;
-								createdIDs.push(rowID);
+						.map(o => {
+							let rowID;
+							while (!rowID) {
+								let newID = generateRowID();
+								if (!createdIDs.includes(newID)) {
+									rowID = newID;
+									createdIDs.push(rowID);
+								}
 							}
-						}
-						const newAttrs = {};
-						if (autogen) {
-							newAttrs[`repeating_${sectionName}_${rowID}_autogen`] = '1';
-						}
-						return Object.keys(o).reduce((m, key) => {
-							m[`repeating_${sectionName}_${rowID}_${key}`] = o[key];
-							return m;
-						}, newAttrs);
-					})
-					.reduce((m, o) => Object.assign(m, o), {});
+							const newAttrs = {};
+							if (autogen) {
+								newAttrs[`repeating_${sectionName}_${rowID}_autogen`] = "1";
+							}
+							return Object.keys(o).reduce((m, key) => {
+								m[`repeating_${sectionName}_${rowID}_${key}`] = o[key];
+								return m;
+							}, newAttrs);
+						})
+						.reduce((m, o) => Object.assign(m, o), {});
 				mySetAttrs(setting, {}, callback);
 			});
 		});
 	},
 	diceMagic = num => {
-		const replaceEntities = string => {
-			const entities = {
-				'[': '#91',
-				'}': '#125',
-				',': '#44',
-			};
-			return string.replace(/[\[},]/g, c => '&' + entities[c] + ';');
-		};
-		const range = end => [...Array(end+1).keys()].slice(1);
-		if (num > 0)
-			return replaceEntities(` {{dice=${range(num).map(() => `[[d6]]`).join(", ")}}}`);
-		else return replaceEntities(' {{zerodice=[[d6]], [[d6]]}}');
+		const range = end => [...Array(end + 1).keys()].slice(1);
+		if (num > 0) return `dice=${range(num).map(() => "[[d6]]").join("&"+"#44"+"; ")}`;
+		else return "zerodice=[[d6]]&"+"#44"+"; [[d6]]";
 	},
 	buildRollFormula = base => {
-		return `?{@{bonusdice}|` +
-			[0,1,2,3,4,5,6,-1,-2,-3].map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join('|') +
-			'}';
+		return ` {{?{@{bonusdice}|${
+			[0, 1, 2, 3, 4, 5, 6, -1, -2, -3].map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join("|")
+		}}}}`;
 	},
 	buildNumdiceFormula = () => {
-		return `?{${getTranslationByKey('numberofdice')}|` +
-			[0, 1, 2, 3, 4 , 5, 6].map(n => `${n},${diceMagic(n)}`).join('|') +
-			'}';
+		return ` {{?{${getTranslationByKey("numberofdice")}|${
+			[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n)}`).join("|")
+		}}}}`;
 	},
 	emptyFirstRowIfUnnamed = sectionName => {
 		getSectionIDs(`repeating_${sectionName}`, idList => {
@@ -174,31 +165,31 @@ const mySetAttrs = (attrs, options, callback) => {
 	},
 	handleBoxesFill = (name, upToFour) => {
 		on(`change:${name}1 change:${name}2 change:${name}3 change:${name}4`, event => {
-			if (event.sourceType !== 'player') return;
+			if (event.sourceType !== "player") return;
 			getAttrs([event.sourceAttribute], v => {
 				const rName = event.sourceAttribute.slice(0, -1),
 					setting = {};
-				if (String(v[event.sourceAttribute]) === '1') {
+				if (String(v[event.sourceAttribute]) === "1") {
 					switch (event.sourceAttribute.slice(-1)) {
-					case '4':
+					case "4":
 						setting[`${rName}3`] = 1;
 						/* falls through */
-					case '3':
+					case "3":
 						setting[`${rName}2`] = 1;
 						/* falls through */
-					case '2':
+					case "2":
 						setting[`${rName}1`] = 1;
 					}
 				}
-				if (String(v[event.sourceAttribute]) === '0') {
+				if (String(v[event.sourceAttribute]) === "0") {
 					switch (event.sourceAttribute.slice(-1)) {
-					case '1':
+					case "1":
 						setting[`${rName}2`] = 0;
 						/* falls through */
-					case '2':
+					case "2":
 						setting[`${rName}3`] = 0;
 						/* falls through */
-					case '3':
+					case "3":
 						if (upToFour) setting[`${rName}4`] = 0;
 					}
 				}
@@ -209,7 +200,7 @@ const mySetAttrs = (attrs, options, callback) => {
 	calculateResistance = name => {
 		getAttrs([...data.actions[name], `setting_resbonus_${name}`], v => {
 			const total = data.actions[name].map(x => v[x])
-				.reduce((s, c) => s + (String(c) === '0' ? 0 : 1), 0);
+				.reduce((s, c) => s + (String(c) === "0" ? 0 : 1), 0);
 			setAttr(name, total);
 			setAttr(`${name}_formula`, buildRollFormula(total + parseInt(v[`setting_resbonus_${name}`])));
 		});
@@ -217,33 +208,33 @@ const mySetAttrs = (attrs, options, callback) => {
 	calculateVice = () => {
 		getAttrs(Object.keys(data.actions), v => {
 			const total = Math.min(...Object.keys(v).map(x => parseInt(v[x]) || 0));
-			setAttr('vice_formula', buildRollFormula(total));
+			setAttr("vice_formula", buildRollFormula(total));
 		});
 	},
-		calculateStashFormula = () => getAttrs(['stash'], v => {
-			setAttr('stash_formula', buildRollFormula(Math.floor(parseInt(v.stash) / 10)));
-		}),
-		calculateWantedFormula = () => getAttrs(['wanted'], v => {
-			setAttr('wanted_formula', buildRollFormula(v.wanted));
-		}),
-		calculateCohortDice = prefixes => {
-			const sourceAttrs = [
-				'crew_tier',
-				...prefixes.map(p => `${p}_impaired`),
-				...prefixes.map(p => `${p}_type`),
-				...prefixes.map(p => `${p}_roll_formula`),
-			];
-			getAttrs(sourceAttrs, v => {
-				const setting = {};
-				prefixes.forEach(prefix => {
-					const dice = (parseInt(v.crew_tier) || 0) - (parseInt(v[`${prefix}_impaired`]) || 0) +
-						((v[`${prefix}_type`] === 'elite' || v[`${prefix}_type`] === 'expert') ? 1 : 0),
-						formula = buildRollFormula(dice);
-					if (formula !== v[`${prefix}_roll_formula`]) setting[`${prefix}_roll_formula`] = formula;
-				});
-				setAttrs(setting);
+	calculateStashFormula = () => getAttrs(["stash"], v => {
+		setAttr("stash_formula", buildRollFormula(Math.floor(parseInt(v.stash) / 10)));
+	}),
+	calculateWantedFormula = () => getAttrs(["wanted"], v => {
+		setAttr("wanted_formula", buildRollFormula(v.wanted));
+	}),
+	calculateCohortDice = prefixes => {
+		const sourceAttrs = [
+			"crew_tier",
+			...prefixes.map(p => `${p}_impaired`),
+			...prefixes.map(p => `${p}_type`),
+			...prefixes.map(p => `${p}_roll_formula`),
+		];
+		getAttrs(sourceAttrs, v => {
+			const setting = {};
+			prefixes.forEach(prefix => {
+				const dice = (parseInt(v.crew_tier) || 0) - (parseInt(v[`${prefix}_impaired`]) || 0) +
+						((v[`${prefix}_type`] === "elite" || v[`${prefix}_type`] === "expert") ? 1 : 0),
+					formula = buildRollFormula(dice);
+				if (formula !== v[`${prefix}_roll_formula`]) setting[`${prefix}_roll_formula`] = formula;
 			});
-		};
+			setAttrs(setting);
+		});
+	};
 /* CONSTANTS */
 const crewAttributes = [...new Set([].concat(...Object.keys(data.crew).map(x => Object.keys(data.crew[x].base))))],
 	playbookAttributes = [...new Set([].concat(...Object.keys(data.playbook).map(x => Object.keys(data.playbook[x].base))))],
@@ -251,42 +242,42 @@ const crewAttributes = [...new Set([].concat(...Object.keys(data.crew).map(x => 
 	actionsFlat = [].concat(...Object.keys(data.actions).map(x => data.actions[x])),
 	traumaDataFlat = Object.keys(data.traumas).reduce((m, k) => m.concat(data.traumas[k]), []),
 	autoExpandFields = [
-		'repeating_ability:name',
-		'repeating_ability:description',
-		'repeating_crewability:name',
-		'repeating_crewability:description',
-		'repeating_playbookitem:name',
-		'repeating_upgrade:name',
-		'repeating_friend:name',
-		'repeating_contact:name',
-		'repeating_clock:name',
-		'repeating_crewclock:name',
-		'repeating_factionclock:name',
-		'repeating_cohort:edges',
-		'repeating_cohort:flaws',
-		'repeating_alchemical:name',
-		'xp_condition',
-		'xp_condition_extra',
-		'xp_condition2',
-		'xp_condition3',
-		'crew_xp_condition',
-		'hunting_grounds_type',
-		'hunting_grounds_description',
-		'cohort1_edges',
-		'cohort1_flaws',
-		'heritage',
-		'background',
-		'vice_purveyor',
+		"repeating_ability:name",
+		"repeating_ability:description",
+		"repeating_crewability:name",
+		"repeating_crewability:description",
+		"repeating_playbookitem:name",
+		"repeating_upgrade:name",
+		"repeating_friend:name",
+		"repeating_contact:name",
+		"repeating_clock:name",
+		"repeating_crewclock:name",
+		"repeating_factionclock:name",
+		"repeating_cohort:edges",
+		"repeating_cohort:flaws",
+		"repeating_alchemical:name",
+		"xp_condition",
+		"xp_condition_extra",
+		"xp_condition2",
+		"xp_condition3",
+		"crew_xp_condition",
+		"hunting_grounds_type",
+		"hunting_grounds_description",
+		"cohort1_edges",
+		"cohort1_flaws",
+		"heritage",
+		"background",
+		"vice_purveyor",
 	],
 	autogenSections = [
-		'ability',
-		'crewability',
-		'friend',
-		'contact',
-		'playbookitem',
-		'upgrade'
+		"ability",
+		"crewability",
+		"friend",
+		"contact",
+		"playbookitem",
+		"upgrade"
 	],
-	spiritPlaybooks = ['ghost', 'hull', 'vampire'],
+	spiritPlaybooks = ["ghost", "hull", "vampire"],
 	translatedNames = [...Object.keys(data.playbook), ...Object.keys(data.crew)].reduce((m, keyName) => {
 		if (getTranslationByKey(keyName)) m[getTranslationByKey(keyName).toLowerCase()] = keyName;
 		else m[keyName.toLowerCase()] = keyName;
@@ -294,20 +285,20 @@ const crewAttributes = [...new Set([].concat(...Object.keys(data.crew).map(x => 
 	}, {});
 /* EVENT HANDLERS */
 /* Set default fields when setting crew type or playbook */
-on('change:crew_type change:playbook', event => {
-	getAttrs(['playbook', 'crew_type', 'changed_attributes', 'setting_autofill', ...watchedAttributes], v => {
-		const changedAttributes = (v.changed_attributes || '').split(','),
-			sourceName = translatedNames[(event.sourceAttribute === 'crew_type' ? v.crew_type : v.playbook).toLowerCase()],
+on("change:crew_type change:playbook", event => {
+	getAttrs(["playbook", "crew_type", "changed_attributes", "setting_autofill", ...watchedAttributes], v => {
+		const changedAttributes = (v.changed_attributes || "").split(","),
+			sourceName = translatedNames[(event.sourceAttribute === "crew_type" ? v.crew_type : v.playbook).toLowerCase()],
 			fillBaseData = (inputData, defaultAttrNames) => {
 				if (data) {
 					const finalSettings = defaultAttrNames.filter(name => !changedAttributes.includes(name))
 						// do not reset attributes which have been changed by the user
 						.filter(name => !spiritPlaybooks.includes(sourceName) || !actionsFlat.includes(name))
 						// do not reset action dots if changing to a spirit playbook
-						.filter(name => v[name] !== (data.defaultValues[name] || ''))
+						.filter(name => v[name] !== (data.defaultValues[name] || ""))
 						// do not set attributes if current value is equal to sheet defaults
 						.reduce((m, name) => {
-							m[name] = data.defaultValues[name] || '';
+							m[name] = data.defaultValues[name] || "";
 							return m;
 						}, {});
 					Object.keys(inputData).filter(name => !changedAttributes.includes(name))
@@ -315,51 +306,51 @@ on('change:crew_type change:playbook', event => {
 					mySetAttrs(finalSettings);
 				}
 			};
-		if (event.sourceAttribute === 'crew_type' ? v.crew_type : v.playbook) {
-			setAttr('show_playbook_reminder', '0');
+		if (event.sourceAttribute === "crew_type" ? v.crew_type : v.playbook) {
+			setAttr("show_playbook_reminder", "0");
 		}
-		if (v.setting_autofill !== '1') return;
-		if (event.sourceAttribute === 'crew_type' && sourceName in data.crew) {
-			fillRepeatingSectionFromData('contact', data.crew[sourceName].contact, true);
-			fillRepeatingSectionFromData('crewability', data.crew[sourceName].crewability, true);
-			fillRepeatingSectionFromData('upgrade', data.crew[sourceName].upgrade, true);
+		if (v.setting_autofill !== "1") return;
+		if (event.sourceAttribute === "crew_type" && sourceName in data.crew) {
+			fillRepeatingSectionFromData("contact", data.crew[sourceName].contact, true);
+			fillRepeatingSectionFromData("crewability", data.crew[sourceName].crewability, true);
+			fillRepeatingSectionFromData("upgrade", data.crew[sourceName].upgrade, true);
 			fillBaseData(data.crew[sourceName].base, crewAttributes);
 		}
-		if (event.sourceAttribute === 'playbook' && sourceName in data.playbook) {
-			fillRepeatingSectionFromData('friend', data.playbook[sourceName].friend, true);
-			fillRepeatingSectionFromData('ability', data.playbook[sourceName].ability, true);
-			fillRepeatingSectionFromData('playbookitem', data.playbook[sourceName].playbookitem, true);
+		if (event.sourceAttribute === "playbook" && sourceName in data.playbook) {
+			fillRepeatingSectionFromData("friend", data.playbook[sourceName].friend, true);
+			fillRepeatingSectionFromData("ability", data.playbook[sourceName].ability, true);
+			fillRepeatingSectionFromData("playbookitem", data.playbook[sourceName].playbookitem, true);
 			fillBaseData(data.playbook[sourceName].base, playbookAttributes);
-			if (sourceName === 'leech') fillRepeatingSectionFromData('alchemical', data.alchemicals);
+			if (sourceName === "leech") fillRepeatingSectionFromData("alchemical", data.alchemicals);
 		}
 	});
 });
 const fillPlaybookAbility = () => {
-	const prefix = 'repeating_ability';
+	const prefix = "repeating_ability";
 	getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
 		if (!v[`${prefix}_description`]) {
-			const description = playbookAbilityMap.get((v[`${prefix}_name`] || '').toLowerCase());
+			const description = playbookAbilityMap.get((v[`${prefix}_name`] || "").toLowerCase());
 			if (description) setAttr(`${prefix}_description`, description);
 		}
 	});
 };
 const fillCrewAbility = () => {
-	const prefix = 'repeating_crewability';
+	const prefix = "repeating_crewability";
 	getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
 		if (!v[`${prefix}_description`]) {
-			const description = crewAbilityMap.get((v[`${prefix}_name`] || '').toLowerCase());
+			const description = crewAbilityMap.get((v[`${prefix}_name`] || "").toLowerCase());
 			if (description) setAttr(`${prefix}_description`, description);
 		}
 	});
 };
-on('change:repeating_ability:name', fillPlaybookAbility);
-on('change:repeating_crewability:name', fillCrewAbility);
+on("change:repeating_ability:name", fillPlaybookAbility);
+on("change:repeating_crewability:name", fillCrewAbility);
 /* Watch repeating rows for changes and set autogen to false if change happens */
 autogenSections.forEach(sectionName => {
 	on(`change:repeating_${sectionName}`, event => {
 		getAttrs([`repeating_${sectionName}_autogen`], v => {
-			if (v[`repeating_${sectionName}_autogen`] && event.sourceType === 'player') {
-				setAttr(`repeating_${sectionName}_autogen`, '');
+			if (v[`repeating_${sectionName}_autogen`] && event.sourceType === "player") {
+				setAttr(`repeating_${sectionName}_autogen`, "");
 			}
 		});
 	});
@@ -367,46 +358,46 @@ autogenSections.forEach(sectionName => {
 /* Watch for changes in auto-set attributes and update changed_attributes*/
 watchedAttributes.forEach(name => {
 	on(`change:${name}`, event => {
-		if (event.sourceType === 'player') {
-			getAttrs(['changed_attributes'], v => {
-				const changedAttributes = [...new Set(v.changed_attributes.split(',')).add(name)]
-					.filter(x => !!x).join(',');
-				setAttr('changed_attributes', changedAttributes);
+		if (event.sourceType === "player") {
+			getAttrs(["changed_attributes"], v => {
+				const changedAttributes = [...new Set(v.changed_attributes.split(",")).add(name)]
+					.filter(x => !!x).join(",");
+				setAttr("changed_attributes", changedAttributes);
 			});
 		}
 	});
 });
 /* Register attribute/action event handlers */
 Object.keys(data.actions).forEach(attrName => {
-		on([...data.actions[attrName], `setting_resbonus_${attrName}`]
-			.map(x => `change:${x}`).join(' '), () => calculateResistance(attrName)
-		);
+	on([...data.actions[attrName], `setting_resbonus_${attrName}`]
+		.map(x => `change:${x}`).join(" "), () => calculateResistance(attrName)
+	);
 	on(`change:${attrName}`, calculateVice);
 });
 /* Calculate stash */
-on('change:stash', calculateStashFormula);
-on('change:wanted', calculateWantedFormula);
+on("change:stash", calculateStashFormula);
+on("change:wanted", calculateWantedFormula);
 /* Calculate trauma */
-on('change:setting_traumata_set ' + traumaDataFlat.map(x => `change:trauma_${x}`).join(' '), event => {
-	getAttrs(['setting_traumata_set', ...traumaDataFlat.map(x => `trauma_${x}`)], v => {
-		const traumaType = (v.setting_traumata_set === '0' ? 'normal' : v.setting_traumata_set);
-		if (data.traumas[traumaType] && event.sourceType === 'player') {
+on("change:setting_traumata_set " + traumaDataFlat.map(x => `change:trauma_${x}`).join(" "), event => {
+	getAttrs(["setting_traumata_set", ...traumaDataFlat.map(x => `trauma_${x}`)], v => {
+		const traumaType = (v.setting_traumata_set === "0" ? "normal" : v.setting_traumata_set);
+		if (data.traumas[traumaType] && event.sourceType === "player") {
 			const newTrauma = data.traumas[traumaType].reduce((m, name) => m + (parseInt(v[`trauma_${name}`]) || 0), 0);
-			setAttr('trauma', newTrauma);
+			setAttr("trauma", newTrauma);
 		}
 	});
 });
 /* Generate buttons */
-on('change:generate_factions', () => {
-	setAttr('show_faction_generatebutton', '0');
+on("change:generate_factions", () => {
+	setAttr("show_faction_generatebutton", "0");
 	Object.keys(data.factions).forEach(sectionName => {
 		fillRepeatingSectionFromData(sectionName, data.factions[sectionName]);
 	});
 });
 autogenSections.forEach(sectionName => {
 	on(`change:generate_${sectionName}`, () => {
-		getAttrs(['generate_source_character', 'generate_source_crew', 'sheet_type'], v => {
-			const dataVar = (v.sheet_type === 'character') ? data.playbook : data.crew,
+		getAttrs(["generate_source_character", "generate_source_crew", "sheet_type"], v => {
+			const dataVar = (v.sheet_type === "character") ? data.playbook : data.crew,
 				genSource = v[`generate_source_${v.sheet_type}`];
 			if (genSource in dataVar) {
 				emptyFirstRowIfUnnamed(sectionName);
@@ -416,44 +407,44 @@ autogenSections.forEach(sectionName => {
 	});
 });
 /* Extra stress and trauma */
-on('change:setting_extra_stress', event => setAttr('stress_max', 9 + (parseInt(event.newValue) || 0)));
-on('change:setting_extra_trauma', event => setAttr('trauma_max', 4 + (parseInt(event.newValue) || 0)));
+on("change:setting_extra_stress", event => setAttr("stress_max", 9 + (parseInt(event.newValue) || 0)));
+on("change:setting_extra_trauma", event => setAttr("trauma_max", 4 + (parseInt(event.newValue) || 0)));
 /* Calculate cohort quality */
-on(['crew_tier', 'cohort1_impaired', 'cohort1_type'].map(x => `change:${x}`).join(' '), () => calculateCohortDice(['cohort1']));
-on('change:repeating_cohort', () => calculateCohortDice(['repeating_cohort']));
-on('change:crew_tier', () => {
-	getSectionIDs('repeating_cohort', a => calculateCohortDice(a.map(id => `repeating_cohort_${id}`)));
+on(["crew_tier", "cohort1_impaired", "cohort1_type"].map(x => `change:${x}`).join(" "), () => calculateCohortDice(["cohort1"]));
+on("change:repeating_cohort", () => calculateCohortDice(["repeating_cohort"]));
+on("change:crew_tier", () => {
+	getSectionIDs("repeating_cohort", a => calculateCohortDice(a.map(id => `repeating_cohort_${id}`)));
 });
-on('change:char_cohort_quality change:char_cohort_impaired change:setting_show_cohort', () => {
-	getAttrs(['char_cohort_quality', 'char_cohort_impaired'], v => {
+on("change:char_cohort_quality change:char_cohort_impaired change:setting_show_cohort", () => {
+	getAttrs(["char_cohort_quality", "char_cohort_impaired"], v => {
 		const dice = (parseInt(v.char_cohort_quality) || 0) - (parseInt(v.char_cohort_impaired) || 0);
-		setAttr('char_cohort_roll_formula', buildRollFormula(dice));
+		setAttr("char_cohort_roll_formula", buildRollFormula(dice));
 	});
 });
 /* Set correct verb for cohort roll button */
-['char_cohort', 'cohort1', 'repeating_cohort'].forEach(prefix => {
-	const eventString = 'change:' + ((prefix === 'repeating_cohort') ? `${prefix}:type` : `${prefix}_type`);
+["char_cohort", "cohort1", "repeating_cohort"].forEach(prefix => {
+	const eventString = "change:" + ((prefix === "repeating_cohort") ? `${prefix}:type` : `${prefix}_type`);
 	on(eventString, event => {
-		const verb = (event.newValue === 'expert') ? '^{rolls_their}' : '^{roll_their}';
+		const verb = (event.newValue === "expert") ? "^{rolls_their}" : "^{roll_their}";
 		setAttr(`${prefix}_verb`, verb);
 	});
 });
 /* Left-fill checkboxes */
-handleBoxesFill('upgrade_24_check_', true);
-handleBoxesFill('bandolier1_check_');
-handleBoxesFill('bandolier2_check_');
-['item', 'playbookitem', 'upgrade'].forEach(sName => handleBoxesFill(`repeating_${sName}:check_`));
+handleBoxesFill("upgrade_24_check_", true);
+handleBoxesFill("bandolier1_check_");
+handleBoxesFill("bandolier2_check_");
+["item", "playbookitem", "upgrade"].forEach(sName => handleBoxesFill(`repeating_${sName}:check_`));
 /* Pseudo-radios */
-['crew_tier', ...actionsFlat].forEach(name => {
+["crew_tier", ...actionsFlat].forEach(name => {
 	on(`change:${name}`, event => {
-		if (String(event.newValue) === '0' && event.sourceType === 'player') {
+		if (String(event.newValue) === "0" && event.sourceType === "player") {
 			setAttr(name, (parseInt(event.previousValue) || 1) - 1);
 		}
-		setAttr(`${name}_formula`, buildRollFormula(event.newValue || '0'));
+		setAttr(`${name}_formula`, buildRollFormula(event.newValue || "0"));
 	});
 });
 /* Item reset button */
-on('change:reset_items', () => {
+on("change:reset_items", () => {
 	const clearChecks = sectionName => {
 		getSectionIDs(`repeating_${sectionName}`, idArray => {
 			const setting = [
@@ -467,8 +458,8 @@ on('change:reset_items', () => {
 			mySetAttrs(setting);
 		});
 	};
-	setAttr('load', 0);
-	['item', 'playbookitem'].forEach(clearChecks);
+	setAttr("load", 0);
+	["item", "playbookitem"].forEach(clearChecks);
 });
 /* Default values for number of upgrades boxes — probably not necessary anymore */
 // on('change:repeating_upgrade:boxes_chosen', () => {
@@ -479,43 +470,43 @@ on('change:reset_items', () => {
 // 	});
 // });
 /* Resistance query */
-on('change:setting_consequence_query sheet:opened', () => {
-	getAttrs(['setting_consequence_query'], v => {
-		const consequenceQuery = (String(v.setting_consequence_query) === '1') ?
-			`?{${getTranslationByKey('consequence')}|${getTranslationByKey('a_consequence')}}` :
-			'^{a_consequence}';
-		setAttr('consequence_query', consequenceQuery);
+on("change:setting_consequence_query sheet:opened", () => {
+	getAttrs(["setting_consequence_query"], v => {
+		const consequenceQuery = (String(v.setting_consequence_query) === "1") ?
+			`?{${getTranslationByKey("consequence")}|${getTranslationByKey("a_consequence")}}` :
+			"^{a_consequence}";
+		setAttr("consequence_query", consequenceQuery);
 	});
 });
 /* Trim whitespace in auto-expand fields */
 autoExpandFields.forEach(name => {
 	on(`change:${name}`, event => {
-		const attrName = name.replace(':', '_');
+		const attrName = name.replace(":", "_");
 		getAttrs([attrName], v => {
-			if (v[attrName].trim() !== v[attrName] && event.sourceType === 'player') {
+			if (v[attrName].trim() !== v[attrName] && event.sourceType === "player") {
 				setAttr(attrName, v[attrName].trim());
 			}
 		});
 	});
 });
 /* Clean chat image URL */
-on('change:chat_image', event => {
-	const match = (event.newValue || '').match(/^(https:\/\/s3\.amazonaws\.com\/files\.d20\.io\/images\/.*\.jpg)\?\d+$/);
-	if (match) setAttr('chat_image', match[1]);
+on("change:chat_image", event => {
+	const match = (event.newValue || "").match(/^(https:\/\/s3\.amazonaws\.com\/files\.d20\.io\/images\/.*\.jpg)\?\d+$/);
+	if (match) setAttr("chat_image", match[1]);
 });
 /* Number of dice prompt */
-on('sheet:opened', () => {
+on("sheet:opened", () => {
 	/* Set up translated attributes */
 	const translatedAttrs = {
-		bonusdice: getTranslationByKey('bonusdice'),
-		effect_query: getTranslationByKey('effect_query'),
-		notes_query: `?{${getTranslationByKey('notes')}}`,
+		bonusdice: getTranslationByKey("bonusdice"),
+		effect_query: getTranslationByKey("effect_query"),
+		notes_query: `?{${getTranslationByKey("notes")}}`,
 		numberofdice: buildNumdiceFormula(),
-		position_query: `?{${getTranslationByKey('position')}|` +
-			`${getTranslationByKey('risky')},position=${getTranslationByKey('risky')}|` +
-			`${getTranslationByKey('controlled')},position=${getTranslationByKey('controlled')}|` +
-			`${getTranslationByKey('desperate')},position=${getTranslationByKey('desperate')}|` +
-			`${getTranslationByKey('fortune_roll')},position=}`,
+		position_query: `?{${getTranslationByKey("position")}|` +
+			`${getTranslationByKey("risky")},position=${getTranslationByKey("risky")}|` +
+			`${getTranslationByKey("controlled")},position=${getTranslationByKey("controlled")}|` +
+			`${getTranslationByKey("desperate")},position=${getTranslationByKey("desperate")}|` +
+			`${getTranslationByKey("fortune_roll")},position=}`,
 	};
 	getAttrs(Object.keys(translatedAttrs), v => {
 		const setting = {};
@@ -526,27 +517,27 @@ on('sheet:opened', () => {
 	});
 });
 /* INITIALISATION AND UPGRADES */
-on('sheet:opened', () => {
-	getAttrs(['sheet_type', 'changed_attributes', 'crew_type', 'playbook'], v => {
+on("sheet:opened", () => {
+	getAttrs(["sheet_type", "changed_attributes", "crew_type", "playbook"], v => {
 		/* Make sure sheet_type is never 0 */
-		if (!['crew', 'faction'].includes(v.sheet_type)) setAttr('sheet_type', 'character');
+		if (!["crew", "faction"].includes(v.sheet_type)) setAttr("sheet_type", "character");
 		/* Remove reminder box if we have playbook or crew name */
-		if (v.playbook || v.crew_type) setAttr('show_playbook_reminder', '0');
+		if (v.playbook || v.crew_type) setAttr("show_playbook_reminder", "0");
 	});
 	/* Setup and upgrades */
-	getAttrs(['version'], v => {
+	getAttrs(["version"], v => {
 		const upgradeSheet = version => {
-				const [major, minor] = version && version.split('.').map(x => parseInt(x));
+				//const [major, minor] = version && version.split(".").map(x => parseInt(x));
 				console.log(`Found version ${version}.`);
 			},
 			initialiseSheet = () => {
-				const setting = ['ability', 'friend', 'crewability', 'contact', 'playbookitem', 'upgrade', 'framefeature']
+				const setting = ["ability", "friend", "crewability", "contact", "playbookitem", "upgrade", "framefeature"]
 					.reduce((memo, sectionName) => {
 						memo[`repeating_${sectionName}_${generateRowID()}_autogen`] = 1;
 						return memo;
 					}, {});
 				mySetAttrs(setting);
-				fillRepeatingSectionFromData('item', data.items);
+				fillRepeatingSectionFromData("item", data.items);
 				/* Set translated default values */
 				getAttrs(Object.keys(data.translatedDefaults), v => {
 					const setting = {};
@@ -555,7 +546,7 @@ on('sheet:opened', () => {
 					});
 					mySetAttrs(setting);
 				});
-				console.log('Initialising new sheet.');
+				console.log("Initialising new sheet.");
 			};
 		if (v.version) upgradeSheet(v.version);
 		else initialiseSheet();
