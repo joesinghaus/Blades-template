@@ -34,7 +34,7 @@ if (config.enableBabel && !config.pretty) {
 
 // Build CSS file
 const sassopts = `--no-source-map --style ${(config.pretty ? "expanded" : "compressed")}`,
-	cssOutput = execSync(`sass ${sassopts} Source/blades.scss`, {encoding: "utf8"}).replace(/^@charset "UTF-8";\s*/, "");
+	cssOutput = execSync(`sass ${sassopts} Source/blades.scss`, {encoding: "utf8"}).replace(/^@charset "UTF-8";\s*/, "").replace(/^\uFEFF/, "");
 fs.writeFileSync("blades.css", cssOutput);
 
 // Build HTML
