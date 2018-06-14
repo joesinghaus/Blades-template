@@ -3,34 +3,34 @@ mixin makefactions(number, title, chaos)
 		.factions-header.flex.uppercase
 			+text-input(`factions${number}_header`, title).faction-name.label
 			if (attributes.class !== "aboard-craft")
-				span.faction-scale(data-i18n='scale')
-				span.faction-status(data-i18n='status')
+				span.faction-scale(data-i18n="scale")
+				span.faction-status(data-i18n="status")
 		if (chaos)
 			.flex
 				.stress1.blackheader
 					+hidden-input(`chaos${number}_formula`)(value=zerodiceFormula)
-					+roll('Profit', "{{charname=@{factions"+number+"_header}}} {{vice=1}} {{short=1}} {{title=^{chaos}}} {{subtitle= }} @{chaos"+number+"_formula}")(data-i18n='chaos').label.rollbutton.inherit
+					+roll("Profit", "{{charname=@{factions"+number+"_header}}} {{vice=1}} {{short=1}} {{title=^{chaos}}} {{subtitle= }} @{chaos"+number+"_formula}")(data-i18n="chaos").label.rollbutton.inherit
 				.stress2.blackborder.flex
-					+radio(`chaos${number}`)(value='0', checked).tooth.zero
+					+radio(`chaos${number}`)(value="0", checked).tooth.zero
 					each num in range(1,12)
 						+radio(`chaos${number}`)(value=num).tooth.stresstooth
 		fieldset(class=`repeating_factions${number}`)
 			.faction
-				+checkbox('expand').expand
-				+text-input('name').faction-name
-				+text-input('scale').faction-scale
-				+number-input('status').faction-status
-				+textarea('notes')(data-i18n-placeholder='faction_notes')
+				+checkbox("expand").expand
+				+text-input("name").faction-name
+				+text-input("scale").faction-scale
+				+number-input("status").faction-status
+				+textarea("notes")(data-i18n-placeholder="faction_notes")
 
 // Faction Sheet
-+hidden-input('setting_clocks_only')(value='0').input-clocks-only
++hidden-input("setting_clocks_only")(value="0").input-clocks-only
 .type-faction.flex-wrap
 	.factiontitle.flex.col100
-		+text-input('factions_title', 'factions_title').label
-		+hidden-input('show_faction_generatebutton')(value='1').hider
+		+text-input("factions_title", "factions_title").label
+		+hidden-input("show_faction_generatebutton")(value="1").hider
 		label.generatebutton
-			+checkbox('generate_factions')(data-i18n='generate_factions')
-		+fortuneroll('Fortune_faction', '{{fortune=1}} {{title=^{fortune}}} {{short=1}} {{charname=}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+			+checkbox("generate_factions")(data-i18n="generate_factions")
+		+fortuneroll("Fortune_faction", "{{fortune=1}} {{title=^{fortune}}} {{short=1}} {{charname=}}", true)(data-i18n="roll_fortune").fortunebutton.borderbutton
 	.factions.free-repcontrol
 		+makefactions("1", "fitzwilliams_ashes", true)
 		+makefactions("2", "godhead", true)
@@ -42,8 +42,8 @@ mixin makefactions(number, title, chaos)
 		+makefactions("8", "nomads_spacers")
 		+makefactions("9", "aboard_craft").aboard-craft
 	.clocks.col55.free-repcontrol.def-margin
-		.blackheader.label(data-i18n='clocks')
+		.blackheader.label(data-i18n="clocks")
 		fieldset.repeating_factionclock
 			+makeclock
 	.col45.right-column.def-margin
-		+textarea('faction_notes')(data-i18n-placeholder='notes').notes
+		+textarea("faction_notes")(data-i18n-placeholder="notes").notes

@@ -1,21 +1,21 @@
 //- ROLL TEMPLATE
 rolltemplate.sheet-rolltemplate-bitd
-	div(class!='holder{{#action}} action{{/action}}{{#resist}} resist{{/resist}}{{#vice}} vice{{/vice}}{{#fortune}} fortune{{/fortune}}{{#short}} short{{/short}}{{#action}}{{^position}} short{{/position}}{{/action}}')
+	div(class!="holder{{#action}} action{{/action}}{{#resist}} resist{{/resist}}{{#vice}} vice{{/vice}}{{#fortune}} fortune{{/fortune}}{{#short}} short{{/short}}{{#action}}{{^position}} short{{/position}}{{/action}}")
 		| {{#charimage}}
 		.char-image [Image]({{charimage}})
 		| {{/charimage}}
-		div(class!='header{{#charimage}} narrow{{/charimage}}') {{charname}} {{subtitle}}
+		div(class!="header{{#charimage}} narrow{{/charimage}}") {{charname}} {{subtitle}}
 		.title
-			span(class='{{#small-title}}small-title{{/small-title}}') {{title}}
+			span(class="{{#small-title}}small-title{{/small-title}}") {{title}}
 		.dice
 			| {{^zerodice}} {{dice}} {{/zerodice}}{{#zerodice}}
 			.zerodice1 {{zerodice}}
-			.zerodice2(data-i18n='zerodice')
+			.zerodice2(data-i18n="zerodice")
 			| {{/zerodice}}
 		| {{#position}}#[.position {{position}}]{{/position}}{{#effect}}#[.effect {{effect}}]{{/effect}}{{#resist}}{{^short}}
-		.instructions(data-i18n='resist_instructions')
+		.instructions(data-i18n="resist_instructions")
 		| {{/short}}{{/resist}}{{#vice}}{{^short}}
-		.instructions(data-i18n='vice_instructions')
+		.instructions(data-i18n="vice_instructions")
 		| {{/short}}{{/vice}}{{#notes}}
 		.notes {{notes}}
 		| {{/notes}}
@@ -26,7 +26,7 @@ rolltemplate.sheet-rolltemplate-bitd-broadcast
 		| {{#charimage}}{{^clock}}
 		.char-image [Image]({{charimage}})
 		| {{/clock}}{{/charimage}}
-		div(class!='header{{#charimage}}{{^clock}} narrow{{/clock}}{{/charimage}}')
+		div(class!="header{{#charimage}}{{^clock}} narrow{{/clock}}{{/charimage}}")
 			div {{charname}}
 			div {{type}}
 		| {{#content}}
@@ -34,7 +34,7 @@ rolltemplate.sheet-rolltemplate-bitd-broadcast
 		.content {{content}}
 		| {{/content}}{{#clock}}
 		.flex
-			.clock(class='size-{{clocksize}} progress-{{clockprogress}}')
+			.clock(class="size-{{clocksize}} progress-{{clockprogress}}")
 				.spoke-0
 				.spoke-30
 				.spoke-36
@@ -49,18 +49,18 @@ rolltemplate.sheet-rolltemplate-bitd-broadcast
 				.spoke-150
 			.title {{title}}
 		| {{/clock}}{{#harm}}
-		.title(data-i18n='harm')
+		.title(data-i18n="harm")
 		table.harm
 			tr
 				td 3
 				td #[.harm-inner {{harm3}}]
-				td(data-i18n='need_help')
+				td(data-i18n="need_help")
 			tr
 				td 2
 				td {{#harm2_1}} #[.harm-inner {{harm2_1}}] {{/harm2_1}} {{#harm2_2}} #[.harm-inner {{harm2_2}}] {{/harm2_2}}
-				td(data-i18n='minus1d')
+				td(data-i18n="minus1d")
 			tr
 				td 1
 				td {{#harm1_1}} #[.harm-inner {{harm1_1}}] {{/harm1_1}} {{#harm1_2}} #[.harm-inner {{harm1_2}}] {{/harm1_2}}
-				td(data-i18n='less_effect')
+				td(data-i18n="less_effect")
 		| {{/harm}}

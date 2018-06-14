@@ -7,7 +7,7 @@ mixin makeupgrade(number, numboxes, def, desc)
 			+text-input(`upgrade_${number}_name`, def).itemname
 		.item-description
 			+checkbox(`upgrade_${number}_expand`).expand
-			+textarea(`upgrade_${number}_description`, desc)(data-i18n-placeholder='description')
+			+textarea(`upgrade_${number}_description`, desc)(data-i18n-placeholder="description")
 
 mixin module(name, bridgeLoc, bridgeNames)
 	.hexagon&attributes(attributes)
@@ -34,60 +34,60 @@ mixin bridge(name)
 		.col100.header.flex-wrap
 			.col55.bladeslogo
 			label.col80
-				+text-input('craft_name')
-				.label.text.title(data-i18n='name')
+				+text-input("craft_name")
+				.label.text.title(data-i18n="name")
 			label.col20
-				+text-input('craft_scale')
-				.label.text.title(data-i18n='scale')
+				+text-input("craft_scale")
+				.label.text.title(data-i18n="scale")
 			label.col55
-				+autoexpand('craft_background')
-				+hidden-input('craft_background')(value='')
+				+autoexpand("craft_background")
+				+hidden-input("craft_background")(value="")
 				.text
-					span.label.title(data-i18n='background')
-					span.uppercase.info(data-i18n='craft_background_info')
+					span.label.title(data-i18n="background")
+					span.uppercase.info(data-i18n="craft_background_info")
 			label.col45
-				+autoexpand('craft_ai')
-				+hidden-input('craft_ai')(value='')
+				+autoexpand("craft_ai")
+				+hidden-input("craft_ai")(value="")
 				.text
-					span.label.title(data-i18n='ai')
-					span.uppercase.info(data-i18n='ai_info')
+					span.label.title(data-i18n="ai")
+					span.uppercase.info(data-i18n="ai_info")
 			label.col100
-				+text-input('craft_look')
-				.label.text.title(data-i18n='look')
+				+text-input("craft_look")
+				.label.text.title(data-i18n="look")
 		// Stress
 		.stress.flex.col100.def-margin
 			.stress1.blackheader
 				.label(data-i18n="stress")
 			.stress2.blackborder.flex
-				+radio('craft_stress')(value='0', checked).tooth.zero
+				+radio("craft_stress")(value="0", checked).tooth.zero
 				each num in range(1,16)
-					+radio('craft_stress')(value=num).tooth.stresstooth
+					+radio("craft_stress")(value=num).tooth.stresstooth
 			// Trauma markers
 			.stress3
 				.blackheader
 					.label(data-i18n="trauma")
 				.traumaholder.flex
-					+radio('craft_trauma')(value='0', checked).tooth.zero
+					+radio("craft_trauma")(value="0", checked).tooth.zero
 					each num in range(1,6)
-						+radio('craft_trauma')(value=num).tooth.regulartooth
+						+radio("craft_trauma")(value=num).tooth.regulartooth
 		.harm-trauma-profit.def-margin
 			// Harm
 			.harm
 				.blackheader.col100
-					.label(data-i18n='harm')
-					+broadcast('Harm', '{{charname=@{character_name}}} {{harm=1}} {{harm3=@{craft_harm3}}} {{harm2_1=@{craft_harm2_1}}} {{harm2_2=@{craft_harm2_2}}} {{harm1_1=@{craft_harm1_1}}} {{harm1_2=@{craft_harm1_2}}}')
+					.label(data-i18n="harm")
+					+broadcast("Harm", "{{charname=@{character_name}}} {{harm=1}} {{harm3=@{craft_harm3}}} {{harm2_1=@{craft_harm2_1}}} {{harm2_2=@{craft_harm2_2}}} {{harm1_1=@{craft_harm1_1}}} {{harm1_2=@{craft_harm1_2}}}")
 				.harmbody
 					.flex-center.harmnumber 3
-					+textarea('craft_harm3').twocols
-					.flex-center.harmeffect(data-i18n='need_help')
+					+textarea("craft_harm3").twocols
+					.flex-center.harmeffect(data-i18n="need_help")
 					.flex-center.harmnumber 2
-					+textarea('craft_harm2_1')
-					+textarea('craft_harm2_2')
-					.flex-center.harmeffect(data-i18n='minus1d')
+					+textarea("craft_harm2_1")
+					+textarea("craft_harm2_2")
+					.flex-center.harmeffect(data-i18n="minus1d")
 					.flex-center.harmnumber 1
-					+textarea('craft_harm1_1')
-					+textarea('craft_harm1_2')
-					.flex-center.harmeffect(data-i18n='less_effect')
+					+textarea("craft_harm1_1")
+					+textarea("craft_harm1_2")
+					.flex-center.harmeffect(data-i18n="less_effect")
 			.trauma.blackborder
 				div
 					.flex
@@ -111,14 +111,14 @@ mixin bridge(name)
 			.profit
 				.blackheader.label
 					+hidden-input("profit_formula")(value=zerodiceFormula)
-					+roll('Profit', '{{resist=1}} {{short=1}} {{title=^{profit_scale}}} {{subtitle=^{rolls}}} @{profit_formula}')(data-i18n='profit').label.rollbutton.inherit
+					+roll("Profit", "{{resist=1}} {{short=1}} {{title=^{profit_scale}}} {{subtitle=^{rolls}}} @{profit_formula}")(data-i18n="profit").label.rollbutton.inherit
 				.profits
-					+radio('profit')(value='0', checked).zero
+					+radio("profit")(value="0", checked).zero
 					each num in range(1,7)
-						+radio('profit')(value=num, class=["radiobox", num == 7 ? "last" : ""])
+						+radio("profit")(value=num, class=["radiobox", num == 7 ? "last" : ""])
 					br
 					each num in range(8,14)
-						+radio('profit')(value=num, class=["radiobox", num == 14 ? "last" : ""])
+						+radio("profit")(value=num, class=["radiobox", num == 14 ? "last" : ""])
 		// Modules
 		+hidden-input("setting_craft_layout")(value="").layout-input
 		.modules
@@ -173,77 +173,77 @@ mixin bridge(name)
 			.empty
 		// Special abilities
 		.col100
-			.specialheader.label(data-i18n='special_abilities')
+			.specialheader.label(data-i18n="special_abilities")
 			.greyholder
 				fieldset.repeating_craftability
 					.specialability.flex
-						+broadcast('Show', '{{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}')
-						+checkbox('check').checkbox.circlebox
-						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
-						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc
+						+broadcast("Show", "{{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}")
+						+checkbox("check").checkbox.circlebox
+						+autoexpand("name")(data-i18n-placeholder="ability_name").abilityname.smallcaps
+						+autoexpand("description")(data-i18n-placeholder="ability_description").abilitydesc
 		// Advancement
 		.def-margin
 			.advancement-header.flex.blackheader
-				.label.markxp(data-i18n='mark_xp:')
-				.label(data-i18n='craft_advancement')
+				.label.markxp(data-i18n="mark_xp:")
+				.label(data-i18n="craft_advancement")
 				.xpholder.flex
-					+radio('craft_xp')(value='0', checked).tooth.zero
+					+radio("craft_xp")(value="0", checked).tooth.zero
 					each num in range(1,8)
-						+radio('craft_xp')(value=num).tooth.xptooth
+						+radio("craft_xp")(value=num).tooth.xptooth
 			ul.advancement-desc
-				li.nondot(data-i18n='xp_top')
+				li.nondot(data-i18n="xp_top")
 				li
-					+autoexpand('craft_xp_condition')(data-i18n-placeholder='xp_craft_specific')
-				+hidden-input('setting_extra_xp')(value='0').hider
+					+autoexpand("craft_xp_condition")(data-i18n-placeholder="xp_craft_specific")
+				+hidden-input("setting_extra_xp")(value="0").hider
 				li
-					+autoexpand('xp_condition_extra')(data-i18n-placeholder='xp_specific_extra')
-				li(data-i18n='xp_express')
-				li(data-i18n='xp_craft_trauma')
+					+autoexpand("xp_condition_extra")(data-i18n-placeholder="xp_specific_extra")
+				li(data-i18n="xp_express")
+				li(data-i18n="xp_craft_trauma")
 	// Right column
 	.col42.flex-wrap.right-column
 		// Craft Type
 		.playbook.flex
-			+text-input('craft_type')(data-i18n-placeholder='craft', placeholder='Craft').label
-			+hidden-input('show_playbook_reminder')(value='1').hider
+			+text-input("craft_type")(data-i18n-placeholder="craft", placeholder="Craft").label
+			+hidden-input("show_playbook_reminder")(value="1").hider
 			.reminder
-				span(data-i18n='autofill_reminder_craft')
+				span(data-i18n="autofill_reminder_craft")
 				br
-				span(data-i18n='list_crafts')
+				span(data-i18n="list_crafts")
 		// Upgrades
 		.col50.small-margin
 			// Upgrades
 			.itemheader.col100
-				span.label(data-i18n='craft_upgrades')
+				span.label(data-i18n="craft_upgrades")
 			// Specific upgrades
 			.playbookitems.itemholder.col100.free-repcontrol
 				fieldset.repeating_upgrade
-					+hidden-input('boxes_chosen')(value='0').boxes-chosen
+					+hidden-input("boxes_chosen")(value="0").boxes-chosen
 					.item.numboxes-chooser
-						div(data-i18n='how_many_boxes')
-						+number-input('numboxes')(min='1', max='3', value='1')
+						div(data-i18n="how_many_boxes")
+						+number-input("numboxes")(min="1", max="3", value="1")
 						label
-							+checkbox('boxes_chosen')(data-i18n='ok')
+							+checkbox("boxes_chosen")(data-i18n="ok")
 					.item
-						+hidden-input('numboxes')(value='1').numboxes
-						+checkbox('check_1').checkbox.squarebox
+						+hidden-input("numboxes")(value="1").numboxes
+						+checkbox("check_1").checkbox.squarebox
 						span.floatingbar.boxesgeq2
-						+checkbox('check_2', 'boxesgeq2').checkbox.squarebox
+						+checkbox("check_2", "boxesgeq2").checkbox.squarebox
 						span.floatingbar.boxesgeq3.boxesgeq2
-						+checkbox('check_3', 'boxesgeq2 boxesgeq3').checkbox.squarebox
-						+autoexpand('name')(data-i18n-placeholder='an_upgrade').itemname
+						+checkbox("check_3", "boxesgeq2 boxesgeq3").checkbox.squarebox
+						+autoexpand("name")(data-i18n-placeholder="an_upgrade").itemname
 					.item-description
-						+checkbox('expand').expand
-						+textarea('description')(data-i18n-placeholder='description')
+						+checkbox("expand").expand
+						+textarea("description")(data-i18n-placeholder="description")
 			.core-upgrade.small-margin
-				+autoexpand("core_upgrade_name")(data-i18n-placeholder='core_name').plainheader.label
-				+autoexpand("core_upgrade_desc")(data-i18n-placeholder='description').description
+				+autoexpand("core_upgrade_name")(data-i18n-placeholder="core_name").plainheader.label
+				+autoexpand("core_upgrade_desc")(data-i18n-placeholder="description").description
 		// Regular upgrades
 		.col50.right-column.small-margin
 			.upgrades.itemholder.col100
 				.item
-					span.label(data-i18n='core')
+					span.label(data-i18n="core")
 				.item
-					span.label(data-i18n='training')
+					span.label(data-i18n="training")
 				+makeupgrade("armor", 2, "armor", "upgrade_armor_desc")
 				+makeupgrade("guts", 1, "guts", "upgrade_training_desc")
 				+makeupgrade("brig", 1, "brig", "upgrade_brig_desc")
@@ -261,23 +261,23 @@ mixin bridge(name)
 							+checkbox(`upgrade_mastery_check_${num}`).checkbox.squarebox
 							if (num < 4)
 								span.floatingbar
-						+text-input('upgrade_mastery_name', 'mastery').itemname
+						+text-input("upgrade_mastery_name", "mastery").itemname
 					.item-description
-						+checkbox('upgrade_mastery_expand').expand
-						+textarea('upgrade_mastery_description', 'upgrade_mastery_desc')(data-i18n-placeholder='description')
+						+checkbox("upgrade_mastery_expand").expand
+						+textarea("upgrade_mastery_description", "upgrade_mastery_desc")(data-i18n-placeholder="description")
 			// Roll Fortune
-			+fortuneroll('Engagement', '{{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title=^{engagement}}}')(data-i18n='roll_engagement').fortunebutton.borderbutton
-			+fortuneroll('Fortune_craft', '{{fortune=1}} {{subtitle=^{roll}}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+			+fortuneroll("Engagement", "{{action=1}} {{short=1}} {{small-title=1}} {{subtitle=^{roll_for}}} {{title=^{engagement}}}")(data-i18n="roll_engagement").fortunebutton.borderbutton
+			+fortuneroll("Fortune_craft", "{{fortune=1}} {{subtitle=^{roll}}} {{title=^{fortune}}}", true)(data-i18n="roll_fortune").fortunebutton.borderbutton
 		// Cohorts
 		.cohorts.col100.small-margin.free-repcontrol
 			.plainheader.label(data-i18n="cohorts")
 			// Cohort repeating section
 			.col100.cohorts.free-repcontrol
 				fieldset.repeating_cohort
-					+makecohort('')
+					+makecohort("")
 		// Clocks
 		.col100.clocks.small-margin.free-repcontrol
-			.specialheader.label(data-i18n='clocks')
+			.specialheader.label(data-i18n="clocks")
 			fieldset.repeating_craftclock
 				+makeclock
-		+textarea('craft_notes')(data-i18n-placeholder='notes').notes
+		+textarea("craft_notes")(data-i18n-placeholder="notes").notes

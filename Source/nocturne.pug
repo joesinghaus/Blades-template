@@ -11,46 +11,46 @@
 
 	// Javascript really needs a range function
 	const range = (start, end) => [...Array(end+1).keys()].slice(start);
-	const zerodiceFormula = '?{@{bonusdice}|0, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|1, {{dice=&#91;&#91;d6]]&#125;&#125;|2, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|3, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|4, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|5, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|6, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-1, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-2, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-3, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}';
+	const zerodiceFormula = " {{?{@{bonusdice}|0,zerodice=[[d6]]&#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&#44; [[d6]]|3,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]|4,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|5,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|6,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|-1,zerodice=[[d6]]&#44; [[d6]]|-2,zerodice=[[d6]]&#44; [[d6]]|-3,zerodice=[[d6]]&#44; [[d6]]}}}";
 
 //- Mixins for code reuse
 mixin checkbox(name, extraclass)
-	input(type='checkbox', class=[attributes.class, extraclass || ''], name=`attr_${name}`, value=attributes.value||'1', checked=attributes.checked)
-	span(class=extraclass, data-i18n!=attributes['data-i18n'])
+	input(type="checkbox", class=[attributes.class, extraclass || ""], name=`attr_${name}`, value=attributes.value||"1", checked=attributes.checked)
+	span(class=extraclass, data-i18n!=attributes["data-i18n"])
 		block
 
 mixin radio(name)
-	input(type='radio', class!=attributes.class, name=`attr_${name}`, value!=attributes.value, checked=attributes.checked)
-	span(data-i18n!=attributes['data-i18n'])
+	input(type="radio", class!=attributes.class, name=`attr_${name}`, value!=attributes.value, checked=attributes.checked)
+	span(data-i18n!=attributes["data-i18n"])
 		block
 
 mixin text-input(name, i18nvalue)
-	input(type='text', spellcheck='false', name=`attr_${name}`, value=i18nvalue ? translation[i18nvalue] : false)&attributes(attributes)
+	input(type="text", spellcheck="false", name=`attr_${name}`, value=i18nvalue ? translation[i18nvalue] : false)&attributes(attributes)
 
 mixin number-input(name)
-	input(type='number', name=`attr_${name}`)&attributes(attributes)
+	input(type="number", name=`attr_${name}`)&attributes(attributes)
 
 mixin textarea(name, i18nvalue)
-	textarea(spellcheck='false', name=`attr_${name}`)&attributes(attributes)
-		= i18nvalue ? translation[i18nvalue] : ''
+	textarea(spellcheck="false", name=`attr_${name}`)&attributes(attributes)
+		= i18nvalue ? translation[i18nvalue] : ""
 
 mixin hidden-input(name)
-	input(type='hidden', name=`attr_${name}`)&attributes(attributes)
+	input(type="hidden", name=`attr_${name}`)&attributes(attributes)
 
 mixin hidden-checkbox(name)
 	- classes = attributes.class;
 	- delete attributes.class;
-	input(type='checkbox', name=`attr_${name}`, class=['hidden', classes])&attributes(attributes)
+	input(type="checkbox", name=`attr_${name}`, class=["hidden", classes])&attributes(attributes)
 
 mixin autoexpand(name, i18nvalue)
-	div(class=['auto-expand', attributes.class])
-		span(name=`attr_${name}`)= i18nvalue ? translation[i18nvalue] : ''
-		+textarea(name, i18nvalue)(data-i18n-placeholder!=attributes['data-i18n-placeholder'])
+	div(class=["auto-expand", attributes.class])
+		span(name=`attr_${name}`)= i18nvalue ? translation[i18nvalue] : ""
+		+textarea(name, i18nvalue)(data-i18n-placeholder!=attributes["data-i18n-placeholder"])
 
 //- Creates a roll button using stat as a bonus
 mixin roll(name, templatedata, stat)
 	button(
-		type='roll',
+		type="roll",
 		name=`roll_${name}`,
 		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} {{charimage=@{chat_image}}}`
 	)&attributes(attributes)
@@ -58,38 +58,38 @@ mixin roll(name, templatedata, stat)
 //- Creates a fortune roll button
 mixin fortuneroll(name, templatedata, useNotes)
 	button(
-		type='roll',
+		type="roll",
 		name=`roll_${name}`,
-		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} @{numberofdice} {{charimage=@{chat_image}}} ${useNotes ? '{{notes=@{notes_query}}} ' : ''}`
+		value!=`&{template:bitd} {{charname=@{character_name}}} ${templatedata} @{numberofdice} {{charimage=@{chat_image}}} ${useNotes ? "{{notes=@{notes_query}}} " : ""}`
 	)&attributes(attributes)
 
 mixin broadcast(name, content)
-	button.broadcast-button(type='roll', name=`roll_${name}`, value!= `&{template:bitd-broadcast} ${content} {{charimage=@{chat_image}}}`, data-i18n-title='send_details_to_chat') :
+	button.broadcast-button(type="roll", name=`roll_${name}`, value!= `&{template:bitd-broadcast} ${content} {{charimage=@{chat_image}}}`, data-i18n-title="send_details_to_chat") :
 
 //- Cohort section
 	isCharacter === true shows an input for quality, instead of generating it from the craft quality
 mixin makecohort(prefix, isCharacter)
 	.cohort
-		+hidden-input(`${prefix}verb`)(value=isCharacter ? '^{rolls_their}' : '^{roll_their}')
-		+hidden-input(`${prefix}roll_formula`)(value="?{@{bonusdice}|0, {{dice=&#91;&#91;d6]]&#125;&#125;|1, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|2, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|3, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|4, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|5, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|6, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-1, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-2, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|-3, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}")
+		+hidden-input(`${prefix}verb`)(value=isCharacter ? "^{rolls_their}" : "^{roll_their}")
+		+hidden-input(`${prefix}roll_formula`)(value=" {{?{@{bonusdice}|0,dice=[[d6]]|1,dice=[[d6]]&#44; [[d6]]|2,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]|3,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|4,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|5,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|6,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|-1,zerodice=[[d6]]&#44; [[d6]]|-2,zerodice=[[d6]]&#44; [[d6]]|-3,zerodice=[[d6]]&#44; [[d6]]}}")
 		.cohort-title.flex.col100.label
-			+text-input(`${prefix}name`, 'cohort').inherit
-			+roll(`${prefix}roll`, '{{resist=1}} {{short=1}} {{charname=@{'+prefix+'name} (^{@{'+prefix+'type}}, @{'+prefix+'subtype})}} {{title=^{cohort_quality}}} {{subtitle=@{'+prefix+'verb}}}) @{'+prefix+'roll_formula}')(data-i18n='roll-inf').inherit.rollbutton
+			+text-input(`${prefix}name`, "cohort").inherit
+			+roll(`${prefix}roll`, "{{resist=1}} {{short=1}} {{charname=@{"+prefix+"name} (^{@{"+prefix+"type}}, @{"+prefix+"subtype})}} {{title=^{cohort_quality}}} {{subtitle=@{"+prefix+"verb}}}) @{"+prefix+"roll_formula}")(data-i18n="roll-inf").inherit.rollbutton
 		.cohort-info.flex.col100.uppercase
 			.cohort-dropdown
 				div
 					span(name=`attr_${prefix}type`, data-i18n-dynamic)
 				div
-					+radio(`${prefix}type`)(value='gang', checked=!isCharacter, data-i18n='gang')
+					+radio(`${prefix}type`)(value="gang", checked=!isCharacter, data-i18n="gang")
 				div
-					+radio(`${prefix}type`)(value='elite', data-i18n='elite')
+					+radio(`${prefix}type`)(value="elite", data-i18n="elite")
 				div
-					+radio(`${prefix}type`)(value='expert', checked=isCharacter, data-i18n='expert')
-			+text-input(`${prefix}subtype`)(data-i18n-placeholder=isCharacter ? 'robot' : 'gang_type').sheet-inherit
+					+radio(`${prefix}type`)(value="expert", checked=isCharacter, data-i18n="expert")
+			+text-input(`${prefix}subtype`)(data-i18n-placeholder=isCharacter ? "robot" : "gang_type").sheet-inherit
 		.cohort-condition.flex.col100
-			each name in ['weak', 'impaired', 'broken', 'armor']
+			each name in ["weak", "impaired", "broken", "armor"]
 				label
-					span(class='cohort-condition-name ' + (name ==='armor' ? 'label' : 'uppercase'), data-i18n=name)
+					span(class="cohort-condition-name " + (name ==="armor" ? "label" : "uppercase"), data-i18n=name)
 					+checkbox(prefix + name).tooth.stresstooth
 		.flex
 			label.cohort-edgeflaw.col50
@@ -98,7 +98,7 @@ mixin makecohort(prefix, isCharacter)
 			label.cohort-edgeflaw.col50
 				span.uppercase.wide(data-i18n="quality")
 				+number-input(`${prefix}quality`)(value=isCharacter ? "2" : "1")
-		each name in ['edges', 'flaws']
+		each name in ["edges", "flaws"]
 			label.cohort-edgeflaw
 				span.uppercase(data-i18n=name)
 				+autoexpand(prefix + name)
@@ -107,13 +107,13 @@ mixin makecohort(prefix, isCharacter)
 //- Clock section
 	isFaction === true hides the character name
 mixin makeclock(isFaction)
-	+hidden-input('size')(value='').size
-	+autoexpand('name')(data-i18n-placeholder='clock_name').smallcaps
-	+broadcast('Show', (!isFaction ? '{{charname=@{character_name}}} ' : '') + '{{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}')
+	+hidden-input("size")(value="").size
+	+autoexpand("name")(data-i18n-placeholder="clock_name").smallcaps
+	+broadcast("Show", (!isFaction ? "{{charname=@{character_name}}} " : "") + "{{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}}")
 	.size-choice
 		each num in [4,6,8,10,12]
 			label.text-button
-				+radio('size')(value=num)=num
+				+radio("size")(value=num)=num
 	.clock-container
 		.spoke-0.all
 		.spoke-30.sheet-12clock
@@ -127,22 +127,22 @@ mixin makeclock(isFaction)
 		.spoke-135.sheet-8clock
 		.spoke-144.sheet-10clock
 		.spoke-150.sheet-12clock
-		+radio('progress')(value='0', checked).zero.input-progress
-		input.input-progress.all(type='radio', name='attr_progress', value='1')
-		input.input-progress.all(type='radio', name='attr_progress', value='2')
-		input.input-progress.all(type='radio', name='attr_progress', value='3')
-		input.input-progress.all(type='radio', name='attr_progress', value='4')
-		input.input-progress.sheet-6clock.sheet-8clock.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='5')
-		input.input-progress.sheet-6clock.sheet-8clock.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='6')
-		input.input-progress.sheet-8clock.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='7')
-		input.input-progress.sheet-8clock.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='8')
-		input.input-progress.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='9')
-		input.input-progress.sheet-10clock.sheet-12clock(type='radio', name='attr_progress', value='10')
-		input.input-progress.sheet-12clock(type='radio', name='attr_progress', value='11')
-		input.input-progress.sheet-12clock(type='radio', name='attr_progress', value='12')
+		+radio("progress")(value="0", checked).zero.input-progress
+		input.input-progress.all(type="radio", name="attr_progress", value="1")
+		input.input-progress.all(type="radio", name="attr_progress", value="2")
+		input.input-progress.all(type="radio", name="attr_progress", value="3")
+		input.input-progress.all(type="radio", name="attr_progress", value="4")
+		input.input-progress.sheet-6clock.sheet-8clock.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="5")
+		input.input-progress.sheet-6clock.sheet-8clock.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="6")
+		input.input-progress.sheet-8clock.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="7")
+		input.input-progress.sheet-8clock.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="8")
+		input.input-progress.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="9")
+		input.input-progress.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="10")
+		input.input-progress.sheet-12clock(type="radio", name="attr_progress", value="11")
+		input.input-progress.sheet-12clock(type="radio", name="attr_progress", value="12")
 		.clock
 
--	const teeth = ['xptooth-red', 'xptooth-white', 'stresstooth-red', 'stresstooth-black', 'stresstooth-halfgrey', 'stresstooth-white', 'shorttooth-red', 'shorttooth-grey'];
+-	const teeth = ["xptooth-red", "xptooth-white", "stresstooth-red", "stresstooth-black", "stresstooth-halfgrey", "stresstooth-white", "shorttooth-red", "shorttooth-grey"];
 
 //- Image preloading
 .preload
@@ -150,35 +150,35 @@ mixin makeclock(isFaction)
 		img(src=`https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/${tooth}.png`)
 
 //- Global setttings
-+hidden-input('setting_show_itemdesc')(value='1').show-itemdesc
-+hidden-input('setting_usekirsty')(value='0').use-kirsty
-+hidden-input('setting_flexwidth')(value='0').flexwidth
-+hidden-input('changed_attributes')(value='')
-+hidden-input('bonusdice')(value='Bonus dice')
-+hidden-input('numberofdice')(value='?{Number of dice|0, {{zerodice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|1, {{dice=&#91;&#91;d6]]&#125;&#125;|2, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|3, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|4, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|5, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;|6, {{dice=&#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#44; &#91;&#91;d6]]&#125;&#125;}')
-+hidden-input('notes_query')(value='?{Notes}')
-+hidden-input('position_query')(value='?{Position|Risky,position=Risky|Controlled,position=Controlled|Desperate,position=Desperate|Fortune roll,position=}')
-+hidden-input('effect_query')(value='?{Effect|Standard|Limited|Great|Extreme|Zero}')
-+hidden-input('consequence_query')(value='^{a_consequence}')
++hidden-input("setting_show_itemdesc")(value="1").show-itemdesc
++hidden-input("setting_usekirsty")(value="0").use-kirsty
++hidden-input("setting_flexwidth")(value="0").flexwidth
++hidden-input("changed_attributes")(value="")
++hidden-input("bonusdice")(value="Bonus dice")
++hidden-input("numberofdice")(value=" {{?{Number of dice|0,zerodice=[[d6]]&#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&#44; [[d6]]|3,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]|4,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|5,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|6,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]}}}")
++hidden-input("notes_query")(value="?{Notes}")
++hidden-input("position_query")(value="?{Position|Risky,position=Risky|Controlled,position=Controlled|Desperate,position=Desperate|Fortune roll,position=}")
++hidden-input("effect_query")(value="?{Effect|Standard|Limited|Great|Extreme|Zero}")
++hidden-input("consequence_query")(value="^{a_consequence}")
 
 
 //- Hidden maxima
-+hidden-input('stress_max')(value='9')
-+hidden-input('trauma_max')(value='4')
-+hidden-input('coin_max')(value='4')
-+hidden-input('stash_max')(value='40')
-+hidden-input('playbook_xp_max')(value='8')
-+hidden-input('rep_max')(value='12')
-+hidden-input('turf_max')(value='6')
-+hidden-input('craft_tier_max')(value='4')
-+hidden-input('heat_max')(value='9')
-+hidden-input('wanted_max')(value='4')
-+hidden-input('craftcoin_max')(value='16')
-+hidden-input('craft_xp_max')(value='8')
++hidden-input("stress_max")(value="9")
++hidden-input("trauma_max")(value="4")
++hidden-input("coin_max")(value="4")
++hidden-input("stash_max")(value="40")
++hidden-input("playbook_xp_max")(value="8")
++hidden-input("rep_max")(value="12")
++hidden-input("turf_max")(value="6")
++hidden-input("craft_tier_max")(value="4")
++hidden-input("heat_max")(value="9")
++hidden-input("wanted_max")(value="4")
++hidden-input("craftcoin_max")(value="16")
++hidden-input("craft_xp_max")(value="8")
 
 //- Actual sheet
 .container
-	+hidden-input('sheet_type')(value='character').type
+	+hidden-input("sheet_type")(value="character").type
 	include pug/title.pug
 	include pug/character.pug
 	include pug/craft.pug
@@ -190,5 +190,5 @@ mixin makeclock(isFaction)
 include pug/rolltemplate.pug
 |
 |
-script(type='text/worker')
+script(type="text/worker")
 	!= locals.workers

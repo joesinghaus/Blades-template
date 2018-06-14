@@ -21,48 +21,48 @@
 		.col100.header.flex-wrap
 			.col55.bladeslogo
 			label.col45.header
-				+text-input('craft')
-				.label.text.title(data-i18n='craft')
+				+text-input("craft")
+				.label.text.title(data-i18n="craft")
 			label.col55
-				+text-input('name')
-				.label.text.title(data-i18n='name')
+				+text-input("name")
+				.label.text.title(data-i18n="name")
 			label.col45
-				+text-input('alias')
-				.label.text.title(data-i18n='alias')
+				+text-input("alias")
+				.label.text.title(data-i18n="alias")
 			label.col100
-				+text-input('look')
-				.label.text.title(data-i18n='look')
+				+text-input("look")
+				.label.text.title(data-i18n="look")
 			label.col55
-				+autoexpand('biology')
-				+hidden-input('biology')(value='')
+				+autoexpand("biology")
+				+hidden-input("biology")(value="")
 				.text
-					span.label.title(data-i18n='biology')
-					span.uppercase.info(data-i18n='biology_info')
+					span.label.title(data-i18n="biology")
+					span.uppercase.info(data-i18n="biology_info")
 			label.col45
-				+autoexpand('background')
-				+hidden-input('background')(value='')
+				+autoexpand("background")
+				+hidden-input("background")(value="")
 				.text
-					span.label.title(data-i18n='background')
-					span.uppercase.info(data-i18n='background_info')
+					span.label.title(data-i18n="background")
+					span.uppercase.info(data-i18n="background_info")
 		// Stress and Trauma
 		.col100.flex.stress.def-margin
 			// Stress markers
 			.stress1.blackheader
 				.label(data-i18n="stress")
 			.stress2.blackborder.flex
-				+radio('stress')(value='0', checked).tooth.zero
+				+radio("stress")(value="0", checked).tooth.zero
 				each num in range(1,8)
-					+radio('stress')(value=num).tooth.stresstooth
+					+radio("stress")(value=num).tooth.stresstooth
 			// Trauma markers
 			.stress3
 				.blackheader
 					.label(data-i18n="trauma")
 				.traumaholder.flex
-					+radio('trauma')(value='0', checked).tooth.zero
+					+radio("trauma")(value="0", checked).tooth.zero
 					each num in range(1,5)
 						if (num === 4)
-							+hidden-checkbox('setting_extra_trauma')(value='0', checked).extra-teeth
-						+radio('trauma')(value=num).tooth.regulartooth
+							+hidden-checkbox("setting_extra_trauma")(value="0", checked).extra-teeth
+						+radio("trauma")(value=num).tooth.regulartooth
 			// Individual traumata
 			.trauma.blackborder
 				//- Splits up traumas into two rows, each of which hold half the traumas
@@ -85,41 +85,41 @@
 			// Harm
 			.harm.col63
 				.blackheader.col100
-					.label(data-i18n='harm')
-					+broadcast('Harm', '{{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}}')
+					.label(data-i18n="harm")
+					+broadcast("Harm", "{{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}}")
 				.harmbody
 					.flex-center.harmnumber 3
-					+textarea('harm3').twocols
-					.flex-center.harmeffect(data-i18n='need_help')
+					+textarea("harm3").twocols
+					.flex-center.harmeffect(data-i18n="need_help")
 					.flex-center.harmnumber 2
-					+textarea('harm2_1')
-					+textarea('harm2_2')
-					.flex-center.harmeffect(data-i18n='minus1d')
+					+textarea("harm2_1")
+					+textarea("harm2_2")
+					.flex-center.harmeffect(data-i18n="minus1d")
 					.flex-center.harmnumber 1
-					+textarea('harm1_1')
-					+textarea('harm1_2')
-					.flex-center.harmeffect(data-i18n='less_effect')
+					+textarea("harm1_1")
+					+textarea("harm1_2")
+					.flex-center.harmeffect(data-i18n="less_effect")
 			// Armor and Healing
 			.col37.flex-wrap
 				// Healing
 				.col45.healing
 					.blackheader.col100
-						+fortuneroll('Recovery', '{{resist=1}} {{short=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for}}}')(data-i18n='healing').label.rollbutton.inherit
-					.col100.healing-progress(data-i18n='progress_clock', data-i18n-title='recoveryblurb')
+						+fortuneroll("Recovery", "{{resist=1}} {{short=1}} {{title=^{recovery}}} {{subtitle=^{rolls_for}}}")(data-i18n="healing").label.rollbutton.inherit
+					.col100.healing-progress(data-i18n="progress_clock", data-i18n-title="recoveryblurb")
 					// Healing clock
-					+hidden-input('recovery_max')(value='4').size
+					+hidden-input("recovery_max")(value="4").size
 					.clock-container
 						.spoke-0.all
 						.spoke-90.all
-						+radio('recovery')(value='0', checked).zero.input-progress
+						+radio("recovery")(value="0", checked).zero.input-progress
 						each num in range(1,4)
-							input.input-progress.all(type='radio', name='attr_recovery', value=num, data-i18n-title='recoveryblurb')
+							input.input-progress.all(type="radio", name="attr_recovery", value=num, data-i18n-title="recoveryblurb")
 						.clock
 				// Armor
 				.armor.col55
 					.blackheader.col100
-						.label(data-i18n='armor_uses')
-					each val in ['armor', 'heavy', 'special']
+						.label(data-i18n="armor_uses")
+					each val in ["armor", "heavy", "special"]
 						label.armor-label
 							+checkbox(val).checkbox.squarebox
 							span.label(data-i18n=val)
@@ -131,195 +131,195 @@
 						+checkbox("armor_special_4").checkbox.squarebox
 		// Special abilities
 		.def-margin
-			.specialheader.label(data-i18n='special_abilities')
+			.specialheader.label(data-i18n="special_abilities")
 			.greyholder
 				fieldset.repeating_ability
 					.specialability.flex
-						+broadcast('Show', '{{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}')
-						+checkbox('check').checkbox.circlebox
-						+autoexpand('name')(data-i18n-placeholder='ability_name').abilityname.smallcaps
-						+autoexpand('description')(data-i18n-placeholder='ability_description').abilitydesc
+						+broadcast("Show", "{{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}}")
+						+checkbox("check").checkbox.circlebox
+						+autoexpand("name")(data-i18n-placeholder="ability_name").abilityname.smallcaps
+						+autoexpand("description")(data-i18n-placeholder="ability_description").abilitydesc
 		// Advancement
 		.def-margin
 			.advancement-header.flex.blackheader
-				.label.markxp(data-i18n='mark_xp:')
-				.label(data-i18n='playbook_advancement')
+				.label.markxp(data-i18n="mark_xp:")
+				.label(data-i18n="playbook_advancement")
 				.xpholder.flex
-					+radio('playbook_xp')(value='0', checked).tooth.zero
+					+radio("playbook_xp")(value="0", checked).tooth.zero
 					each num in range(1,8)
-						+radio('playbook_xp')(value=num).tooth.xptooth
+						+radio("playbook_xp")(value=num).tooth.xptooth
 			ul.advancement-desc
-				li(data-i18n='xp_desperate')
-				li.nondot(data-i18n='xp_top')
+				li(data-i18n="xp_desperate")
+				li.nondot(data-i18n="xp_top")
 				li
-					+autoexpand('xp_condition')(data-i18n-placeholder='xp_specific')
-				+hidden-input('setting_extra_xp')(value='0').hider
+					+autoexpand("xp_condition")(data-i18n-placeholder="xp_specific")
+				+hidden-input("setting_extra_xp")(value="0").hider
 				li
-					+autoexpand('xp_condition_extra')(data-i18n-placeholder='xp_specific_extra')
+					+autoexpand("xp_condition_extra")(data-i18n-placeholder="xp_specific_extra")
 				li(data-i18n="xp_beliefs")
 				li(data-i18n="xp_trauma")
 		// Planning and Load
 		.planning.col45.def-margin
-			input.title-checkbox(type='checkbox', name='attr_show_planning', value='1', checked)
-			span.label.plainheader(data-i18n='planning_load')
+			input.title-checkbox(type="checkbox", name="attr_show_planning", value="1", checked)
+			span.label.plainheader(data-i18n="planning_load")
 			.planning-content
-				.planningdesc(data-i18n='planningdesc')
+				.planningdesc(data-i18n="planningdesc")
 				.teamworkbox
-					span.bold(data-i18n='assault')
-					span.italic(data-i18n='detail_assault')
+					span.bold(data-i18n="assault")
+					span.italic(data-i18n="detail_assault")
 				.teamworkbox
-					span.bold(data-i18n='deception')
-					span.italic(data-i18n='detail_deception')
+					span.bold(data-i18n="deception")
+					span.italic(data-i18n="detail_deception")
 				.teamworkbox
-					span.bold(data-i18n='stealth')
-					span.italic(data-i18n='detail_stealth')
+					span.bold(data-i18n="stealth")
+					span.italic(data-i18n="detail_stealth")
 				.teamworkbox
-					span.bold(data-i18n='social')
-					span.italic(data-i18n='detail_social')
+					span.bold(data-i18n="social")
+					span.italic(data-i18n="detail_social")
 				.teamworkbox
-					span.bold(data-i18n='tech')
-					span.italic(data-i18n='detail_tech')
+					span.bold(data-i18n="tech")
+					span.italic(data-i18n="detail_tech")
 				.teamworkbox
-					span.bold(data-i18n='transport')
-					span.italic(data-i18n='detail_transport')
+					span.bold(data-i18n="transport")
+					span.italic(data-i18n="detail_transport")
 		// Teamwork
 		.col52b.right-column.def-margin
-			.plainheader.label(data-i18n='teamwork')
-			.teamworkbox(data-i18n='assist_a_teammate')
-			.teamworkbox(data-i18n='lead_a_group_action')
-			.teamworkbox(data-i18n='protect_a_teammate')
-			.teamworkbox(data-i18n='set_up_a_teammate')
+			.plainheader.label(data-i18n="teamwork")
+			.teamworkbox(data-i18n="assist_a_teammate")
+			.teamworkbox(data-i18n="lead_a_group_action")
+			.teamworkbox(data-i18n="protect_a_teammate")
+			.teamworkbox(data-i18n="set_up_a_teammate")
 			// Utility belt
 			+hidden-input("setting_show_utility_belts")(value="0").hider
 			.right-column.def-margin
-				.label.plainheader(data-i18n='utility_belts')
+				.label.plainheader(data-i18n="utility_belts")
 				.utilitybelt.free-repcontrol
 					.item
-						span.belt-name(data-i18n='belts')
+						span.belt-name(data-i18n="belts")
 						each bnum in [1,2]
 							each checknum in range(1,3)
 								+checkbox(`utility_belt${bnum}_check_${checknum}`).checkbox.squarebox
 								if (checknum !== 3)
 									span.floatingbar
-					.desc(data-i18n='utility_belts_blurb')
+					.desc(data-i18n="utility_belts_blurb")
 					fieldset.repeating_gadget
-						+checkbox('expand').gadget-expand
-						+autoexpand('name')
-						+textarea('description').gadget-info
+						+checkbox("expand").gadget-expand
+						+autoexpand("name")
+						+textarea("description").gadget-info
 	// Right column
 	.col45.flex-wrap.right-column
 		// Playbook name and description
 		.playbook.flex
-			+text-input('playbook')(data-i18n-placeholder='playbook').label
-			+hidden-input('show_playbook_reminder')(value='1').hider
+			+text-input("playbook")(data-i18n-placeholder="playbook").label
+			+hidden-input("show_playbook_reminder")(value="1").hider
 			.reminder
-				span(data-i18n='autofill_reminder_playbook')
+				span(data-i18n="autofill_reminder_playbook")
 				br
-				span(data-i18n='list_playbooks')
+				span(data-i18n="list_playbooks")
 		// Items and Planning
 		.col53.itemcolumn.small-margin
 			// Load
 			.loadheader.flex.col100
-				.label(data-i18n='load')
-				each val in ['light', 'normal', 'heavy']
+				.label(data-i18n="load")
+				each val in ["light", "normal", "heavy"]
 					label
-						+checkbox('load')(value=val).checkbox
+						+checkbox("load")(value=val).checkbox
 						span.loadnumber(name=`attr_setting_load_${val[0]}`)
 						span(data-i18n=val)
 			.itemheader.small-margin.col100.flex
-				.label(data-i18n='items')
-				span.italic(data-i18n='italics_dont_count')
+				.label(data-i18n="items")
+				span.italic(data-i18n="italics_dont_count")
 				label.text-button
-					+checkbox('reset_items')(data-i18n='reset?')
+					+checkbox("reset_items")(data-i18n="reset?")
 			// Items
 			.itemholder.col100.items
 				// Playbook items
 				.playbookitems.col100.free-repcontrol
 					fieldset.repeating_playbookitem
-						+hidden-input('boxes_chosen')(value='0').boxes-chosen
+						+hidden-input("boxes_chosen")(value="0").boxes-chosen
 						.item.numboxes-chooser
-							div(data-i18n='how_much_load')
-							+number-input('numboxes')(min='0', max='3', value='0')
+							div(data-i18n="how_much_load")
+							+number-input("numboxes")(min="0", max="3", value="0")
 							label
-								+checkbox('bold')(data-i18n='bold')
+								+checkbox("bold")(data-i18n="bold")
 							label
-								+checkbox('boxes_chosen')(data-i18n='ok')
+								+checkbox("boxes_chosen")(data-i18n="ok")
 						.item
-							+hidden-input('bold')(value='0').input-bold
-							+hidden-input('numboxes')(value='0').numboxes
-							+checkbox('check_1').checkbox.squarebox
+							+hidden-input("bold")(value="0").input-bold
+							+hidden-input("numboxes")(value="0").numboxes
+							+checkbox("check_1").checkbox.squarebox
 							span.floatingbar.boxesgeq2
-							+checkbox('check_2', 'boxesgeq2').checkbox.squarebox
+							+checkbox("check_2", "boxesgeq2").checkbox.squarebox
 							span.floatingbar.boxesgeq3.boxesgeq2
-							+checkbox('check_3', 'boxesgeq2 boxesgeq3').checkbox.squarebox
-							+autoexpand('name')(data-i18n-placeholder='item_name').itemname
+							+checkbox("check_3", "boxesgeq2 boxesgeq3").checkbox.squarebox
+							+autoexpand("name")(data-i18n-placeholder="item_name").itemname
 						.item-description
-							+checkbox('expand').expand
-							+textarea('description')(data-i18n-placeholder='description')
+							+checkbox("expand").expand
+							+textarea("description")(data-i18n-placeholder="description")
 				// Regular items
 				.regularitems.col100.free-repcontrol.free-repcontrol
 					fieldset.repeating_item
-						+hidden-input('short')(value='0').input-short
-						+hidden-input('expand')(value='0').input-expand
+						+hidden-input("short")(value="0").input-short
+						+hidden-input("expand")(value="0").input-expand
 						.item-container
-							+hidden-input('boxes_chosen')(value='0').boxes-chosen
+							+hidden-input("boxes_chosen")(value="0").boxes-chosen
 							.item.numboxes-chooser
-								div(data-i18n='how_much_load')
-								+number-input('numboxes')(min='0', max='3', value='0')
+								div(data-i18n="how_much_load")
+								+number-input("numboxes")(min="0", max="3", value="0")
 								label
-									+checkbox('short')(data-i18n='short')
+									+checkbox("short")(data-i18n="short")
 								label
-									+checkbox('boxes_chosen')(data-i18n='ok')
+									+checkbox("boxes_chosen")(data-i18n="ok")
 							.item
-								+hidden-input('numboxes')(value='0').numboxes
-								+checkbox('check_1').checkbox.squarebox
+								+hidden-input("numboxes")(value="0").numboxes
+								+checkbox("check_1").checkbox.squarebox
 								span.floatingbar.boxesgeq2
-								+checkbox('check_2', 'boxesgeq2').checkbox.squarebox
+								+checkbox("check_2", "boxesgeq2").checkbox.squarebox
 								span.floatingbar.boxesgeq3.boxesgeq2
-								+checkbox('check_3', 'boxesgeq2 boxesgeq3').checkbox.squarebox
-								+text-input('name')(data-i18n-placeholder='item_name').itemname
+								+checkbox("check_3", "boxesgeq2 boxesgeq3").checkbox.squarebox
+								+text-input("name")(data-i18n-placeholder="item_name").itemname
 							.item-description
-								+checkbox('expand').expand
-								+textarea('description')(data-i18n-placeholder='description')
+								+checkbox("expand").expand
+								+textarea("description")(data-i18n-placeholder="description")
 		// Action ratings
 		.col47.right-column.actioncolumn.small-margin
 			each actions, attribute in actionData
 				.attribute.col100
 					.attribute-title.flex.col100
 						+roll(attribute,
-							'{{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title=^{'+attribute+'}}} @{'+attribute+'_formula}')(data-i18n=attribute, data-i18n-title=`${attribute}_description`).rollbutton.label
-						+hidden-input(`${attribute}`)(value='0')
+							"{{resist=1}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title=^{"+attribute+"}}} @{"+attribute+"_formula}")(data-i18n=attribute, data-i18n-title=`${attribute}_description`).rollbutton.label
+						+hidden-input(`${attribute}`)(value="0")
 						+hidden-input(`${attribute}_formula`)(value=zerodiceFormula)
-						+hidden-input(`${attribute}_xp_max`)(value='6')
+						+hidden-input(`${attribute}_xp_max`)(value="6")
 						.attribute-xp-box.flex
 							//- generate 6 xp boxes
-							+radio(`${attribute}_xp`)(value='0', checked).tooth.zero
+							+radio(`${attribute}_xp`)(value="0", checked).tooth.zero
 							each num in range(1,6)
 								+radio(`${attribute}_xp`)(value=num).tooth.xptooth
 					.actions.col100
 						each action in actions
 							.action.flex.col100
 								+hidden-input(`${action}_formula`)(value=zerodiceFormula)
-								+hidden-checkbox(action)(value='0', checked).fakeradio
-								+checkbox(action)(value='1').checkbox.circlebox.fakeradio
+								+hidden-checkbox(action)(value="0", checked).fakeradio
+								+checkbox(action)(value="1").checkbox.circlebox.fakeradio
 								.divider
 								each num in range(2,4)
 									+checkbox(action)(value=num).checkbox.circlebox.fakeradio
-								+roll(action, '{{action=1}} {{subtitle=^{rolls}}} {{title=^{'+action+'}}} {{@{position_query}}} {{effect=@{effect_query}}} @{'+action+'_formula}')(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
+								+roll(action, "{{action=1}} {{subtitle=^{rolls}}} {{title=^{"+action+"}}} {{@{position_query}}} {{effect=@{effect_query}}} @{"+action+"_formula}")(data-i18n=action, data-i18n-title=`${action}_description`).rollbutton.label
 			// Cohort
-			+hidden-input('setting_show_cohort')(value='0').hider
-			+makecohort('char_cohort_', true)
+			+hidden-input("setting_show_cohort")(value="0").hider
+			+makecohort("char_cohort_", true)
 			// Bonus die box
 			.bonusdie.col100
-				.col100.label(data-i18n='bonus_die')
+				.col100.label(data-i18n="bonus_die")
 				.col100.flex
 					.flex-center.bonusdieplus +
 					.bonusdietext
-						.label(data-i18n='push_yourself')
-						div(data-i18n='push_yourself_desc')
-						.label(data-i18n='devils_bargain')
+						.label(data-i18n="push_yourself")
+						div(data-i18n="push_yourself_desc")
+						.label(data-i18n="devils_bargain")
 			// Roll Fortune
-			+fortuneroll('Fortune', '{{fortune=1}} {{subtitle=^{rolls}}} {{title=^{fortune}}}', true)(data-i18n='roll_fortune').fortunebutton.borderbutton
+			+fortuneroll("Fortune", "{{fortune=1}} {{subtitle=^{rolls}}} {{title=^{fortune}}}", true)(data-i18n="roll_fortune").fortunebutton.borderbutton
 		.col100.armatures.def-margin.free-repcontrol
 			.specialheader.label(data-i18n="armatures")
 			fieldset.repeating_armature
@@ -328,26 +328,26 @@
 					+autoexpand("armature_description")(data-i18n-placeholder="description").desc
 					.harm
 						.blackheader.col100
-							.label(data-i18n='harm')
-							+broadcast('Harm', '{{charname=@{armature_name}}} {{harm=1}} {{harm3=@{armature_harm3}}} {{harm2_1=@{armature_harm2_1}}} {{harm2_2=@{armature_harm2_2}}} {{harm1_1=@{armature_harm1_1}}} {{harm1_2=@{armature_harm1_2}}}')
+							.label(data-i18n="harm")
+							+broadcast("Harm", "{{charname=@{armature_name}}} {{harm=1}} {{harm3=@{armature_harm3}}} {{harm2_1=@{armature_harm2_1}}} {{harm2_2=@{armature_harm2_2}}} {{harm1_1=@{armature_harm1_1}}} {{harm1_2=@{armature_harm1_2}}}")
 						.harmbody
 							.flex-center.harmnumber 3
-							+textarea('armature_harm3').twocols
+							+textarea("armature_harm3").twocols
 							.flex-center.harmnumber 2
-							+textarea('armature_harm2_1')
-							+textarea('armature_harm2_2')
+							+textarea("armature_harm2_1")
+							+textarea("armature_harm2_2")
 							.flex-center.harmnumber 1
-							+textarea('armature_harm1_1')
-							+textarea('armature_harm1_2')
+							+textarea("armature_harm1_1")
+							+textarea("armature_harm1_2")
 					.repairclock.flex
 						.label(data-i18n="repair")
-						+hidden-input('armature_recovery_max')(value='4').size
+						+hidden-input("armature_recovery_max")(value="4").size
 						.clock-container
 							.spoke-0.all
 							.spoke-90.all
-							+radio('armature_recovery')(value='0', checked).zero.input-progress
+							+radio("armature_recovery")(value="0", checked).zero.input-progress
 							each num in range(1,4)
-								input.input-progress.all(type='radio', name='attr_armature_recovery', value=num)
+								input.input-progress.all(type="radio", name="attr_armature_recovery", value=num)
 							.clock
 					label.armor-label
 						+checkbox("armature_armor").checkbox.squarebox
@@ -355,13 +355,13 @@
 					.features
 						+hidden-input("armature_frame")(value="0").chosen-frame
 						.item.small
-							+checkbox('armature_frame')(value="s").checkbox.squarebox
+							+checkbox("armature_frame")(value="s").checkbox.squarebox
 							span(data-i18n="small_frame_blurb").blurb
 						.item.medium
-							+checkbox('armature_frame')(value="m").checkbox.squarebox
+							+checkbox("armature_frame")(value="m").checkbox.squarebox
 							span(data-i18n="medium_frame_blurb").blurb
 						.item.large
-							+checkbox('armature_frame')(value="l").checkbox.squarebox
+							+checkbox("armature_frame")(value="l").checkbox.squarebox
 							span(data-i18n="large_frame_blurb").blurb
 						.specialheader.label(data-i18n="frame_features")
 						each feature in armatureFeatures
@@ -370,7 +370,7 @@
 								span(data-i18n=feature).itemname
 		// Clocks
 		.col100.clocks.small-margin.free-repcontrol
-			.specialheader.label(data-i18n='clocks')
+			.specialheader.label(data-i18n="clocks")
 			fieldset.repeating_clock
 				+makeclock
-		+textarea('notes')(data-i18n-placeholder='notes').notes
+		+textarea("notes")(data-i18n-placeholder="notes").notes

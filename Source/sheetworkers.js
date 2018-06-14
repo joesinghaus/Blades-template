@@ -17,13 +17,13 @@ Object.keys(data.craft).forEach(craft => {
 	data.craft[craft].upgrade.forEach(upgrade => {
 		upgrade.name = getTranslationByKey(upgrade.name);
 		upgrade.description = getTranslationByKey(upgrade.description);
-		upgrade.boxes_chosen = '1';
+		upgrade.boxes_chosen = "1";
 	});
 });
 data.items.forEach(item => {
-	item.boxes_chosen = '1';
+	item.boxes_chosen = "1";
 	item.name = getTranslationByKey(item.name);
-	item.description = getTranslationByKey(item.description) || '';
+	item.description = getTranslationByKey(item.description) || "";
 });
 Object.keys(data.translatedDefaults).forEach(k => {
 	data.translatedDefaults[k] = getTranslationByKey(data.translatedDefaults[k]);
@@ -48,7 +48,7 @@ Object.keys(data.playbook).forEach(playbook => {
 	data.playbook[playbook].playbookitem.forEach(item => {
 		item.name = getTranslationByKey(item.name);
 		item.description = getTranslationByKey(item.description);
-		item.boxes_chosen = '1';
+		item.boxes_chosen = "1";
 	});
 });
 const playbookAbilityMap = new Map([...Object.values(data.playbook).map(x => x.ability).reduce((m, v) => {
@@ -99,25 +99,25 @@ const mySetAttrs = (attrs, options, callback) => {
 				const existingRowNames = idList.map(id => v[`repeating_${sectionName}_${id}_name`]),
 					createdIDs = [],
 					setting = dataList.filter(o => !existingRowNames.includes(o.name))
-					.map(o => {
-						let rowID;
-						while (!rowID) {
-							let newID = generateRowID();
-							if (!createdIDs.includes(newID)) {
-								rowID = newID;
-								createdIDs.push(rowID);
+						.map(o => {
+							let rowID;
+							while (!rowID) {
+								let newID = generateRowID();
+								if (!createdIDs.includes(newID)) {
+									rowID = newID;
+									createdIDs.push(rowID);
+								}
 							}
-						}
-						const newAttrs = {};
-						if (autogen) {
-							newAttrs[`repeating_${sectionName}_${rowID}_autogen`] = '1';
-						}
-						return Object.keys(o).reduce((m, key) => {
-							m[`repeating_${sectionName}_${rowID}_${key}`] = o[key];
-							return m;
-						}, newAttrs);
-					})
-					.reduce((m, o) => Object.assign(m, o), {});
+							const newAttrs = {};
+							if (autogen) {
+								newAttrs[`repeating_${sectionName}_${rowID}_autogen`] = "1";
+							}
+							return Object.keys(o).reduce((m, key) => {
+								m[`repeating_${sectionName}_${rowID}_${key}`] = o[key];
+								return m;
+							}, newAttrs);
+						})
+						.reduce((m, o) => Object.assign(m, o), {});
 				mySetAttrs(setting, {}, callback);
 			});
 		});
@@ -130,28 +130,19 @@ const mySetAttrs = (attrs, options, callback) => {
 		else return 0;
 	},
 	diceMagic = num => {
-		const replaceEntities = string => {
-			const entities = {
-				'[': '#91',
-				'}': '#125',
-				',': '#44',
-			};
-			return string.replace(/[\[},]/g, c => '&' + entities[c] + ';');
-		};
-		const range = end => [...Array(end+1).keys()].slice(1);
-		if (num > 0)
-			return replaceEntities(` {{dice=${range(num).map(() => `[[d6]]`).join(", ")}}}`);
-		else return replaceEntities(' {{zerodice=[[d6]], [[d6]]}}');
+		const range = end => [...Array(end + 1).keys()].slice(1);
+		if (num > 0) return `dice=${range(num).map(() => "[[d6]]").join("&"+"#44"+"; ")}`;
+		else return "zerodice=[[d6]]&"+"#44"+"; [[d6]]";
 	},
 	buildRollFormula = base => {
-		return `?{@{bonusdice}|` +
-			[0,1,2,3,4,5,6,-1,-2,-3].map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join('|') +
-			'}';
+		return ` {{?{@{bonusdice}|${
+			[0, 1, 2, 3, 4, 5, 6, -1, -2, -3].map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join("|")
+		}}}}`;
 	},
 	buildNumdiceFormula = () => {
-		return `?{${getTranslationByKey('numberofdice')}|` +
-			[0, 1, 2, 3, 4 , 5, 6].map(n => `${n},${diceMagic(n)}`).join('|') +
-			'}';
+		return ` {{?{${getTranslationByKey("numberofdice")}|${
+			[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n)}`).join("|")
+		}}}}`;
 	},
 	emptyFirstRowIfUnnamed = sectionName => {
 		getSectionIDs(`repeating_${sectionName}`, idList => {
@@ -165,31 +156,31 @@ const mySetAttrs = (attrs, options, callback) => {
 	},
 	handleBoxesFill = (name, upToFour) => {
 		on(`change:${name}1 change:${name}2 change:${name}3 change:${name}4`, event => {
-			if (event.sourceType !== 'player') return;
+			if (event.sourceType !== "player") return;
 			getAttrs([event.sourceAttribute], v => {
 				const rName = event.sourceAttribute.slice(0, -1),
 					setting = {};
-				if (String(v[event.sourceAttribute]) === '1') {
+				if (String(v[event.sourceAttribute]) === "1") {
 					switch (event.sourceAttribute.slice(-1)) {
-					case '4':
+					case "4":
 						setting[`${rName}3`] = 1;
 						/* falls through */
-					case '3':
+					case "3":
 						setting[`${rName}2`] = 1;
 						/* falls through */
-					case '2':
+					case "2":
 						setting[`${rName}1`] = 1;
 					}
 				}
-				if (String(v[event.sourceAttribute]) === '0') {
+				if (String(v[event.sourceAttribute]) === "0") {
 					switch (event.sourceAttribute.slice(-1)) {
-					case '1':
+					case "1":
 						setting[`${rName}2`] = 0;
 						/* falls through */
-					case '2':
+					case "2":
 						setting[`${rName}3`] = 0;
 						/* falls through */
-					case '3':
+					case "3":
 						if (upToFour) setting[`${rName}4`] = 0;
 					}
 				}
@@ -200,7 +191,7 @@ const mySetAttrs = (attrs, options, callback) => {
 	calculateResistance = name => {
 		getAttrs([...data.actions[name], `setting_resbonus_${name}`], v => {
 			const total = data.actions[name].map(x => v[x])
-				.reduce((s, c) => s + (String(c) === '0' ? 0 : 1), 0);
+				.reduce((s, c) => s + (String(c) === "0" ? 0 : 1), 0);
 			setAttr(name, total);
 			setAttr(`${name}_formula`, buildRollFormula(total + parseInt(v[`setting_resbonus_${name}`])));
 		});
@@ -237,33 +228,33 @@ const craftAttributes = [...new Set([].concat(...Object.keys(data.craft).map(x =
 	watchedAttributes = new Set(craftAttributes.concat(playbookAttributes)),
 	actionsFlat = [].concat(...Object.keys(data.actions).map(x => data.actions[x])),
 	autoExpandFields = [
-		'repeating_ability:name',
-		'repeating_ability:description',
-		'repeating_craftability:name',
-		'repeating_craftability:description',
-		'repeating_playbookitem:name',
-		'repeating_upgrade:name',
-		'repeating_clock:name',
-		'repeating_craftclock:name',
-		'repeating_factionclock:name',
-		'repeating_cohort:edges',
-		'repeating_cohort:flaws',
-		'repeating_gadget:name',
-		'xp_condition',
-		'xp_condition_extra',
-		'xp_condition2',
-		'xp_condition3',
-		'craft_xp_condition',
-		'biology',
-		'craft_background',
-		'craft_ai',
-		'background',
+		"repeating_ability:name",
+		"repeating_ability:description",
+		"repeating_craftability:name",
+		"repeating_craftability:description",
+		"repeating_playbookitem:name",
+		"repeating_upgrade:name",
+		"repeating_clock:name",
+		"repeating_craftclock:name",
+		"repeating_factionclock:name",
+		"repeating_cohort:edges",
+		"repeating_cohort:flaws",
+		"repeating_gadget:name",
+		"xp_condition",
+		"xp_condition_extra",
+		"xp_condition2",
+		"xp_condition3",
+		"craft_xp_condition",
+		"biology",
+		"craft_background",
+		"craft_ai",
+		"background",
 	],
 	autogenSections = [
-		'ability',
-		'craftability',
-		'playbookitem',
-		'upgrade'
+		"ability",
+		"craftability",
+		"playbookitem",
+		"upgrade"
 	],
 	translatedNames = [...Object.keys(data.playbook), ...Object.keys(data.craft)].reduce((m, keyName) => {
 		if (getTranslationByKey(keyName)) m[getTranslationByKey(keyName).toLowerCase()] = keyName;
@@ -273,18 +264,18 @@ const craftAttributes = [...new Set([].concat(...Object.keys(data.craft).map(x =
 
 /* EVENT HANDLERS */
 /* Set default fields when setting craft type or playbook */
-on('change:craft_type change:playbook', event => {
-	getAttrs(['playbook', 'craft_type', 'changed_attributes', 'setting_autofill', ...watchedAttributes], v => {
-		const changedAttributes = (v.changed_attributes || '').split(','),
-			sourceName = translatedNames[(event.sourceAttribute === 'craft_type' ? v.craft_type : v.playbook).toLowerCase()],
+on("change:craft_type change:playbook", event => {
+	getAttrs(["playbook", "craft_type", "changed_attributes", "setting_autofill", ...watchedAttributes], v => {
+		const changedAttributes = (v.changed_attributes || "").split(","),
+			sourceName = translatedNames[(event.sourceAttribute === "craft_type" ? v.craft_type : v.playbook).toLowerCase()],
 			fillBaseData = (inputData, defaultAttrNames) => {
 				if (data) {
 					const finalSettings = defaultAttrNames.filter(name => !changedAttributes.includes(name))
 						// do not reset attributes which have been changed by the user
-						.filter(name => v[name] !== (data.defaultValues[name] || ''))
+						.filter(name => v[name] !== (data.defaultValues[name] || ""))
 						// do not set attributes if current value is equal to sheet defaults
 						.reduce((m, name) => {
-							m[name] = data.defaultValues[name] || '';
+							m[name] = data.defaultValues[name] || "";
 							return m;
 						}, {});
 					Object.keys(inputData).filter(name => !changedAttributes.includes(name))
@@ -292,13 +283,13 @@ on('change:craft_type change:playbook', event => {
 					mySetAttrs(finalSettings);
 				}
 			};
-		if (event.sourceAttribute === 'craft_type' ? v.craft_type : v.playbook) {
-			setAttr('show_playbook_reminder', '0');
+		if (event.sourceAttribute === "craft_type" ? v.craft_type : v.playbook) {
+			setAttr("show_playbook_reminder", "0");
 		}
-		if (v.setting_autofill !== '1') return;
-		if (event.sourceAttribute === 'craft_type' && sourceName in data.craft) {
-			fillRepeatingSectionFromData('craftability', data.craft[sourceName].craftability, true);
-			fillRepeatingSectionFromData('upgrade', data.craft[sourceName].upgrade, true);
+		if (v.setting_autofill !== "1") return;
+		if (event.sourceAttribute === "craft_type" && sourceName in data.craft) {
+			fillRepeatingSectionFromData("craftability", data.craft[sourceName].craftability, true);
+			fillRepeatingSectionFromData("upgrade", data.craft[sourceName].upgrade, true);
 			fillBaseData(data.craft[sourceName].base, craftAttributes);
 			if(sourceName === "cannibal_craft")
 				fillRepeatingSectionFromData("cohort", [{
@@ -307,39 +298,39 @@ on('change:craft_type change:playbook', event => {
 					type: "gang"
 				}]);
 		}
-		if (event.sourceAttribute === 'playbook' && sourceName in data.playbook) {
-			fillRepeatingSectionFromData('ability', data.playbook[sourceName].ability, true);
-			fillRepeatingSectionFromData('playbookitem', data.playbook[sourceName].playbookitem, true);
+		if (event.sourceAttribute === "playbook" && sourceName in data.playbook) {
+			fillRepeatingSectionFromData("ability", data.playbook[sourceName].ability, true);
+			fillRepeatingSectionFromData("playbookitem", data.playbook[sourceName].playbookitem, true);
 			fillBaseData(data.playbook[sourceName].base, playbookAttributes);
 		}
 	});
 });
 const fillPlaybookAbility = () => {
-	const prefix = 'repeating_ability';
+	const prefix = "repeating_ability";
 	getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
 		if (!v[`${prefix}_description`]) {
-			const description = playbookAbilityMap.get((v[`${prefix}_name`] || '').toLowerCase());
+			const description = playbookAbilityMap.get((v[`${prefix}_name`] || "").toLowerCase());
 			if (description) setAttr(`${prefix}_description`, description);
 		}
 	});
 };
 const fillCraftAbility = () => {
-	const prefix = 'repeating_craftability';
+	const prefix = "repeating_craftability";
 	getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
 		if (!v[`${prefix}_description`]) {
-			const description = craftAbilityMap.get((v[`${prefix}_name`] || '').toLowerCase());
+			const description = craftAbilityMap.get((v[`${prefix}_name`] || "").toLowerCase());
 			if (description) setAttr(`${prefix}_description`, description);
 		}
 	});
 };
-on('change:repeating_ability:name', fillPlaybookAbility);
-on('change:repeating_craftability:name', fillCraftAbility);
+on("change:repeating_ability:name", fillPlaybookAbility);
+on("change:repeating_craftability:name", fillCraftAbility);
 /* Watch repeating rows for changes and set autogen to false if change happens */
 autogenSections.forEach(sectionName => {
 	on(`change:repeating_${sectionName}`, event => {
 		getAttrs([`repeating_${sectionName}_autogen`], v => {
-			if (v[`repeating_${sectionName}_autogen`] && event.sourceType === 'player') {
-				setAttr(`repeating_${sectionName}_autogen`, '');
+			if (v[`repeating_${sectionName}_autogen`] && event.sourceType === "player") {
+				setAttr(`repeating_${sectionName}_autogen`, "");
 			}
 		});
 	});
@@ -347,26 +338,26 @@ autogenSections.forEach(sectionName => {
 /* Watch for changes in auto-set attributes and update changed_attributes*/
 watchedAttributes.forEach(name => {
 	on(`change:${name}`, event => {
-		if (event.sourceType === 'player') {
-			getAttrs(['changed_attributes'], v => {
-				const changedAttributes = [...new Set(v.changed_attributes.split(',')).add(name)]
-					.filter(x => !!x).join(',');
-				setAttr('changed_attributes', changedAttributes);
+		if (event.sourceType === "player") {
+			getAttrs(["changed_attributes"], v => {
+				const changedAttributes = [...new Set(v.changed_attributes.split(",")).add(name)]
+					.filter(x => !!x).join(",");
+				setAttr("changed_attributes", changedAttributes);
 			});
 		}
 	});
 });
 /* Register attribute/action event handlers */
 Object.keys(data.actions).forEach(attrName => {
-		on([...data.actions[attrName], `setting_resbonus_${attrName}`]
-			.map(x => `change:${x}`).join(' '), () => calculateResistance(attrName)
-		);
+	on([...data.actions[attrName], `setting_resbonus_${attrName}`]
+		.map(x => `change:${x}`).join(" "), () => calculateResistance(attrName)
+	);
 });
 /* Calculate trauma */
 ["", "craft_"].forEach(p => {
-	on(data.traumas.map(x => `change:${p}trauma_${x}`).join(' '), event => {
+	on(data.traumas.map(x => `change:${p}trauma_${x}`).join(" "), event => {
 		getAttrs(data.traumas.map(x => `${p}trauma_${x}`), v => {
-			if (event.sourceType === 'player') {
+			if (event.sourceType === "player") {
 				const newTrauma = data.traumas.reduce((m, name) => m + (parseInt(v[`${p}trauma_${name}`]) || 0), 0);
 				setAttr(`${p}trauma`, newTrauma);
 			}
@@ -374,16 +365,16 @@ Object.keys(data.actions).forEach(attrName => {
 	});
 });
 /* Generate buttons */
-on('change:generate_factions', () => {
-	setAttr('show_faction_generatebutton', '0');
+on("change:generate_factions", () => {
+	setAttr("show_faction_generatebutton", "0");
 	Object.keys(data.factions).forEach(sectionName => {
 		fillRepeatingSectionFromData(sectionName, data.factions[sectionName]);
 	});
 });
 autogenSections.forEach(sectionName => {
 	on(`change:generate_${sectionName}`, () => {
-		getAttrs(['generate_source_character', 'generate_source_craft', 'sheet_type'], v => {
-			const dataVar = (v.sheet_type === 'character') ? data.playbook : data.craft,
+		getAttrs(["generate_source_character", "generate_source_craft", "sheet_type"], v => {
+			const dataVar = (v.sheet_type === "character") ? data.playbook : data.craft,
 				genSource = v[`generate_source_${v.sheet_type}`];
 			if (genSource in dataVar) {
 				emptyFirstRowIfUnnamed(sectionName);
@@ -393,43 +384,43 @@ autogenSections.forEach(sectionName => {
 	});
 });
 /* Extra trauma */
-on('change:setting_extra_trauma', event => setAttr('trauma_max', 4 + (parseInt(event.newValue) || 0)));
+on("change:setting_extra_trauma", event => setAttr("trauma_max", 4 + (parseInt(event.newValue) || 0)));
 on("change:profit", calculateProfitFormula);
 [1,2,3,4,5,6,7].forEach(number => on(`change:chaos${number}`, () => calculateChaosFormula(number)));
 
 /* Calculate cohort quality */
-on('change:repeating_cohort', () => calculateCohortDice(['repeating_cohort']));
-on('change:char_cohort_quality change:char_cohort_impaired change:setting_show_cohort', () => {
-	getAttrs(['char_cohort_quality', 'char_cohort_impaired'], v => {
+on("change:repeating_cohort", () => calculateCohortDice(["repeating_cohort"]));
+on("change:char_cohort_quality change:char_cohort_impaired change:setting_show_cohort", () => {
+	getAttrs(["char_cohort_quality", "char_cohort_impaired"], v => {
 		const dice = (parseInt(v.char_cohort_quality) || 0) - (parseInt(v.char_cohort_impaired) || 0);
-		setAttr('char_cohort_roll_formula', buildRollFormula(dice));
+		setAttr("char_cohort_roll_formula", buildRollFormula(dice));
 	});
 });
 /* Set correct verb for cohort roll button */
-['char_cohort', 'repeating_cohort'].forEach(prefix => {
-	const eventString = 'change:' + ((prefix === 'repeating_cohort') ? `${prefix}:type` : `${prefix}_type`);
+["char_cohort", "repeating_cohort"].forEach(prefix => {
+	const eventString = "change:" + ((prefix === "repeating_cohort") ? `${prefix}:type` : `${prefix}_type`);
 	on(eventString, event => {
-		const verb = (event.newValue === 'expert') ? '^{rolls_their}' : '^{roll_their}';
+		const verb = (event.newValue === "expert") ? "^{rolls_their}" : "^{roll_their}";
 		setAttr(`${prefix}_verb`, verb);
 	});
 });
 /* Left-fill checkboxes */
-handleBoxesFill('upgrade_mastery_check_', true);
-handleBoxesFill('utility_belt1_check_');
-handleBoxesFill('utility_belt2_check_');
-['item', 'playbookitem', 'upgrade'].forEach(sName => handleBoxesFill(`repeating_${sName}:check_`));
+handleBoxesFill("upgrade_mastery_check_", true);
+handleBoxesFill("utility_belt1_check_");
+handleBoxesFill("utility_belt2_check_");
+["item", "playbookitem", "upgrade"].forEach(sName => handleBoxesFill(`repeating_${sName}:check_`));
 
 /* Pseudo-radios */
 actionsFlat.forEach(name => {
 	on(`change:${name}`, event => {
-		if (String(event.newValue) === '0' && event.sourceType === 'player') {
+		if (String(event.newValue) === "0" && event.sourceType === "player") {
 			setAttr(name, (parseInt(event.previousValue) || 1) - 1);
 		}
-		setAttr(`${name}_formula`, buildRollFormula(event.newValue || '0'));
+		setAttr(`${name}_formula`, buildRollFormula(event.newValue || "0"));
 	});
 });
 /* Item reset button */
-on('change:reset_items', () => {
+on("change:reset_items", () => {
 	const clearChecks = sectionName => {
 		getSectionIDs(`repeating_${sectionName}`, idArray => {
 			const setting = [
@@ -443,46 +434,46 @@ on('change:reset_items', () => {
 			mySetAttrs(setting);
 		});
 	};
-	setAttr('load', 0);
-	['item', 'playbookitem'].forEach(clearChecks);
+	setAttr("load", 0);
+	["item", "playbookitem"].forEach(clearChecks);
 });
-on('change:setting_consequence_query sheet:opened', () => {
-	getAttrs(['setting_consequence_query'], v => {
-		const consequenceQuery = (String(v.setting_consequence_query) === '1') ?
-			`?{${getTranslationByKey('consequence')}|${getTranslationByKey('a_consequence')}}` :
-			'^{a_consequence}';
-		setAttr('consequence_query', consequenceQuery);
+on("change:setting_consequence_query sheet:opened", () => {
+	getAttrs(["setting_consequence_query"], v => {
+		const consequenceQuery = (String(v.setting_consequence_query) === "1") ?
+			`?{${getTranslationByKey("consequence")}|${getTranslationByKey("a_consequence")}}` :
+			"^{a_consequence}";
+		setAttr("consequence_query", consequenceQuery);
 	});
 });
 /* Trim whitespace in auto-expand fields */
 autoExpandFields.forEach(name => {
 	on(`change:${name}`, event => {
-		const attrName = name.replace(':', '_');
+		const attrName = name.replace(":", "_");
 		getAttrs([attrName], v => {
-			if (v[attrName].trim() !== v[attrName] && event.sourceType === 'player') {
+			if (v[attrName].trim() !== v[attrName] && event.sourceType === "player") {
 				setAttr(attrName, v[attrName].trim());
 			}
 		});
 	});
 });
 /* Clean chat image URL */
-on('change:chat_image', event => {
-	const match = (event.newValue || '').match(/^(https:\/\/s3\.amazonaws\.com\/files\.d20\.io\/images\/.*\.jpg)\?\d+$/);
-	if (match) setAttr('chat_image', match[1]);
+on("change:chat_image", event => {
+	const match = (event.newValue || "").match(/^(https:\/\/s3\.amazonaws\.com\/files\.d20\.io\/images\/.*\.jpg)\?\d+$/);
+	if (match) setAttr("chat_image", match[1]);
 });
 /* Number of dice prompt */
-on('sheet:opened', () => {
+on("sheet:opened", () => {
 	/* Set up translated attributes */
 	const translatedAttrs = {
-		bonusdice: getTranslationByKey('bonusdice'),
-		effect_query: getTranslationByKey('effect_query'),
-		notes_query: `?{${getTranslationByKey('notes')}}`,
+		bonusdice: getTranslationByKey("bonusdice"),
+		effect_query: getTranslationByKey("effect_query"),
+		notes_query: `?{${getTranslationByKey("notes")}}`,
 		numberofdice: buildNumdiceFormula(),
-		position_query: `?{${getTranslationByKey('position')}|` +
-			`${getTranslationByKey('risky')},position=${getTranslationByKey('risky')}|` +
-			`${getTranslationByKey('controlled')},position=${getTranslationByKey('controlled')}|` +
-			`${getTranslationByKey('desperate')},position=${getTranslationByKey('desperate')}|` +
-			`${getTranslationByKey('fortune_roll')},position=}`,
+		position_query: `?{${getTranslationByKey("position")}|` +
+			`${getTranslationByKey("risky")},position=${getTranslationByKey("risky")}|` +
+			`${getTranslationByKey("controlled")},position=${getTranslationByKey("controlled")}|` +
+			`${getTranslationByKey("desperate")},position=${getTranslationByKey("desperate")}|` +
+			`${getTranslationByKey("fortune_roll")},position=}`,
 	};
 	getAttrs(Object.keys(translatedAttrs), v => {
 		const setting = {};
@@ -493,27 +484,27 @@ on('sheet:opened', () => {
 	});
 });
 /* INITIALISATION AND UPGRADES */
-on('sheet:opened', () => {
-	getAttrs(['sheet_type', 'changed_attributes', 'craft_type', 'playbook'], v => {
+on("sheet:opened", () => {
+	getAttrs(["sheet_type", "changed_attributes", "craft_type", "playbook"], v => {
 		/* Make sure sheet_type is never 0 */
-		if (!['craft', 'faction'].includes(v.sheet_type)) setAttr('sheet_type', 'character');
+		if (!["craft", "faction"].includes(v.sheet_type)) setAttr("sheet_type", "character");
 		/* Remove reminder box if we have playbook or craft name */
-		if (v.playbook || v.craft_type) setAttr('show_playbook_reminder', '0');
+		if (v.playbook || v.craft_type) setAttr("show_playbook_reminder", "0");
 	});
 	/* Setup and upgrades */
-	getAttrs(['version'], v => {
+	getAttrs(["version"], v => {
 		const upgradeSheet = version => {
 				// const [major, minor] = version && version.split('.').map(x => parseInt(x));
 				console.log(`Found version ${version}.`);
 			},
 			initialiseSheet = () => {
-				const setting = ['ability', 'friend', 'craftability', 'contact', 'playbookitem', 'upgrade', 'framefeature']
+				const setting = ["ability", "friend", "craftability", "contact", "playbookitem", "upgrade", "framefeature"]
 					.reduce((memo, sectionName) => {
 						memo[`repeating_${sectionName}_${generateRowID()}_autogen`] = 1;
 						return memo;
 					}, {});
 				mySetAttrs(setting);
-				fillRepeatingSectionFromData('item', data.items);
+				fillRepeatingSectionFromData("item", data.items);
 				/* Set translated default values */
 				getAttrs(Object.keys(data.translatedDefaults), v => {
 					const setting = {};
@@ -522,7 +513,7 @@ on('sheet:opened', () => {
 					});
 					mySetAttrs(setting);
 				});
-				console.log('Initialising new sheet.');
+				console.log("Initialising new sheet.");
 			};
 		if (v.version) upgradeSheet(v.version);
 		else initialiseSheet();
