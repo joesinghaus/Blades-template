@@ -134,28 +134,19 @@ const mySetAttrs = (attrs, options, callback) => {
 		});
 	},
 	diceMagic = num => {
-		const replaceEntities = string => {
-			const entities = {
-				"[": "#91",
-				"}": "#125",
-				",": "#44",
-			};
-			return string.replace(/[[},]/g, c => "&" + entities[c] + ";");
-		};
-		const range = end => [...Array(end+1).keys()].slice(1);
-		if (num > 0)
-			return replaceEntities(` {{dice=${range(num).map(() => "[[d6]]").join(", ")}}}`);
-		else return replaceEntities(" {{zerodice=[[d6]], [[d6]]}}");
+		const range = end => [...Array(end + 1).keys()].slice(1);
+		if (num > 0) return `dice=${range(num).map(() => "[[d6]]").join("&"+"#44"+"; ")}`;
+		else return "zerodice=[[d6]]&"+"#44"+"; [[d6]]";
 	},
 	buildRollFormula = base => {
-		return "?{@{bonusdice}|" +
-			[0,1,2,3,4,5,6,-1,-2,-3].map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join("|") +
-			"}";
+		return ` {{?{@{bonusdice}|${
+			[0, 1, 2, 3, 4, 5, 6, -1, -2, -3].map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join("|")
+		}}}}`;
 	},
 	buildNumdiceFormula = () => {
-		return `?{${getTranslationByKey("numberofdice")}|` +
-			[0, 1, 2, 3, 4 , 5, 6].map(n => `${n},${diceMagic(n)}`).join("|") +
-			"}";
+		return ` {{?{${getTranslationByKey("numberofdice")}|${
+			[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n)}`).join("|")
+		}}}}`;
 	},
 	emptyFirstRowIfUnnamed = sectionName => {
 		getSectionIDs(`repeating_${sectionName}`, idList => {

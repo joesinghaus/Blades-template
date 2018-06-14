@@ -822,9 +822,6 @@ textarea.sheet-smallcaps {
 .sheet-header .sheet-info {
   font-size: 8px;
 }
-.sheet-header .sheet-vice-input:not([value=normal]) ~ .sheet-normal, .sheet-header .sheet-vice-input:not([value=ghost]) ~ .sheet-ghost, .sheet-header .sheet-vice-input:not([value=hull]) ~ .sheet-hull, .sheet-header .sheet-vice-input:not([value=vampire]) ~ .sheet-vampire {
-  display: none;
-}
 .sheet-header .sheet-vice {
   justify-content: space-between;
   text-align: justify;
@@ -1891,14 +1888,6 @@ input.sheet-zero {
 .sheet-stress4 div {
   justify-content: space-between;
 }
-.sheet-stress4 .sheet-input:not([value=normal]) ~ .sheet-normal,
-.sheet-stress4 .sheet-input:not([value=ghost]) ~ .sheet-ghost,
-.sheet-stress4 .sheet-input:not([value=hull]) ~ .sheet-hull {
-  display: none;
-}
-.sheet-stress4 .sheet-ghost, .sheet-stress4 .sheet-hull {
-  letter-spacing: 1px;
-}
 
 .sheet-traumaholder, .sheet-wantedholder {
   height: 13px;
@@ -2441,22 +2430,6 @@ input[value="1"] + .sheet-claimbox {
   background: #c7c7c7;
 }
 
-/* STRICTURES */
-.sheet-strictures {
-  font-size: 11px;
-  line-height: 1.6;
-  text-align: justify;
-}
-.sheet-strictures label {
-  margin-right: 3px;
-  display: inline-flex;
-  vertical-align: top;
-  align-items: center;
-}
-.sheet-strictures span.sheet-label::after {
-  content: ":";
-}
-
 /* ALCHEMICALS */
 .sheet-title-checkbox ~ div {
   height: auto;
@@ -2561,12 +2534,6 @@ input.sheet-title-checkbox {
   display: flex;
   justify-content: space-between;
   align-items: start;
-}
-
-/* FRAME */
-.sheet-frame textarea {
-  font-size: 11px;
-  height: 40px;
 }
 
 /* FACTIONS PAGE */
