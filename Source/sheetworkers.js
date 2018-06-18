@@ -1,42 +1,42 @@
 /* global data, getTranslationByKey, getAttrs, setAttrs, on, getSectionIDs, generateRowID, removeRepeatingRow */
-const sheetVersion = "1.0";
+const sheetVersion = "1.1";
 const sheetName = "A Nocturne";
 /* It's necessary to include the base data at the start of the file */
 /* Translate all the data */
-Object.keys(data.craft).forEach(craft => {
+Object.keys(data.craft).forEach((craft) => {
 	const base = data.craft[craft].base;
-	Object.keys(base).forEach(attr => {
+	Object.keys(base).forEach((attr) => {
 		if (data.translatedCraftAttributes.includes(attr)) {
 			base[attr] = getTranslationByKey(base[attr]);
 		}
 	});
-	data.craft[craft].craftability = data.craft[craft].craftability.map(name => ({
+	data.craft[craft].craftability = data.craft[craft].craftability.map((name) => ({
 		name: getTranslationByKey(`craft_ability_${name}`),
 		description: getTranslationByKey(`craft_ability_${name}_desc`)
 	}));
-	data.craft[craft].upgrade.forEach(upgrade => {
+	data.craft[craft].upgrade.forEach((upgrade) => {
 		upgrade.name = getTranslationByKey(upgrade.name);
 		upgrade.description = getTranslationByKey(upgrade.description);
 		upgrade.boxes_chosen = "1";
 	});
 });
-data.items.forEach(item => {
+data.items.forEach((item) => {
 	item.boxes_chosen = "1";
 	item.name = getTranslationByKey(item.name);
 	item.description = getTranslationByKey(item.description) || "";
 });
-Object.keys(data.translatedDefaults).forEach(k => {
+Object.keys(data.translatedDefaults).forEach((k) => {
 	data.translatedDefaults[k] = getTranslationByKey(data.translatedDefaults[k]);
 });
 Object.assign(data.defaultValues, data.translatedDefaults);
-Object.keys(data.factions).forEach(x => {
-	data.factions[x].forEach(faction => {
+Object.keys(data.factions).forEach((x) => {
+	data.factions[x].forEach((faction) => {
 		faction.name = getTranslationByKey(faction.name);
 	});
 });
-Object.keys(data.playbook).forEach(playbook => {
+Object.keys(data.playbook).forEach((playbook) => {
 	const base = data.playbook[playbook].base;
-	Object.keys(base).forEach(attr => {
+	Object.keys(base).forEach((attr) => {
 		if (data.translatedPlaybookAttributes.includes(attr)) {
 			base[attr] = getTranslationByKey(base[attr]);
 		}
@@ -63,23 +63,20 @@ const craftAbilityMap = new Map([...Object.values(data.craft).map(x => x.craftab
 }, new Set())].map(x => {
 	return [x.name.toLowerCase(), x.description];
 }));
-/* Utility functions - shouldn't need to touch most of these */
-const mySetAttrs = (attrs, options, callback) => {
+/* Utility functions */
+const mySetAttrs = (attrs, v = {}, options, callback) => {
 		const finalAttrs = Object.keys(attrs).reduce((m, k) => {
-			m[k] = `${attrs[k]}`;
+			if (v[k] !== `${attrs[k]}`) m[k] = `${attrs[k]}`;
 			return m;
 		}, {});
 		setAttrs(finalAttrs, options, callback);
 	},
 	setAttr = (name, value) => {
-		getAttrs([name], v => {
-			const setting = {};
-			if (v[name] !== `${value}`) setting[name] = `${value}`;
-			setAttrs(setting);
-		});
+		getAttrs([name], (v) => mySetAttrs({
+			[name]: value
+		}, v));
 	},
-	fillRepeatingSectionFromData = (sectionName, dataList, autogen, callback) => {
-		callback = callback || (() => {});
+	fillRepeatingSectionFromData = (sectionName, dataList, autogen) => {
 		getSectionIDs(`repeating_${sectionName}`, idList => {
 			const existingRowAttributes = [
 				...idList.map(id => `repeating_${sectionName}_${id}_name`),
@@ -92,8 +89,7 @@ const mySetAttrs = (attrs, options, callback) => {
 						if (v[`repeating_${sectionName}_${id}_autogen`]) {
 							removeRepeatingRow(`repeating_${sectionName}_${id}`);
 							return false;
-						}
-						else return true;
+						} else return true;
 					});
 				}
 				const existingRowNames = idList.map(id => v[`repeating_${sectionName}_${id}_name`]),
@@ -118,7 +114,7 @@ const mySetAttrs = (attrs, options, callback) => {
 							}, newAttrs);
 						})
 						.reduce((m, o) => Object.assign(m, o), {});
-				mySetAttrs(setting, {}, callback);
+				mySetAttrs(setting);
 			});
 		});
 	},
@@ -132,7 +128,7 @@ const mySetAttrs = (attrs, options, callback) => {
 	diceMagic = num => {
 		const range = end => [...Array(end + 1).keys()].slice(1);
 		if (num > 0) return `dice=${range(num).map(() => "[[d6]]").join("&"+"#44"+"; ")}`;
-		else return "zerodice=[[d6]]&"+"#44"+"; [[d6]]";
+		else return "zerodice=[[d6]]&" + "#44" + "; [[d6]]";
 	},
 	buildRollFormula = base => {
 		return ` {{?{@{bonusdice}|${
@@ -157,9 +153,9 @@ const mySetAttrs = (attrs, options, callback) => {
 	handleBoxesFill = (name, upToFour) => {
 		on(`change:${name}1 change:${name}2 change:${name}3 change:${name}4`, event => {
 			if (event.sourceType !== "player") return;
-			getAttrs([event.sourceAttribute], v => {
-				const rName = event.sourceAttribute.slice(0, -1),
-					setting = {};
+			const rName = event.sourceAttribute.slice(0, -1);
+			getAttrs([`${rName}1`, `${rName}2`, `${rName}3`, `${rName}4`], v => {
+				const setting = {};
 				if (String(v[event.sourceAttribute]) === "1") {
 					switch (event.sourceAttribute.slice(-1)) {
 					case "4":
@@ -184,41 +180,64 @@ const mySetAttrs = (attrs, options, callback) => {
 						if (upToFour) setting[`${rName}4`] = 0;
 					}
 				}
-				mySetAttrs(setting);
+				mySetAttrs(setting, v);
 			});
 		});
 	},
 	calculateResistance = name => {
-		getAttrs([...data.actions[name], `setting_resbonus_${name}`], v => {
+		getAttrs([...data.actions[name], name, `${name}_formula`, `setting_resbonus_${name}`], v => {
 			const total = data.actions[name].map(x => v[x])
 				.reduce((s, c) => s + (String(c) === "0" ? 0 : 1), 0);
-			setAttr(name, total);
-			setAttr(`${name}_formula`, buildRollFormula(total + parseInt(v[`setting_resbonus_${name}`])));
+			mySetAttrs({
+				[name]: total,
+				[`${name}_formula`]: buildRollFormula(total + parseInt(v[`setting_resbonus_${name}`]))
+			}, v);
 		});
 	},
 	calculateProfitFormula = () => {
-		getAttrs(["profit"], v => {
-			setAttr("profit_formula",  buildRollFormula(getRating(parseInt(v.profit)||0)));
+		getAttrs(["profit", "profit_formula"], (v) => {
+			mySetAttrs({
+				"profit_formula": buildRollFormula(getRating(parseInt(v.profit) || 0))
+			}, v);
 		});
 	},
 	calculateChaosFormula = (number) => {
-		getAttrs([`chaos${number}`], (v) => {
-			setAttr(`chaos${number}_formula`, buildRollFormula(getRating(parseInt(v[`chaos${number}`])||0)));
+		getAttrs([`chaos${number}`, `chaos${number}_formula`], (v) => {
+			mySetAttrs({
+				[`chaos${number}_formula`]: buildRollFormula(getRating(parseInt(v[`chaos${number}`]) || 0))
+			}, v);
 		});
 	},
-	calculateCohortDice = prefixes => {
+	calculateCohortDice = (prefixes) => {
 		const sourceAttrs = [
 			...prefixes.map(p => `${p}_quality`),
 			...prefixes.map(p => `${p}_impaired`),
 			...prefixes.map(p => `${p}_roll_formula`),
 		];
-		getAttrs(sourceAttrs, v => {
+		getAttrs(sourceAttrs, (v) => {
 			const setting = {};
-			prefixes.forEach(prefix => {
+			prefixes.forEach((prefix) => {
 				const dice = (parseInt(v[`${prefix}_quality`]) || 0) - (parseInt(v[`${prefix}_impaired`]) || 0),
 					formula = buildRollFormula(dice);
 				if (formula !== v[`${prefix}_roll_formula`]) setting[`${prefix}_roll_formula`] = formula;
 			});
+			setAttrs(setting, {
+				silent: true
+			});
+		});
+	},
+	recalculateAllDiceFormulas = () => {
+		getSectionIDs("repeating_cohort", (idArray) => calculateCohortDice([...idArray, "char_cohort"]));
+		calculateProfitFormula();
+		[1, 2, 3, 4, 5, 6, 7].forEach((number) => calculateChaosFormula(number));
+		Object.keys(data.actions).forEach(calculateResistance);
+		getAttrs([...actionsFlat, ...actionsFlat.map(x => `${x}_formula`)], (v) => {
+			const setting = actionsFlat.reduce((m, name) => {
+				const formula = buildRollFormula(v[name] || "0");
+				if (formula !== v[`${name}_formula`])
+					m[`${name}_formula`] = formula;
+				return m;
+			}, {});
 			setAttrs(setting);
 		});
 	};
@@ -291,7 +310,7 @@ on("change:craft_type change:playbook", event => {
 			fillRepeatingSectionFromData("craftability", data.craft[sourceName].craftability, true);
 			fillRepeatingSectionFromData("upgrade", data.craft[sourceName].upgrade, true);
 			fillBaseData(data.craft[sourceName].base, craftAttributes);
-			if(sourceName === "cannibal_craft")
+			if (sourceName === "cannibal_craft")
 				fillRepeatingSectionFromData("cohort", [{
 					name: getTranslationByKey("cohort"),
 					subtype: getTranslationByKey("techs"),
@@ -336,12 +355,12 @@ autogenSections.forEach(sectionName => {
 	});
 });
 /* Watch for changes in auto-set attributes and update changed_attributes*/
-watchedAttributes.forEach(name => {
-	on(`change:${name}`, event => {
+watchedAttributes.forEach((name) => {
+	on(`change:${name}`, (event) => {
 		if (event.sourceType === "player") {
-			getAttrs(["changed_attributes"], v => {
+			getAttrs(["changed_attributes"], (v) => {
 				const changedAttributes = [...new Set(v.changed_attributes.split(",")).add(name)]
-					.filter(x => !!x).join(",");
+					.filter((x) => !!x).join(",");
 				setAttr("changed_attributes", changedAttributes);
 			});
 		}
@@ -354,9 +373,9 @@ Object.keys(data.actions).forEach(attrName => {
 	);
 });
 /* Calculate trauma */
-["", "craft_"].forEach(p => {
-	on(data.traumas.map(x => `change:${p}trauma_${x}`).join(" "), event => {
-		getAttrs(data.traumas.map(x => `${p}trauma_${x}`), v => {
+["", "craft_"].forEach((p) => {
+	on(data.traumas.map(x => `change:${p}trauma_${x}`).join(" "), (event) => {
+		getAttrs([`${p}trauma`, ...data.traumas.map(x => `${p}trauma_${x}`)], (v) => {
 			if (event.sourceType === "player") {
 				const newTrauma = data.traumas.reduce((m, name) => m + (parseInt(v[`${p}trauma_${name}`]) || 0), 0);
 				setAttr(`${p}trauma`, newTrauma);
@@ -367,11 +386,11 @@ Object.keys(data.actions).forEach(attrName => {
 /* Generate buttons */
 on("change:generate_factions", () => {
 	setAttr("show_faction_generatebutton", "0");
-	Object.keys(data.factions).forEach(sectionName => {
+	Object.keys(data.factions).forEach((sectionName) => {
 		fillRepeatingSectionFromData(sectionName, data.factions[sectionName]);
 	});
 });
-autogenSections.forEach(sectionName => {
+autogenSections.forEach((sectionName) => {
 	on(`change:generate_${sectionName}`, () => {
 		getAttrs(["generate_source_character", "generate_source_craft", "sheet_type"], v => {
 			const dataVar = (v.sheet_type === "character") ? data.playbook : data.craft,
@@ -386,15 +405,12 @@ autogenSections.forEach(sectionName => {
 /* Extra trauma */
 on("change:setting_extra_trauma", event => setAttr("trauma_max", 4 + (parseInt(event.newValue) || 0)));
 on("change:profit", calculateProfitFormula);
-[1,2,3,4,5,6,7].forEach(number => on(`change:chaos${number}`, () => calculateChaosFormula(number)));
+[1, 2, 3, 4, 5, 6, 7].forEach(number => on(`change:chaos${number}`, () => calculateChaosFormula(number)));
 
 /* Calculate cohort quality */
 on("change:repeating_cohort", () => calculateCohortDice(["repeating_cohort"]));
 on("change:char_cohort_quality change:char_cohort_impaired change:setting_show_cohort", () => {
-	getAttrs(["char_cohort_quality", "char_cohort_impaired"], v => {
-		const dice = (parseInt(v.char_cohort_quality) || 0) - (parseInt(v.char_cohort_impaired) || 0);
-		setAttr("char_cohort_roll_formula", buildRollFormula(dice));
-	});
+	calculateCohortDice(["char_cohort"]);
 });
 /* Set correct verb for cohort roll button */
 ["char_cohort", "repeating_cohort"].forEach(prefix => {
@@ -428,13 +444,13 @@ on("change:reset_items", () => {
 				...idArray.map(id => `repeating_${sectionName}_${id}_check_2`),
 				...idArray.map(id => `repeating_${sectionName}_${id}_check_3`)
 			].reduce((m, name) => {
-				m[name] = 0;
+				m[name] = "0";
 				return m;
 			}, {});
-			mySetAttrs(setting);
+			setAttrs(setting);
 		});
 	};
-	setAttr("load", 0);
+	setAttr("load", "0");
 	["item", "playbookitem"].forEach(clearChecks);
 });
 on("change:setting_consequence_query sheet:opened", () => {
@@ -475,13 +491,7 @@ on("sheet:opened", () => {
 			`${getTranslationByKey("desperate")},position=${getTranslationByKey("desperate")}|` +
 			`${getTranslationByKey("fortune_roll")},position=}`,
 	};
-	getAttrs(Object.keys(translatedAttrs), v => {
-		const setting = {};
-		Object.keys(translatedAttrs).forEach(name => {
-			if (v[name] !== translatedAttrs[name]) setting[name] = translatedAttrs[name];
-		});
-		mySetAttrs(setting);
-	});
+	getAttrs(Object.keys(translatedAttrs), v => mySetAttrs(translatedAttrs, v));
 });
 /* INITIALISATION AND UPGRADES */
 on("sheet:opened", () => {
@@ -494,31 +504,28 @@ on("sheet:opened", () => {
 	/* Setup and upgrades */
 	getAttrs(["version"], v => {
 		const upgradeSheet = version => {
-				// const [major, minor] = version && version.split('.').map(x => parseInt(x));
+				const [major, minor] = version && version.split(".").map(x => parseInt(x));
 				console.log(`Found version ${version}.`);
+				if (major == 1 && minor < 1) {
+					recalculateAllDiceFormulas();
+				}
 			},
 			initialiseSheet = () => {
 				const setting = ["ability", "friend", "craftability", "contact", "playbookitem", "upgrade", "framefeature"]
 					.reduce((memo, sectionName) => {
-						memo[`repeating_${sectionName}_${generateRowID()}_autogen`] = 1;
+						memo[`repeating_${sectionName}_${generateRowID()}_autogen`] = "1";
 						return memo;
 					}, {});
-				mySetAttrs(setting);
+				setAttrs(setting);
 				fillRepeatingSectionFromData("item", data.items);
 				/* Set translated default values */
-				getAttrs(Object.keys(data.translatedDefaults), v => {
-					const setting = {};
-					Object.keys(data.translatedDefaults).forEach(k => {
-						if (v[k] !== data.translatedDefaults[k]) setting[k] = data.translatedDefaults[k];
-					});
-					mySetAttrs(setting);
-				});
+				getAttrs(Object.keys(data.translatedDefaults), v => mySetAttrs(data.translatedDefaults, v));
 				console.log("Initialising new sheet.");
 			};
 		if (v.version) upgradeSheet(v.version);
 		else initialiseSheet();
 		// Set version number
-		mySetAttrs({
+		setAttrs({
 			version: sheetVersion,
 			character_sheet: `${sheetName} v${sheetVersion}`,
 		});
