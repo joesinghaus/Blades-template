@@ -665,13 +665,15 @@ textarea.sheet-smallcaps {
 	}
 }
 /* ADVANCEMENT BOX*/
-.sheet-advancement-header {
+.sheet-advancement-header .sheet-label {
 	letter-spacing: 2px;
 }
+.sheet-markxp {
+	margin-right: auto;
+}
 .sheet-xpholder {
-	letter-spacing: 0;
 	font-size: 0;
-	margin: 0 8px 0 auto;
+	margin: 0 8px 0 10px;
 }
 .sheet-advancement-desc, .sheet-warblurb {
 	li {
@@ -2351,64 +2353,4 @@ button[type=roll].sheet-broadcast-button {
 	line-height: 11px;
 	right: 2px;
 	top: 1px;
-}
-
-/* Kirsty */
-.sheet-use-kirsty[value="1"] ~ .sheet-container {
-	.sheet-specialheader,
-	.sheet-blackheader,
-	.sheet-greyheader,
-	.sheet-black-on-grey,
-	.sheet-playbook input[type="text"],
-	.sheet-plainheader,
-	.sheet-itemheader :first-child,
-	.sheet-loadheader :first-child,
-	.sheet-attribute-title button[type=roll].sheet-rollbutton,
-	.sheet-bonusdie > .sheet-label:first-child,
-	.sheet-cohort-title,
-	.sheet-claimbox .sheet-label,
-	.sheet-lairbox,
-	.sheet-craftheader,
-	.sheet-factiontitle input[type="text"],
-	.sheet-factions-header input[type="text"] {
-		font-family: Kirsty, Georgia, serif;
-	}
-	.sheet-claimbox .sheet-label {
-		font-size: 10px;
-		font-weight: 400;
-	}
-	.sheet-specialheader, .sheet-itemheader :first-child, .sheet-loadheader :first-child {
-		font-size: 12px;
-		font-weight: 400;
-	}
-	.sheet-plainheader, .sheet-cohort-title {
-		font-size: 13px;
-		font-weight: 400;
-	}
-	.sheet-factions-header input[type="text"],
-	.sheet-bonusdie > .sheet-label:first-child {
-		font-size: 14px;
-		font-weight: 400;
-	}
-	.sheet-attribute-title button[type=roll].sheet-rollbutton, .sheet-lairbox {
-		font-size: 15px;
-		font-weight: 400;
-	}
-	.sheet-craftheader {
-		font-size: 29px;
-		letter-spacing: 0;
-	}
-	.sheet-factiontitle input[type="text"] {
-		font-size: 32px;
-	}
-	.sheet-playbook input[type="text"] {
-		font-size: 40px;
-		letter-spacing: 0;
-	}
-	.sheet-blackheader, .sheet-greyheader, .sheet-black-on-grey {
-		.sheet-label, button[type="roll"].sheet-label {
-			font-size: 12px;
-			font-weight: 400;
-		}
-	}
 }
