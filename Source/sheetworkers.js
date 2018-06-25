@@ -1,69 +1,70 @@
 /* global data, getTranslationByKey, getAttrs, setAttrs, on, getSectionIDs, generateRowID, removeRepeatingRow */
 const sheetVersion = "1.0";
 const sheetName = "Blades in the Dark";
+const getTranslation = (key) => (getTranslationByKey(key) || "NO_TRANSLATION_FOUND");
 /* It's necessary to include the base data at the start of the file */
 /* Translate all the data */
 Object.keys(data.crew).forEach(crew => {
 	const base = data.crew[crew].base;
 	Object.keys(base).forEach(attr => {
 		if (data.translatedCrewAttributes.includes(attr)) {
-			base[attr] = getTranslationByKey(base[attr]);
+			base[attr] = getTranslation(base[attr]);
 		}
 	});
 	/* Generate crew contacts from translation file */
 	data.crew[crew].contact = [...Array(data.maxContactsPerCrew).keys()].map(i => ({
-		name: getTranslationByKey(`crew_${crew}_contact_${i}`)
+		name: getTranslation(`crew_${crew}_contact_${i}`)
 	}));
 	data.crew[crew].crewability = data.crew[crew].crewability.map(name => ({
-		name: getTranslationByKey(`crew_ability_${name}`),
-		description: getTranslationByKey(`crew_ability_${name}_description`)
+		name: getTranslation(`crew_ability_${name}`),
+		description: getTranslation(`crew_ability_${name}_description`)
 	}));
 	data.crew[crew].upgrade.forEach(upgrade => {
-		upgrade.name = getTranslationByKey(upgrade.name);
+		upgrade.name = getTranslation(upgrade.name);
 		upgrade.boxes_chosen = "1";
 	});
 });
 data.items.forEach(item => {
 	item.boxes_chosen = "1";
-	item.name = getTranslationByKey(item.name);
-	item.description = getTranslationByKey(item.description) || "";
+	item.name = getTranslation(item.name);
+	item.description = getTranslation(item.description) || "";
 });
 Object.keys(data.translatedDefaults).forEach(k => {
-	data.translatedDefaults[k] = getTranslationByKey(data.translatedDefaults[k]);
+	data.translatedDefaults[k] = getTranslation(data.translatedDefaults[k]);
 });
 Object.assign(data.defaultValues, data.translatedDefaults);
 Object.keys(data.factions).forEach(x => {
 	data.factions[x].forEach(faction => {
-		faction.name = getTranslationByKey(faction.name);
+		faction.name = getTranslation(faction.name);
 	});
 });
 data.alchemicals.forEach((v, k) => {
 	data.alchemicals[k] = {
-		name: getTranslationByKey(v)
+		name: getTranslation(v)
 	};
 });
 Object.keys(data.playbook).forEach(playbook => {
 	const base = data.playbook[playbook].base;
 	Object.keys(base).forEach(attr => {
 		if (data.translatedPlaybookAttributes.includes(attr)) {
-			base[attr] = getTranslationByKey(base[attr]);
+			base[attr] = getTranslation(base[attr]);
 		}
 	});
 	/* Generate playbook friends from translation file */
 	if (!data.friendlessPlaybooks.includes(playbook)) {
 		data.playbook[playbook].friend = [...Array(data.maxFriendsPerPlaybook).keys()]
 			.map(i => ({
-				name: getTranslationByKey(`playbook_${playbook}_friend_${i}`)
+				name: getTranslation(`playbook_${playbook}_friend_${i}`)
 			}))
 			.filter(o => o.name);
 	}
 	else data.playbook[playbook].friend = [];
 	data.playbook[playbook].ability = data.playbook[playbook].ability.map(name => ({
-		name: getTranslationByKey(`playbook_ability_${name}`),
-		description: getTranslationByKey(`playbook_ability_${name}_description`)
+		name: getTranslation(`playbook_ability_${name}`),
+		description: getTranslation(`playbook_ability_${name}_description`)
 	}));
 	data.playbook[playbook].playbookitem.forEach(item => {
-		item.name = getTranslationByKey(item.name);
+		item.name = getTranslation(item.name);
 		item.boxes_chosen = "1";
 	});
 });
@@ -149,7 +150,7 @@ const mySetAttrs = (attrs, options, callback) => {
 		}}}}`;
 	},
 	buildNumdiceFormula = () => {
-		return ` {{?{${getTranslationByKey("numberofdice")}|${
+		return ` {{?{${getTranslation("numberofdice")}|${
 			[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n)}`).join("|")
 		}}}}`;
 	},
@@ -473,7 +474,7 @@ on("change:reset_items", () => {
 on("change:setting_consequence_query sheet:opened", () => {
 	getAttrs(["setting_consequence_query"], v => {
 		const consequenceQuery = (String(v.setting_consequence_query) === "1") ?
-			`?{${getTranslationByKey("consequence")}|${getTranslationByKey("a_consequence")}}` :
+			`?{${getTranslation("consequence")}|${getTranslation("a_consequence")}}` :
 			"^{a_consequence}";
 		setAttr("consequence_query", consequenceQuery);
 	});
@@ -498,15 +499,15 @@ on("change:chat_image", event => {
 on("sheet:opened", () => {
 	/* Set up translated attributes */
 	const translatedAttrs = {
-		bonusdice: getTranslationByKey("bonusdice"),
-		effect_query: getTranslationByKey("effect_query"),
-		notes_query: `?{${getTranslationByKey("notes")}}`,
+		bonusdice: getTranslation("bonusdice"),
+		effect_query: getTranslation("effect_query"),
+		notes_query: `?{${getTranslation("notes")}}`,
 		numberofdice: buildNumdiceFormula(),
-		position_query: `?{${getTranslationByKey("position")}|` +
-			`${getTranslationByKey("risky")},position=${getTranslationByKey("risky")}|` +
-			`${getTranslationByKey("controlled")},position=${getTranslationByKey("controlled")}|` +
-			`${getTranslationByKey("desperate")},position=${getTranslationByKey("desperate")}|` +
-			`${getTranslationByKey("fortune_roll")},position=}`,
+		position_query: `?{${getTranslation("position")}|` +
+			`${getTranslation("risky")},position=${getTranslation("risky")}|` +
+			`${getTranslation("controlled")},position=${getTranslation("controlled")}|` +
+			`${getTranslation("desperate")},position=${getTranslation("desperate")}|` +
+			`${getTranslation("fortune_roll")},position=}`,
 	};
 	getAttrs(Object.keys(translatedAttrs), v => {
 		const setting = {};
