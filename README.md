@@ -8,7 +8,7 @@ This is the main version of this template, still containing all the Blades-speci
 
 ### July 3, 2018
 
-Switched from command line sass to node-sass. This makes installing the required dependencies a bit more intuitive to install.
+Switched from command line sass to node-sass. This makes installing the required dependencies a bit more intuitive.
 
 ### June 2, 2018
 
