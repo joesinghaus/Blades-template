@@ -7,9 +7,8 @@ const config = {
 
 // Code below
 const pug = require("pug"),
+	sass = require("node-sass"),
 	fs = require("fs"),
-	execSync = require("child_process").execSync,
-	t0 = process.hrtime(),
 	data = fs.readFileSync("Source/data.json", "utf8");
 
 const options = {
@@ -20,6 +19,19 @@ const options = {
 		`const data = ${data.trim()};\n` +
 		`${fs.readFileSync("Source/sheetworkers.js", "utf8").trim()}\n`
 };
+
+const printOutput = (() => {
+	let calledBefore = false,
+		t0 = process.hrtime();
+	return () => {
+		if (!calledBefore) calledBefore = true;
+		else {
+			console.log(`Sheet build completed. Time taken: ${
+				(process.hrtime(t0)[0] + (process.hrtime(t0)[1] / 1e9)).toFixed(3)
+			} s.`);
+		}
+	};
+})();
 
 // Handle presence/absence of babel
 if (config.enableBabel && !config.pretty) {
@@ -33,12 +45,19 @@ if (config.enableBabel && !config.pretty) {
 }
 
 // Build CSS file
-const sassopts = `--no-source-map --style ${(config.pretty ? "expanded" : "compressed")}`,
-	cssOutput = execSync(`sass ${sassopts} Source/blades.scss`, {encoding: "utf8"}).replace(/^@charset "UTF-8";\s*/, "").replace(/^\uFEFF/, "");
-fs.writeFileSync("blades.css", cssOutput);
+sass.render({
+	file: "Source/blades.scss",
+	outputStyle: config.pretty ? "expanded" : "compressed",
+}, (error, result) => {
+	if (!error) {
+		const cssOutput = result.css.toString("utf8").replace(/^@charset "UTF-8";\s*/, "").replace(/^\uFEFF/, "").replace(/\n\n/g, "\n");
+		fs.writeFile("blades.css", cssOutput, printOutput);
+	} else {
+		console.log(`An error occured in the CSS build.\n${error.line}:${error.column} ${error.message}.`);
+	}
+});
 
 // Build HTML
 const htmlOutput = pug.renderFile("Source/Blades.pug", options).trim().replace(/\n+/g, "\n");
-fs.writeFileSync("blades.html", `${htmlOutput}\n`);
+fs.writeFile("blades.html", `${htmlOutput}\n`, printOutput);
 
-console.log(`Sheet build completed. Time taken: ${(process.hrtime(t0)[0] + (process.hrtime(t0)[1] / 1e9)).toFixed(3)} s.`);

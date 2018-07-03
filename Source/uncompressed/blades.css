@@ -6,6 +6,7 @@
   font-size: 0;
   position: relative;
   top: -11px;
+  line-height: 18px;
   cursor: default;
   box-sizing: border-box;
   padding: 0 !important;
@@ -86,9 +87,9 @@
 .charsheet li::before {
   transform: rotate(45deg) scale(0.9);
   font-family: Georgia, serif;
-  content: "■";
+  content: '■';
   left: 0;
-  top: -0.1em;
+  top: -.1em;
   position: absolute;
 }
 .charsheet button[type=roll].sheet-inherit, .charsheet input[type=text].sheet-inherit {
@@ -98,17 +99,14 @@
   letter-spacing: inherit;
 }
 .charsheet .sheet-space-after::after {
-  content: " ";
+  content: ' ';
 }
-
 .sheet-focus-shadow[value="1"] ~ .sheet-container textarea:focus, .sheet-focus-shadow[value="1"] ~ .sheet-container input[type=text]:focus, .sheet-focus-shadow[value="1"] ~ .sheet-container input[type=number]:focus {
   box-shadow: inset 0 0 1px 1px rgba(66, 66, 66, 0.3), 0 0 2px 1px rgba(66, 66, 66, 0.3);
 }
-
 .sheet-hidden {
   display: none !important;
 }
-
 /* Preloading graphics*/
 .sheet-preload {
   opacity: 0;
@@ -118,7 +116,6 @@
   width: 1px;
   height: 1px;
 }
-
 /* Version text */
 .sheet-topholder {
   line-height: 22px;
@@ -145,7 +142,6 @@
 .sheet-topholder .sheet-settings-checkbox input:checked + span {
   opacity: 1;
 }
-
 /* Type Selector */
 .sheet-type-selector {
   display: flex;
@@ -168,17 +164,17 @@
   color: red;
 }
 .sheet-type-selector .sheet-3waybox:not(:checked) + .sheet-3waybox,
-.sheet-type-selector input[value=character]:not(:checked) ~ span[data-i18n=character_mode],
-.sheet-type-selector input[value=crew]:not(:checked) ~ span[data-i18n=crew_mode],
-.sheet-type-selector input[value=faction][type=radio]:not(:checked) ~ span[data-i18n=faction_mode] {
+.sheet-type-selector input[value="character"]:not(:checked) ~ span[data-i18n="character_mode"],
+.sheet-type-selector input[value="crew"]:not(:checked) ~ span[data-i18n="crew_mode"],
+.sheet-type-selector input[value="faction"][type=radio]:not(:checked) ~ span[data-i18n="faction_mode"] {
   display: none;
 }
-
 /* SETTINGS */
-.sheet-type[value=character] ~ .sheet-settings > :not(.sheet-setting-char), .sheet-type[value=crew] ~ .sheet-settings > :not(.sheet-setting-crew), .sheet-type[value=faction] ~ .sheet-settings > :not(.sheet-setting-faction) {
+.sheet-type[value="character"] ~ .sheet-settings > :not(.sheet-setting-char),
+.sheet-type[value="crew"] ~ .sheet-settings > :not(.sheet-setting-crew),
+.sheet-type[value="faction"] ~ .sheet-settings > :not(.sheet-setting-faction) {
   display: none;
 }
-
 .sheet-settings {
   position: absolute;
   right: 0;
@@ -240,21 +236,17 @@
   padding: 0;
   height: 18px;
 }
-
 /* SETTINGS FOR HIDING STUFF ON THE SHEET */
 .sheet-toothhider[value="0"] ~ .sheet-tooth, .sheet-toothhider[value="0"] ~ .sheet-tooth + span {
   display: none;
 }
-
 .sheet-hider[value="0"] + li, .sheet-hider[value="0"] + div, .sheet-hider[value="0"] + label {
   display: none;
 }
-
 /* Sheet container */
 .sheet-container {
   position: relative;
 }
-
 .sheet-flexwidth[value="0"] ~ .sheet-container {
   width: 860px;
 }
@@ -262,11 +254,11 @@
   min-width: 860px;
   max-width: 1190px;
 }
-
-.sheet-type:not([value=character]) ~ .sheet-type-character, .sheet-type:not([value=crew]) ~ .sheet-type-crew, .sheet-type:not([value=faction]) ~ .sheet-type-faction {
+.sheet-type:not([value="character"]) ~ .sheet-type-character,
+.sheet-type:not([value="crew"]) ~ .sheet-type-crew,
+.sheet-type:not([value="faction"]) ~ .sheet-type-faction {
   display: none;
 }
-
 /* USEFUL GENERAL LAYOUT*/
 .sheet-blackheader {
   background: black;
@@ -279,22 +271,18 @@
 .sheet-blackheader.sheet-hold1 {
   padding-left: 2px;
 }
-
 .sheet-blackheader, .sheet-black-on-grey, .sheet-greyheader {
   font-size: 11px;
   letter-spacing: 1px;
 }
-
 .sheet-blackheader, .sheet-greyheader {
   height: 16px;
   line-height: 15px;
   padding: 1px 2px 0 4px;
 }
-
 .sheet-black-on-grey, .sheet-greyheader {
   background: #b4b4b4;
 }
-
 .sheet-black-on-grey {
   text-align: center;
   position: relative;
@@ -304,14 +292,12 @@
   line-height: 13px;
   z-index: -1;
 }
-
 .sheet-plainheader {
   width: 100%;
   border-top: 2px solid black;
   font-size: 12px;
   line-height: 22px;
 }
-
 .sheet-specialheader {
   background: #b4b4b4;
   height: 20px;
@@ -325,31 +311,24 @@
   padding: 0 5px;
   width: calc(100% + 10px);
 }
-
 .sheet-italic {
   font-style: italic;
 }
-
 .sheet-bold {
   font-weight: bold;
 }
-
 .sheet-greyholder {
   background: #d8d8d8;
 }
-
 .sheet-def-margin {
   margin-top: 10px;
 }
-
 .sheet-small-margin {
   margin-top: 5px;
 }
-
 .sheet-blackborder {
   border-top: 3px solid black;
 }
-
 .sheet-tier {
   background: #d8d8d8;
   height: 16px;
@@ -362,70 +341,55 @@
 .sheet-tier .sheet-checkbox + span {
   margin-right: auto;
 }
-
 /* COLUMN LAYOUT */
 .sheet-flex {
   display: flex;
 }
-
 .sheet-flex-wrap {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
   align-items: flex-start;
 }
-
 .sheet-flex-center {
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .sheet-right-column {
   padding-left: 5px;
 }
-
 .sheet-col47 {
   width: 47%;
 }
-
 .sheet-col53 {
   width: 53%;
 }
-
 .sheet-col37 {
   width: 37%;
 }
-
 .sheet-col24b {
   width: 24.25%;
 }
-
 .sheet-col50 {
   width: 50%;
 }
-
 .sheet-col52b {
   width: 52%;
 }
-
 .sheet-col55 {
   width: 55%;
 }
-
 .sheet-col45 {
   width: 45%;
 }
-
 .sheet-col63 {
   width: 63%;
 }
-
 .sheet-col100 {
   width: 100%;
 }
-
 /* FONT STYLES */
 .sheet-label,
 input[type=text].sheet-label,
@@ -434,18 +398,15 @@ button[type=roll].sheet-label {
   text-transform: uppercase;
   font-weight: bold;
 }
-
 .sheet-uppercase {
   text-transform: uppercase;
 }
-
 .sheet-smallcaps,
 input[type=text].sheet-smallcaps,
 textarea.sheet-smallcaps {
   font-variant: small-caps;
   font-weight: bold;
 }
-
 /* INFO BOXES */
 .sheet-gatherinfo ul {
   padding: 0;
@@ -457,7 +418,6 @@ textarea.sheet-smallcaps {
   font-size: 11px;
   height: 17px;
 }
-
 .sheet-teamworkbox {
   width: 95%;
   padding: 5px;
@@ -466,35 +426,28 @@ textarea.sheet-smallcaps {
   font-size: 12px;
   line-height: 15px;
 }
-
 .sheet-planning .sheet-teamworkbox .sheet-bold::after {
   content: ": ";
 }
-
 .sheet-planningdesc {
   font-size: 12px;
   line-height: 15px;
   text-align: justify;
   margin: 0 5% 5px 0;
 }
-
 /* ITEMS/UPGRADES */
 .sheet-itemcolumn {
   max-width: 249px;
 }
-
 .sheet-itemholder > div {
   padding: 5px;
 }
-
 .sheet-item-container {
   flex-grow: 1;
 }
-
 .sheet-playbookitems {
   background: #d8d8d8;
 }
-
 .sheet-regularitems .repcontainer {
   display: flex;
   flex-wrap: wrap;
@@ -510,7 +463,6 @@ textarea.sheet-smallcaps {
 .sheet-regularitems .sheet-col50, .sheet-regularitems .sheet-col100 {
   position: relative;
 }
-
 .sheet-item {
   display: flex;
   align-items: start;
@@ -554,7 +506,6 @@ textarea.sheet-smallcaps {
 .sheet-item .sheet-upgradecaption {
   margin-top: 3px;
 }
-
 .sheet-floatingbar {
   width: 3px;
   height: 2px;
@@ -562,18 +513,15 @@ textarea.sheet-smallcaps {
   flex: 0 0 auto;
   background: #8c8c8c;
 }
-
 /* Repeating items*/
 .sheet-numboxes[value="0"] ~ .sheet-boxesgeq2,
 .sheet-numboxes[value="1"] ~ .sheet-boxesgeq2,
 .sheet-numboxes[value="2"] ~ .sheet-boxesgeq3 {
   display: none;
 }
-
 .sheet-itemholder .repitem .sheet-boxes-chosen[value="1"] + div, .sheet-itemholder .repitem .sheet-boxes-chosen[value="0"] + div ~ div {
   display: none;
 }
-
 .sheet-numboxes-chooser {
   padding: 1px 0;
   font-size: 11px;
@@ -596,11 +544,9 @@ textarea.sheet-smallcaps {
 .sheet-numboxes-chooser input:checked + span {
   font-weight: bold;
 }
-
 .sheet-show-itemdesc[value="0"] ~ div .sheet-item-description {
   display: none;
 }
-
 .sheet-itemholder .sheet-expand {
   top: 4px;
   right: 1px;
@@ -621,11 +567,9 @@ textarea.sheet-smallcaps {
   font-size: 10px;
   height: 49px;
 }
-
 .sheet-itemholder .sheet-playbookitems .sheet-expand ~ textarea {
   border-color: #aaa;
 }
-
 /* LOGO */
 .sheet-bladeslogo {
   border-right: 12px solid transparent;
@@ -634,7 +578,6 @@ textarea.sheet-smallcaps {
   background-size: 102% auto;
   background-repeat: no-repeat;
 }
-
 .sheet-crewheader {
   color: #808080;
   font-size: 28px;
@@ -642,7 +585,6 @@ textarea.sheet-smallcaps {
   letter-spacing: -2px;
   line-height: 31px;
 }
-
 /* LOAD */
 .sheet-itemheader,
 .sheet-loadheader {
@@ -652,7 +594,6 @@ textarea.sheet-smallcaps {
   padding: 3px 2px 1px 4px;
   align-items: center;
 }
-
 .sheet-loadheader label {
   align-items: center;
   line-height: 11px;
@@ -660,14 +601,12 @@ textarea.sheet-smallcaps {
   margin-left: auto;
   text-transform: lowercase;
 }
-
 .sheet-loadnumber {
   font-weight: bold;
   font-family: "Times New Roman", Times, serif;
   font-size: 12px;
   margin: 0 3px 0 4px;
 }
-
 .sheet-itemheader > .sheet-label {
   margin-right: 4px;
 }
@@ -684,22 +623,18 @@ textarea.sheet-smallcaps {
 .sheet-itemheader .sheet-text-button:hover input[type=checkbox] + span {
   color: red;
 }
-
 /* ADVANCEMENT BOX*/
 .sheet-advancement-header {
   letter-spacing: 2px;
 }
-
 .sheet-markxp {
   margin-right: auto;
 }
-
 .sheet-xpholder {
   letter-spacing: 0;
   font-size: 0;
   margin-left: 8px;
 }
-
 .sheet-advancement-desc li, .sheet-warblurb li {
   font-size: 13px;
   line-height: 16px;
@@ -712,7 +647,6 @@ textarea.sheet-smallcaps {
 .sheet-advancement-desc li.sheet-nondot::before, .sheet-warblurb li.sheet-nondot::before {
   display: none;
 }
-
 .sheet-advancement-desc {
   width: 99%;
   background: #d8d8d8;
@@ -727,7 +661,6 @@ textarea.sheet-smallcaps {
   min-height: 16px;
   padding: 0 2px;
 }
-
 /* PLAYBOOK */
 .sheet-playbook {
   align-items: center;
@@ -766,21 +699,18 @@ textarea.sheet-smallcaps {
   text-align: center;
   padding: 3px;
 }
-
 .sheet-type-character .sheet-playbook input[type=text] {
   width: calc(64% - 10px);
 }
 .sheet-type-character .sheet-playbook textarea {
   width: calc(36% + 6px);
 }
-
 .sheet-type-crew .sheet-playbook input[type=text] {
   width: calc(74% - 7px);
 }
 .sheet-type-crew .sheet-playbook textarea {
   width: calc(26% + 3px);
 }
-
 /* HEADER */
 .sheet-header {
   flex-wrap: wrap;
@@ -800,10 +730,10 @@ textarea.sheet-smallcaps {
   min-height: 22px;
   color: #c43c35;
 }
-.sheet-header input[type=hidden][value=""] + div > .sheet-title::after {
+.sheet-header input[type="hidden"][value=""] + div > .sheet-title::after {
   content: ": ";
 }
-.sheet-header input[type=hidden]:not([value=""]) + div > .sheet-info {
+.sheet-header input[type="hidden"]:not([value=""]) + div > .sheet-info {
   display: none;
 }
 .sheet-header .sheet-col55:not(:first-child) {
@@ -822,7 +752,10 @@ textarea.sheet-smallcaps {
 .sheet-header .sheet-info {
   font-size: 8px;
 }
-.sheet-header .sheet-vice-input:not([value=normal]) ~ .sheet-normal, .sheet-header .sheet-vice-input:not([value=ghost]) ~ .sheet-ghost, .sheet-header .sheet-vice-input:not([value=hull]) ~ .sheet-hull, .sheet-header .sheet-vice-input:not([value=vampire]) ~ .sheet-vampire {
+.sheet-header .sheet-vice-input:not([value="normal"]) ~ .sheet-normal,
+.sheet-header .sheet-vice-input:not([value="ghost"]) ~ .sheet-ghost,
+.sheet-header .sheet-vice-input:not([value="hull"]) ~ .sheet-hull,
+.sheet-header .sheet-vice-input:not([value="vampire"]) ~ .sheet-vampire {
   display: none;
 }
 .sheet-header .sheet-vice {
@@ -835,7 +768,6 @@ textarea.sheet-smallcaps {
   font-size: 130%;
   line-height: 0;
 }
-
 /* CLOCKS */
 .sheet-clocks .repcontainer {
   display: grid;
@@ -863,7 +795,6 @@ textarea.sheet-smallcaps {
   margin-right: 2px;
   min-height: 28px;
 }
-
 .sheet-clock-container {
   position: relative;
   padding: 2px;
@@ -889,7 +820,6 @@ textarea.sheet-smallcaps {
 .sheet-clock-container .sheet-all, .sheet-clock-container .sheet-zero {
   display: block;
 }
-
 .sheet-clock {
   border: 2px solid black;
   border-radius: 50%;
@@ -901,8 +831,7 @@ textarea.sheet-smallcaps {
   top: 0;
   z-index: -1;
 }
-
-[class^=sheet-spoke] {
+[class^="sheet-spoke"] {
   height: 44px;
   width: 2px;
   position: absolute;
@@ -911,55 +840,42 @@ textarea.sheet-smallcaps {
   top: 0;
   background: black;
 }
-
 .sheet-spoke-0 {
   transform: translateX(21px);
 }
-
 .sheet-spoke-30 {
   transform: translateX(21px) rotate(30deg);
 }
-
 .sheet-spoke-36 {
   transform: translateX(21px) rotate(36deg);
 }
-
 .sheet-spoke-45 {
   transform: translateX(21px) rotate(45deg);
 }
-
 .sheet-spoke-60 {
   transform: translateX(21px) rotate(60deg);
 }
-
 .sheet-spoke-72 {
   transform: translateX(21px) rotate(72deg);
 }
-
 .sheet-spoke-90 {
   transform: translateX(21px) rotate(90deg);
 }
-
 .sheet-spoke-108 {
   transform: translateX(21px) rotate(108deg);
 }
-
 .sheet-spoke-120 {
   transform: translateX(21px) rotate(120deg);
 }
-
 .sheet-spoke-135 {
   transform: translateX(21px) rotate(135deg);
 }
-
 .sheet-spoke-144 {
   transform: translateX(21px) rotate(144deg);
 }
-
 .sheet-spoke-150 {
   transform: translateX(21px) rotate(150deg);
 }
-
 .sheet-size-choice {
   display: flex;
   flex: 0 0 auto;
@@ -972,24 +888,21 @@ textarea.sheet-smallcaps {
   align-content: space-evenly;
   flex-wrap: wrap;
 }
-
 /* Faction clocks */
 .sheet-input-clocks-only[value="0"] + .sheet-type-faction .sheet-clocks .repcontainer {
-  grid-column-gap: 0.7%;
+  grid-column-gap: .7%;
   grid-template-columns: repeat(3, 1fr);
 }
-
 .sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-clocks {
   width: 100%;
 }
 .sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-clocks .repcontainer {
-  grid-column-gap: 0.4%;
+  grid-column-gap: .4%;
   grid-template-columns: repeat(4, 1fr);
 }
 .sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-factiontitle, .sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-factions, .sheet-input-clocks-only[value="1"] + .sheet-type-faction .sheet-notes {
   display: none;
 }
-
 .sheet-size[value="4"] ~ .sheet-clock-container input:not(.sheet-zero) {
   height: 20px;
   width: 20px;
@@ -1003,7 +916,6 @@ textarea.sheet-smallcaps {
 .sheet-size[value="4"] ~ .sheet-clock-container input[value="3"] {
   margin-top: 20px;
 }
-
 .sheet-size[value="6"] ~ .sheet-clock-container input:not(.sheet-zero) {
   height: 17px;
   width: 12px;
@@ -1032,7 +944,6 @@ textarea.sheet-smallcaps {
   margin-left: 8px;
   transform: rotate(330deg);
 }
-
 .sheet-size[value="8"] ~ .sheet-clock-container input:not(.sheet-zero) {
   height: 14px;
   width: 10px;
@@ -1069,7 +980,6 @@ textarea.sheet-smallcaps {
   margin-left: 9px;
   transform: rotate(337.5deg);
 }
-
 .sheet-size[value="10"] ~ .sheet-clock-container input:not(.sheet-zero) {
   height: 14px;
   width: 9px;
@@ -1114,7 +1024,6 @@ textarea.sheet-smallcaps {
   transform: rotate(342deg);
   margin-left: 12px;
 }
-
 .sheet-size[value="12"] ~ .sheet-clock-container input:not(.sheet-zero) {
   height: 12px;
   width: 8px;
@@ -1167,7 +1076,6 @@ textarea.sheet-smallcaps {
   margin-left: 12px;
   transform: rotate(345deg);
 }
-
 /* End positioning */
 .sheet-size[value="4"] ~ .sheet-clock-container .sheet-4clock,
 .sheet-size[value="6"] ~ .sheet-clock-container .sheet-6clock,
@@ -1176,17 +1084,14 @@ textarea.sheet-smallcaps {
 .sheet-size[value="12"] ~ .sheet-clock-container .sheet-12clock {
   display: block;
 }
-
 .sheet-size:not([value=""]) ~ .sheet-size-choice,
 .sheet-clocks .sheet-size[value=""] ~ .sheet-broadcast-button,
 .sheet-size[value=""] ~ .sheet-clock-container {
   display: none;
 }
-
 .sheet-clock-container .sheet-input-progress[value="0"]:checked ~ .sheet-clock {
   background: white;
 }
-
 .sheet-size[value="4"] ~ .sheet-clock-container .sheet-input-progress[value="1"]:checked ~ .sheet-clock {
   background-image: linear-gradient(90deg, white 50%, transparent 50%), linear-gradient(180deg, red 50%, white 50%);
 }
@@ -1199,7 +1104,6 @@ textarea.sheet-smallcaps {
 .sheet-size[value="4"] ~ .sheet-clock-container .sheet-input-progress[value="4"]:checked ~ .sheet-clock {
   background: red;
 }
-
 .sheet-size[value="6"] ~ .sheet-clock-container .sheet-input-progress[value="1"]:checked ~ .sheet-clock {
   background-image: linear-gradient(90deg, white 50%, transparent 50%), linear-gradient(150deg, red 50%, white 50%);
 }
@@ -1218,7 +1122,6 @@ textarea.sheet-smallcaps {
 .sheet-size[value="6"] ~ .sheet-clock-container .sheet-input-progress[value="6"]:checked ~ .sheet-clock {
   background: red;
 }
-
 .sheet-size[value="8"] ~ .sheet-clock-container .sheet-input-progress[value="1"]:checked ~ .sheet-clock {
   background-image: linear-gradient(90deg, white 50%, transparent 50%), linear-gradient(135deg, red 50%, white 50%);
 }
@@ -1243,7 +1146,6 @@ textarea.sheet-smallcaps {
 .sheet-size[value="8"] ~ .sheet-clock-container .sheet-input-progress[value="8"]:checked ~ .sheet-clock {
   background: red;
 }
-
 .sheet-size[value="10"] ~ .sheet-clock-container .sheet-input-progress[value="1"]:checked ~ .sheet-clock {
   background-image: linear-gradient(90deg, white 50%, transparent 50%), linear-gradient(126deg, red 50%, white 50%);
 }
@@ -1274,7 +1176,6 @@ textarea.sheet-smallcaps {
 .sheet-size[value="10"] ~ .sheet-clock-container .sheet-input-progress[value="10"]:checked ~ .sheet-clock {
   background: red;
 }
-
 .sheet-size[value="12"] ~ .sheet-clock-container .sheet-input-progress[value="1"]:checked ~ .sheet-clock {
   background-image: linear-gradient(90deg, white 50%, transparent 50%), linear-gradient(120deg, red 50%, white 50%);
 }
@@ -1311,7 +1212,6 @@ textarea.sheet-smallcaps {
 .sheet-size[value="12"] ~ .sheet-clock-container .sheet-input-progress[value="12"]:checked ~ .sheet-clock {
   background: red;
 }
-
 /* TEXT INPUTS FOR TRAUMA AND CLOCKS */
 .sheet-text-button {
   font-weight: bold;
@@ -1319,7 +1219,6 @@ textarea.sheet-smallcaps {
 .sheet-text-button input:checked + span {
   color: red;
 }
-
 .sheet-size-choice > .sheet-text-button {
   height: 17px;
   padding: 3px;
@@ -1327,7 +1226,6 @@ textarea.sheet-smallcaps {
   margin: auto;
   justify-content: center;
 }
-
 /* TEETH */
 input.sheet-stresstooth,
 input.sheet-xptooth,
@@ -1337,12 +1235,10 @@ input.sheet-holdtooth,
 .sheet-holdtooth + span {
   height: 25px;
 }
-
 input.sheet-regulartooth,
 .sheet-regulartooth + span {
   height: 13px;
 }
-
 input.sheet-tooth {
   width: 12px;
   margin-right: -12px;
@@ -1351,7 +1247,6 @@ input.sheet-tooth:last-of-type {
   width: 8px;
   margin-right: -8px;
 }
-
 .sheet-tooth + span {
   width: 8px;
   background-size: cover;
@@ -1360,47 +1255,38 @@ input.sheet-tooth:last-of-type {
 .sheet-tooth + span:last-child {
   margin-right: 0 !important;
 }
-
 .sheet-tooth:hover + span {
   opacity: 0.7;
 }
-
 .sheet-xptooth + span {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/xptooth-red.png");
   margin-right: 4px;
 }
-
 .sheet-tooth:checked ~ .sheet-xptooth + span {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/xptooth-white.png");
 }
-
 .sheet-stresstooth[type=radio] + span,
 .sheet-stresstooth[type=checkbox]:checked + span,
 .sheet-holdtooth:checked + span {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/stresstooth-red.png");
 }
-
 .sheet-stresstooth[type=checkbox] + span,
 .sheet-tooth:checked ~ .sheet-stresstooth[type=radio] + span,
 .sheet-holdtooth + span {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/stresstooth-white.png");
 }
-
 .sheet-regulartooth + span {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/shorttooth-red.png");
 }
-
 .sheet-tooth:checked ~ .sheet-regulartooth + span {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/shorttooth-grey.png");
 }
-
 input.sheet-zero {
   width: 13px;
   height: 13px;
   margin-right: -13px;
   vertical-align: top;
 }
-
 .sheet-zero + span {
   height: 11px;
   width: 11px;
@@ -1412,7 +1298,6 @@ input.sheet-zero {
   border-radius: 50%;
   position: relative;
 }
-
 .sheet-zero + span::before, .sheet-zero + span::after {
   position: absolute;
   width: 1px;
@@ -1421,49 +1306,40 @@ input.sheet-zero {
   background: black;
   height: 11px;
 }
-
 .sheet-zero + span::after {
   transform: translate(4px, -1px) rotate(135deg);
 }
-
 .sheet-zero + span::before {
   transform: translate(4px, -1px) rotate(45deg);
 }
-
 .sheet-zero:checked + span {
   visibility: hidden;
 }
-
 .sheet-coin .sheet-zero + span {
   position: relative;
   bottom: 1px;
   margin-right: auto;
 }
-
 .sheet-stash input.sheet-zero, .sheet-stash .sheet-zero + span {
   position: absolute;
   left: -3px;
   top: 3px;
 }
-
 .sheet-crewcoin input.sheet-zero, .sheet-crewcoin .sheet-zero + span {
   position: absolute;
   left: -9px;
   top: 3px;
 }
-
 .sheet-stress2 input.sheet-zero, .sheet-stress2 .sheet-zero + span, .sheet-rep2 input.sheet-zero, .sheet-rep2 .sheet-zero + span, .sheet-heat2 input.sheet-zero, .sheet-heat2 .sheet-zero + span {
   position: absolute;
   left: -13px;
   top: 13px;
 }
-
 /* TURF RADIOS */
 .sheet-turfbox input[type=radio] {
   height: 12px;
   width: calc(100%/12);
 }
-
 .sheet-turf-input[value="1"] ~ input[type=radio].sheet-turf1 + span,
 .sheet-turf-input[value="2"] ~ input[type=radio].sheet-turf2 + span,
 .sheet-turf-input[value="3"] ~ input[type=radio].sheet-turf3 + span,
@@ -1472,11 +1348,9 @@ input.sheet-zero {
 .sheet-turf-input[value="6"] ~ input[type=radio].sheet-turf6 + span {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/stresstooth-black.png");
 }
-
 .sheet-tooth:checked ~ .sheet-stresstooth.sheet-turf6 + span {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/stresstooth-halfgrey.png");
 }
-
 /* SPECIAL ABILITIES*/
 .sheet-specialability,
 .sheet-friend-contact {
@@ -1484,16 +1358,13 @@ input.sheet-zero {
   width: 100%;
   align-items: start;
 }
-
 .sheet-specialability {
   padding: 4px;
 }
-
 .sheet-friend-contact {
   padding: 6px 4px;
   align-items: center;
 }
-
 .sheet-abilityname {
   width: calc(28% - 22px);
   font-size: 13px;
@@ -1502,7 +1373,6 @@ input.sheet-zero {
   line-height: 17px;
   padding: 0 1px;
 }
-
 .sheet-abilitydesc {
   width: 72%;
   min-height: 32px;
@@ -1511,7 +1381,6 @@ input.sheet-zero {
   padding: 2px 1px;
   text-align: justify;
 }
-
 /* FRIENDS/CONTACTS */
 .sheet-friends input.sheet-expand, .sheet-contacts input.sheet-expand {
   top: 11px;
@@ -1542,7 +1411,6 @@ input.sheet-zero {
   min-height: 18px;
   border-bottom: 1px solid #b4b4b4;
 }
-
 .sheet-friend-contact .sheet-auto-expand {
   font-size: 12px;
   color: #555;
@@ -1551,15 +1419,13 @@ input.sheet-zero {
   flex: 1 1 0;
   padding: 2px 0 2px 3px;
 }
-
 /* HARM */
 .sheet-harm {
   position: relative;
 }
-
 .sheet-harmbody {
   display: grid;
-  grid: 52px/12px auto auto 59px;
+  grid: 52px / 12px auto auto 59px;
   font-weight: 800;
   text-transform: uppercase;
   text-align: center;
@@ -1596,13 +1462,11 @@ input.sheet-zero {
 .sheet-harmbody textarea + textarea {
   border-left: 1px solid #d8d8d8;
 }
-
 /* HEALING AND ARMOR */
 .sheet-armor .sheet-blackheader, .sheet-healing .sheet-blackheader {
   text-align: center;
   padding: 1px 0 0;
 }
-
 .sheet-healing {
   position: relative;
 }
@@ -1615,7 +1479,6 @@ input.sheet-zero {
 .sheet-healing .sheet-clock-container {
   margin: 0 auto;
 }
-
 .sheet-armor label {
   margin: 3px 0 3px 10px;
   height: 18px;
@@ -1635,18 +1498,15 @@ input.sheet-zero {
   margin: 3px;
   order: 2;
 }
-
 /* COIN */
 .sheet-coin-and-stash {
   width: 96%;
   margin: 1px 0 0 4%;
 }
-
 .sheet-coinrow .sheet-label {
   font-size: 11px;
   margin-right: auto;
 }
-
 .sheet-coin {
   border-bottom: 1px solid #8c8c8c;
   border-right: 1px solid #8c8c8c;
@@ -1655,7 +1515,6 @@ input.sheet-zero {
   padding: 1px 3px 0 0;
   align-items: center;
 }
-
 .sheet-stashbutton-holder {
   border-top: 1px solid #8c8c8c;
   display: flex;
@@ -1665,7 +1524,6 @@ input.sheet-zero {
   height: 19px;
   padding-bottom: 1px;
 }
-
 /* STASH */
 .sheet-stash {
   padding: 4px 0 0 10px;
@@ -1673,27 +1531,23 @@ input.sheet-zero {
   margin-bottom: -10px;
   position: relative;
 }
-
 /* CREW COIN */
 .sheet-crewcoin-coins {
   padding: 4px 0 0 3px;
   position: relative;
 }
-
 .sheet-crewcoin-desc {
   font-size: 10px;
   line-height: 14px;
   padding-left: 3px;
   font-style: italic;
 }
-
 .sheet-crewcoinbar {
   border-left: 1px solid #c7c7c7;
   height: 15px;
   width: 3px;
   margin: -1px auto 0;
 }
-
 /* LEFT-FILLED RADIO BOXES */
 .sheet-crewcoin input.sheet-radiobox {
   width: 12px;
@@ -1708,7 +1562,6 @@ input.sheet-zero {
 .sheet-crewcoin input:checked ~ .sheet-radiobox.sheet-vaultcoin + span {
   border-color: #c7c7c7;
 }
-
 .sheet-coin-and-stash input.sheet-radiobox {
   width: 13px;
   height: 13px;
@@ -1720,19 +1573,15 @@ input.sheet-zero {
   height: 12px;
   vertical-align: top;
 }
-
 .sheet-coinrow .sheet-radiobox + span {
   margin-right: auto;
 }
-
 .sheet-radiobox:hover + span {
   opacity: 0.7;
 }
-
 .sheet-radiobox:last-of-type + span {
   margin-right: 0;
 }
-
 .sheet-coin .sheet-radiobox + span, .sheet-crewcoin .sheet-radiobox + span {
   background: red;
   border: 1px solid black;
@@ -1740,7 +1589,6 @@ input.sheet-zero {
 .sheet-coin input:checked ~ .sheet-radiobox + span, .sheet-crewcoin input:checked ~ .sheet-radiobox + span {
   background: white;
 }
-
 .sheet-stash .sheet-radiobox + span {
   background: black;
   margin-right: calc((100% - 126px)/9);
@@ -1762,7 +1610,6 @@ input.sheet-zero {
   position: relative;
   top: -2px;
 }
-
 /* HUNTING GROUNDS */
 .sheet-hunting-grounds .sheet-plainheader {
   min-height: 20px;
@@ -1773,12 +1620,10 @@ input.sheet-zero {
   min-height: 32px;
   line-height: 16px;
 }
-
 /* BONUS DIE SECTION */
 .sheet-bonusdie .sheet-label {
   font-size: 12px;
 }
-
 .sheet-bonusdieplus {
   width: 10%;
   background: black;
@@ -1787,7 +1632,6 @@ input.sheet-zero {
   line-height: 1;
   font-weight: bold;
 }
-
 .sheet-bonusdietext {
   background: #d8d8d8;
   width: 90%;
@@ -1796,7 +1640,6 @@ input.sheet-zero {
   line-height: 14px;
   text-align: center;
 }
-
 /* REPEATING SECTION CONTROLS */
 /* REPEATING SECTION CONTROLS */
 .repcontrol {
@@ -1832,55 +1675,43 @@ input.sheet-zero {
 .repcontrol button.repcontrol_edit::after, .repcontrol button.repcontrol_add::after {
   font-size: 12px;
 }
-
 .repcontainer.editmode + .repcontrol button.repcontrol_edit::after {
   content: ")";
 }
-
 .sheet-free-repcontrol .repcontrol {
   margin-top: 3px;
 }
-
 .itemcontrol {
   z-index: 20;
 }
-
 .sheet-itemholder .itemcontrol .btn {
   padding: 0px 7px;
   line-height: 16px;
 }
-
 .sheet-factions .itemcontrol .btn {
   padding: 1px 7px;
 }
-
 /* STRESS, REP, et cetera */
 .sheet-rep-and-hold, .sheet-heat-and-vault {
   justify-content: space-between;
 }
-
 .sheet-hold {
   width: 53%;
 }
-
 .sheet-stress, .sheet-rep, .sheet-hold, .sheet-heat {
   height: 25px;
 }
-
 .sheet-stress1 {
   flex: 1 0 auto;
 }
-
 .sheet-stress2 {
   flex: 2 1 136px;
   position: relative;
 }
-
 .sheet-stress3 {
   flex: 1 0 68px;
   text-align: center;
 }
-
 .sheet-stress4 {
   flex: 2 0 217px;
   line-height: 13px;
@@ -1891,29 +1722,25 @@ input.sheet-zero {
 .sheet-stress4 div {
   justify-content: space-between;
 }
-.sheet-stress4 .sheet-input:not([value=normal]) ~ .sheet-normal,
-.sheet-stress4 .sheet-input:not([value=ghost]) ~ .sheet-ghost,
-.sheet-stress4 .sheet-input:not([value=hull]) ~ .sheet-hull {
+.sheet-stress4 .sheet-input:not([value="normal"]) ~ .sheet-normal,
+.sheet-stress4 .sheet-input:not([value="ghost"]) ~ .sheet-ghost,
+.sheet-stress4 .sheet-input:not([value="hull"]) ~ .sheet-hull {
   display: none;
 }
 .sheet-stress4 .sheet-ghost, .sheet-stress4 .sheet-hull {
   letter-spacing: 1px;
 }
-
 .sheet-traumaholder, .sheet-wantedholder {
   height: 13px;
   padding-left: 2px;
 }
-
 .sheet-rep1 {
   width: 33px;
 }
-
 .sheet-rep2 {
   width: 134px;
   position: relative;
 }
-
 .sheet-turfbox {
   display: flex;
   position: absolute;
@@ -1921,11 +1748,9 @@ input.sheet-zero {
   z-index: 2;
   width: 100%;
 }
-
 .sheet-turfzero-holder {
   margin-left: 2px;
 }
-
 .sheet-hold > div,
 .sheet-hold > label,
 .sheet-heat > div,
@@ -1933,36 +1758,30 @@ input.sheet-zero {
 .sheet-crewcoin2 {
   flex-grow: 1;
 }
-
 .sheet-heat2 {
   width: 107px;
   position: relative;
 }
-
 .sheet-crewcoin1 {
   width: 26%;
 }
-
 .sheet-regulartooth + span,
 .sheet-rep .sheet-tooth + span,
 .sheet-heat2 .sheet-tooth + span,
 .sheet-stress2 .sheet-tooth + span {
   margin-right: auto;
 }
-
 .sheet-extra-teeth:checked + .sheet-tooth + span {
   margin-right: 0;
 }
 .sheet-extra-teeth:checked + .sheet-tooth ~ .sheet-tooth, .sheet-extra-teeth:checked + .sheet-tooth + span ~ span {
   display: none;
 }
-
 /* small fixes */
 .sheet-rep input.sheet-tooth {
   width: 11px;
   margin-right: -11px;
 }
-
 /* NOTES */
 .sheet-notes {
   margin-left: 1%;
@@ -1975,11 +1794,9 @@ input.sheet-zero {
   height: 378px;
   min-height: 378px;
 }
-
 .sheet-type-character .sheet-notes, .sheet-type-crew .sheet-notes {
   margin-top: 15px;
 }
-
 /* LOAD CHECKBOXES */
 .sheet-loadheader .sheet-checkbox + span {
   border: 1px solid black;
@@ -1988,7 +1805,6 @@ input.sheet-zero {
   height: 10px;
   background: white;
 }
-
 /* ROLL BUTTONS */
 button[type=roll].sheet-rollbutton {
   display: flex;
@@ -1996,177 +1812,143 @@ button[type=roll].sheet-rollbutton {
   margin: 0;
   padding: 0;
 }
-
 .sheet-attribute-title button[type=roll].sheet-rollbutton {
   max-width: calc(100% - 97px);
   line-height: inherit;
   color: inherit;
   font-size: 13px;
 }
-
 .sheet-action button[type=roll].sheet-rollbutton {
   letter-spacing: 1px;
   line-height: 13px;
   flex: 0 0 86px;
   font-size: 13px;
 }
-
 .sheet-coinrow button[type=roll].sheet-rollbutton {
   font-size: 11px;
   color: #777;
 }
-
 .sheet-blackheader button[type=roll].sheet-rollbutton {
   margin: auto;
 }
-
 button[type=roll].sheet-borderbutton {
   color: #777;
   font-size: 13px;
   border-color: #b4b4b4;
 }
-
 button[type=roll].sheet-vicebutton {
   float: right;
   margin: 5px 3px -5px auto;
   line-height: 13px;
   padding: 4px;
 }
-
 button[type=roll].sheet-fortunebutton {
   width: 100%;
   height: 30px;
   margin: 10px 0 0;
 }
-
 .sheet-type-faction button[type=roll].sheet-fortunebutton {
   width: 100px;
   margin: 0;
 }
-
 button[type=roll].sheet-engagementbutton {
   width: calc(100% - 20px);
   padding: 2px 5px;
   height: 30px;
   margin: 10px 10px 0;
 }
-
 button[type=roll].sheet-rollbutton:hover {
   color: red;
 }
-
 button[type=roll].sheet-borderbutton:hover {
   color: black;
   border-color: black;
 }
-
 /* CHECKBOXES */
 .sheet-checkbox {
   margin-right: -12px;
 }
-
 input.sheet-checkbox, .sheet-checkbox + span {
   height: 12px;
   width: 12px;
   flex: 0 0 auto;
 }
-
 .sheet-checkbox + span {
   border: 1px solid #8c8c8c;
 }
-
 .sheet-checkbox:checked + span {
   background: red;
 }
-
 .sheet-checkbox:hover + span {
   opacity: 0.7;
 }
-
 .sheet-squarebox + span {
   background: transparent;
   margin-right: 3px;
 }
-
 .sheet-circlebox + span {
   border-radius: 50%;
   background: white;
 }
-
 input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-small + span {
   height: 9px;
   width: 9px;
 }
-
 .sheet-checkbox.sheet-squarebox-small:checked + span {
   background: black;
 }
-
 .sheet-claimbridge {
   position: relative;
 }
-
 .sheet-claimbridge input, .sheet-claimbridge span {
   width: 100%;
   height: 100%;
 }
-
 .sheet-claimbridge input:checked + span {
   background: #d8d8d8;
 }
-
 /* Change text colour when boxes are checked*/
 .sheet-specialability .sheet-checkbox:checked ~ .sheet-abilityname,
 .sheet-item .sheet-checkbox:checked ~ .sheet-itemname,
-.sheet-friend .sheet-friendstate[value=up] ~ .sheet-auto-expand {
+.sheet-friend .sheet-friendstate[value="up"] ~ .sheet-auto-expand {
   color: red;
 }
-
 .sheet-friend-contact .sheet-friendstate:not([value="0"]) ~ .sheet-auto-expand {
   font-weight: bold;
 }
-
-.sheet-friend .sheet-friendstate[value=down] ~ .sheet-auto-expand,
+.sheet-friend .sheet-friendstate[value="down"] ~ .sheet-auto-expand,
 .sheet-contact .sheet-friendstate[value="1"] ~ .sheet-auto-expand {
   color: #333;
 }
-
 /* specific adjustments */
 .sheet-specialability .sheet-checkbox,
 .sheet-specialability .sheet-checkbox + span {
   margin-top: 3px;
 }
-
 .sheet-actions input.sheet-checkbox {
   height: 20px;
   width: 16px;
   margin-right: -14px;
 }
-
 .sheet-actions .sheet-checkbox + span {
   height: 11px;
   width: 11px;
   border: none;
   margin-right: calc(7px + (100% - 173px)/8);
 }
-
 .sheet-action .sheet-checkbox + span:first-of-type {
   margin-right: 6px;
 }
-
 /* Fake radios */
 .sheet-checkbox.sheet-fakeradio + span {
   background: red;
 }
-
 .sheet-action .sheet-fakeradio:checked ~ .sheet-fakeradio + span {
   background: #c7c7c7;
 }
-
 .sheet-tier .sheet-fakeradio:checked ~ .sheet-fakeradio + span {
   background: white;
 }
-
 /* Friend triangles */
 .sheet-friend-contact .sheet-checkbox + span {
   width: 0;
@@ -2179,7 +1961,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
   height: 12px;
   position: relative;
 }
-
 .sheet-friend label.sheet-up {
   margin-right: 1px;
   top: -1px;
@@ -2201,7 +1982,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 .sheet-friend label.sheet-down .sheet-checkbox:checked + span {
   border-top-color: black;
 }
-
 .sheet-contact label {
   top: 1px;
 }
@@ -2212,13 +1992,11 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 .sheet-contact label .sheet-checkbox:checked + span {
   border-left-color: black;
 }
-
 /* ACTION RATINGS */
 .sheet-attribute,
 .sheet-cohort {
   margin-bottom: 10px;
 }
-
 .sheet-attribute-title,
 .sheet-cohort-title {
   height: 21px;
@@ -2229,42 +2007,34 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
   align-items: center;
   justify-content: space-between;
 }
-
 .sheet-attribute-xp-box {
   width: 97px;
   justify-content: flex-end;
   height: 100%;
 }
-
 .sheet-actioncolumn {
   flex-grow: 1;
 }
-
 .sheet-actions {
   padding-left: 2px;
 }
-
 .sheet-action {
   height: 22px;
   align-items: center;
 }
-
 .sheet-action:first-child {
   height: 34px;
   padding-top: 12px;
 }
-
 .sheet-divider {
   margin-right: calc(5px + (100% - 173px)/12);
   border-right: 1px solid black;
   height: inherit;
 }
-
 .sheet-action:first-child .sheet-divider {
   position: relative;
   top: -6px;
 }
-
 /* COHORTS */
 .sheet-cohort-title {
   font-size: 11px;
@@ -2272,7 +2042,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 .sheet-cohort-title input[type=text] {
   width: calc(100% - 40px);
 }
-
 .sheet-cohort-info {
   background: black;
   height: 13px;
@@ -2301,21 +2070,17 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
   margin: 0;
   -webkit-appearance: none;
 }
-
 .sheet-cohort-quality-label {
   flex: 0 0 auto;
 }
-
 .sheet-cohort-condition {
   justify-content: space-between;
 }
-
 .sheet-cohort-condition-name {
   font-size: 7.5px;
   margin-right: 2px;
   z-index: -1;
 }
-
 .sheet-cohort-dropdown {
   background: black;
   position: relative;
@@ -2343,7 +2108,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
 .sheet-cohort-dropdown input[type=radio]:checked + span {
   color: red;
 }
-
 .sheet-cohort-edgeflaw {
   font-size: 9px;
   line-height: 10px;
@@ -2359,7 +2123,6 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
   min-height: 14px;
   padding: 2px 3px;
 }
-
 .sheet-cohort-description {
   font-size: 9px;
   padding: 1px 0;
@@ -2367,29 +2130,24 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
   height: 50px;
   border-bottom: 1px solid #d8d8d8;
 }
-
 /* CLAIMS */
 .sheet-claims {
   margin-top: 15px;
 }
-
 .sheet-claimsrow {
   align-items: center;
 }
 .sheet-claimsrow > div, .sheet-claimsrow > label {
   flex: 0 0 auto;
 }
-
 .sheet-claimbox,
 .sheet-lairbox {
   height: 66px;
 }
-
 .sheet-claims-seprow {
   height: 12px;
   justify-content: space-between;
 }
-
 .sheet-lairbox {
   background: #777;
   width: 18.4%;
@@ -2397,19 +2155,16 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
   color: white;
   letter-spacing: 1px;
 }
-
 .sheet-claims-horisep {
   height: 12px;
   display: flex;
   width: 2%;
 }
-
 .sheet-claims-vertsep {
   display: flex;
   width: 12px;
   margin: 0 calc(9.2% - 6px);
 }
-
 .sheet-claimbox {
   background: #d8d8d8;
   width: 18.4%;
@@ -2436,11 +2191,9 @@ input.sheet-checkbox.sheet-squarebox-small, .sheet-checkbox.sheet-squarebox-smal
   bottom: 1px;
   left: 1px;
 }
-
 input[value="1"] + .sheet-claimbox {
   background: #c7c7c7;
 }
-
 /* STRICTURES */
 .sheet-strictures {
   font-size: 11px;
@@ -2456,51 +2209,42 @@ input[value="1"] + .sheet-claimbox {
 .sheet-strictures span.sheet-label::after {
   content: ":";
 }
-
 /* ALCHEMICALS */
 .sheet-title-checkbox ~ div {
   height: auto;
   transition: all 0.2s;
   overflow: hidden;
 }
-
 .sheet-title-checkbox:not(:checked) ~ div {
   height: 0;
 }
-
 input.sheet-title-checkbox {
   width: 100%;
   vertical-align: top;
   margin-right: -100%;
   height: 24px;
 }
-
 .sheet-title-checkbox:hover + span {
   color: red;
 }
-
 .sheet-alchemicals {
   padding: 0 5px;
   line-height: 16px;
 }
-
 .sheet-bandolier-desc {
   line-height: 12px;
   margin-top: 2px;
   font-size: 10px;
   font-style: italic;
 }
-
 .sheet-bandoliers-name {
   margin-right: 7px;
   font-size: 12px;
   line-height: 18px;
 }
-
 .sheet-bandolier input:nth-of-type(3) + span {
   margin-right: 8px;
 }
-
 .sheet-alchemicals .repcontainer {
   display: flex;
   flex-flow: row wrap;
@@ -2543,7 +2287,7 @@ input.sheet-title-checkbox {
   left: -100%;
 }
 .sheet-alchemicals .sheet-alchemicals-expand + span::before {
-  content: "■";
+  content: '■';
   font-family: serif;
 }
 .sheet-alchemicals .sheet-alchemicals-expand:checked + span {
@@ -2562,29 +2306,24 @@ input.sheet-title-checkbox {
   justify-content: space-between;
   align-items: start;
 }
-
 /* FRAME */
 .sheet-frame textarea {
   font-size: 11px;
   height: 40px;
 }
-
 /* FACTIONS PAGE */
 .sheet-factions {
   justify-content: space-between;
 }
-
 .sheet-factiontitle {
   margin-bottom: 10px;
   align-items: center;
 }
-
 .sheet-factiontitle input[type=text] {
   font-size: 26px;
   margin-right: auto;
   width: 60%;
 }
-
 .sheet-factions-header {
   width: 100%;
   height: 24px;
@@ -2592,22 +2331,18 @@ input.sheet-title-checkbox {
   line-height: 14px;
   background: #c7c7c7;
 }
-
 .sheet-factions-header input[type=text] {
   padding-left: 3px;
 }
-
 .sheet-factions-header span {
   font-size: 7px;
 }
-
 input.sheet-expand, .sheet-expand + span {
   position: absolute;
   width: 7px;
   height: 10px;
   font-size: 8px;
 }
-
 .sheet-type-faction .sheet-expand {
   left: -7px;
   top: 6px;
@@ -2622,7 +2357,6 @@ input.sheet-expand, .sheet-expand + span {
 .sheet-type-faction .sheet-expand:checked + span::before {
   content: "▼";
 }
-
 .sheet-faction {
   border-bottom: 1px solid #d8d8d8;
 }
@@ -2643,32 +2377,26 @@ input.sheet-expand, .sheet-expand + span {
   font-size: 12px;
   padding: 2px 1px;
 }
-
 .sheet-expand:not(:checked) ~ textarea {
   height: 0 !important;
   border-width: 0;
 }
-
 /* Column widths */
 .sheet-faction-name, input[type=text].sheet-faction-name {
   width: 65%;
 }
-
 .sheet-faction-tier, input[type=text].sheet-faction-tier {
   width: 10%;
   text-align: center;
 }
-
 .sheet-faction-hold, input[type=text].sheet-faction-hold {
   width: 10%;
   text-align: center;
 }
-
 .sheet-faction-status, input[type=number].sheet-faction-status {
   width: 15%;
   text-align: center;
 }
-
 /* War blurb */
 .sheet-warblurb {
   text-align: justify;
@@ -2677,10 +2405,9 @@ input.sheet-expand, .sheet-expand + span {
   font-size: 14px;
 }
 .sheet-warblurb li {
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
   padding-left: 1em;
 }
-
 /* Generate button */
 label.sheet-generatebutton {
   color: #777;
@@ -2693,7 +2420,6 @@ label.sheet-generatebutton:hover {
 label.sheet-generatebutton:hover input + span {
   opacity: 1;
 }
-
 .sheet-type-faction label.sheet-generatebutton {
   font-size: 13px;
   padding: 0 6px;
@@ -2702,14 +2428,12 @@ label.sheet-generatebutton:hover input + span {
   font-weight: bold;
   height: 30px;
 }
-
 .sheet-settings label.sheet-generatebutton {
   padding: 2px;
   line-height: 12px;
   margin: 0 4px;
   font-size: 11px;
 }
-
 /* Auto-expand textareas */
 .sheet-auto-expand {
   position: relative;
@@ -2737,12 +2461,10 @@ label.sheet-generatebutton:hover input + span {
   letter-spacing: inherit;
   text-align: inherit;
 }
-
 /* Broadcast buttons */
 .sheet-show-broadcast[value="0"] ~ .sheet-container .sheet-broadcast-button {
   display: none;
 }
-
 button[type=roll].sheet-broadcast-button {
   font-family: pictos;
   position: absolute;
@@ -2751,7 +2473,6 @@ button[type=roll].sheet-broadcast-button {
   padding: 0;
   z-index: 3;
 }
-
 .sheet-specialability button[type=roll].sheet-broadcast-button {
   font-size: 12px;
   line-height: 14px;
@@ -2761,7 +2482,6 @@ button[type=roll].sheet-broadcast-button {
   left: 3px;
   bottom: 7px;
 }
-
 .sheet-clocks button[type=roll].sheet-broadcast-button {
   font-size: 11px;
   line-height: 11px;
@@ -2771,7 +2491,6 @@ button[type=roll].sheet-broadcast-button {
   right: 0;
   bottom: 2px;
 }
-
 .sheet-harm button[type=roll].sheet-broadcast-button {
   color: white;
   font-weight: normal;
@@ -2780,13 +2499,12 @@ button[type=roll].sheet-broadcast-button {
   right: 2px;
   top: 1px;
 }
-
 /* Kirsty */
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-specialheader,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey,
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-playbook input[type=text],
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-playbook input[type="text"],
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-plainheader,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-itemheader :first-child,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-loadheader :first-child,
@@ -2796,8 +2514,8 @@ button[type=roll].sheet-broadcast-button {
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-claimbox .sheet-label,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-lairbox,
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-crewheader,
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factiontitle input[type=text],
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factions-header input[type=text] {
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factiontitle input[type="text"],
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factions-header input[type="text"] {
   font-family: Kirsty, Georgia, serif;
 }
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-claimbox .sheet-label {
@@ -2812,7 +2530,7 @@ button[type=roll].sheet-broadcast-button {
   font-size: 13px;
   font-weight: 400;
 }
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factions-header input[type=text],
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factions-header input[type="text"],
 .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-bonusdie > .sheet-label:first-child {
   font-size: 14px;
   font-weight: 400;
@@ -2825,18 +2543,17 @@ button[type=roll].sheet-broadcast-button {
   font-size: 29px;
   letter-spacing: 0;
 }
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factiontitle input[type=text] {
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-factiontitle input[type="text"] {
   font-size: 32px;
 }
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-playbook input[type=text] {
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-playbook input[type="text"] {
   font-size: 40px;
   letter-spacing: 0;
 }
-.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader button[type=roll].sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader button[type=roll].sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey button[type=roll].sheet-label {
+.sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-blackheader button[type="roll"].sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-greyheader button[type="roll"].sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey .sheet-label, .sheet-use-kirsty[value="1"] ~ .sheet-container .sheet-black-on-grey button[type="roll"].sheet-label {
   font-size: 12px;
   font-weight: 400;
 }
-
 /* ROLL TEMPLATES */
 /* Colors */
 .withoutavatars .sheet-rolltemplate-bitd .sheet-holder {
@@ -2845,7 +2562,6 @@ button[type=roll].sheet-broadcast-button {
 .withoutavatars .sheet-rolltemplate-bitd-broadcast {
   margin-left: -15px;
 }
-
 /* Container */
 .sheet-rolltemplate-bitd {
   /* Background images */
@@ -2875,7 +2591,7 @@ button[type=roll].sheet-broadcast-button {
 }
 .sheet-rolltemplate-bitd .sheet-action {
   display: grid;
-  grid: auto/133px 116px;
+  grid: auto / 133px 116px;
   align-content: start;
 }
 .sheet-rolltemplate-bitd .sheet-holder.sheet-resist.sheet-short,
@@ -3081,7 +2797,6 @@ button[type=roll].sheet-broadcast-button {
   padding: 20px 0;
   color: fortunegrey;
 }
-
 /* BROADCAST TEMPLATE */
 .sheet-rolltemplate-bitd-broadcast {
   margin: 0 -5px -4px -45px;
@@ -3198,13 +2913,13 @@ button[type=roll].sheet-broadcast-button {
   border-radius: 50%;
   margin-right: 4px;
 }
-.sheet-rolltemplate-bitd-broadcast [class^=sheet-spoke] {
+.sheet-rolltemplate-bitd-broadcast [class^='sheet-spoke'] {
   height: 88px;
   width: 4px;
   position: absolute;
   background: black;
 }
-.sheet-rolltemplate-bitd-broadcast [class^=sheet-spoke]:not(.sheet-spoke-0) {
+.sheet-rolltemplate-bitd-broadcast [class^='sheet-spoke']:not(.sheet-spoke-0) {
   display: none;
 }
 .sheet-rolltemplate-bitd-broadcast .sheet-size-4 .sheet-spoke-90,
