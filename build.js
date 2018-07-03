@@ -2,28 +2,35 @@
 
 // Code below
 const pug = require("pug"),
+	sass = require("node-sass"),
 	fs = require("fs"),
-	execSync = require("child_process").execSync,
-	t0 = process.hrtime(),
 	data = fs.readFileSync("Source/data.json", "utf8"),
 	babel = require("jstransformer")(require("jstransformer-babel"));
 
-const workerSource = `"use strict";
-const data = ${data};
-${fs.readFileSync("Source/sheetworkers.js", "utf8")}`;
+const workerSource = `"use strict";const data = ${data};${
+	fs.readFileSync("Source/sheetworkers.js", "utf8")
+}`;
 
+
+
+// Build CSS file
+sass.render({
+	file: "Source/nocturne.scss",
+	outputStyle: "compressed",
+}, (error, result) => {
+	if (!error) {
+		fs.writeFile("nocturne.css", result.css.toString("utf8").replace(/^\uFEFF/, ""), () => {});
+	} else {
+		console.log(`${error.line}:${error.column} ${error.message}.`);
+	}
+});
+
+// Build HTML
 const options = {
 	data: JSON.parse(data),
 	translation: JSON.parse(fs.readFileSync("translation.json", "utf8")),
 	workers: babel.render(workerSource, {presets: ["minify"]}).body
 };
 
-// Build CSS file
-const cssOutput = execSync("sass --no-source-map --style compressed Source/nocturne.scss").toString().replace(/^\uFEFF/, "");
-fs.writeFileSync("nocturne.css", cssOutput);
-
-// Build HTML
 const htmlOutput = pug.renderFile("Source/nocturne.pug", options);
-fs.writeFileSync("nocturne.html", `${htmlOutput}\n`);
-
-console.log(`Sheet build completed. Time taken: ${(process.hrtime(t0)[0] + (process.hrtime(t0)[1] / 1e9)).toFixed(3)} s.`);
+fs.writeFile("nocturne.html", `${htmlOutput}\n`, () => {});
