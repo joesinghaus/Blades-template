@@ -2060,13 +2060,16 @@ Object.keys(data.crew).forEach(crew => {
 	}));
 	data.crew[crew].upgrade.forEach(upgrade => {
 		upgrade.name = getTranslation(upgrade.name);
+		if (upgrade.description) {
+			upgrade.description = getTranslationByKey(upgrade.description) || "";
+		}
 		upgrade.boxes_chosen = "1";
 	});
 });
 data.items.forEach(item => {
 	item.boxes_chosen = "1";
 	item.name = getTranslation(item.name);
-	item.description = getTranslation(item.description) || "";
+	item.description = getTranslationByKey(item.description) || "";
 });
 Object.keys(data.translatedDefaults).forEach(k => {
 	data.translatedDefaults[k] = getTranslation(data.translatedDefaults[k]);
@@ -2099,6 +2102,9 @@ Object.keys(data.playbook).forEach(playbook => {
 	}));
 	data.playbook[playbook].playbookitem.forEach(item => {
 		item.name = getTranslation(item.name);
+		if (item.description) {
+			item.description = getTranslationByKey(item.description) || "";
+		}
 		item.boxes_chosen = "1";
 	});
 });
