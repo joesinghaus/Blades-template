@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "pug": "^2.0.3",
+    "node-sass": "^4.11.0",
+    "jstransformer": "^1.0.0",
+    "jstransformer-babel": "^2.1.0",
+    "babel-preset-minify": "^0.5.0"
+  }
+}

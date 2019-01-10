@@ -20,6 +20,24 @@ Apart from bugfixes, some changes made to the Blades sheet were backported to th
 * Pre-calculated number of dice
 * Restyled repeating section controls to use symbols instead of text
 
+## Installing dependencies
+
+To work with this sheet template, you need to first install [Node.js](https://nodejs.org/en/download/).
+
+To install all of the Node packages required to compile and work with the
+sheets, open a command-prompt and run
+
+```bash
+npm install
+```
+
+This will install all the dependencies defined in `package.json`. If you would
+prefer to install dependencies manually, you can:
+
+```bash
+npm install pug node-sass jstransformer jstransformer-babel babel-preset-minify
+````
+
 ## Compiling the sheet
 
 The sheet uses [pug](https://pugjs.org/) as a HTML preprocessor and [sass](https://sass-lang.com/) as a CSS preprocessor. This means that you need to compile the two main source code files (`Source/blades.pug` and `Source/blades.scss`) into the actual `blades.html` and `blades.css` files. It also uses Babel (via JSTransformer) to minify the Javascript code, though this is optional (read below on how to disable it if it produces problems). Once the command line interfaces for pug and sass are installed, the sheet is compiled via
@@ -41,14 +59,6 @@ For changing the **content** of the sheet, you will have to make changes to the 
 ### Babel problems
 
 Sometimes the babel filter does not seem to work and produces errors. You can change `enableBabel` to `false` in the build.js file to disable it. It will have no impact on the functionality of the sheet, and it will get rid of this error.
-
-### Installing the required components
-
-To install all the prerequsites, install [Node.js](https://nodejs.org/en/download/), open a command prompt, and enter
-
-```bash
-npm install pug node-sass jstransformer jstransformer-babel babel-preset-minify
-````
 
 ## File structure
 
