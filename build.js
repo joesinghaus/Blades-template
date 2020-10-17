@@ -58,6 +58,6 @@ sass.render({
 });
 
 // Build HTML
-const htmlOutput = pug.renderFile("Source/Blades.pug", options).trim().replace(/\n+/g, "\n");
+const htmlOutput = pug.renderFile("Source/blades.pug", options).trim().replace(/\n+/g, "\n");
 fs.writeFile("blades.html", `${htmlOutput}\n`, printOutput);
 
